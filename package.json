@@ -1,12 +1,12 @@
 {
-  "name": "react-aria-modal",
+  "name": "react-aria-focustrap",
   "version": "0.1.0",
-  "description": "A fully accessible React modal, built according to WAI-ARIA Authoring Practices",
+  "description": "A React component that traps focus.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "demo-bundle": "browserify demo/js/demo.js -o demo/demo-bundle.js",
-    "demo-watch": "watchify demo/js/demo.js -o demo/demo-bundle.js",
+    "demo-bundle": "browserify demo/js/index.js -t babelify --extension=.jsx -o demo/demo-bundle.js",
+    "demo-watch": "watchify demo/js/index.js -d -t babelify --extension=.jsx -o demo/demo-bundle.js",
     "demo-bs": "browser-sync start --server demo --files=\"demo/**/*.css,demo/index.html,demo/demo-bundle.js\"",
     "demo-dev": "parallelshell \"npm run demo-watch\" \"npm run demo-bs\"",
     "test-bundle": "browserify test -t babelify -o test/test-bundle.js --extension=.jsx",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davidtheclark/react-aria-modal.git"
+    "url": "git+https://github.com/davidtheclark/react-aria-focustrap.git"
   },
   "keywords": [
     "react",
@@ -27,27 +27,31 @@
     "accessibility",
     "modal",
     "dialog",
-    "widget"
+    "focus",
+    "keyboard"
   ],
   "author": "David Clark",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/davidtheclark/react-aria-modal/issues"
+    "url": "https://github.com/davidtheclark/react-aria-focustrap/issues"
   },
-  "homepage": "https://github.com/davidtheclark/react-aria-modal#readme",
+  "homepage": "https://github.com/davidtheclark/react-aria-focustrap#readme",
   "devDependencies": {
+    "babelify": "6.1.3",
+    "browser-sync": "2.8.2",
     "browserify": "11.0.1",
     "es5-shim": "4.1.10",
     "eslint": "1.1.0",
     "karma": "0.13.9",
     "karma-phantomjs-launcher": "0.2.1",
     "karma-tap": "1.0.3",
+    "parallelshell": "2.0.0",
     "phantomjs": "1.9.18",
-    "sinon": "1.15.4",
     "tape": "4.2.0",
     "watchify": "3.3.1"
   },
   "dependencies": {
-    "react": "0.13.3"
+    "react": "0.13.3",
+    "tabbable": "^0.3.0"
   }
 }

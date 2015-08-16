@@ -11,3 +11,9 @@ body {
   margin: 0 auto 200px;
   padding: 10px;
 }
+
+input:focus,
+a:focus,
+button:focus {
+  outline: 5px solid lightblue;
+}

@@ -1,2 +1,3 @@
-# react-aria-modal
-A fully accessible React modal, built according to WAI-ARIA Authoring Practices 
+# react-aria-focustrap
+
+A React component that traps focus.

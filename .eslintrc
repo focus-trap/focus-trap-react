@@ -3,6 +3,9 @@
     "node": true,
     "browser": true
   },
+  "ecmaFeatures": {
+    "jsx": true,
+  },
   "rules": {
     "comma-dangle": [2, "always-multiline"],
     "curly": 0,
