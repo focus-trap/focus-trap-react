@@ -1,5 +1,5 @@
 var React = require('react');
-var AriaFocusTrap = require('../../');
+var FocusTrap = require('../../');
 
 var container = document.getElementById('demo-three');
 
@@ -19,24 +19,8 @@ var DemoThree = React.createClass({
   },
 
   render: function() {
-    var trap = (this.state.activeTrap) ? (
-      <AriaFocusTrap
-        onExit={this.unmountTrap}
-        id='focus-trap-three'
-        className='special-focus-trap'
-        tag='section'
-        style={{ border: '1px solid', padding: '1em 2em' }}
-      >
-        <p>
-          Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.
-        </p>
-        <p>
-          <button onClick={this.unmountTrap}>
-            deactivate trap
-          </button>
-        </p>
-      </AriaFocusTrap>
-    ) : false;
+    var trapClass = 'trap';
+    if (this.state.activeTrap) trapClass += ' is-active';
 
     return (
       <div>
@@ -45,7 +29,22 @@ var DemoThree = React.createClass({
             activate trap
           </button>
         </p>
-        {trap}
+        <FocusTrap
+          onDeactivate={this.unmountTrap}
+          id='focus-trap-three'
+          tag='section'
+          active={this.state.activeTrap}
+          className={trapClass}
+        >
+        <p>
+          Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.
+        </p>
+        <p>
+          <button onClick={this.unmountTrap}>
+            deactivate trap
+          </button>
+        </p>
+      </FocusTrap>
       </div>
     );
   },

@@ -4,24 +4,24 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>react-aria-focustrap demo</title>
+  <title>focus-trap-react demo</title>
 
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="A demo of react-aria-focustrap">
+  <meta name="description" content="A demo of focus-trap-react">
 
 </head>
 <body>
-  <h1 tabindex="0">react-aria-focustrap demo</h1>
+  <h1 tabindex="0">focus-trap-react demo</h1>
 
   <h2>demo one</h2>
   <p>
-    Default behavior: When this one activates, the first element in its tab order receives focus.
+    Default behavior: When this FocusTrap mounts (and activates), the first element in its tab order receives focus.
   </p>
   <div id="demo-one"></div>
 
   <h2>demo two</h2>
   <p>
-    When this one activates, focus jumps to a specific, manually specified element.
+    When this FocusTrap mounts (and activates), focus jumps to a specific, manually specified element.
   </p>
   <div id="demo-two"></div>
 
@@ -30,12 +30,15 @@
     Inspect this element and you'll see that is not the default plan div,
     but rather a section tag with an id, a class, and inline styles.
   </p>
+  <p>
+    Also, this FocusTrap activates and deactivates while staying mounted.
+  </p>
   <div id="demo-three"></div>
 
   <h2>demo four</h2>
   <p>
     Default behavior with a twist:
-    When this one activates, the first element in its tab order receives focus,
+    When this FocusTrap activates, the first element in its tab order receives focus,
     <em>but because of positive tabindex attributes the tab order is not the same as the source order</em>.
   </p>
   <div id="demo-four"></div>

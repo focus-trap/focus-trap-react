@@ -1,101 +1,54 @@
 var React = require('react');
-var tabbable = require('tabbable');
+var focusTrap = require('focus-trap');
 
-var AriaFocusTrap = React.createClass({
+var PropTypes = React.PropTypes;
+
+var FocusTrap = React.createClass({
   propTypes: {
-    onExit: React.PropTypes.func.isRequired,
-    className: React.PropTypes.string,
-    id: React.PropTypes.string,
-    initialFocusId: React.PropTypes.string,
-    style: React.PropTypes.object,
-    tag: React.PropTypes.string,
+    onDeactivate: PropTypes.func.isRequired,
+    active: PropTypes.bool,
+    className: PropTypes.string,
+    id: PropTypes.string,
+    initialFocus: PropTypes.string,
+    tag: PropTypes.string,
+    style: PropTypes.object,
   },
 
   getDefaultProps: function() {
     return {
+      active: true,
       tag: 'div',
     };
   },
 
   componentDidMount: function() {
-    this.activate();
+    if (this.props.active) {
+      this.activateTrap();
+    }
+  },
+
+  componentDidUpdate: function(prevProps) {
+    if (prevProps.active && !this.props.active) {
+      focusTrap.deactivate();
+    } else if (!prevProps.active && this.props.active) {
+      this.activateTrap();
+    }
   },
 
   componentWillUnmount: function() {
-    this.deactivate();
+    focusTrap.deactivate();
   },
 
-  activate: function() {
-    this.updateTabbableNodes();
-    this.previouslyFocused = document.activeElement;
-    var focusNode = (this.props.initialFocusId)
-      ? document.getElementById(this.props.initialFocusId)
-      : this.tabbableNodes[0];
-    focusNode.focus();
-
-    document.addEventListener('focus', this.checkFocus, true);
-    document.addEventListener('click', this.checkClick, true);
-    document.addEventListener('touchend', this.checkClick, true);
-  },
-
-  deactivate: function() {
-    document.removeEventListener('focus', this.checkFocus, true);
-    document.removeEventListener('click', this.checkClick, true);
-    document.removeEventListener('touchend', this.checkClick, true);
-    this.previouslyFocused.focus();
-  },
-
-  updateTabbableNodes: function() {
-    this.tabbableNodes = tabbable(React.findDOMNode(this));
-  },
-
-  checkClick: function(e) {
-    if (React.findDOMNode(this).contains(e.target)) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-  },
-
-  checkFocus: function(e) {
-    this.updateTabbableNodes();
-    if (React.findDOMNode(this).contains(e.target)) return;
-    this.tabbableNodes[0].focus();
-  },
-
-  checkKey: function(e) {
-    if (e.key === 'Tab') {
-      e.preventDefault();
-      this.updateTabbableNodes();
-      var currentFocusIndex = this.tabbableNodes.indexOf(e.target);
-      var lastTabbableNode = this.tabbableNodes[this.tabbableNodes.length - 1];
-      var firstTabbableNode = this.tabbableNodes[0];
-      if (e.shiftKey) {
-        if (e.target === firstTabbableNode) {
-          lastTabbableNode.focus();
-          return;
-        }
-        this.tabbableNodes[currentFocusIndex - 1].focus();
-        return;
-      }
-      if (e.target === lastTabbableNode) {
-        firstTabbableNode.focus();
-        return;
-      }
-      this.tabbableNodes[currentFocusIndex + 1].focus();
-    }
-
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      if (this.props.onExit) this.props.onExit();
-      setTimeout(function() {
-        this.previouslyFocused.focus();
-      }.bind(this), 0);
-    }
+  activateTrap: function() {
+    focusTrap.activate(React.findDOMNode(this), {
+      onDeactivate: this.props.onDeactivate,
+      initialFocus: this.props.initialFocus,
+    });
   },
 
   render: function() {
     return React.createElement(this.props.tag,
       {
-        onKeyDown: this.checkKey,
         className: this.props.className,
         id: this.props.id,
         style: this.props.style,
@@ -105,4 +58,4 @@ var AriaFocusTrap = React.createClass({
   },
 });
 
-module.exports = AriaFocusTrap;
+module.exports = FocusTrap;

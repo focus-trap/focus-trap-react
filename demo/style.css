@@ -17,3 +17,12 @@ a:focus,
 button:focus {
   outline: 5px solid lightblue;
 }
+
+.trap {
+  border: 1px solid #ccc;
+  padding: 1em 2em;
+}
+
+.trap.is-active {
+  background: #FEE9FF;
+}
