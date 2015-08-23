@@ -22,7 +22,7 @@ var DemoTwo = React.createClass({
     var trap = (this.state.activeTrap) ? (
       <FocusTrap
         onDeactivate={this.unmountTrap}
-        initialFocus='focused-input'
+        initialFocus='#focused-input'
         className='trap'
       >
         <p>

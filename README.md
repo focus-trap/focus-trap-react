@@ -103,7 +103,9 @@ This function is called when the `FocusTrap` deactivates. If, for example, a use
 
 Type: `String`, optional
 
-By default, when the `FocusTrap` activates it will pass focus to the first element in its tab order. If you want that initial focus to pass to some other element (e.g. a Submit button at the bottom of a modal dialog), pass **the `id` of the element that should receive initial focus** when the `FocusTrap` activates.
+By default, when the `FocusTrap` activates it will pass focus to the first element in its tab order. If you want that initial focus to pass to some other element (e.g. a Submit button at the bottom of a modal dialog),
+pass **a selector identifying the element that should receive initial focus** when the `FocusTrap` activates.
+(This will be passed to `document.querySelector()` to find the element.)
 
 See `demo/demo-two.jsx`.
 
