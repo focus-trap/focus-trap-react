@@ -1,4 +1,4 @@
-# 0.2.0
+# 0.2.1
 
 - Update focus-trap; now `initialFocus` is a selector instead of an id.
 

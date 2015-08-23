@@ -1,6 +1,6 @@
 {
   "name": "focus-trap-react",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A React component that traps focus.",
   "main": "index.js",
   "scripts": {
@@ -52,7 +52,7 @@
     "watchify": "3.3.1"
   },
   "dependencies": {
-    "focus-trap": "^0.2.0",
+    "focus-trap": "^0.3.0",
     "react": "0.13.x"
   },
   "files": [
