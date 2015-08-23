@@ -1,3 +1,7 @@
+# 0.2.0
+
+- Update focus-trap; now `initialFocus` is a selector instead of an id.
+
 # 0.1.0
 
 - Initial release.
