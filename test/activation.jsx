@@ -31,12 +31,12 @@ test('default activation', function(t) {
   t.end();
 });
 
-test('activation with initialFocus as string id', function(t) {
+test('activation with initialFocus as selector', function(t) {
   var domContainer = setup();
   var trap = React.render(
     <FocusTrap
       onDeactivate={noop}
-      initialFocus='initial-focusee'
+      initialFocus='#initial-focusee'
     >
       <button>
         something special
@@ -53,7 +53,7 @@ test('activation with initialFocus as string id', function(t) {
     React.findDOMNode(trap),
     {
       onDeactivate: noop,
-      initialFocus: 'initial-focusee',
+      initialFocus: '#initial-focusee',
     },
   ]);
 
