@@ -1,4 +1,4 @@
-# focus-trap-react
+# focus-trap-react [![Build Status](https://travis-ci.org/davidtheclark/focus-trap-react.svg?branch=0.1.0)](https://travis-ci.org/davidtheclark/focus-trap-react)
 
 A React component that traps focus.
 
