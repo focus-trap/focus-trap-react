@@ -26,10 +26,11 @@ npm install focus-trap-react
 
 ## Browser Support
 
-IE9+
+Basically IE9+. See `.zuul.yml` for more details.
 
-Why?
-Because this module's core functionality comes from focus-trap, which uses [a couple of IE9+ functions](https://github.com/davidtheclark/tabbable#browser-support).
+Why? Because this module's core functionality comes from focus-trap, which uses [a couple of IE9+ functions](https://github.com/davidtheclark/tabbable#browser-support).
+
+Automated testing is done with [zuul](https://github.com/defunctzombie/zuul) and [Open Suace](https://saucelabs.com/opensauce/).
 
 ## Usage
 
@@ -140,3 +141,9 @@ An HTML tag for the `FocusTrap`'s DOM node.
 Type: `Object`, optional
 
 An inline style object ([in React fashion](https://facebook.github.io/react/tips/inline-styles.html)) for the `FocusTrap`'s DOM node.
+
+## Development
+
+Lint with `npm run lint`.
+
+Test with `npm run test-dev`, which will give you a URL to open in your browser. Look at the console log for TAP output.

@@ -9,11 +9,9 @@
     "demo-watch": "watchify demo/js -d -t babelify --extension=.jsx -o demo/demo-bundle.js",
     "demo-bs": "browser-sync start --server demo --files=\"demo/**/*.css,demo/index.html,demo/demo-bundle.js\"",
     "demo-dev": "parallelshell \"npm run demo-watch\" \"npm run demo-bs\"",
-    "test-bundle": "browserify test -t babelify -o test/test-bundle.js --extension=.jsx",
-    "test-dev": "watchify test -d -t babelify -o test/test-bundle.js -v --extension=.jsx",
-    "test-single": "karma start --single-run",
+    "test-dev": "zuul --local 8080 -- test/index.js",
     "pretest": "npm run lint",
-    "test": "npm run test-bundle && npm run test-single"
+    "test": "zuul -- test/index.js"
   },
   "repository": {
     "type": "git",
@@ -40,16 +38,10 @@
     "babelify": "6.2.0",
     "browser-sync": "2.8.2",
     "browserify": "11.0.1",
-    "es5-shim": "4.1.10",
     "eslint": "1.2.1",
-    "karma": "0.13.9",
-    "karma-phantomjs-launcher": "0.2.1",
-    "karma-tap": "1.0.3",
     "parallelshell": "2.0.0",
-    "phantomjs": "1.9.18",
     "sinon": "1.16.1",
-    "tape": "4.2.0",
-    "watchify": "3.3.1"
+    "tape": "4.2.0"
   },
   "dependencies": {
     "focus-trap": "^1.0.0",
