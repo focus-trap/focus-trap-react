@@ -44,7 +44,7 @@ test('DOM with all possible DOM-related props', function(t) {
   t.equal(trapNode.tagName, 'FIGURE')
   t.equal(trapNode.getAttribute('id'), 'foo')
   t.equal(trapNode.getAttribute('class'), 'bar')
-  t.equal(trapNode.getAttribute('style'), 'background:pink;')
+  t.equal(trapNode.getAttribute('style').replace(' ', ''), 'background:pink;')
   t.equal(trapNode.children.length, 1);
   t.equal(trapNode.firstChild.tagName, 'BUTTON');
   t.equal(trapNode.firstChild.innerHTML, 'something special');
