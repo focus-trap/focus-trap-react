@@ -1,10 +1,11 @@
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var test = require('tape');
 var sinon = require('sinon');
 var vanillaFocusTrap = require('focus-trap');
 var FocusTrap = require('../');
 
-var TestUtils = React.addons.TestUtils;
 var deactivateSpy = sinon.spy(vanillaFocusTrap, 'deactivate');
 
 test('deactivation', function(t) {
@@ -45,11 +46,11 @@ test('deactivation', function(t) {
     },
   })
 
-  var zone = React.render(<TestZone />, domContainer);
+  var zone = ReactDOM.render(<TestZone />, domContainer);
 
   t.notOk(deactivateSpy.called);
 
-  TestUtils.Simulate.click(React.findDOMNode(zone.refs.trigger));
+  TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
 
   t.ok(deactivateSpy.calledOnce);
   t.ok(handleDeactivation.calledOnce);
@@ -99,11 +100,11 @@ test('deactivation by dismount', function(t) {
     },
   })
 
-  var zone = React.render(<TestZone />, domContainer);
+  var zone = ReactDOM.render(<TestZone />, domContainer);
 
   t.notOk(deactivateSpy.called);
 
-  TestUtils.Simulate.click(React.findDOMNode(zone.refs.trigger));
+  TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
 
   t.ok(deactivateSpy.calledOnce);
   t.ok(handleDeactivation.calledOnce);
@@ -122,6 +123,6 @@ function setup() {
 }
 
 function teardown() {
-  React.unmountComponentAtNode(domContainer);
+  ReactDOM.unmountComponentAtNode(domContainer);
   document.body.removeChild(domContainer);
 }

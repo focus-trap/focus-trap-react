@@ -1,15 +1,16 @@
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var test = require('tape');
 var sinon = require('sinon');
 var vanillaFocusTrap = require('focus-trap');
 var FocusTrap = require('../');
 
-var TestUtils = React.addons.TestUtils;
 var activateSpy = sinon.spy(vanillaFocusTrap, 'activate');
 
 test('default activation', function(t) {
   var domContainer = setup();
-  var trap = React.render(
+  var trap = ReactDOM.render(
     <FocusTrap onDeactivate={noop}>
       <button>
         something special
@@ -20,7 +21,7 @@ test('default activation', function(t) {
 
   t.ok(activateSpy.calledOnce);
   t.deepEqual(activateSpy.getCall(0).args, [
-    React.findDOMNode(trap),
+    ReactDOM.findDOMNode(trap),
     {
       onDeactivate: noop,
       initialFocus: undefined,
@@ -33,7 +34,7 @@ test('default activation', function(t) {
 
 test('activation with initialFocus as selector', function(t) {
   var domContainer = setup();
-  var trap = React.render(
+  var trap = ReactDOM.render(
     <FocusTrap
       onDeactivate={noop}
       initialFocus='#initial-focusee'
@@ -50,7 +51,7 @@ test('activation with initialFocus as selector', function(t) {
 
   t.ok(activateSpy.calledOnce);
   t.deepEqual(activateSpy.getCall(0).args, [
-    React.findDOMNode(trap),
+    ReactDOM.findDOMNode(trap),
     {
       onDeactivate: noop,
       initialFocus: '#initial-focusee',
@@ -63,7 +64,7 @@ test('activation with initialFocus as selector', function(t) {
 
 test('mounting without activation', function(t) {
   var domContainer = setup();
-  var trap = React.render(
+  var trap = ReactDOM.render(
     <FocusTrap
       onDeactivate={noop}
       active={false}
@@ -74,7 +75,7 @@ test('mounting without activation', function(t) {
     </FocusTrap>,
     domContainer
   );
-  var trapNode = React.findDOMNode(trap);
+  var trapNode = ReactDOM.findDOMNode(trap);
 
   t.notOk(activateSpy.called);
 
@@ -119,15 +120,15 @@ test('mounting without activation then activating', function(t) {
     },
   })
 
-  var zone = React.render(<TestZone />, domContainer);
+  var zone = ReactDOM.render(<TestZone />, domContainer);
 
   t.notOk(activateSpy.called);
 
-  TestUtils.Simulate.click(React.findDOMNode(zone.refs.trigger));
+  TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
 
   t.ok(activateSpy.calledOnce);
   t.deepEqual(activateSpy.getCall(0).args, [
-    React.findDOMNode(zone.refs.trap),
+    ReactDOM.findDOMNode(zone.refs.trap),
     {
       onDeactivate: noop,
       initialFocus: undefined,
@@ -150,6 +151,6 @@ function setup() {
 }
 
 function teardown() {
-  React.unmountComponentAtNode(domContainer);
+  ReactDOM.unmountComponentAtNode(domContainer);
   document.body.removeChild(domContainer);
 }

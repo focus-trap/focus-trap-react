@@ -1,8 +1,8 @@
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var test = require('tape');
 var FocusTrap = require('../');
-
-var TestUtils = React.addons.TestUtils;
 
 test('DOM with only required props', function(t) {
   var trap = TestUtils.renderIntoDocument(
@@ -12,7 +12,7 @@ test('DOM with only required props', function(t) {
       </button>
     </FocusTrap>
   );
-  var trapNode = React.findDOMNode(trap);
+  var trapNode = ReactDOM.findDOMNode(trap);
 
   t.equal(trapNode.tagName, 'DIV')
   t.equal(trapNode.getAttribute('id'), null)
@@ -39,7 +39,7 @@ test('DOM with all possible DOM-related props', function(t) {
       </button>
     </FocusTrap>
   );
-  var trapNode = React.findDOMNode(trap);
+  var trapNode = ReactDOM.findDOMNode(trap);
 
   t.equal(trapNode.tagName, 'FIGURE')
   t.equal(trapNode.getAttribute('id'), 'foo')

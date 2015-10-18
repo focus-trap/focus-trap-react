@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var focusTrap = require('focus-trap');
 
 var PropTypes = React.PropTypes;
@@ -40,7 +41,7 @@ var FocusTrap = React.createClass({
   },
 
   activateTrap: function() {
-    focusTrap.activate(React.findDOMNode(this), {
+    focusTrap.activate(ReactDOM.findDOMNode(this), {
       onDeactivate: this.props.onDeactivate,
       initialFocus: this.props.initialFocus,
     });

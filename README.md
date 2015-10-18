@@ -24,6 +24,12 @@ This module simply provides a React component that creates a focus trap.
 npm install focus-trap-react
 ```
 
+### React dependency
+
+Version 2+ is compatible with React 0.14.x.
+
+Version 1 is compatible with React 0.13.x.
+
 ## Browser Support
 
 Basically IE9+. See `.zuul.yml` for more details.
@@ -86,8 +92,6 @@ var DemoOne = React.createClass({
     );
   },
 });
-
-React.render(<DemoOne />, document.getElementById('demo-one'));
 ```
 
 Easy enough.

@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var FocusTrap = require('../../');
 
 var container = document.getElementById('demo-one');
@@ -49,4 +50,4 @@ var DemoOne = React.createClass({
   },
 });
 
-React.render(<DemoOne />, container);
+ReactDOM.render(<DemoOne />, container);

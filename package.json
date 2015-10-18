@@ -9,7 +9,7 @@
     "demo-watch": "watchify demo/js -d -t babelify --extension=.jsx -o demo/demo-bundle.js",
     "demo-bs": "browser-sync start --server demo --files=\"demo/**/*.css,demo/index.html,demo/demo-bundle.js\"",
     "demo-dev": "parallelshell \"npm run demo-watch\" \"npm run demo-bs\"",
-    "test-dev": "zuul --local 8080 -- test/index.js",
+    "test-dev": "zuul --local 8080 --open -- test/index.js",
     "pretest": "npm run lint",
     "test": "zuul -- test/index.js"
   },
@@ -35,19 +35,21 @@
   },
   "homepage": "https://github.com/davidtheclark/focus-trap-react#readme",
   "devDependencies": {
-    "babelify": "6.2.0",
-    "browser-sync": "2.8.2",
-    "browserify": "11.0.1",
-    "eslint": "1.2.1",
+    "babelify": "6.3.0",
+    "browser-sync": "2.9.11",
+    "browserify": "11.2.0",
+    "eslint": "1.7.1",
     "parallelshell": "2.0.0",
-    "sinon": "1.16.1",
-    "tape": "4.2.0",
+    "react-addons-test-utils": "^0.14.0",
+    "sinon": "1.17.1",
+    "tape": "4.2.1",
     "watchify": "3.4.0",
-    "zuul": "3.4.0"
+    "zuul": "3.6.0"
   },
   "dependencies": {
     "focus-trap": "^1.0.0",
-    "react": "0.13.x"
+    "react": "0.14.x",
+    "react-dom": "0.14.x"
   },
   "files": [
     "index.js"
