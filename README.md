@@ -146,7 +146,9 @@ Type: `Object`, optional
 
 An inline style object ([in React fashion](https://facebook.github.io/react/tips/inline-styles.html)) for the `FocusTrap`'s DOM node.
 
-## Development
+## Contributing & Development
+
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
 
 Lint with `npm run lint`.
 
