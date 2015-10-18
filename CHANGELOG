@@ -1,7 +1,9 @@
-# Head
+# CHANGELOG
+
+## 2.0.0
 
 - Upgrade to React 0.14 and its companion ReactDOM.
 
-# 1.0.0
+## 1.0.0
 
 - Initial release.
