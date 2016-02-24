@@ -7,8 +7,7 @@
     "lint": "eslint .",
     "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
     "demo-watch": "watchify demo/js -d -t babelify --extension=.jsx -o demo/demo-bundle.js",
-    "demo-bs": "browser-sync start --server demo --files=\"demo/**/*.css,demo/index.html,demo/demo-bundle.js\"",
-    "demo-dev": "parallelshell \"npm run demo-watch\" \"npm run demo-bs\"",
+    "demo-dev": "npm run demo-watch & http-server demo",
     "test-dev": "zuul --local 8080 --open -- test/index.js",
     "pretest": "npm run lint",
     "test": "zuul -- test/index.js"
@@ -35,23 +34,29 @@
   },
   "homepage": "https://github.com/davidtheclark/focus-trap-react#readme",
   "devDependencies": {
-    "babelify": "6.3.0",
-    "browser-sync": "2.9.11",
-    "browserify": "11.2.0",
-    "eslint": "1.7.1",
-    "parallelshell": "2.0.0",
-    "react-addons-test-utils": "^0.14.0",
-    "sinon": "1.17.1",
-    "tape": "4.2.1",
+    "babel-preset-react": "6.5.0",
+    "babelify": "7.2.0",
+    "browserify": "13.0.0",
+    "eslint": "2.2.0",
+    "react": "0.14.7",
+    "react-addons-test-utils": "0.14.7",
+    "react-dom": "0.14.7",
+    "sinon": "1.17.3",
+    "tape": "4.4.0",
     "watchify": "3.4.0",
-    "zuul": "3.6.0"
+    "zuul": "3.9.0"
   },
   "dependencies": {
-    "focus-trap": "^1.0.0",
+    "focus-trap": "^1.0.2"
+  },
+  "peerDependencies": {
     "react": "0.14.x",
     "react-dom": "0.14.x"
   },
   "files": [
     "index.js"
-  ]
+  ],
+  "babel": {
+    "presets": ["react"]
+  }
 }

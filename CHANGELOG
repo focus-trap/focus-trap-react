@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Head
+
+- Move `react` to `peerDependencies` and remove `react-dom` dependency.
+
 ## 2.0.0
 
 - Upgrade to React 0.14 and its companion ReactDOM.

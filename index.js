@@ -1,5 +1,4 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
 var focusTrap = require('focus-trap');
 
 var PropTypes = React.PropTypes;
@@ -41,21 +40,20 @@ var FocusTrap = React.createClass({
   },
 
   activateTrap: function() {
-    focusTrap.activate(ReactDOM.findDOMNode(this), {
+    if (!this.node) return;
+    focusTrap.activate(this.node, {
       onDeactivate: this.props.onDeactivate,
       initialFocus: this.props.initialFocus,
     });
   },
 
   render: function() {
-    return React.createElement(this.props.tag,
-      {
-        className: this.props.className,
-        id: this.props.id,
-        style: this.props.style,
-      },
-      this.props.children
-    );
+    return React.createElement(this.props.tag, {
+      className: this.props.className,
+      id: this.props.id,
+      style: this.props.style,
+      ref: function(el) { this.node = el; }.bind(this),
+    }, this.props.children);
   },
 });
 
