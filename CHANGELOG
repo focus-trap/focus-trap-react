@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Head
+## 2.0.1
 
 - Move `react` to `peerDependencies` and remove `react-dom` dependency.
 
