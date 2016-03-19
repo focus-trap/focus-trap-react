@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Head
+2.1.0 Head
 
 - Upgrade `focus-trap` to add `escapeDeactivates` and `clickOutsideDeactivates` props.
 - Allow arbitrary props passed through to the element itself.
