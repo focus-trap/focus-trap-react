@@ -32,6 +32,7 @@ var DemoThree = React.createClass({
         </p>
         <FocusTrap
           onDeactivate={this.unmountTrap}
+          clickOutsideDeactivates={true}
           id='focus-trap-three'
           tag='section'
           active={this.state.activeTrap}

@@ -114,6 +114,18 @@ pass **a selector identifying the element that should receive initial focus** wh
 
 See `demo/demo-two.jsx`.
 
+### escapeDeactivates
+
+Type: `Boolean`, Default: true
+
+If `false`, the Escape key will not trigger deactivation of the focus trap. This can be useful if you want to force the user to make a decision instead of allowing an easy way out.
+
+### clickOutsideDeactivates
+
+Type: Boolean, Default: false
+
+If `true`, a click outside the focus trap will deactivate the focus trap and allow the click event to carry on.
+
 #### active
 
 Type: `Boolean`, optional

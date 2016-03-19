@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Head
+
+- Upgrade `focus-trap` to add `escapeDeactivates` and `clickOutsideDeactivates` props.
+
 ## 2.0.1
 
 - Move `react` to `peerDependencies` and remove `react-dom` dependency.

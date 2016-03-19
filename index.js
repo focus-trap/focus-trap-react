@@ -6,6 +6,8 @@ var PropTypes = React.PropTypes;
 var FocusTrap = React.createClass({
   propTypes: {
     onDeactivate: PropTypes.func.isRequired,
+    escapeDeactivates: PropTypes.bool,
+    clickOutsideDeactivates: PropTypes.bool,
     active: PropTypes.bool,
     className: PropTypes.string,
     id: PropTypes.string,
@@ -44,6 +46,8 @@ var FocusTrap = React.createClass({
     focusTrap.activate(this.node, {
       onDeactivate: this.props.onDeactivate,
       initialFocus: this.props.initialFocus,
+      escapeDeactivates: this.props.escapeDeactivates,
+      clickOutsideDeactivates: this.props.clickOutsideDeactivates,
     });
   },
 
