@@ -5,7 +5,7 @@ A React component that traps focus.
 This component is a light wrapper around [focus-trap](https://github.com/davidtheclark/focus-trap),
 tailored to your React-specific needs.
 
-You might want it for, say, building an accessible modal?
+You might want it for, say, building [an accessible modal](https://github.com/davidtheclark/react-aria-modal)?
 
 ## What it does
 
