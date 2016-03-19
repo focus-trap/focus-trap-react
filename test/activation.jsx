@@ -25,6 +25,8 @@ test('default activation', function(t) {
     {
       onDeactivate: noop,
       initialFocus: undefined,
+      escapeDeactivates: true,
+      clickOutsideDeactivates: undefined,
     },
   ]);
 
@@ -55,6 +57,8 @@ test('activation with initialFocus as selector', function(t) {
     {
       onDeactivate: noop,
       initialFocus: '#initial-focusee',
+      escapeDeactivates: true,
+      clickOutsideDeactivates: undefined,
     },
   ]);
 
@@ -132,6 +136,8 @@ test('mounting without activation then activating', function(t) {
     {
       onDeactivate: noop,
       initialFocus: undefined,
+      escapeDeactivates: true,
+      clickOutsideDeactivates: undefined,
     },
   ]);
 

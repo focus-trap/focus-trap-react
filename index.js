@@ -2,19 +2,17 @@ var React = require('react');
 var focusTrap = require('focus-trap');
 
 var PropTypes = React.PropTypes;
+var checkedProps = {
+  onDeactivate: PropTypes.func.isRequired,
+  escapeDeactivates: PropTypes.bool,
+  clickOutsideDeactivates: PropTypes.bool,
+  active: PropTypes.bool,
+  initialFocus: PropTypes.string,
+  tag: PropTypes.string,
+};
 
 var FocusTrap = React.createClass({
-  propTypes: {
-    onDeactivate: PropTypes.func.isRequired,
-    escapeDeactivates: PropTypes.bool,
-    clickOutsideDeactivates: PropTypes.bool,
-    active: PropTypes.bool,
-    className: PropTypes.string,
-    id: PropTypes.string,
-    initialFocus: PropTypes.string,
-    tag: PropTypes.string,
-    style: PropTypes.object,
-  },
+  propTypes: checkedProps,
 
   getDefaultProps: function() {
     return {
@@ -52,12 +50,20 @@ var FocusTrap = React.createClass({
   },
 
   render: function() {
-    return React.createElement(this.props.tag, {
-      className: this.props.className,
-      id: this.props.id,
-      style: this.props.style,
+    var props = this.props;
+
+    var elementProps = {
       ref: function(el) { this.node = el; }.bind(this),
-    }, this.props.children);
+    };
+
+    // This will get id, className, style, etc. -- arbitrary element props
+    for (var prop in props) {
+      if (!props.hasOwnProperty(prop)) continue;
+      if (checkedProps[prop]) continue;
+      elementProps[prop] = props[prop];
+    }
+
+    return React.createElement(this.props.tag, elementProps, this.props.children);
   },
 });
 
