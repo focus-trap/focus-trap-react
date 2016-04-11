@@ -1,6 +1,10 @@
 # CHANGELOG
 
-2.1.0 Head
+# 2.1.1
+
+- Allow React 15 as peer dependency.
+
+# 2.1.0
 
 - Upgrade `focus-trap` to add `escapeDeactivates` and `clickOutsideDeactivates` props.
 - Allow arbitrary props passed through to the element itself.
