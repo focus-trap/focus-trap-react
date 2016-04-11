@@ -37,21 +37,21 @@
     "babel-preset-react": "6.5.0",
     "babelify": "7.2.0",
     "browserify": "13.0.0",
-    "eslint": "2.2.0",
-    "react": "0.14.7",
-    "react-addons-test-utils": "0.14.7",
-    "react-dom": "0.14.7",
+    "eslint": "2.7.0",
+    "react": "15.0.1",
+    "react-addons-test-utils": "15.0.1",
+    "react-dom": "15.0.1",
     "sinon": "1.17.3",
-    "tape": "4.4.0",
-    "watchify": "3.4.0",
-    "zuul": "3.9.0"
+    "tape": "4.5.1",
+    "watchify": "3.7.0",
+    "zuul": "3.10.1"
   },
   "dependencies": {
     "focus-trap": "^1.1.0"
   },
   "peerDependencies": {
-    "react": "0.14.x",
-    "react-dom": "0.14.x"
+    "react": "0.14.x || ^15.0.0",
+    "react-dom": "0.14.x || ^15.0.0"
   },
   "files": [
     "index.js"
