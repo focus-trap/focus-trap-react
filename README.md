@@ -140,6 +140,12 @@ Type: `String`, Default: `div`, optional
 
 An HTML tag for the FocusTrap's DOM node.
 
+#### returnFocus
+
+Type: `Boolean`, Default: true
+
+If `false`, the focus will not return to the element that triggered the `FocusTrap`.
+
 #### additional props
 
 All props not mentioned above are passed directly to the `<div>` element. This means that you can pass `id`, `className`, `style`, `aria-`attributes, `data-`attributes, or any other arbitrary property that you want to use to customize the element.

@@ -24,6 +24,7 @@ var DemoFour = React.createClass({
       <FocusTrap
         onDeactivate={this.unmountTrap}
         className='trap'
+        returnFocus={false}
       >
         <p>
           <button tabIndex='3'>
