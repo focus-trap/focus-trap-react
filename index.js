@@ -9,6 +9,7 @@ var checkedProps = {
   active: PropTypes.bool,
   initialFocus: PropTypes.string,
   tag: PropTypes.string,
+  returnFocus: PropTypes.bool,
 };
 
 var FocusTrap = React.createClass({
@@ -18,6 +19,7 @@ var FocusTrap = React.createClass({
     return {
       active: true,
       tag: 'div',
+      returnFocus: true,
     };
   },
 
@@ -29,14 +31,14 @@ var FocusTrap = React.createClass({
 
   componentDidUpdate: function(prevProps) {
     if (prevProps.active && !this.props.active) {
-      focusTrap.deactivate();
+      focusTrap.deactivate({returnFocus: this.props.returnFocus});
     } else if (!prevProps.active && this.props.active) {
       this.activateTrap();
     }
   },
 
   componentWillUnmount: function() {
-    focusTrap.deactivate();
+    focusTrap.deactivate({returnFocus: this.props.returnFocus});
   },
 
   activateTrap: function() {
