@@ -1,15 +1,12 @@
 var React = require('react');
-var focusTrap = require('focus-trap');
+var createFocusTrap = require('focus-trap');
 
 var PropTypes = React.PropTypes;
 var checkedProps = {
-  onDeactivate: PropTypes.func.isRequired,
-  escapeDeactivates: PropTypes.bool,
-  clickOutsideDeactivates: PropTypes.bool,
   active: PropTypes.bool,
-  initialFocus: PropTypes.string,
+  paused: PropTypes.bool,
   tag: PropTypes.string,
-  returnFocus: PropTypes.bool,
+  focusTrapOptions: PropTypes.object,
 };
 
 var FocusTrap = React.createClass({
@@ -19,36 +16,36 @@ var FocusTrap = React.createClass({
     return {
       active: true,
       tag: 'div',
-      returnFocus: true,
+      paused: false,
     };
   },
 
   componentDidMount: function() {
+    this.focusTrap = createFocusTrap(this.node, this.props.focusTrapOptions);
     if (this.props.active) {
-      this.activateTrap();
+      this.focusTrap.activate();
+    }
+    if (this.props.paused) {
+      this.focusTrap.pause();
     }
   },
 
   componentDidUpdate: function(prevProps) {
     if (prevProps.active && !this.props.active) {
-      focusTrap.deactivate({returnFocus: this.props.returnFocus});
+      this.focusTrap.deactivate();
     } else if (!prevProps.active && this.props.active) {
-      this.activateTrap();
+      this.focusTrap.activate();
+    }
+
+    if (prevProps.paused && !this.props.paused) {
+      this.focusTrap.unpause();
+    } else if (!prevProps.paused && this.props.paused) {
+      this.focusTrap.pause();
     }
   },
 
   componentWillUnmount: function() {
-    focusTrap.deactivate({returnFocus: this.props.returnFocus});
-  },
-
-  activateTrap: function() {
-    if (!this.node) return;
-    focusTrap.activate(this.node, {
-      onDeactivate: this.props.onDeactivate,
-      initialFocus: this.props.initialFocus,
-      escapeDeactivates: this.props.escapeDeactivates,
-      clickOutsideDeactivates: this.props.clickOutsideDeactivates,
-    });
+    this.focusTrap.deactivate();
   },
 
   render: function() {

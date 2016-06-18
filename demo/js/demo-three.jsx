@@ -31,14 +31,16 @@ var DemoThree = React.createClass({
           </button>
         </p>
         <FocusTrap
-          onDeactivate={this.unmountTrap}
-          clickOutsideDeactivates={true}
           id='focus-trap-three'
           tag='section'
           style={{ background: '#eee' }}
           data-whatever='nothing'
           active={this.state.activeTrap}
           className={trapClass}
+          focusTrapOptions={{
+            onDeactivate: this.unmountTrap,
+            clickOutsideDeactivates: true,
+          }}
         >
         <p>
           Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.

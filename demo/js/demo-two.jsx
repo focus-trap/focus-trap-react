@@ -22,10 +22,12 @@ var DemoTwo = React.createClass({
   render: function() {
     var trap = (this.state.activeTrap) ? (
       <FocusTrap
-        onDeactivate={this.unmountTrap}
-        initialFocus='#focused-input'
         className='trap'
-        escapeDeactivates={false}
+        focusTrapOptions={{
+          onDeactivate: this.unmountTrap,
+          initialFocus: '#focused-input',
+          escapeDeactivates: false,
+        }}
       >
         <p>
           Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.

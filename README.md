@@ -13,10 +13,11 @@ You might want it for, say, building [an accessible modal](https://github.com/da
 
 Please read [the focus-trap documentation](https://github.com/davidtheclark/focus-trap) to understand what a focus trap is, what happens when a focus trap is activated, and what happens when one is deactivated.
 
-This module simply provides a React component that creates a focus trap.
+This module simply provides a React component that creates and manages a focus trap.
 
 - The focus trap automatically activates when mounted (by default, though this can be changed).
 - The focus trap automatically deactivates when unmounted.
+- The focus trap can be activated and deactivated, paused and unpaused via props.
 
 ## Installation
 
@@ -26,9 +27,9 @@ npm install focus-trap-react
 
 ### React dependency
 
-Version 2+ is compatible with React 0.14.x.
+Version 2+ is compatible with React 0.14+.
 
-Version 1 is compatible with React 0.13.x.
+Version 1 is compatible with React 0.13.
 
 ## Browser Support
 
@@ -46,7 +47,10 @@ Here's one simple example:
 
 ```js
 var React = require('react');
-var FocusTrap = require('focus-trap-react');
+var ReactDOM = require('react-dom');
+var FocusTrap = require('../../');
+
+var container = document.getElementById('demo-one');
 
 var DemoOne = React.createClass({
   getInitialState: function() {
@@ -66,17 +70,20 @@ var DemoOne = React.createClass({
   render: function() {
     var trap = (this.state.activeTrap) ? (
       <FocusTrap
-        onDeactivate={this.unmountTrap}
-        className='trap'
+        focusTrapOptions={{
+          onDeactivate: this.unmountTrap
+        }}
       >
-        <p>
-          Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.
-        </p>
-        <p>
-          <button onClick={this.unmountTrap}>
-            deactivate trap
-          </button>
-        </p>
+        <div className='trap'>
+          <p>
+            Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.
+          </p>
+          <p>
+            <button onClick={this.unmountTrap}>
+              deactivate trap
+            </button>
+          </p>
+        </div>
       </FocusTrap>
     ) : false;
 
@@ -92,39 +99,17 @@ var DemoOne = React.createClass({
     );
   },
 });
-```
 
-Easy enough.
+ReactDOM.render(<DemoOne />, container);
+```
 
 ### Props
 
-#### onDeactivate
+#### focusTrapOptions
 
-Type: `Function`, *required*
+Type: `Object`, optional
 
-This function is called when the `FocusTrap` deactivates. If, for example, a user hits Escape within the `FocusTrap`, the trap deactivates; and you need to tell it what to do next. The `FocusTrap` does not manage its own visible/hidden state: you do that.
-
-#### initialFocus
-
-Type: `String`, optional
-
-By default, when the `FocusTrap` activates it will pass focus to the first element in its tab order. If you want that initial focus to pass to some other element (e.g. a Submit button at the bottom of a modal dialog),
-pass **a selector identifying the element that should receive initial focus** when the `FocusTrap` activates.
-(This will be passed to `document.querySelector()` to find the element.)
-
-See `demo/demo-two.jsx`.
-
-### escapeDeactivates
-
-Type: `Boolean`, Default: true
-
-If `false`, the Escape key will not trigger deactivation of the focus trap. This can be useful if you want to force the user to make a decision instead of allowing an easy way out.
-
-### clickOutsideDeactivates
-
-Type: Boolean, Default: false
-
-If `true`, a click outside the focus trap will deactivate the focus trap and allow the click event to carry on.
+Pass any of the options available in [`focus-trap`'s `createOptions`](https://github.com/davidtheclark/focus-trap#focustrap--createfocustrapelement-createoptions).
 
 #### active
 
@@ -134,21 +119,21 @@ By default, the `FocusTrap` activates when it mounts. So you activate and deacti
 
 See `demo/demo-three.jsx`.
 
+#### paused
+
+Type: `Boolean`, optional
+
+If you would like to pause or unpause the focus trap (see [`focus-trap`'s documentation](https://github.com/davidtheclark/focus-trap#focustrappause)), toggle this prop.
+
 #### tag
 
 Type: `String`, Default: `div`, optional
 
 An HTML tag for the FocusTrap's DOM node.
 
-#### returnFocus
-
-Type: `Boolean`, Default: true
-
-If `false`, the focus will not return to the element that triggered the `FocusTrap`.
-
 #### additional props
 
-All props not mentioned above are passed directly to the `<div>` element. This means that you can pass `id`, `className`, `style`, `aria-`attributes, `data-`attributes, or any other arbitrary property that you want to use to customize the element.
+All props not mentioned above are passed directly to the rendered DOM element. This means that you can pass `id`, `className`, `style`, `aria-`attributes, `data-`attributes, or any other arbitrary property that you want to use to customize the element.
 
 ## Contributing & Development
 

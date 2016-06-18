@@ -22,9 +22,11 @@ var DemoFour = React.createClass({
   render: function() {
     var trap = (this.state.activeTrap) ? (
       <FocusTrap
-        onDeactivate={this.unmountTrap}
         className='trap'
-        returnFocus={false}
+        focusTrapOptions={{
+          onDeactivate: this.unmountTrap,
+          returnFocusOnDeactivate: false,
+        }}
       >
         <p>
           <button tabIndex='3'>
@@ -56,6 +58,9 @@ var DemoFour = React.createClass({
           <button onClick={this.mountTrap}>
             activate trap
           </button>
+        </p>
+        <p>
+          <a href='#'>other focusable element</a>
         </p>
         {trap}
       </div>

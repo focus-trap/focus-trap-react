@@ -22,7 +22,9 @@ var DemoOne = React.createClass({
   render: function() {
     var trap = (this.state.activeTrap) ? (
       <FocusTrap
-        onDeactivate={this.unmountTrap}
+        focusTrapOptions={{
+          onDeactivate: this.unmountTrap
+        }}
       >
         <div className='trap'>
           <p>

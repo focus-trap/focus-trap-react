@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# Head
+
+- Introduce `focusTrapOptions` prop (and remove redundancies).
+- Upgrade to `focus-trap` v2.
+
 # 2.1.1
 
 - Allow React 15 as peer dependency.
