@@ -1,6 +1,6 @@
 # CHANGELOG
 
-# Head
+# 3.0.0
 
 - Introduce `focusTrapOptions` prop (and remove redundancies).
 - Upgrade to `focus-trap` v2.
