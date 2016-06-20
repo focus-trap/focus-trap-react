@@ -1,6 +1,6 @@
 {
   "name": "focus-trap-react",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A React component that traps focus.",
   "main": "index.js",
   "scripts": {
@@ -48,7 +48,7 @@
     "zuul": "3.10.1"
   },
   "dependencies": {
-    "focus-trap": "^2.0.0"
+    "focus-trap": "^2.0.1"
   },
   "peerDependencies": {
     "react": "0.14.x || ^15.0.0",

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 3.0.1
+
+- Upgrade `focus-trap` for important bug fix.
+
 # 3.0.0
 
 - Introduce `focusTrapOptions` prop (and remove redundancies).
