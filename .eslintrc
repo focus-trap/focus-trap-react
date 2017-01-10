@@ -3,8 +3,10 @@
     "node": true,
     "browser": true
   },
-  "ecmaFeatures": {
-    "jsx": true,
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+    }
   },
   "rules": {
     "comma-dangle": [2, "always-multiline"],

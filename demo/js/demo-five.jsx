@@ -2,9 +2,9 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var FocusTrap = require('../../');
 
-var container = document.getElementById('demo-two');
+var container = document.getElementById('demo-five');
 
-var DemoTwo = React.createClass({
+var DemoFive = React.createClass({
   getInitialState: function() {
     return {
       activeTrap: false,
@@ -22,34 +22,28 @@ var DemoTwo = React.createClass({
   render: function() {
     var trap = (this.state.activeTrap) ? (
       <FocusTrap
-        className='trap'
         focusTrapOptions={{
           onDeactivate: this.unmountTrap,
-          initialFocus: '#focused-input',
-          escapeDeactivates: false,
         }}
       >
-        <p>
-          Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.
-        </p>
-        <p>
-          <label htmlFor='focused-input' style={{ marginRight: 10 }}>
-            Initially focused input
-          </label>
-          <input ref='input' id='focused-input' />
-        </p>
-        <p>
+        <div className='trap'>
           <button onClick={this.unmountTrap}>
             deactivate trap
           </button>
-        </p>
+          <div>
+            <a href='#'>Another focusable thing</a>
+          </div>
+          <div>
+            Autofocused input: <input autoFocus={true} />
+          </div>
+        </div>
       </FocusTrap>
     ) : false;
 
     return (
       <div>
         <p>
-          <button onClick={this.mountTrap}>
+          <button key='button' onClick={this.mountTrap}>
             activate trap
           </button>
         </p>
@@ -59,4 +53,4 @@ var DemoTwo = React.createClass({
   },
 });
 
-ReactDOM.render(<DemoTwo />, container);
+ReactDOM.render(<DemoFive />, container);
