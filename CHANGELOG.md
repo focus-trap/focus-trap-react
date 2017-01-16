@@ -1,23 +1,23 @@
-# CHANGELOG
+# Changelog
 
-## Head
+## 3.0.2
 
 - Fix handling of `focusTrapOptions.returnFocusOnDeactivate` for React-specific kinks like `autoFocus` on inputs.
 
-# 3.0.1
+## 3.0.1
 
 - Upgrade `focus-trap` for important bug fix.
 
-# 3.0.0
+## 3.0.0
 
 - Introduce `focusTrapOptions` prop (and remove redundancies).
 - Upgrade to `focus-trap` v2.
 
-# 2.1.1
+## 2.1.1
 
 - Allow React 15 as peer dependency.
 
-# 2.1.0
+## 2.1.0
 
 - Upgrade `focus-trap` to add `escapeDeactivates` and `clickOutsideDeactivates` props.
 - Allow arbitrary props passed through to the element itself.
