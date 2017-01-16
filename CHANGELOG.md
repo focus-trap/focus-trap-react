@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Head
+
+- Fix handling of `focusTrapOptions.returnFocusOnDeactivate` for React-specific kinks like `autoFocus` on inputs.
+
 # 3.0.1
 
 - Upgrade `focus-trap` for important bug fix.

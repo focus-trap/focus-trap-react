@@ -3,10 +3,10 @@ var createFocusTrap = require('focus-trap');
 
 var PropTypes = React.PropTypes;
 var checkedProps = {
-  active: PropTypes.bool,
-  paused: PropTypes.bool,
-  tag: PropTypes.string,
-  focusTrapOptions: PropTypes.object,
+  active: PropTypes.bool.isRequired,
+  paused: PropTypes.bool.isRequired,
+  tag: PropTypes.string.isRequired,
+  focusTrapOptions: PropTypes.object.isRequired,
 };
 
 var FocusTrap = React.createClass({
@@ -17,11 +17,33 @@ var FocusTrap = React.createClass({
       active: true,
       tag: 'div',
       paused: false,
+      focusTrapOptions: {},
     };
   },
 
+  componentWillMount: function() {
+    if (typeof document !== 'undefined') {
+      this.previouslyFocusedElement = document.activeElement;
+    }
+  },
+
   componentDidMount: function() {
-    this.focusTrap = createFocusTrap(this.node, this.props.focusTrapOptions);
+    // We need to hijack the returnFocusOnDeactivate option,
+    // because React can move focus into the element before we arrived at
+    // this lifecycle hook (e.g. with autoFocus inputs). So the component
+    // captures the previouslyFocusedElement in componentWillMount,
+    // then (optionally) returns focus to it in componentWillUnmount.
+    var specifiedFocusTrapOptions = this.props.focusTrapOptions;
+    var tailoredFocusTrapOptions = {
+      returnFocusOnDeactivate: false,
+    };
+    for (var optionName in specifiedFocusTrapOptions) {
+      if (!specifiedFocusTrapOptions.hasOwnProperty(optionName)) continue;
+      if (optionName === 'returnFocusOnDeactivate') continue;
+      tailoredFocusTrapOptions[optionName] = specifiedFocusTrapOptions[optionName];
+    }
+
+    this.focusTrap = createFocusTrap(this.node, tailoredFocusTrapOptions);
     if (this.props.active) {
       this.focusTrap.activate();
     }
@@ -46,6 +68,9 @@ var FocusTrap = React.createClass({
 
   componentWillUnmount: function() {
     this.focusTrap.deactivate();
+    if (this.props.focusTrapOptions.returnFocusOnDeactivate !== false && this.previouslyFocusedElement) {
+      this.previouslyFocusedElement.focus();
+    }
   },
 
   render: function() {
