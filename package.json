@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
+    "bundle": "NODE_ENV=production browserify index.js --transform babelify --transform envify --transform [ browserify-global-shim --global ]  > ./dist/focus-trap-react.js",
     "start": "budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
     "test-dev": "zuul --local 8080 --open -- test/index.js",
     "pretest": "npm run lint",
@@ -36,7 +37,9 @@
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
+    "browserify-global-shim": "^1.0.3",
     "budo": "^9.4.1",
+    "envify": "^4.0.0",
     "eslint": "^3.13.1",
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
@@ -55,6 +58,9 @@
   "files": [
     "index.js"
   ],
+  "browserify-global-shim": {
+    "react": "React"
+  },
   "babel": {
     "presets": [
       "react"
