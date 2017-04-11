@@ -1,7 +1,8 @@
 var React = require('react');
+var PropTypes = require('prop-types');
 var createFocusTrap = require('focus-trap');
+var createReactClass = require('create-react-class');
 
-var PropTypes = React.PropTypes;
 var checkedProps = {
   active: PropTypes.bool.isRequired,
   paused: PropTypes.bool.isRequired,
@@ -9,7 +10,7 @@ var checkedProps = {
   focusTrapOptions: PropTypes.object.isRequired,
 };
 
-var FocusTrap = React.createClass({
+var FocusTrap = createReactClass({
   propTypes: checkedProps,
 
   getDefaultProps: function() {
