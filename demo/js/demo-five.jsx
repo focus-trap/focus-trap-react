@@ -1,26 +1,32 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var FocusTrap = require('../../');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const FocusTrap = require('../../');
 
-var container = document.getElementById('demo-five');
+const container = document.getElementById('demo-five');
 
-var DemoFive = React.createClass({
-  getInitialState: function() {
-    return {
+class DemoFive extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
       activeTrap: false,
     };
-  },
 
-  mountTrap: function() {
+    this.mountTrap = this.mountTrap.bind(this);
+    this.unmountTrap = this.unmountTrap.bind(this);
+  }
+
+  mountTrap() {
     this.setState({ activeTrap: true });
-  },
+  }
 
-  unmountTrap: function() {
+  unmountTrap() {
     this.setState({ activeTrap: false });
-  },
+  }
 
-  render: function() {
-    var trap = (this.state.activeTrap) ? (
+  render() {
+    const trap = (this.state.activeTrap) ? (
       <FocusTrap
         focusTrapOptions={{
           onDeactivate: this.unmountTrap,
@@ -34,7 +40,7 @@ var DemoFive = React.createClass({
             <a href='#'>Another focusable thing</a>
           </div>
           <div>
-            Autofocused input: <input autoFocus={true} />
+            Autofocused input: <input autoFocus={true}/>
           </div>
         </div>
       </FocusTrap>
@@ -50,7 +56,7 @@ var DemoFive = React.createClass({
         {trap}
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(<DemoFive />, container);

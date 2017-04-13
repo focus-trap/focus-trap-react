@@ -1,26 +1,32 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var FocusTrap = require('../../');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const FocusTrap = require('../../');
 
-var container = document.getElementById('demo-two');
+const container = document.getElementById('demo-two');
 
-var DemoTwo = React.createClass({
-  getInitialState: function() {
-    return {
+class DemoTwo extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
       activeTrap: false,
     };
-  },
 
-  mountTrap: function() {
+    this.mountTrap = this.mountTrap.bind(this);
+    this.unmountTrap = this.unmountTrap.bind(this);
+  }
+
+  mountTrap() {
     this.setState({ activeTrap: true });
-  },
+  }
 
-  unmountTrap: function() {
+  unmountTrap() {
     this.setState({ activeTrap: false });
-  },
+  }
 
-  render: function() {
-    var trap = (this.state.activeTrap) ? (
+  render() {
+    const trap = (this.state.activeTrap) ? (
       <FocusTrap
         className='trap'
         focusTrapOptions={{
@@ -36,7 +42,7 @@ var DemoTwo = React.createClass({
           <label htmlFor='focused-input' style={{ marginRight: 10 }}>
             Initially focused input
           </label>
-          <input ref='input' id='focused-input' />
+          <input ref='input' id='focused-input'/>
         </p>
         <p>
           <button onClick={this.unmountTrap}>
@@ -56,7 +62,8 @@ var DemoTwo = React.createClass({
         {trap}
       </div>
     );
-  },
-});
+  }
+
+}
 
 ReactDOM.render(<DemoTwo />, container);

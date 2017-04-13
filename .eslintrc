@@ -1,11 +1,12 @@
 {
   "env": {
     "node": true,
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "parserOptions": {
     "ecmaFeatures": {
-      "jsx": true,
+      "jsx": true
     }
   },
   "rules": {
@@ -26,6 +27,6 @@
     "space-before-function-paren": [2, "never"],
     "space-before-blocks": [2, "always"],
     "space-in-parens": [2, "never"],
-    "space-unary-ops": 2,
+    "space-unary-ops": 2
   }
 }
