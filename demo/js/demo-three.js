@@ -1,16 +1,15 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const FocusTrap = require('../../');
+const FocusTrap = require('../../dist/focus-trap-react');
 
 const container = document.getElementById('demo-three');
 
 class DemoThree extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      activeTrap: false,
+      activeTrap: false
     };
 
     this.mountTrap = this.mountTrap.bind(this);
@@ -37,19 +36,27 @@ class DemoThree extends React.Component {
           </button>
         </p>
         <FocusTrap
-          id='focus-trap-three'
-          tag='section'
+          id="focus-trap-three"
+          tag="section"
           style={{ background: '#eee' }}
-          data-whatever='nothing'
+          data-whatever="nothing"
           active={this.state.activeTrap}
           className={trapClass}
           focusTrapOptions={{
             onDeactivate: this.unmountTrap,
-            clickOutsideDeactivates: true,
+            clickOutsideDeactivates: true
           }}
         >
           <p>
-            Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.
+            Here is a focus trap
+            {' '}
+            <a href="#">with</a>
+            {' '}
+            <a href="#">some</a>
+            {' '}
+            <a href="#">focusable</a>
+            {' '}
+            parts.
           </p>
           <p>
             <button onClick={this.unmountTrap}>
@@ -60,7 +67,6 @@ class DemoThree extends React.Component {
       </div>
     );
   }
-
 }
 
 ReactDOM.render(<DemoThree />, container);

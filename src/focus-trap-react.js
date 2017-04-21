@@ -1,13 +1,13 @@
 const React = require('react');
-const PropTypes = require('prop-types');
 const createFocusTrap = require('focus-trap');
 
-const checkedProps = {
-  active: PropTypes.bool.isRequired,
-  paused: PropTypes.bool.isRequired,
-  tag: PropTypes.string.isRequired,
-  focusTrapOptions: PropTypes.object.isRequired,
-};
+const checkedProps = [
+  'active',
+  'paused',
+  'tag',
+  'focusTrapOptions',
+  '_createFocusTrap'
+];
 
 class FocusTrap extends React.Component {
   componentWillMount() {
@@ -24,15 +24,19 @@ class FocusTrap extends React.Component {
     // then (optionally) returns focus to it in componentWillUnmount.
     const specifiedFocusTrapOptions = this.props.focusTrapOptions;
     const tailoredFocusTrapOptions = {
-      returnFocusOnDeactivate: false,
+      returnFocusOnDeactivate: false
     };
     for (const optionName in specifiedFocusTrapOptions) {
       if (!specifiedFocusTrapOptions.hasOwnProperty(optionName)) continue;
       if (optionName === 'returnFocusOnDeactivate') continue;
-      tailoredFocusTrapOptions[optionName] = specifiedFocusTrapOptions[optionName];
+      tailoredFocusTrapOptions[optionName] =
+        specifiedFocusTrapOptions[optionName];
     }
 
-    this.focusTrap = createFocusTrap(this.node, tailoredFocusTrapOptions);
+    this.focusTrap = this.props._createFocusTrap(
+      this.node,
+      tailoredFocusTrapOptions
+    );
     if (this.props.active) {
       this.focusTrap.activate();
     }
@@ -57,39 +61,44 @@ class FocusTrap extends React.Component {
 
   componentWillUnmount() {
     this.focusTrap.deactivate();
-    if (this.props.focusTrapOptions.returnFocusOnDeactivate !== false && this.previouslyFocusedElement) {
+    if (
+      this.props.focusTrapOptions.returnFocusOnDeactivate !== false &&
+      this.previouslyFocusedElement
+    ) {
       this.previouslyFocusedElement.focus();
     }
   }
 
-  render() {
-    const props = this.props;
+  setNode = el => {
+    this.node = el;
+  };
 
+  render() {
     const elementProps = {
-      ref: function(el) {
-        this.node = el;
-      }.bind(this),
+      ref: this.setNode
     };
 
     // This will get id, className, style, etc. -- arbitrary element props
-    for (const prop in props) {
-      if (!props.hasOwnProperty(prop)) continue;
-      if (checkedProps[prop]) continue;
-      elementProps[prop] = props[prop];
+    for (const prop in this.props) {
+      if (!this.props.hasOwnProperty(prop)) continue;
+      if (checkedProps.indexOf(prop) !== -1) continue;
+      elementProps[prop] = this.props[prop];
     }
 
-    return React.createElement(this.props.tag, elementProps, this.props.children);
+    return React.createElement(
+      this.props.tag,
+      elementProps,
+      this.props.children
+    );
   }
-
 }
-
-FocusTrap.propTypes = checkedProps;
 
 FocusTrap.defaultProps = {
   active: true,
   tag: 'div',
   paused: false,
   focusTrapOptions: {},
+  _createFocusTrap: createFocusTrap
 };
 
 module.exports = FocusTrap;
