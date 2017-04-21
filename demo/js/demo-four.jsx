@@ -1,26 +1,32 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var FocusTrap = require('../../');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const FocusTrap = require('../../');
 
-var container = document.getElementById('demo-four');
+const container = document.getElementById('demo-four');
 
-var DemoFour = React.createClass({
-  getInitialState: function() {
-    return {
+class DemoFour extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
       activeTrap: false,
     };
-  },
 
-  mountTrap: function() {
+    this.mountTrap = this.mountTrap.bind(this);
+    this.unmountTrap = this.unmountTrap.bind(this);
+  }
+
+  mountTrap() {
     this.setState({ activeTrap: true });
-  },
+  }
 
-  unmountTrap: function() {
+  unmountTrap() {
     this.setState({ activeTrap: false });
-  },
+  }
 
-  render: function() {
-    var trap = (this.state.activeTrap) ? (
+  render() {
+    const trap = (this.state.activeTrap) ? (
       <FocusTrap
         className='trap'
         focusTrapOptions={{
@@ -65,7 +71,7 @@ var DemoFour = React.createClass({
         {trap}
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(<DemoFour />, container);

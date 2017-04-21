@@ -46,7 +46,8 @@
     "zuul": "^3.10.1"
   },
   "dependencies": {
-    "focus-trap": "^2.0.1"
+    "focus-trap": "^2.0.1",
+    "prop-types": "^15.5.8"
   },
   "peerDependencies": {
     "react": "0.14.x || ^15.0.0",
