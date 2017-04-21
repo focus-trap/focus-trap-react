@@ -1,15 +1,18 @@
 {
   "name": "focus-trap-react",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A React component that traps focus.",
-  "main": "index.js",
+  "main": "dist/focus-trap-react.js",
   "scripts": {
-    "lint": "eslint .",
     "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
     "start": "budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
-    "test-dev": "zuul --local 8080 --open -- test/index.js",
-    "pretest": "npm run lint",
-    "test": "zuul -- test/index.js"
+    "lint": "eslint .",
+    "format": "prettier --single-quote --write src/*.js test/*.js demo/js/*.js",
+    "build": "babel src -d dist",
+    "jest": "jest",
+    "pretest": "npm run lint && npm run build",
+    "test": "jest",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -33,32 +36,39 @@
   },
   "homepage": "https://github.com/davidtheclark/focus-trap-react#readme",
   "devDependencies": {
-    "babel-preset-react": "^6.5.0",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "babelify": "^7.3.0",
-    "browserify": "^13.0.1",
+    "browserify": "^14.3.0",
     "budo": "^9.4.1",
     "eslint": "^3.13.1",
-    "react": "^15.1.0",
-    "react-addons-test-utils": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "sinon": "^1.17.4",
-    "tape": "^4.5.1",
-    "zuul": "^3.10.1"
+    "eslint-plugin-react": "^6.10.3",
+    "jest": "^19.0.2",
+    "prettier": "^1.2.2",
+    "react": "^15.5.0",
+    "react-dom": "^15.5.0"
   },
   "dependencies": {
-    "focus-trap": "^2.0.1",
-    "prop-types": "^15.5.8"
+    "focus-trap": "^2.0.1"
   },
   "peerDependencies": {
     "react": "0.14.x || ^15.0.0",
     "react-dom": "0.14.x || ^15.0.0"
   },
-  "files": [
-    "index.js"
-  ],
   "babel": {
     "presets": [
-      "react"
+      "react",
+      "es2015"
+    ],
+    "plugins": [
+      "transform-class-properties"
     ]
+  },
+  "jest": {
+    "testRegex": "/test/.*\\.test.js$",
+    "resetMocks": true
   }
 }

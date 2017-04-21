@@ -1,4 +1,4 @@
-# focus-trap-react [![Build Status](https://travis-ci.org/davidtheclark/focus-trap-react.svg?branch=0.1.0)](https://travis-ci.org/davidtheclark/focus-trap-react)
+# focus-trap-react [![Build Status](https://travis-ci.org/davidtheclark/focus-trap-react.svg?branch=master)](https://travis-ci.org/davidtheclark/focus-trap-react)
 
 A React component that traps focus.
 
@@ -25,19 +25,19 @@ This module simply provides a React component that creates and manages a focus t
 npm install focus-trap-react
 ```
 
+`dist/focus-trap-react.js` is the Babel-compiled file that you'll use.
+
 ### React dependency
 
-Version 2+ is compatible with React 0.14+.
+Version 2+ is compatible with React >0.14+.
 
 Version 1 is compatible with React 0.13.
 
 ## Browser Support
 
-Basically IE9+. See `.zuul.yml` for more details.
+Basically IE9+.
 
 Why? Because this module's core functionality comes from focus-trap, which uses [a couple of IE9+ functions](https://github.com/davidtheclark/tabbable#browser-support).
-
-Automated testing is done with [zuul](https://github.com/defunctzombie/zuul) and [Open Suace](https://saucelabs.com/opensauce/).
 
 ## Usage
 
@@ -46,46 +46,59 @@ Read code in `demo/` (it's very simple), and [see how it works](http://davidthec
 Here's one simple example:
 
 ```js
-var React = require('react');
-var ReactDOM = require('react-dom');
-var FocusTrap = require('../../');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const FocusTrap = require('../../dist/focus-trap-react');
 
-var container = document.getElementById('demo-one');
+const container = document.getElementById('demo-one');
 
-var DemoOne = React.createClass({
-  getInitialState: function() {
-    return {
-      activeTrap: false,
+class DemoOne extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeTrap: false
     };
-  },
 
-  mountTrap: function() {
+    this.mountTrap = this.mountTrap.bind(this);
+    this.unmountTrap = this.unmountTrap.bind(this);
+  }
+
+  mountTrap() {
     this.setState({ activeTrap: true });
-  },
+  }
 
-  unmountTrap: function() {
+  unmountTrap() {
     this.setState({ activeTrap: false });
-  },
+  }
 
-  render: function() {
-    var trap = (this.state.activeTrap) ? (
-      <FocusTrap
-        focusTrapOptions={{
-          onDeactivate: this.unmountTrap
-        }}
-      >
-        <div className='trap'>
-          <p>
-            Here is a focus trap <a href='#'>with</a> <a href='#'>some</a> <a href='#'>focusable</a> parts.
-          </p>
-          <p>
-            <button onClick={this.unmountTrap}>
-              deactivate trap
-            </button>
-          </p>
-        </div>
-      </FocusTrap>
-    ) : false;
+  render() {
+    const trap = this.state.activeTrap
+      ? <FocusTrap
+          focusTrapOptions={{
+            onDeactivate: this.unmountTrap
+          }}
+        >
+          <div className="trap">
+            <p>
+              Here is a focus trap
+              {' '}
+              <a href="#">with</a>
+              {' '}
+              <a href="#">some</a>
+              {' '}
+              <a href="#">focusable</a>
+              {' '}
+              parts.
+            </p>
+            <p>
+              <button onClick={this.unmountTrap}>
+                deactivate trap
+              </button>
+            </p>
+          </div>
+        </FocusTrap>
+      : false;
 
     return (
       <div>
@@ -97,8 +110,8 @@ var DemoOne = React.createClass({
         {trap}
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(<DemoOne />, container);
 ```
@@ -143,4 +156,4 @@ Lint with `npm run lint`.
 
 Run the demos with `npm start`.
 
-Test with `npm run test-dev`, which will give you a URL to open in your browser. Look at the console log for TAP output.
+Test with `npm run test`.

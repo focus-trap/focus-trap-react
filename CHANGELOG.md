@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.3
+
+- Introduce `dist/focus-trap-react.js`, where `src/` now compiles to, since React 15.5+ demands `class`es, so Babel-compilation.
+  Which is actually a huge overhaul, though in semver it's just a patch.
+
 ## 3.0.2
 
 - Fix handling of `focusTrapOptions.returnFocusOnDeactivate` for React-specific kinks like `autoFocus` on inputs.
