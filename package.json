@@ -48,15 +48,15 @@
     "eslint-plugin-react": "^6.10.3",
     "jest": "^19.0.2",
     "prettier": "^1.2.2",
-    "react": "^15.5.0",
-    "react-dom": "^15.5.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "dependencies": {
     "focus-trap": "^2.0.1"
   },
   "peerDependencies": {
-    "react": "0.14.x || ^15.0.0",
-    "react-dom": "0.14.x || ^15.0.0"
+    "react": "0.14.x || ^15.0.0 || ^16.0.0",
+    "react-dom": "0.14.x || ^15.0.0 || ^16.0.0"
   },
   "babel": {
     "presets": [
@@ -68,6 +68,9 @@
     ]
   },
   "jest": {
+    "setupFiles": [
+      "<rootDir>/test/__mocks__/requestAnimationFrame.js"
+    ],
     "testRegex": "/test/.*\\.test.js$",
     "resetMocks": true
   }
