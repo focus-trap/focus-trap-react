@@ -1,6 +1,6 @@
 {
   "name": "focus-trap-react",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A React component that traps focus.",
   "main": "dist/focus-trap-react.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "jest": "jest",
     "pretest": "npm run lint && npm run build",
     "test": "jest",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -69,9 +69,8 @@
   },
   "jest": {
     "setupFiles": [
-      "<rootDir>/test/__mocks__/requestAnimationFrame.js"
+      "<rootDir>/test/jest-setup.js"
     ],
-    "testRegex": "/test/.*\\.test.js$",
-    "resetMocks": true
+    "clearMocks": true
   }
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.4
+
+- Allow React v16 peer dependency.
+
 ## 3.0.3
 
 - Introduce `dist/focus-trap-react.js`, where `src/` now compiles to, since React 15.5+ demands `class`es, so Babel-compilation.
