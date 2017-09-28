@@ -68,6 +68,9 @@
     ]
   },
   "jest": {
+    "setupFiles": [
+      "<rootDir>/test/__mocks__/requestAnimationFrame.js"
+    ],
     "testRegex": "/test/.*\\.test.js$",
     "resetMocks": true
   }
