@@ -1,17 +1,17 @@
-const React = require('react');
-const createFocusTrap = require('focus-trap');
+const React = require("react");
+const createFocusTrap = require("focus-trap");
 
 const checkedProps = [
-  'active',
-  'paused',
-  'tag',
-  'focusTrapOptions',
-  '_createFocusTrap'
+  "active",
+  "paused",
+  "tag",
+  "focusTrapOptions",
+  "_createFocusTrap"
 ];
 
 class FocusTrap extends React.Component {
   componentWillMount() {
-    if (typeof document !== 'undefined') {
+    if (typeof document !== "undefined") {
       this.previouslyFocusedElement = document.activeElement;
     }
   }
@@ -28,7 +28,7 @@ class FocusTrap extends React.Component {
     };
     for (const optionName in specifiedFocusTrapOptions) {
       if (!specifiedFocusTrapOptions.hasOwnProperty(optionName)) continue;
-      if (optionName === 'returnFocusOnDeactivate') continue;
+      if (optionName === "returnFocusOnDeactivate") continue;
       tailoredFocusTrapOptions[optionName] =
         specifiedFocusTrapOptions[optionName];
     }
@@ -63,17 +63,10 @@ class FocusTrap extends React.Component {
     this.focusTrap.deactivate();
     if (
       this.props.focusTrapOptions.returnFocusOnDeactivate !== false &&
-      this.previouslyFocusedElement
+      this.previouslyFocusedElement &&
+      this.previouslyFocusedElement.focus
     ) {
-      /*
-        IE 11 in an iFrame some times returns an empty object
-        for document.activeElement if that element has a tab index.
-      */
-      try {
-        this.previouslyFocusedElement.focus();
-      } catch (error) {
-        console.error('Error attempting focus on previously focused element', error)
-      }
+      this.previouslyFocusedElement.focus();
     }
   }
 
@@ -103,7 +96,7 @@ class FocusTrap extends React.Component {
 
 FocusTrap.defaultProps = {
   active: true,
-  tag: 'div',
+  tag: "div",
   paused: false,
   focusTrapOptions: {},
   _createFocusTrap: createFocusTrap
