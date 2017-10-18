@@ -65,7 +65,15 @@ class FocusTrap extends React.Component {
       this.props.focusTrapOptions.returnFocusOnDeactivate !== false &&
       this.previouslyFocusedElement
     ) {
-      this.previouslyFocusedElement.focus();
+      /*
+        IE 11 in an iFrame some times returns an empty object
+        for document.activeElement if that element has a tab index.
+      */
+      try {
+        this.previouslyFocusedElement.focus();
+      } catch (error) {
+        console.error('Error attempting focus on previously focused element', error)
+      }
     }
   }
 
