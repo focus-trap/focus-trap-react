@@ -63,7 +63,8 @@ class FocusTrap extends React.Component {
     this.focusTrap.deactivate();
     if (
       this.props.focusTrapOptions.returnFocusOnDeactivate !== false &&
-      this.previouslyFocusedElement
+      this.previouslyFocusedElement &&
+      this.previouslyFocusedElement.focus
     ) {
       this.previouslyFocusedElement.focus();
     }
