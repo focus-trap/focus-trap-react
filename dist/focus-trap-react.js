@@ -84,7 +84,7 @@ var FocusTrap = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       this.focusTrap.deactivate();
-      if (this.props.focusTrapOptions.returnFocusOnDeactivate !== false && this.previouslyFocusedElement) {
+      if (this.props.focusTrapOptions.returnFocusOnDeactivate !== false && this.previouslyFocusedElement && this.previouslyFocusedElement.focus) {
         this.previouslyFocusedElement.focus();
       }
     }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0
+
+- Add TypeScript declarations.
+
 ## 3.0.5
 
 - Prevent error in IE edge cases when the previously focused element does not have a `focus()` function.
