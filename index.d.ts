@@ -4,7 +4,7 @@ declare module "focus-trap-react" {
 
   // Extend AllHTMLAttributes to provide completions on DOM properties wherever
   // React does.
-  export interface Props extends React.AllHTMLAttributes<any> {
+  interface Props extends React.AllHTMLAttributes<any> {
     active?: boolean;
     paused?: boolean;
     tag?: string;
@@ -13,5 +13,8 @@ declare module "focus-trap-react" {
     [x: string]: any;
   }
 
-  export default class FocusTrap extends React.Component<Props> {}
+  class FocusTrap extends React.Component<Props> {}
+  namespace FocusTrap {}
+
+  export = FocusTrap;
 }
