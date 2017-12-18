@@ -1,6 +1,6 @@
 declare module "focus-trap-react" {
   import { Options as FocusTrapOptions } from "focus-trap";
-  import React from "react";
+  import * as React from "react";
 
   // Extend AllHTMLAttributes to provide completions on DOM properties wherever
   // React does.
