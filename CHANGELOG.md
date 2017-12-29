@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1
+
+- Fix React import in TypeScript declarations.
+
 ## 3.1.0
 
 - Add TypeScript declarations.
