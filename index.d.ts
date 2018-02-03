@@ -1,20 +1,17 @@
-declare module "focus-trap-react" {
-  import { Options as FocusTrapOptions } from "focus-trap";
-  import * as React from "react";
+import { Options as FocusTrapOptions } from 'focus-trap';
+import * as React from 'react';
 
-  // Extend AllHTMLAttributes to provide completions on DOM properties wherever
-  // React does.
-  interface Props extends React.AllHTMLAttributes<any> {
+export = FocusTrap;
+
+declare namespace FocusTrap {
+  export interface Props extends React.AllHTMLAttributes<any> {
     active?: boolean;
     paused?: boolean;
     tag?: string;
     focusTrapOptions?: FocusTrapOptions;
     // Allow through any properties that weren't picked up
-    [x: string]: any;
+    [prop: string]: any;
   }
-
-  class FocusTrap extends React.Component<Props> {}
-  namespace FocusTrap {}
-
-  export = FocusTrap;
 }
+
+declare class FocusTrap extends React.Component<FocusTrap.Props> {}
