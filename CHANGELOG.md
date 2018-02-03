@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.2
+
+- Fix TypeScript declarations so props are available on the imported namespace.
+
 ## 3.1.1
 
 - Fix React import in TypeScript declarations.
