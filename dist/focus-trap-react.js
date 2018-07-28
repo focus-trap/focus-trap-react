@@ -17,29 +17,21 @@ var FocusTrap = function (_React$Component) {
   _inherits(FocusTrap, _React$Component);
 
   function FocusTrap() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
     _classCallCheck(this, FocusTrap);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (FocusTrap.__proto__ || Object.getPrototypeOf(FocusTrap)).call(this));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = FocusTrap.__proto__ || Object.getPrototypeOf(FocusTrap)).call.apply(_ref, [this].concat(args))), _this), _this.setNode = function (el) {
+    _this.setNode = function (el) {
       _this.node = el;
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    };
+
+    if (typeof document !== 'undefined') {
+      _this.previouslyFocusedElement = document.activeElement;
+    }
+    return _this;
   }
 
   _createClass(FocusTrap, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      if (typeof document !== 'undefined') {
-        this.previouslyFocusedElement = document.activeElement;
-      }
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // We need to hijack the returnFocusOnDeactivate option,

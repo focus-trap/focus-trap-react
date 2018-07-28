@@ -10,7 +10,9 @@ const checkedProps = [
 ];
 
 class FocusTrap extends React.Component {
-  componentWillMount() {
+  constructor() {
+    super()
+    
     if (typeof document !== 'undefined') {
       this.previouslyFocusedElement = document.activeElement;
     }
