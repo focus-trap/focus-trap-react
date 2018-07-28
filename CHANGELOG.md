@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.3
+
+- Remove `componentWillMount` usage.
+
 ## 3.1.2
 
 - Fix TypeScript declarations so props are available on the imported namespace.
