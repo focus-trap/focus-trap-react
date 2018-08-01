@@ -1,5 +1,10 @@
 # Changelog
 
+## HEAD
+
+- Update focus-trap to 3.0.0, which includes [a couple of behavior changes](https://github.com/davidtheclark/focus-trap/blob/master/CHANGELOG.md#300). The key change is that focus management has been changed so that you can include tricky focusable elements like radio groups, iframes, and shadow DOM components in your trap — as long as the first and last focusable elements in the trap can still be detected by [Tabbable](https://github.com/davidtheclark/tabbable).
+  - An effect of this change is that *positive tabindexes are no longer guaranteed to work as expected*. You should avoid these.
+
 ## 3.1.4
 
 - Re-add TypeScript declarations.

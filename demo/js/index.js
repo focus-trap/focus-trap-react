@@ -1,5 +1,4 @@
-require('./demo-one');
-require('./demo-two');
-require('./demo-three');
-require('./demo-four');
-require('./demo-five');
+require('./demo-defaults');
+require('./demo-ffne');
+require('./demo-special-element');
+require('./demo-autofocus');

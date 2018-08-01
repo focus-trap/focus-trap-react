@@ -2,9 +2,9 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const FocusTrap = require('../../dist/focus-trap-react');
 
-const container = document.getElementById('demo-five');
+const container = document.getElementById('demo-autofocus');
 
-class DemoFive extends React.Component {
+class DemoAutofocus extends React.Component {
   constructor(props) {
     super(props);
 
@@ -58,4 +58,4 @@ class DemoFive extends React.Component {
   }
 }
 
-ReactDOM.render(<DemoFive />, container);
+ReactDOM.render(<DemoAutofocus />, container);
