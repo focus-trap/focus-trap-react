@@ -21,7 +21,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "keywords": [
     "react",
