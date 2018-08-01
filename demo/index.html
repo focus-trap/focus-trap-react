@@ -18,24 +18,24 @@
     <a href="https://github.com/davidtheclark/focus-trap-react" style="vertical-align:middle;">Return to the repository</a>
   </p>
 
-  <h2>demo one</h2>
+  <h2>defaults</h2>
   <p>
     Default behavior: When this FocusTrap mounts (and activates), the first element in its tab order receives focus.
   </p>
-  <div id="demo-one"></div>
+  <div id="demo-defaults"></div>
 
-  <h2>demo two</h2>
+  <h2>first focus, no escape</h2>
   <p>
     When this FocusTrap mounts (and activates), focus jumps to a specific, manually specified element.
   </p>
   <p>
     Also, the Escape key does not deactivate this trap: you have to click the button to deactivate.
   </p>
-  <div id="demo-two"></div>
+  <div id="demo-ffne"></div>
 
-  <h2>demo three</h2>
+  <h2>special element</h2>
   <p>
-    Inspect this element and you'll see that is not the default plan div,
+    Inspect this element and you'll see that it is not the default plain div,
     but rather a section tag with an id, a class, inline styles, and an
     arbitrary <code>data-</code>attribute.
   </p>
@@ -45,24 +45,13 @@
   <p>
     ALSO, when you click outside this FocusTrap, the trap deactivates and your click carries through.
   </p>
-  <div id="demo-three"></div>
+  <div id="demo-special-element"></div>
 
-  <h2>demo four</h2>
-  <p>
-    Default behavior with a twist:
-    When this FocusTrap activates, the first element in its tab order receives focus,
-    <em>but because of positive tabindex attributes the tab order is not the same as the source order</em>.
-  </p>
-  <p>
-    Also, when you deactivate this FocusTrap, the focus will not be returned to the button that activated it.
-  </p>
-  <div id="demo-four"></div>
-
-  <h2>demo five</h2>
+  <h2>demo autofocus</h2>
   <p>
     The trap contains an input with the autofocus attribute.
   </p>
-  <div id="demo-five"></div>
+  <div id="demo-autofocus"></div>
 
   <p>
     <span style="font-size:2em;vertical-align:middle;">☜</span>

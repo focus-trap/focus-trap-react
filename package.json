@@ -58,7 +58,7 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
-    "focus-trap": "^2.0.1"
+    "focus-trap": "^3.0.0"
   },
   "peerDependencies": {
     "react": "0.14.x || ^15.0.0 || ^16.0.0",

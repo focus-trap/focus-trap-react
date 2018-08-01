@@ -2,9 +2,9 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const FocusTrap = require('../../dist/focus-trap-react');
 
-const container = document.getElementById('demo-four');
+const container = document.getElementById('demo-ffne');
 
-class DemoFour extends React.Component {
+class DemoFfne extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,28 +30,30 @@ class DemoFour extends React.Component {
           className="trap"
           focusTrapOptions={{
             onDeactivate: this.unmountTrap,
-            returnFocusOnDeactivate: false
+            initialFocus: '#focused-input',
+            escapeDeactivates: false
           }}
         >
           <p>
-            <button tabIndex="3">
-              tabindex 3
-            </button>
+            Here is a focus trap
+            {' '}
+            <a href="#">with</a>
+            {' '}
+            <a href="#">some</a>
+            {' '}
+            <a href="#">focusable</a>
+            {' '}
+            parts.
           </p>
           <p>
-            <button tabIndex="2">
-              tabindex 2
-            </button>
+            <label htmlFor="focused-input" style={{ marginRight: 10 }}>
+              Initially focused input
+            </label>
+            <input ref="input" id="focused-input" />
           </p>
           <p>
-            <button tabIndex="4">tabindex 4</button>
-          </p>
-          <p>
-            <button>no tabindex</button>
-          </p>
-          <p>
-            <button onClick={this.unmountTrap} tabIndex="1">
-              deactivate trap (tabindex 1)
+            <button onClick={this.unmountTrap}>
+              deactivate trap
             </button>
           </p>
         </FocusTrap>
@@ -64,13 +66,10 @@ class DemoFour extends React.Component {
             activate trap
           </button>
         </p>
-        <p>
-          <a href="#">other focusable element</a>
-        </p>
         {trap}
       </div>
     );
   }
 }
 
-ReactDOM.render(<DemoFour />, container);
+ReactDOM.render(<DemoFfne />, container);

@@ -2,9 +2,9 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const FocusTrap = require('../../dist/focus-trap-react');
 
-const container = document.getElementById('demo-two');
+const container = document.getElementById('demo-special-element');
 
-class DemoTwo extends React.Component {
+class DemoSpecialElement extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,13 +25,26 @@ class DemoTwo extends React.Component {
   }
 
   render() {
-    const trap = this.state.activeTrap
-      ? <FocusTrap
-          className="trap"
+    let trapClass = 'trap';
+    if (this.state.activeTrap) trapClass += ' is-active';
+
+    return (
+      <div>
+        <p>
+          <button onClick={this.mountTrap}>
+            activate trap
+          </button>
+        </p>
+        <FocusTrap
+          id="focus-trap-three"
+          tag="section"
+          style={{ background: '#eee' }}
+          data-whatever="nothing"
+          active={this.state.activeTrap}
+          className={trapClass}
           focusTrapOptions={{
             onDeactivate: this.unmountTrap,
-            initialFocus: '#focused-input',
-            escapeDeactivates: false
+            clickOutsideDeactivates: true
           }}
         >
           <p>
@@ -46,30 +59,14 @@ class DemoTwo extends React.Component {
             parts.
           </p>
           <p>
-            <label htmlFor="focused-input" style={{ marginRight: 10 }}>
-              Initially focused input
-            </label>
-            <input ref="input" id="focused-input" />
-          </p>
-          <p>
             <button onClick={this.unmountTrap}>
               deactivate trap
             </button>
           </p>
         </FocusTrap>
-      : false;
-
-    return (
-      <div>
-        <p>
-          <button onClick={this.mountTrap}>
-            activate trap
-          </button>
-        </p>
-        {trap}
       </div>
     );
   }
 }
 
-ReactDOM.render(<DemoTwo />, container);
+ReactDOM.render(<DemoSpecialElement />, container);
