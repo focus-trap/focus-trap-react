@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.4
+
+- Re-add TypeScript declarations.
+
 ## 3.1.3
 
 - Remove `componentWillMount` usage.
