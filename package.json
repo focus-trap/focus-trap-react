@@ -52,7 +52,7 @@
     "budo": "^9.4.1",
     "eslint": "^3.13.1",
     "eslint-plugin-react": "^6.10.3",
-    "jest": "^19.0.2",
+    "jest": "^23.4.0",
     "prettier": "^1.2.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -77,6 +77,7 @@
     "setupFiles": [
       "<rootDir>/test/jest-setup.js"
     ],
-    "clearMocks": true
+    "clearMocks": true,
+    "testURL": "http://localhost"
   }
 }
