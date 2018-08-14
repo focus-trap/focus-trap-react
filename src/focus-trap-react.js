@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const createFocusTrap = require('focus-trap');
 
@@ -9,6 +10,13 @@ const checkedProps = [
   '_createFocusTrap'
 ];
 
+const FocusTrapReactContextType = {
+  _FocusTrapReact: PropTypes.shape({
+    pause: PropTypes.func.isRequired,
+    unpause: PropTypes.func.isRequired,
+  })
+};
+
 class FocusTrap extends React.Component {
   constructor(props) {
     super(props)
@@ -16,6 +24,19 @@ class FocusTrap extends React.Component {
     if (typeof document !== 'undefined') {
       this.previouslyFocusedElement = document.activeElement;
     }
+  }
+
+  getChildContext() {
+    return {
+      _FocusTrapReact: {
+        pause: () => this.focusTrap.pause(),
+        unpause: () => {
+          if (this.props.paused === false) {
+            this.focusTrap.unpause()
+          }
+        }
+      }
+    };
   }
 
   componentDidMount() {
@@ -45,6 +66,10 @@ class FocusTrap extends React.Component {
     if (this.props.paused) {
       this.focusTrap.pause();
     }
+
+    // if there is a _FocusTrapReact context from a parent focus trap, pause it
+    const {_FocusTrapReact: {pause} = {}} = this.context;
+    if (pause) pause();
   }
 
   componentDidUpdate(prevProps) {
@@ -70,6 +95,10 @@ class FocusTrap extends React.Component {
     ) {
       this.previouslyFocusedElement.focus();
     }
+
+    // if there is a _FocusTrapReact context from a parent focus trap, activate it
+    const {_FocusTrapReact: {unpause} = {}} = this.context;
+    if (unpause) unpause();
   }
 
   setNode = el => {
@@ -95,6 +124,9 @@ class FocusTrap extends React.Component {
     );
   }
 }
+
+FocusTrap.contextTypes = FocusTrapReactContextType;
+FocusTrap.childContextTypes = FocusTrapReactContextType;
 
 FocusTrap.defaultProps = {
   active: true,
