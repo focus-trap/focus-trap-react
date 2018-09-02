@@ -62,6 +62,46 @@ describe('deactivation', () => {
     expect(mockFocusTrap.deactivate).toHaveBeenCalledTimes(1);
   });
 
+  test('deactivation respects `returnFocusOnDeactivate` option', () => {
+    class TestZone extends React.Component {
+      state = {
+        trapActive: true
+      };
+
+      deactivateTrap = () => {
+        this.setState({ trapActive: false });
+      };
+
+      render() {
+        return (
+          <div>
+            <button ref="trigger" onClick={this.deactivateTrap}>
+              deactivate
+            </button>
+            <FocusTrap
+              ref={(component) => this.trap = component}
+              active={this.state.trapActive}
+              focusTrapOptions={{ returnFocusOnDeactivate: true }}
+            >
+              <button>
+                something special
+              </button>
+            </FocusTrap>
+          </div>
+        );
+      }
+    }
+
+    const zone = ReactDOM.render(<TestZone />, domContainer);
+    // mock deactivate on the fouscTrap instance for we can asset 
+    // that we are passing the correct config to the focus trap.
+    zone.trap.focusTrap.deactivate = jest.fn();
+
+    TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
+
+    expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({ returnFocus: true });
+  });
+  
   test('deactivation by dismount', () => {
     class TestZone extends React.Component {
       state = {
