@@ -26,9 +26,11 @@ describe('dom', () => {
   test('DOM with only required props', () => {
     const trap = TestUtils.renderIntoDocument(
       <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
-        <button>
-          something special
-        </button>
+        <div>
+          <button>
+            something special
+          </button>
+        </div>
       </FocusTrap>
     );
     const trapNode = ReactDOM.findDOMNode(trap);
@@ -44,15 +46,15 @@ describe('dom', () => {
 
   test('DOM with all possible DOM-related props', () => {
     const trap = TestUtils.renderIntoDocument(
-      <FocusTrap
-        _createFocusTrap={mockCreateFocusTrap}
-        id="foo"
-        className="bar"
-        tag="figure"
-      >
-        <button>
-          something special
-        </button>
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+        <figure
+          id="foo"
+          className="bar"
+        >
+          <button>
+            something special
+          </button>
+        </figure>
       </FocusTrap>
     );
     const trapNode = ReactDOM.findDOMNode(trap);

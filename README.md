@@ -75,28 +75,28 @@ class DemoOne extends React.Component {
   render() {
     const trap = this.state.activeTrap
       ? <FocusTrap
+          component="div"
           focusTrapOptions={{
             onDeactivate: this.unmountTrap
           }}
+          className="trap"
         >
-          <div className="trap">
-            <p>
-              Here is a focus trap
-              {' '}
-              <a href="#">with</a>
-              {' '}
-              <a href="#">some</a>
-              {' '}
-              <a href="#">focusable</a>
-              {' '}
-              parts.
-            </p>
-            <p>
-              <button onClick={this.unmountTrap}>
-                deactivate trap
-              </button>
-            </p>
-          </div>
+          <p>
+            Here is a focus trap
+            {' '}
+            <a href="#">with</a>
+            {' '}
+            <a href="#">some</a>
+            {' '}
+            <a href="#">focusable</a>
+            {' '}
+            parts.
+          </p>
+          <p>
+            <button onClick={this.unmountTrap}>
+              deactivate trap
+            </button>
+          </p>
         </FocusTrap>
       : false;
 
@@ -138,11 +138,11 @@ Type: `Boolean`, optional
 
 If you would like to pause or unpause the focus trap (see [`focus-trap`'s documentation](https://github.com/davidtheclark/focus-trap#focustrappause)), toggle this prop.
 
-#### tag
+#### component
 
-Type: `String`, Default: `div`, optional
+Type: `React.Component | String`, required
 
-An HTML tag for the FocusTrap's DOM node.
+A React component or HTML element to trap the focus in.
 
 #### additional props
 
