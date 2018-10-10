@@ -36,33 +36,35 @@ class DemoSpecialElement extends React.Component {
           </button>
         </p>
         <FocusTrap
-          id="focus-trap-three"
-          tag="section"
-          style={{ background: '#eee' }}
-          data-whatever="nothing"
           active={this.state.activeTrap}
-          className={trapClass}
           focusTrapOptions={{
             onDeactivate: this.unmountTrap,
             clickOutsideDeactivates: true
           }}
         >
-          <p>
-            Here is a focus trap
-            {' '}
-            <a href="#">with</a>
-            {' '}
-            <a href="#">some</a>
-            {' '}
-            <a href="#">focusable</a>
-            {' '}
-            parts.
-          </p>
-          <p>
-            <button onClick={this.unmountTrap}>
-              deactivate trap
-            </button>
-          </p>
+          <section
+            id="focus-trap-three"
+            style={{ background: '#eee' }}
+            data-whatever="nothing"
+            className={trapClass}
+          >
+            <p>
+              Here is a focus trap
+              {' '}
+              <a href="#">with</a>
+              {' '}
+              <a href="#">some</a>
+              {' '}
+              <a href="#">focusable</a>
+              {' '}
+              parts.
+            </p>
+            <p>
+              <button onClick={this.unmountTrap}>
+                deactivate trap
+              </button>
+            </p>
+          </section>
         </FocusTrap>
       </div>
     );
