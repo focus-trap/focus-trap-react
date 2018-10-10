@@ -81,4 +81,16 @@ describe('dom', () => {
       </FocusTrap>
     )).toThrowError('expected to receive a single React element child');
   });
+
+  test('FocusTrap preserves child ref by composing', () => {
+    const childRef = jest.fn();
+
+    TestUtils.renderIntoDocument(
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+        <div ref={childRef}></div>
+      </FocusTrap>
+    );
+
+    expect(childRef).toHaveBeenCalledTimes(1);
+  })
 });
