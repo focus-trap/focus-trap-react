@@ -118,10 +118,10 @@ describe('deactivation', () => {
       render() {
         const trap = this.state.trapActive
           ? <FocusTrap _createFocusTrap={mockCreateFocusTrap} ref="trap">
-            <button>
-              something special
+              <button>
+                something special
               </button>
-          </FocusTrap>
+            </FocusTrap>
           : false;
 
         return (

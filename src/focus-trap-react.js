@@ -77,7 +77,6 @@ class FocusTrap extends React.Component {
   render() {
     const child = React.Children.only(this.props.children);
 
-
     const composedRefCallback = element => {
       this.setFocusTrapElement(element);
       if (typeof child.ref === 'function') {
@@ -93,7 +92,6 @@ class FocusTrap extends React.Component {
 
 FocusTrap.defaultProps = {
   active: true,
-  tag: 'div',
   paused: false,
   focusTrapOptions: {},
   _createFocusTrap: createFocusTrap
