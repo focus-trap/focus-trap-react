@@ -66,4 +66,19 @@ describe('dom', () => {
     expect(trapNode.firstChild.tagName).toBe('BUTTON');
     expect(trapNode.firstChild.innerHTML).toBe('something special');
   });
+
+  test('FocusTrap with no child provided to it', () => {
+    expect(() => TestUtils.renderIntoDocument(
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap} />
+    )).toThrowError('expected to receive a single React element child');
+  });
+
+  test('FocusTrap with multiple children provided to it', () => {
+    expect(() => TestUtils.renderIntoDocument(
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+        <div>First div</div>
+        <div>Second div</div>
+      </FocusTrap>
+    )).toThrowError('expected to receive a single React element child');
+  });
 });
