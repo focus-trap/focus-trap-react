@@ -16,11 +16,19 @@ describe('dom', () => {
     mockCreateFocusTrap = jest.fn(() => mockFocusTrap);
     domContainer = document.createElement('div');
     document.body.appendChild(domContainer);
+
+    // This surpresses React error boundary logs for testing intentionally
+    // thrown errors, like in some test cases in this suite. See discussion of
+    // this here: https://github.com/facebook/react/issues/11098
+    jest.spyOn(console, 'error')
+    global.console.error.mockImplementation(() => { })
   });
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(domContainer);
     document.body.removeChild(domContainer);
+
+    global.console.error.mockRestore()
   });
 
   test('DOM with only required props', () => {
