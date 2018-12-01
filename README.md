@@ -7,6 +7,12 @@ tailored to your React-specific needs.
 
 You might want it for, say, building [an accessible modal](https://github.com/davidtheclark/react-aria-modal)?
 
+---
+
+**Looking for co-maintainers!** If you'd like to help maintain this project, please let me know.
+
+---
+
 ## What it does
 
 [Check out the demo](http://davidtheclark.github.io/focus-trap-react/demo/).
