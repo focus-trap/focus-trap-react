@@ -27,14 +27,13 @@ class DemoFfne extends React.Component {
   render() {
     const trap = this.state.activeTrap
       ? <FocusTrap
-          className="trap"
           focusTrapOptions={{
             onDeactivate: this.unmountTrap,
             initialFocus: '#focused-input',
             escapeDeactivates: false
           }}
         >
-          <div class="trap">
+          <div className="trap">
             <p>
               Here is a focus trap
               {' '}

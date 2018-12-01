@@ -94,28 +94,28 @@ class DemoOne extends React.Component {
   render() {
     const trap = this.state.activeTrap
       ? <FocusTrap
-          component="div"
           focusTrapOptions={{
             onDeactivate: this.unmountTrap
           }}
-          className="trap"
         >
-          <p>
-            Here is a focus trap
-            {' '}
-            <a href="#">with</a>
-            {' '}
-            <a href="#">some</a>
-            {' '}
-            <a href="#">focusable</a>
-            {' '}
-            parts.
-          </p>
-          <p>
-            <button onClick={this.unmountTrap}>
-              deactivate trap
-            </button>
-          </p>
+          <div className="trap">
+            <p>
+              Here is a focus trap
+              {' '}
+              <a href="#">with</a>
+              {' '}
+              <a href="#">some</a>
+              {' '}
+              <a href="#">focusable</a>
+              {' '}
+              parts.
+            </p>
+            <p>
+              <button onClick={this.unmountTrap}>
+                deactivate trap
+              </button>
+            </p>
+          </div>
         </FocusTrap>
       : false;
 

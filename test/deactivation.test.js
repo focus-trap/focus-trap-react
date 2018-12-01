@@ -105,6 +105,7 @@ describe('deactivation', () => {
 
     expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({ returnFocus: true });
   });
+
   test('deactivation by dismount', () => {
     class TestZone extends React.Component {
       state = {

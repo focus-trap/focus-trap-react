@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- **Breaking change:** `<FocusTrap>` now expects exactly one child element which can be any HTML element or other React component that contains focusable elements. The `tag` prop has been removed, as has support for additional props that are passed through to the `tag`, because it is no longer necessary: you should provide your own element, with whatever props you want, as a child of `<FocusTrap>`.
+
 ## 4.0.1
 
 - Fix bug that caused `returnFocusOnDeactivate: true` to be ignored when using the `active` prop to activate & deactivate the focus trap.
