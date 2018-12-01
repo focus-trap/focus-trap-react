@@ -16,19 +16,29 @@ describe('dom', () => {
     mockCreateFocusTrap = jest.fn(() => mockFocusTrap);
     domContainer = document.createElement('div');
     document.body.appendChild(domContainer);
+
+    // This surpresses React error boundary logs for testing intentionally
+    // thrown errors, like in some test cases in this suite. See discussion of
+    // this here: https://github.com/facebook/react/issues/11098
+    jest.spyOn(console, 'error')
+    global.console.error.mockImplementation(() => { })
   });
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(domContainer);
     document.body.removeChild(domContainer);
+
+    global.console.error.mockRestore()
   });
 
   test('DOM with only required props', () => {
     const trap = TestUtils.renderIntoDocument(
       <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
-        <button>
-          something special
-        </button>
+        <div>
+          <button>
+            something special
+          </button>
+        </div>
       </FocusTrap>
     );
     const trapNode = ReactDOM.findDOMNode(trap);
@@ -44,15 +54,15 @@ describe('dom', () => {
 
   test('DOM with all possible DOM-related props', () => {
     const trap = TestUtils.renderIntoDocument(
-      <FocusTrap
-        _createFocusTrap={mockCreateFocusTrap}
-        id="foo"
-        className="bar"
-        tag="figure"
-      >
-        <button>
-          something special
-        </button>
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+        <figure
+          id="foo"
+          className="bar"
+        >
+          <button>
+            something special
+          </button>
+        </figure>
       </FocusTrap>
     );
     const trapNode = ReactDOM.findDOMNode(trap);
@@ -64,4 +74,39 @@ describe('dom', () => {
     expect(trapNode.firstChild.tagName).toBe('BUTTON');
     expect(trapNode.firstChild.innerHTML).toBe('something special');
   });
+
+  test('FocusTrap throws with no child provided to it', () => {
+    expect(() => TestUtils.renderIntoDocument(
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap} />
+    )).toThrowError('expected to receive a single React element child');
+  });
+
+  test('FocusTrap throws with a plain text child provided to it', () => {
+    expect(() => TestUtils.renderIntoDocument(
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+        Some text that is not a DOM node
+      </FocusTrap>
+    )).toThrowError('expected to receive a single React element child');
+  });
+
+  test('FocusTrap throws with multiple children provided to it', () => {
+    expect(() => TestUtils.renderIntoDocument(
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+        <div>First div</div>
+        <div>Second div</div>
+      </FocusTrap>
+    )).toThrowError('expected to receive a single React element child');
+  });
+
+  test('FocusTrap preserves child ref by composing', () => {
+    const childRef = jest.fn();
+
+    TestUtils.renderIntoDocument(
+      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+        <div ref={childRef}></div>
+      </FocusTrap>
+    );
+
+    expect(childRef).toHaveBeenCalledTimes(1);
+  })
 });

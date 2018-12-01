@@ -1,13 +1,6 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
 const createFocusTrap = require('focus-trap');
-
-const checkedProps = [
-  'active',
-  'paused',
-  'tag',
-  'focusTrapOptions',
-  '_createFocusTrap'
-];
 
 class FocusTrap extends React.Component {
   constructor(props) {
@@ -35,8 +28,10 @@ class FocusTrap extends React.Component {
         specifiedFocusTrapOptions[optionName];
     }
 
+    const focusTrapElementDOMNode = ReactDOM.findDOMNode(this.focusTrapElement);
+
     this.focusTrap = this.props._createFocusTrap(
-      this.node,
+      focusTrapElementDOMNode,
       tailoredFocusTrapOptions
     );
     if (this.props.active) {
@@ -75,33 +70,28 @@ class FocusTrap extends React.Component {
     }
   }
 
-  setNode = el => {
-    this.node = el;
+  setFocusTrapElement = element => {
+    this.focusTrapElement = element;
   };
 
   render() {
-    const elementProps = {
-      ref: this.setNode
-    };
+    const child = React.Children.only(this.props.children);
 
-    // This will get id, className, style, etc. -- arbitrary element props
-    for (const prop in this.props) {
-      if (!this.props.hasOwnProperty(prop)) continue;
-      if (checkedProps.indexOf(prop) !== -1) continue;
-      elementProps[prop] = this.props[prop];
+    const composedRefCallback = element => {
+      this.setFocusTrapElement(element);
+      if (typeof child.ref === 'function') {
+        child.ref(element);
+      }
     }
 
-    return React.createElement(
-      this.props.tag,
-      elementProps,
-      this.props.children
-    );
+    const childWithRef = React.cloneElement(child, { ref: composedRefCallback });
+
+    return childWithRef;
   }
 }
 
 FocusTrap.defaultProps = {
   active: true,
-  tag: 'div',
   paused: false,
   focusTrapOptions: {},
   _createFocusTrap: createFocusTrap

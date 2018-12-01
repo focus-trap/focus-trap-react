@@ -55,12 +55,14 @@ describe('activation', () => {
           initialFocus: '#initial-focusee'
         }}
       >
-        <button>
-          something special
-        </button>
-        <button id="initial-focusee">
-          another thing
-        </button>
+        <div>
+          <button>
+            something special
+          </button>
+          <button id="initial-focusee">
+            another thing
+          </button>
+        </div>
       </FocusTrap>,
       domContainer
     );

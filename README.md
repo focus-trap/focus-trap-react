@@ -41,9 +41,28 @@ Why? Because this module's core functionality comes from focus-trap, which uses 
 
 ## Usage
 
-Read code in `demo/` (it's very simple), and [see how it works](http://davidtheclark.github.io/focus-trap-react/demo/).
+You wrap any element that you want to act as a focus trap with the `<FocusTrap>` component. `<FocusTrap>` expects exactly one child element which can be any HTML element or other React component that contains focusable elements.
 
-Here's one simple example:
+For example:
+
+```js
+<FocusTrap>
+  <div id="modal-dialog" className="modal" >
+    <button>Ok</button>
+    <button>Cancel</button>
+  </div>
+</FocusTrap>
+```
+
+```js
+<FocusTrap>
+  <ModalDialog okButtonText="Ok" cancelButtonText="Cancel" />
+</FocusTrap>
+```
+
+You can read further code examples in `demo/` (it's very simple), and [see how it works](http://davidtheclark.github.io/focus-trap-react/demo/).
+
+Here's one more simple example:
 
 ```js
 const React = require('react');
@@ -75,28 +94,28 @@ class DemoOne extends React.Component {
   render() {
     const trap = this.state.activeTrap
       ? <FocusTrap
+          component="div"
           focusTrapOptions={{
             onDeactivate: this.unmountTrap
           }}
+          className="trap"
         >
-          <div className="trap">
-            <p>
-              Here is a focus trap
-              {' '}
-              <a href="#">with</a>
-              {' '}
-              <a href="#">some</a>
-              {' '}
-              <a href="#">focusable</a>
-              {' '}
-              parts.
-            </p>
-            <p>
-              <button onClick={this.unmountTrap}>
-                deactivate trap
-              </button>
-            </p>
-          </div>
+          <p>
+            Here is a focus trap
+            {' '}
+            <a href="#">with</a>
+            {' '}
+            <a href="#">some</a>
+            {' '}
+            <a href="#">focusable</a>
+            {' '}
+            parts.
+          </p>
+          <p>
+            <button onClick={this.unmountTrap}>
+              deactivate trap
+            </button>
+          </p>
         </FocusTrap>
       : false;
 
@@ -137,16 +156,6 @@ See `demo/demo-three.jsx`.
 Type: `Boolean`, optional
 
 If you would like to pause or unpause the focus trap (see [`focus-trap`'s documentation](https://github.com/davidtheclark/focus-trap#focustrappause)), toggle this prop.
-
-#### tag
-
-Type: `String`, Default: `div`, optional
-
-An HTML tag for the FocusTrap's DOM node.
-
-#### additional props
-
-All props not mentioned above are passed directly to the rendered DOM element. This means that you can pass `id`, `className`, `style`, `aria-`attributes, `data-`attributes, or any other arbitrary property that you want to use to customize the element.
 
 ## Contributing & Development
 

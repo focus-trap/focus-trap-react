@@ -44,9 +44,11 @@ describe('deactivation', () => {
               _createFocusTrap={mockCreateFocusTrap}
               active={this.state.trapActive}
             >
-              <button>
-                something special
-              </button>
+              <div>
+                <button>
+                  something special
+                </button>
+              </div>
             </FocusTrap>
           </div>
         );
@@ -83,9 +85,11 @@ describe('deactivation', () => {
               active={this.state.trapActive}
               focusTrapOptions={{ returnFocusOnDeactivate: true }}
             >
-              <button>
-                something special
-              </button>
+              <div>
+                <button>
+                  something special
+                </button>
+              </div>
             </FocusTrap>
           </div>
         );
@@ -93,7 +97,7 @@ describe('deactivation', () => {
     }
 
     const zone = ReactDOM.render(<TestZone />, domContainer);
-    // mock deactivate on the fouscTrap instance for we can asset 
+    // mock deactivate on the fouscTrap instance for we can asset
     // that we are passing the correct config to the focus trap.
     zone.trap.focusTrap.deactivate = jest.fn();
 
@@ -101,7 +105,6 @@ describe('deactivation', () => {
 
     expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({ returnFocus: true });
   });
-  
   test('deactivation by dismount', () => {
     class TestZone extends React.Component {
       state = {
