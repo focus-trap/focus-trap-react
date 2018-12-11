@@ -5,7 +5,7 @@ export = FocusTrap;
 
 declare namespace FocusTrap {
   export interface Props extends React.AllHTMLAttributes<any> {
-    children: React.ReactElement;
+    children: React.ReactElement<any>;
     active?: boolean;
     paused?: boolean;
     focusTrapOptions?: FocusTrapOptions;
