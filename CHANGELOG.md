@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- Update focus-trap to 4.0.2, which includes [a queue of traps](https://github.com/davidtheclark/focus-trap/blob/master/CHANGELOG.md#400), so when a trap is paused because another trap activates, it will be unpaused when that other trap deactivates. If Trap A was automatically paused because Trap B activated (existing behavior), when Trap B is deactivated Trap A will be automatically unpaused (new behavior).
+
 ## 5.0.1
 
 - Fix TypeScript declarations.
