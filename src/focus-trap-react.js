@@ -82,6 +82,9 @@ class FocusTrap extends React.Component {
       if (typeof child.ref === 'function') {
         child.ref(element);
       }
+      if (typeof child.ref === 'object') {
+        child.ref.current = element;
+      }
     }
 
     const childWithRef = React.cloneElement(child, { ref: composedRefCallback });
