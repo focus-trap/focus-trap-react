@@ -1,17 +1,18 @@
 # focus-trap-react [![Build Status](https://travis-ci.org/davidtheclark/focus-trap-react.svg?branch=master)](https://travis-ci.org/davidtheclark/focus-trap-react)
 
+---
+
+**SEEKING CO-MAINTAINERS!** Continued development of this project is going to require the work of one or more dedicated co-maintainers (or forkers). If you're interested, please comment in [this issue](https://github.com/davidtheclark/focus-trap-react/issues/48).
+
+---
+
+
 A React component that traps focus.
 
 This component is a light wrapper around [focus-trap](https://github.com/davidtheclark/focus-trap),
 tailored to your React-specific needs.
 
 You might want it for, say, building [an accessible modal](https://github.com/davidtheclark/react-aria-modal)?
-
----
-
-**Looking for co-maintainers!** If you'd like to help maintain this project, please let me know.
-
----
 
 ## What it does
 
