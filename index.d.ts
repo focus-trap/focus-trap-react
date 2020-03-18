@@ -1,15 +1,16 @@
-import { Options as FocusTrapOptions } from 'focus-trap';
-import * as React from 'react';
-
-export = FocusTrap;
-
 declare namespace FocusTrap {
-  export interface Props extends React.AllHTMLAttributes<any> {
-    children: React.ReactElement<any>;
+  export interface FocusTrapProps {
     active?: boolean;
     paused?: boolean;
     focusTrapOptions?: FocusTrapOptions;
   }
+
+  export class FocusTrap extends React.Component<FocusTrapProps & React.HTMLAttributes<HTMLDivElement>> {
+    render(): JSX.Element;
+  }
 }
 
-declare class FocusTrap extends React.Component<FocusTrap.Props> { }
+declare module 'focus-trap-react' {
+  import E = FocusTrap.FocusTrap;
+  export = E;
+}
