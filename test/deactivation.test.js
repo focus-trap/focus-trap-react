@@ -82,6 +82,7 @@ describe('deactivation', () => {
             </button>
             <FocusTrap
               ref={(component) => this.trap = component}
+              _createFocusTrap={mockCreateFocusTrap}
               active={this.state.trapActive}
               focusTrapOptions={{ returnFocusOnDeactivate: true }}
             >
