@@ -22,7 +22,7 @@ class FocusTrap extends React.Component {
       returnFocusOnDeactivate: false
     };
     for (const optionName in specifiedFocusTrapOptions) {
-      if (!specifiedFocusTrapOptions.hasOwnProperty(optionName)) continue;
+      if (!specifiedFocusTrapOptions.includes(optionName)) continue;
       if (optionName === 'returnFocusOnDeactivate') continue;
       tailoredFocusTrapOptions[optionName] =
         specifiedFocusTrapOptions[optionName];
