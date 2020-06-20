@@ -81,6 +81,8 @@ class FocusTrap extends React.Component {
       this.setFocusTrapElement(element);
       if (typeof child.ref === 'function') {
         child.ref(element);
+      } else if (child.ref) {
+        child.ref.current = element;
       }
     }
 
