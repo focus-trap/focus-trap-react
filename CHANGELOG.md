@@ -1,5 +1,15 @@
 # Changelog
 
+## UNRELEASED
+
+- Add: Prop types for `<FocusTrap>`.
+- Update: `focus-trap` dependency from 4.0.2 to [5.1.0](https://github.com/davidtheclark/focus-trap/blob/master/CHANGELOG.md#510) for the latest features/fixes it provides. #71
+- **BREAKING** Update: Only React 16.0+ is supported going forward. #55
+- **BREAKING** Update: All dependencies updated to their latest versions.
+- Fix: `children`'s type is `React.ReactNode`, not `React.ReactElement`. #66
+- Fix: Allow mutable object refs to be used for FocusTrap child. #72
+- Fix: `specifiedFocusTrapOptions.includes(optionName)` statement in `componentDidMount()` was causing an exception because `includes()` is not a function defined on `Object`.
+
 ## 6.0.0
 
 - Update focus-trap to 4.0.2, which includes [a queue of traps](https://github.com/davidtheclark/focus-trap/blob/master/CHANGELOG.md#400), so when a trap is paused because another trap activates, it will be unpaused when that other trap deactivates. If Trap A was automatically paused because Trap B activated (existing behavior), when Trap B is deactivated Trap A will be automatically unpaused (new behavior).
@@ -10,7 +20,7 @@
 
 ## 5.0.0
 
-- **Breaking change:** `<FocusTrap>` now expects exactly one child element which can be any HTML element or other React component that contains focusable elements. The `tag` prop has been removed, as has support for additional props that are passed through to the `tag`, because it is no longer necessary: you should provide your own element, with whatever props you want, as a child of `<FocusTrap>`.
+- **BREAKING:** `<FocusTrap>` now expects exactly one child element which can be any HTML element or other React component that contains focusable elements. The `tag` prop has been removed, as has support for additional props that are passed through to the `tag`, because it is no longer necessary: you should provide your own element, with whatever props you want, as a child of `<FocusTrap>`.
 
 ## 4.0.1
 

@@ -25,25 +25,25 @@ class DemoAutofocus extends React.Component {
   }
 
   render() {
-    const trap = this.state.activeTrap
-      ? <FocusTrap
-          focusTrapOptions={{
-            onDeactivate: this.unmountTrap
-          }}
-        >
-          <div className="trap">
-            <button onClick={this.unmountTrap}>
-              deactivate trap
-            </button>
-            <div>
-              <a href="#">Another focusable thing</a>
-            </div>
-            <div>
-              Autofocused input: <input autoFocus={true} />
-            </div>
+    const trap = this.state.activeTrap ? (
+      <FocusTrap
+        focusTrapOptions={{
+          onDeactivate: this.unmountTrap
+        }}
+      >
+        <div className="trap">
+          <button onClick={this.unmountTrap}>deactivate trap</button>
+          <div>
+            <a href="#">Another focusable thing</a>
           </div>
-        </FocusTrap>
-      : false;
+          <div>
+            Autofocused input: <input autoFocus={true} />
+          </div>
+        </div>
+      </FocusTrap>
+    ) : (
+      false
+    );
 
     return (
       <div>

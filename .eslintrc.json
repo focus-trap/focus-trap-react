@@ -1,0 +1,38 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "jsx": true
+    },
+    "ecmaVersion": 6,
+    "sourceType": "script"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier" // ALWAYS LAST: disable style rules that conflict with prettier
+  ],
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "no-warning-comments": [
+      "error",
+      {
+        "terms": ["DEBUG", "FIXME", "HACK"],
+        "location": "start"
+      }
+    ]
+  },
+  "settings": {
+    // eslint-plugin-react settings: a version needs to be specified,
+    //  here it's set to detect (default value)
+    "react": {
+      "version": "detect"
+    }
+  }
+}
