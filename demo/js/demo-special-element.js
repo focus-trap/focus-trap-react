@@ -31,9 +31,7 @@ class DemoSpecialElement extends React.Component {
     return (
       <div>
         <p>
-          <button onClick={this.mountTrap}>
-            activate trap
-          </button>
+          <button onClick={this.mountTrap}>activate trap</button>
         </p>
         <FocusTrap
           active={this.state.activeTrap}
@@ -49,20 +47,11 @@ class DemoSpecialElement extends React.Component {
             className={trapClass}
           >
             <p>
-              Here is a focus trap
-              {' '}
-              <a href="#">with</a>
-              {' '}
-              <a href="#">some</a>
-              {' '}
-              <a href="#">focusable</a>
-              {' '}
-              parts.
+              Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
+              <a href="#">focusable</a> parts.
             </p>
             <p>
-              <button onClick={this.unmountTrap}>
-                deactivate trap
-              </button>
+              <button onClick={this.unmountTrap}>deactivate trap</button>
             </p>
           </section>
         </FocusTrap>

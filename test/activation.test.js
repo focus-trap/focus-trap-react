@@ -1,7 +1,12 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const TestUtils = require('react-dom/test-utils');
-const FocusTrap = require('../dist/focus-trap-react');
+const FocusTrap = require('../src/focus-trap-react');
+
+// TODO: These issues are related to older React features which we'll likely need
+//  to fix in order to move the code forward to the next major version of React.
+//  @see https://github.com/davidtheclark/focus-trap-react/issues/77
+/* eslint-disable react/no-find-dom-node, react/no-render-return-value, react/no-string-refs */
 
 describe('activation', () => {
   let domContainer;
@@ -29,9 +34,7 @@ describe('activation', () => {
         _createFocusTrap={mockCreateFocusTrap}
         focusTrapOptions={{ onDeactivate: noop }}
       >
-        <button>
-          something special
-        </button>
+        <button>something special</button>
       </FocusTrap>,
       domContainer
     );
@@ -56,12 +59,8 @@ describe('activation', () => {
         }}
       >
         <div>
-          <button>
-            something special
-          </button>
-          <button id="initial-focusee">
-            another thing
-          </button>
+          <button>something special</button>
+          <button id="initial-focusee">another thing</button>
         </div>
       </FocusTrap>,
       domContainer
@@ -85,9 +84,7 @@ describe('activation', () => {
         focusTrapOptions={{ onDeactivate: noop }}
         active={false}
       >
-        <button>
-          something special
-        </button>
+        <button>something special</button>
       </FocusTrap>,
       domContainer
     );
@@ -117,9 +114,7 @@ describe('activation', () => {
               focusTrapOptions={{ onDeactivate: noop }}
               active={this.state.trapActive}
             >
-              <button>
-                something special
-              </button>
+              <button>something special</button>
             </FocusTrap>
           </div>
         );

@@ -3,23 +3,30 @@
   "version": "6.0.0",
   "description": "A React component that traps focus.",
   "main": "dist/focus-trap-react.js",
+  "engines": {
+    "npm": ">=6.14.5"
+  },
   "types": "index.d.ts",
   "scripts": {
     "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
+    "prestart": "npm run build",
     "start": "budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
-    "lint": "eslint .",
-    "format": "prettier --single-quote --write src/*.js test/*.js demo/js/*.js",
+    "lint": "eslint \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\"",
+    "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\" \"demo/js/**/*.js\"",
+    "format-check": "prettier --check \"src/**/*.js\" \"test/**/*.js\" \"demo/js/**/*.js\"",
     "build": "babel src -d dist",
-    "jest": "jest",
-    "pretest": "npm run lint && npm run build",
-    "test": "jest",
-    "prepublishOnly": "npm run build"
+    "test-unit": "jest",
+    "test": "npm run format-check && npm run lint && jest",
+    "prepublishOnly": "npm test && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidtheclark/focus-trap-react.git"
   },
   "files": [
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
     "dist",
     "src",
     "index.d.ts"
@@ -42,22 +49,24 @@
   },
   "homepage": "https://github.com/davidtheclark/focus-trap-react#readme",
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "babel-eslint": "^10.0.3",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babelify": "^7.3.0",
-    "browserify": "^14.3.0",
-    "budo": "^9.4.1",
-    "eslint": "^6.3.0",
-    "eslint-plugin-react": "^6.10.3",
-    "jest": "^23.4.0",
-    "prettier": "^1.16.4",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.0.1",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.1",
+    "budo": "^11.6.3",
+    "eslint": "^7.3.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-react": "^7.20.0",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "dependencies": {
     "focus-trap": "^5.1.0"
@@ -65,21 +74,5 @@
   "peerDependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
-  },
-  "babel": {
-    "presets": [
-      "react",
-      "es2015"
-    ],
-    "plugins": [
-      "transform-class-properties"
-    ]
-  },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/test/jest-setup.js"
-    ],
-    "clearMocks": true,
-    "testURL": "http://localhost"
   }
 }

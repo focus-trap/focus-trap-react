@@ -1,10 +1,16 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const PropTypes = require('prop-types');
 const createFocusTrap = require('focus-trap');
+
+// TODO: These issues are related to older React features which we'll likely need
+//  to fix in order to move the code forward to the next major version of React.
+//  @see https://github.com/davidtheclark/focus-trap-react/issues/77
+/* eslint-disable react/no-find-dom-node */
 
 class FocusTrap extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     if (typeof document !== 'undefined') {
       this.previouslyFocusedElement = document.activeElement;
@@ -21,15 +27,28 @@ class FocusTrap extends React.Component {
     const tailoredFocusTrapOptions = {
       returnFocusOnDeactivate: false
     };
+
     for (const optionName in specifiedFocusTrapOptions) {
-      if (!specifiedFocusTrapOptions.includes(optionName)) continue;
-      if (optionName === 'returnFocusOnDeactivate') continue;
+      if (
+        !Object.prototype.hasOwnProperty.call(
+          specifiedFocusTrapOptions,
+          optionName
+        )
+      ) {
+        continue;
+      }
+
+      if (optionName === 'returnFocusOnDeactivate') {
+        continue;
+      }
+
       tailoredFocusTrapOptions[optionName] =
         specifiedFocusTrapOptions[optionName];
     }
 
     const focusTrapElementDOMNode = ReactDOM.findDOMNode(this.focusTrapElement);
 
+    // eslint-disable-next-line react/prop-types -- _createFocusTrap is an internal prop
     this.focusTrap = this.props._createFocusTrap(
       focusTrapElementDOMNode,
       tailoredFocusTrapOptions
@@ -70,27 +89,66 @@ class FocusTrap extends React.Component {
     }
   }
 
-  setFocusTrapElement = element => {
+  setFocusTrapElement = (element) => {
     this.focusTrapElement = element;
   };
 
   render() {
     const child = React.Children.only(this.props.children);
 
-    const composedRefCallback = element => {
+    const composedRefCallback = (element) => {
       this.setFocusTrapElement(element);
       if (typeof child.ref === 'function') {
         child.ref(element);
       } else if (child.ref) {
         child.ref.current = element;
       }
-    }
+    };
 
-    const childWithRef = React.cloneElement(child, { ref: composedRefCallback });
+    const childWithRef = React.cloneElement(child, {
+      ref: composedRefCallback
+    });
 
     return childWithRef;
   }
 }
+
+FocusTrap.propTypes = {
+  active: PropTypes.bool,
+  paused: PropTypes.bool,
+  focusTrapOptions: PropTypes.shape({
+    onActivate: PropTypes.func,
+    onDeactivate: PropTypes.func,
+    initialFocus: PropTypes.oneOfType([
+      PropTypes.instanceOf(Element),
+      PropTypes.string,
+      PropTypes.func
+    ]),
+    fallbackFocus: PropTypes.oneOfType([
+      PropTypes.instanceOf(Element),
+      PropTypes.string,
+      PropTypes.func
+    ]),
+    escapeDeactivates: PropTypes.bool,
+    clickOutsideDeactivates: PropTypes.bool,
+    returnFocusOnDeactivate: PropTypes.bool,
+    setReturnFocus: PropTypes.oneOfType([
+      PropTypes.instanceOf(Element),
+      PropTypes.string,
+      PropTypes.func
+    ]),
+    allowOutsideClick: PropTypes.func,
+    preventScroll: PropTypes.bool
+  }),
+  children: PropTypes.oneOfType([
+    PropTypes.element, // React element
+    PropTypes.instanceOf(Element) // DOM element
+  ])
+
+  // NOTE: _createFocusTrap is internal, for testing purposes only, so we don't
+  //  specify it here. It's expected to be set to the function returned from
+  //  require('focus-trap'), or one with a compatible interface.
+};
 
 FocusTrap.defaultProps = {
   active: true,

@@ -168,8 +168,12 @@ If you would like to pause or unpause the focus trap (see [`focus-trap`'s docume
 
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
 
+Format with `npm run format`.
+
 Lint with `npm run lint`.
 
 Run the demos with `npm start`.
 
-Test with `npm run test`.
+Test with `npm run test` (checks formatting, checks lint, runs tests).
+
+Unit test (only) with `npm run test-unit`.

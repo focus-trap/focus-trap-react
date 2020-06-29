@@ -1,7 +1,12 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const TestUtils = require('react-dom/test-utils');
-const FocusTrap = require('../dist/focus-trap-react');
+const FocusTrap = require('../src/focus-trap-react');
+
+// TODO: These issues are related to older React features which we'll likely need
+//  to fix in order to move the code forward to the next major version of React.
+//  @see https://github.com/davidtheclark/focus-trap-react/issues/77
+/* eslint-disable react/no-find-dom-node, react/no-render-return-value, react/no-string-refs */
 
 describe('deactivation', () => {
   let domContainer;
@@ -45,9 +50,7 @@ describe('deactivation', () => {
               active={this.state.trapActive}
             >
               <div>
-                <button>
-                  something special
-                </button>
+                <button>something special</button>
               </div>
             </FocusTrap>
           </div>
@@ -81,15 +84,13 @@ describe('deactivation', () => {
               deactivate
             </button>
             <FocusTrap
-              ref={(component) => this.trap = component}
+              ref={(component) => (this.trap = component)}
               _createFocusTrap={mockCreateFocusTrap}
               active={this.state.trapActive}
               focusTrapOptions={{ returnFocusOnDeactivate: true }}
             >
               <div>
-                <button>
-                  something special
-                </button>
+                <button>something special</button>
               </div>
             </FocusTrap>
           </div>
@@ -104,7 +105,9 @@ describe('deactivation', () => {
 
     TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
 
-    expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({ returnFocus: true });
+    expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({
+      returnFocus: true
+    });
   });
 
   test('deactivation by dismount', () => {
@@ -118,13 +121,13 @@ describe('deactivation', () => {
       };
 
       render() {
-        const trap = this.state.trapActive
-          ? <FocusTrap _createFocusTrap={mockCreateFocusTrap} ref="trap">
-              <button>
-                something special
-              </button>
-            </FocusTrap>
-          : false;
+        const trap = this.state.trapActive ? (
+          <FocusTrap _createFocusTrap={mockCreateFocusTrap} ref="trap">
+            <button>something special</button>
+          </FocusTrap>
+        ) : (
+          false
+        );
 
         return (
           <div>

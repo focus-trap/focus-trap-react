@@ -25,39 +25,30 @@ class DemoDefaults extends React.Component {
   }
 
   render() {
-    const trap = this.state.activeTrap
-      ? <FocusTrap
-          focusTrapOptions={{
-            onDeactivate: this.unmountTrap
-          }}
-        >
-          <div className="trap">
-            <p>
-              Here is a focus trap
-              {' '}
-              <a href="#">with</a>
-              {' '}
-              <a href="#">some</a>
-              {' '}
-              <a href="#">focusable</a>
-              {' '}
-              parts.
-            </p>
-            <p>
-              <button onClick={this.unmountTrap}>
-                deactivate trap
-              </button>
-            </p>
-          </div>
-        </FocusTrap>
-      : false;
+    const trap = this.state.activeTrap ? (
+      <FocusTrap
+        focusTrapOptions={{
+          onDeactivate: this.unmountTrap
+        }}
+      >
+        <div className="trap">
+          <p>
+            Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
+            <a href="#">focusable</a> parts.
+          </p>
+          <p>
+            <button onClick={this.unmountTrap}>deactivate trap</button>
+          </p>
+        </div>
+      </FocusTrap>
+    ) : (
+      false
+    );
 
     return (
       <div>
         <p>
-          <button onClick={this.mountTrap}>
-            activate trap
-          </button>
+          <button onClick={this.mountTrap}>activate trap</button>
         </p>
         {trap}
       </div>

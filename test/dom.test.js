@@ -1,7 +1,12 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const TestUtils = require('react-dom/test-utils');
-const FocusTrap = require('../dist/focus-trap-react');
+const FocusTrap = require('../src/focus-trap-react');
+
+// TODO: These issues are related to older React features which we'll likely need
+//  to fix in order to move the code forward to the next major version of React.
+//  @see https://github.com/davidtheclark/focus-trap-react/issues/77
+/* eslint-disable react/no-find-dom-node */
 
 describe('dom', () => {
   let domContainer;
@@ -20,24 +25,22 @@ describe('dom', () => {
     // This surpresses React error boundary logs for testing intentionally
     // thrown errors, like in some test cases in this suite. See discussion of
     // this here: https://github.com/facebook/react/issues/11098
-    jest.spyOn(console, 'error')
-    global.console.error.mockImplementation(() => { })
+    jest.spyOn(console, 'error');
+    global.console.error.mockImplementation(() => {});
   });
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(domContainer);
     document.body.removeChild(domContainer);
 
-    global.console.error.mockRestore()
+    global.console.error.mockRestore();
   });
 
   test('DOM with only required props', () => {
     const trap = TestUtils.renderIntoDocument(
       <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
         <div>
-          <button>
-            something special
-          </button>
+          <button>something special</button>
         </div>
       </FocusTrap>
     );
@@ -55,13 +58,8 @@ describe('dom', () => {
   test('DOM with all possible DOM-related props', () => {
     const trap = TestUtils.renderIntoDocument(
       <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
-        <figure
-          id="foo"
-          className="bar"
-        >
-          <button>
-            something special
-          </button>
+        <figure id="foo" className="bar">
+          <button>something special</button>
         </figure>
       </FocusTrap>
     );
@@ -76,26 +74,32 @@ describe('dom', () => {
   });
 
   test('FocusTrap throws with no child provided to it', () => {
-    expect(() => TestUtils.renderIntoDocument(
-      <FocusTrap _createFocusTrap={mockCreateFocusTrap} />
-    )).toThrowError('expected to receive a single React element child');
+    expect(() =>
+      TestUtils.renderIntoDocument(
+        <FocusTrap _createFocusTrap={mockCreateFocusTrap} />
+      )
+    ).toThrowError('expected to receive a single React element child');
   });
 
   test('FocusTrap throws with a plain text child provided to it', () => {
-    expect(() => TestUtils.renderIntoDocument(
-      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
-        Some text that is not a DOM node
-      </FocusTrap>
-    )).toThrowError('expected to receive a single React element child');
+    expect(() =>
+      TestUtils.renderIntoDocument(
+        <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+          Some text that is not a DOM node
+        </FocusTrap>
+      )
+    ).toThrowError('expected to receive a single React element child');
   });
 
   test('FocusTrap throws with multiple children provided to it', () => {
-    expect(() => TestUtils.renderIntoDocument(
-      <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
-        <div>First div</div>
-        <div>Second div</div>
-      </FocusTrap>
-    )).toThrowError('expected to receive a single React element child');
+    expect(() =>
+      TestUtils.renderIntoDocument(
+        <FocusTrap _createFocusTrap={mockCreateFocusTrap}>
+          <div>First div</div>
+          <div>Second div</div>
+        </FocusTrap>
+      )
+    ).toThrowError('expected to receive a single React element child');
   });
 
   test('FocusTrap preserves child ref by composing', () => {
@@ -108,5 +112,5 @@ describe('dom', () => {
     );
 
     expect(childRef).toHaveBeenCalledTimes(1);
-  })
+  });
 });
