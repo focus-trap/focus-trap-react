@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@master
         with:
-          node-version: lts
+          node-version: 12
           check-latest: true
 
       - name: Install packages

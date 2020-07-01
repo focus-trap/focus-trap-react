@@ -10,7 +10,7 @@ jobs:
       CI: true
     strategy:
       matrix:
-        node: [lts, 14]
+        node: [12, 13, 14]
     steps:
       - uses: actions/checkout@master
       
