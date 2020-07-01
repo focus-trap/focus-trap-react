@@ -12,9 +12,9 @@
     "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\" \"demo/js/**/*.js\"",
     "format-check": "prettier --check \"src/**/*.js\" \"test/**/*.js\" \"demo/js/**/*.js\"",
     "build": "babel src -d dist",
+    "release": "yarn build && changeset publish",
     "test-unit": "jest",
-    "test": "yarn format-check && yarn lint && jest",
-    "prepublishOnly": "yarn test && yarn build"
+    "test": "yarn format-check && yarn lint && jest"
   },
   "repository": {
     "type": "git",
@@ -65,6 +65,7 @@
     "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
+    "@changesets/cli": "^2.9.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
     "babelify": "^10.0.0",
