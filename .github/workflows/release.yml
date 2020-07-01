@@ -16,9 +16,10 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v2
         with:
           node-version: lts
+          check-latest: true
 
       - name: Install packages
         run: yarn --frozen-lockfile
