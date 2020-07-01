@@ -1,6 +1,6 @@
 # Changelog
 
-## UNRELEASED
+## 7.0.0
 
 - Add: Prop types for `<FocusTrap>`.
 - Update: `focus-trap` dependency from 4.0.2 to [5.1.0](https://github.com/davidtheclark/focus-trap/blob/master/CHANGELOG.md#510) for the latest features/fixes it provides. #71
