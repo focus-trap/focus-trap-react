@@ -43,6 +43,20 @@
     "keyboard"
   ],
   "author": "David Clark",
+  "contributors": [
+    {
+      "name": "David Clark",
+      "url": "http://davidtheclark.com/"
+    },
+    {
+      "name": "Stefan Cameron",
+      "url": "https://stefancameron.com/"
+    },
+    {
+      "name": "Marais Rossouw",
+      "url": "https://marais.io/"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/davidtheclark/focus-trap-react/issues"
@@ -73,6 +87,7 @@
   },
   "peerDependencies": {
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "prop-types": "^15.7.2"
   }
 }
