@@ -14,7 +14,7 @@
     "build": "babel src -d dist",
     "test-unit": "jest",
     "test": "yarn format-check && yarn lint && jest",
-    "prepublishOnly": "npm test && yarn build"
+    "prepublishOnly": "yarn test && yarn build"
   },
   "repository": {
     "type": "git",
