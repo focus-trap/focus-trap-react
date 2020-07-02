@@ -13,12 +13,23 @@ jobs:
         node: [12, 13, 14]
     steps:
       - uses: actions/checkout@master
-      
+
+      - name: Setup environment
+        id: setups
+        run: |-
+          echo "::set-output name=yarn_cache::$(yarn cache dir)"
+
       - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
+
+      - name: Yarn cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.setups.outputs.yarn_cache }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-node-${{ matrix.node }}
       
       - name: Install packages
         run: yarn --frozen-lockfile
