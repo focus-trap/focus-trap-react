@@ -30,17 +30,17 @@ jobs:
         with:
           path: ${{ steps.setups.outputs.yarn_cache }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-node-${{ matrix.node }}
-      
+
       - name: Install packages
         run: yarn --frozen-lockfile
-      
+
       - name: Lint
         run: |-
           yarn format-check;
           yarn lint;
-      
+
       - name: Test
         run: yarn test-unit
-        
+
       - name: Build # Tests to see if a build can succeed
         run: yarn build

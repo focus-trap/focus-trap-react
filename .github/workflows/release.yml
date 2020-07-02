@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 12
           check-latest: true
-          
+
       - name: Yarn cache
         uses: actions/cache@v1
         with:
