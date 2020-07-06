@@ -113,6 +113,9 @@ class FocusTrap extends React.Component {
   }
 }
 
+// support server-side rendering where `Element` will not be defined
+const ElementType = typeof Element === 'undefined' ? Function : Element;
+
 FocusTrap.propTypes = {
   active: PropTypes.bool,
   paused: PropTypes.bool,
@@ -120,12 +123,12 @@ FocusTrap.propTypes = {
     onActivate: PropTypes.func,
     onDeactivate: PropTypes.func,
     initialFocus: PropTypes.oneOfType([
-      PropTypes.instanceOf(Element),
+      PropTypes.instanceOf(ElementType),
       PropTypes.string,
       PropTypes.func
     ]),
     fallbackFocus: PropTypes.oneOfType([
-      PropTypes.instanceOf(Element),
+      PropTypes.instanceOf(ElementType),
       PropTypes.string,
       PropTypes.func
     ]),
@@ -133,7 +136,7 @@ FocusTrap.propTypes = {
     clickOutsideDeactivates: PropTypes.bool,
     returnFocusOnDeactivate: PropTypes.bool,
     setReturnFocus: PropTypes.oneOfType([
-      PropTypes.instanceOf(Element),
+      PropTypes.instanceOf(ElementType),
       PropTypes.string,
       PropTypes.func
     ]),
@@ -142,7 +145,7 @@ FocusTrap.propTypes = {
   }),
   children: PropTypes.oneOfType([
     PropTypes.element, // React element
-    PropTypes.instanceOf(Element) // DOM element
+    PropTypes.instanceOf(ElementType) // DOM element
   ])
 
   // NOTE: _createFocusTrap is internal, for testing purposes only, so we don't
