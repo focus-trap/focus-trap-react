@@ -2,16 +2,16 @@
 
 ## 7.0.1
 
-- Fix: PropTypes definition now supports server-side rendering. #83
+- Fix: PropTypes definition now supports server-side rendering. [#83](https://github.com/davidtheclark/focus-trap-react/issues/83)
 
 ## 7.0.0
 
 - Add: Prop types for `<FocusTrap>`.
-- Update: `focus-trap` dependency from 4.0.2 to [5.1.0](https://github.com/davidtheclark/focus-trap/blob/master/CHANGELOG.md#510) for the latest features/fixes it provides. #71
-- **BREAKING** Update: Only React 16.0+ is supported going forward. #55
+- Update: `focus-trap` dependency from 4.0.2 to [5.1.0](https://github.com/davidtheclark/focus-trap/blob/master/CHANGELOG.md#510) for the latest features/fixes it provides. [#71](https://github.com/davidtheclark/focus-trap-react/issues/71)
+- **BREAKING** Update: Only React 16.0+ is supported going forward. [#55](https://github.com/davidtheclark/focus-trap-react/issues/55)
 - **BREAKING** Update: All dependencies updated to their latest versions.
-- Fix: `children`'s type is `React.ReactNode`, not `React.ReactElement`. #66
-- Fix: Allow mutable object refs to be used for FocusTrap child. #72
+- Fix: `children`'s type is `React.ReactNode`, not `React.ReactElement`. [#66](https://github.com/davidtheclark/focus-trap-react/issues/66)
+- Fix: Allow mutable object refs to be used for FocusTrap child. [#72](https://github.com/davidtheclark/focus-trap-react/issues/72)
 - Fix: `specifiedFocusTrapOptions.includes(optionName)` statement in `componentDidMount()` was causing an exception because `includes()` is not a function defined on `Object`.
 
 ## 6.0.0
