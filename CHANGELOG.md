@@ -1,5 +1,9 @@
 # Changelog
 
+## UNRELEASED
+
+- Fix: PropTypes definition now supports server-side rendering. #83
+
 ## 7.0.0
 
 - Add: Prop types for `<FocusTrap>`.
