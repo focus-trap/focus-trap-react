@@ -1,6 +1,6 @@
 # Changelog
 
-## UNRELEASED
+## 7.0.1
 
 - Fix: PropTypes definition now supports server-side rendering. #83
 
