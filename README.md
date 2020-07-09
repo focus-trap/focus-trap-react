@@ -1,24 +1,24 @@
-# focus-trap-react [![Build Status](https://travis-ci.org/davidtheclark/focus-trap-react.svg?branch=master)](https://travis-ci.org/davidtheclark/focus-trap-react)
+# focus-trap-react [![Build Status](https://travis-ci.org/focus-trap/focus-trap-react.svg?branch=master)](https://travis-ci.org/focus-trap/focus-trap-react)
 
 ---
 
-**SEEKING CO-MAINTAINERS!** Continued development of this project is going to require the work of one or more dedicated co-maintainers (or forkers). If you're interested, please comment in [this issue](https://github.com/davidtheclark/focus-trap-react/issues/48).
+**SEEKING CO-MAINTAINERS!** Continued development of this project is going to require the work of one or more dedicated co-maintainers (or forkers). If you're interested, please comment in [this issue](https://github.com/focus-trap/focus-trap-react/issues/48).
 
 ---
 
 
 A React component that traps focus.
 
-This component is a light wrapper around [focus-trap](https://github.com/davidtheclark/focus-trap),
+This component is a light wrapper around [focus-trap](https://github.com/focus-trap/focus-trap),
 tailored to your React-specific needs.
 
 You might want it for, say, building [an accessible modal](https://github.com/davidtheclark/react-aria-modal)?
 
 ## What it does
 
-[Check out the demo](http://davidtheclark.github.io/focus-trap-react/demo/).
+[Check out the demo](http://focus-trap.github.io/focus-trap-react/demo/).
 
-Please read [the focus-trap documentation](https://github.com/davidtheclark/focus-trap) to understand what a focus trap is, what happens when a focus trap is activated, and what happens when one is deactivated.
+Please read [the focus-trap documentation](https://github.com/focus-trap/focus-trap) to understand what a focus trap is, what happens when a focus trap is activated, and what happens when one is deactivated.
 
 This module simply provides a React component that creates and manages a focus trap.
 
@@ -67,7 +67,7 @@ For example:
 </FocusTrap>
 ```
 
-You can read further code examples in `demo/` (it's very simple), and [see how it works](http://davidtheclark.github.io/focus-trap-react/demo/).
+You can read further code examples in `demo/` (it's very simple), and [see how it works](http://focus-trap.github.io/focus-trap-react/demo/).
 
 Here's one more simple example:
 
@@ -148,7 +148,7 @@ ReactDOM.render(<DemoOne />, container);
 
 Type: `Object`, optional
 
-Pass any of the options available in [`focus-trap`'s `createOptions`](https://github.com/davidtheclark/focus-trap#focustrap--createfocustrapelement-createoptions).
+Pass any of the options available in [`focus-trap`'s `createOptions`](https://github.com/focus-trap/focus-trap#focustrap--createfocustrapelement-createoptions).
 
 #### active
 
@@ -162,7 +162,7 @@ See `demo/demo-three.jsx`.
 
 Type: `Boolean`, optional
 
-If you would like to pause or unpause the focus trap (see [`focus-trap`'s documentation](https://github.com/davidtheclark/focus-trap#focustrappause)), toggle this prop.
+If you would like to pause or unpause the focus trap (see [`focus-trap`'s documentation](https://github.com/focus-trap/focus-trap#focustrappause)), toggle this prop.
 
 ## Contributing & Development
 
