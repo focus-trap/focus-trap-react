@@ -1,4 +1,4 @@
-# focus-trap-react [![CI](https://github.com/focus-trap/focus-trap-react/workflows/CI/badge.svg?event=push)](https://github.com/focus-trap/focus-trap-react/actions?query=workflow:CI+branch:master)
+# focus-trap-react [![CI](https://github.com/focus-trap/focus-trap-react/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/focus-trap/focus-trap-react/actions?query=workflow:CI+branch:master)
 
 ---
 
