@@ -42,18 +42,6 @@ class FocusTrap extends React.Component {
         continue;
       }
 
-      /**
-       * If a boolean value is passed to 'allowOutsideClick',
-       * wrap it in a function that returns that value
-       */
-      if (
-        optionName === 'allowOutsideClick' &&
-        typeof specifiedFocusTrapOptions[optionName] === 'boolean'
-      ) {
-        tailoredFocusTrapOptions[optionName] = () =>
-          specifiedFocusTrapOptions[optionName];
-      }
-
       tailoredFocusTrapOptions[optionName] =
         specifiedFocusTrapOptions[optionName];
     }
