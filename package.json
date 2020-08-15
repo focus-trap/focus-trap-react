@@ -13,8 +13,9 @@
     "format-check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
     "build": "babel src -d dist",
     "release": "yarn build && changeset publish",
+    "test-types": "tsc index.d.ts",
     "test-unit": "jest",
-    "test": "yarn format-check && yarn lint && jest"
+    "test": "yarn format-check && yarn lint && yarn test-unit && yarn test-types"
   },
   "repository": {
     "type": "git",
@@ -78,14 +79,15 @@
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "focus-trap": "^5.1.0"
   },
   "peerDependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "prop-types": "^15.7.2"
+    "react-dom": "^16.0.0"
   }
 }

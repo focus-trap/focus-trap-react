@@ -35,6 +35,9 @@ jobs:
       - name: Install packages
         run: yarn --frozen-lockfile
 
+      - name: Test All
+        run: yarn test
+
       - name: Create Release or Publish
         uses: changesets/action@master
         with:

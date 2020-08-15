@@ -40,7 +40,9 @@ jobs:
           yarn lint;
 
       - name: Test
-        run: yarn test-unit
+        run: |-
+          yarn test-unit;
+          yarn test-types;
 
       - name: Build # Tests to see if a build can succeed
         run: yarn build
