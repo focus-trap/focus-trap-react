@@ -4,5 +4,6 @@ module.exports = {
   },
   setupFilesAfterEnv: ['<rootDir>/test/jest-setup.js'],
   clearMocks: true,
-  testURL: 'http://localhost'
+  testURL: 'http://localhost',
+  testPathIgnorePatterns: ['/node_modules/', '/cypress/']
 };
