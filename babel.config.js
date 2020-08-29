@@ -5,7 +5,7 @@ module.exports = {
     //  to upgrading to Babel 7
     // @see https://babeljs.io/docs/en/babel-preset-env#targets
     '@babel/preset-env',
-    '@babel/preset-react'
+    '@babel/preset-react',
   ],
-  plugins: ['@babel/plugin-proposal-class-properties']
+  plugins: ['@babel/plugin-proposal-class-properties'],
 };

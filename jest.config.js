@@ -1,9 +1,9 @@
 module.exports = {
   transform: {
-    '^.+\\.[t|j]sx?$': 'babel-jest'
+    '^.+\\.[t|j]sx?$': 'babel-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/test/jest-setup.js'],
   clearMocks: true,
   testURL: 'http://localhost',
-  testPathIgnorePatterns: ['/node_modules/', '/cypress/']
+  testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
 };

@@ -13,7 +13,7 @@ describe('deactivation', () => {
   const mockFocusTrap = {
     activate: jest.fn(),
     deactivate: jest.fn(),
-    pause: jest.fn()
+    pause: jest.fn(),
   };
   let mockCreateFocusTrap;
 
@@ -31,7 +31,7 @@ describe('deactivation', () => {
   test('deactivation', () => {
     class TestZone extends React.Component {
       state = {
-        trapActive: true
+        trapActive: true,
       };
 
       deactivateTrap = () => {
@@ -70,7 +70,7 @@ describe('deactivation', () => {
   test('deactivation respects `returnFocusOnDeactivate` option', () => {
     class TestZone extends React.Component {
       state = {
-        trapActive: true
+        trapActive: true,
       };
 
       deactivateTrap = () => {
@@ -106,14 +106,14 @@ describe('deactivation', () => {
     TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
 
     expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({
-      returnFocus: true
+      returnFocus: true,
     });
   });
 
   test('deactivation by dismount', () => {
     class TestZone extends React.Component {
       state = {
-        trapActive: true
+        trapActive: true,
       };
 
       deactivateTrap = () => {

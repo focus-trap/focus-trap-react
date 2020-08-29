@@ -13,7 +13,7 @@ describe('dom', () => {
   const mockFocusTrap = {
     activate: jest.fn(),
     deactivate: jest.fn(),
-    pause: jest.fn()
+    pause: jest.fn(),
   };
   let mockCreateFocusTrap;
 

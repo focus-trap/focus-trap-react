@@ -25,7 +25,7 @@ class FocusTrap extends React.Component {
     // then (optionally) returns focus to it in componentWillUnmount.
     const specifiedFocusTrapOptions = this.props.focusTrapOptions;
     const tailoredFocusTrapOptions = {
-      returnFocusOnDeactivate: false
+      returnFocusOnDeactivate: false,
     };
 
     for (const optionName in specifiedFocusTrapOptions) {
@@ -106,7 +106,7 @@ class FocusTrap extends React.Component {
     };
 
     const childWithRef = React.cloneElement(child, {
-      ref: composedRefCallback
+      ref: composedRefCallback,
     });
 
     return childWithRef;
@@ -125,12 +125,12 @@ FocusTrap.propTypes = {
     initialFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
-      PropTypes.func
+      PropTypes.func,
     ]),
     fallbackFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
-      PropTypes.func
+      PropTypes.func,
     ]),
     escapeDeactivates: PropTypes.bool,
     clickOutsideDeactivates: PropTypes.bool,
@@ -138,15 +138,15 @@ FocusTrap.propTypes = {
     setReturnFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
-      PropTypes.func
+      PropTypes.func,
     ]),
     allowOutsideClick: PropTypes.func,
-    preventScroll: PropTypes.bool
+    preventScroll: PropTypes.bool,
   }),
   children: PropTypes.oneOfType([
     PropTypes.element, // React element
-    PropTypes.instanceOf(ElementType) // DOM element
-  ])
+    PropTypes.instanceOf(ElementType), // DOM element
+  ]),
 
   // NOTE: _createFocusTrap is internal, for testing purposes only, so we don't
   //  specify it here. It's expected to be set to the function returned from
@@ -157,7 +157,7 @@ FocusTrap.defaultProps = {
   active: true,
   paused: false,
   focusTrapOptions: {},
-  _createFocusTrap: createFocusTrap
+  _createFocusTrap: createFocusTrap,
 };
 
 module.exports = FocusTrap;

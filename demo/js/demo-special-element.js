@@ -9,7 +9,7 @@ class DemoSpecialElement extends React.Component {
     super(props);
 
     this.state = {
-      activeTrap: false
+      activeTrap: false,
     };
 
     this.mountTrap = this.mountTrap.bind(this);
@@ -37,7 +37,7 @@ class DemoSpecialElement extends React.Component {
           active={this.state.activeTrap}
           focusTrapOptions={{
             onDeactivate: this.unmountTrap,
-            clickOutsideDeactivates: true
+            clickOutsideDeactivates: true,
           }}
         >
           <section
