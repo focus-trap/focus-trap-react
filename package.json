@@ -15,6 +15,8 @@
     "release": "yarn build && changeset publish",
     "test-types": "tsc index.d.ts",
     "test-unit": "jest",
+    "test-cypress": "start-server-and-test start 9966 'cypress open'",
+    "test-cypress-ci": "start-server-and-test start 9966 'cypress run --browser $CYPRESS_BROWSER --headless'",
     "test": "yarn format-check && yarn lint && yarn test-unit && yarn test-types"
   },
   "repository": {
@@ -67,11 +69,15 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
     "@changesets/cli": "^2.9.1",
+    "@testing-library/cypress": "^6.0.1",
+    "@types/jquery": "^3.5.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
     "babelify": "^10.0.0",
     "browserify": "^16.5.1",
     "budo": "^11.6.3",
+    "cypress": "^5.0.0",
+    "cypress-plugin-tab": "^1.0.5",
     "eslint": "^7.3.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-react": "^7.20.0",
@@ -80,6 +86,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "start-server-and-test": "^1.11.3",
     "typescript": "^3.9.7"
   },
   "dependencies": {
