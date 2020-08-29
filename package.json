@@ -8,7 +8,7 @@
     "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
     "prestart": "yarn build",
     "start": "budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
-    "lint": "eslint \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\"",
+    "lint": "eslint \"*.js\" \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\"",
     "format": "prettier --write \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
     "format-check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
     "build": "babel src -d dist",

@@ -13,7 +13,7 @@ describe('activation', () => {
   const mockFocusTrap = {
     activate: jest.fn(),
     deactivate: jest.fn(),
-    pause: jest.fn()
+    pause: jest.fn(),
   };
   let mockCreateFocusTrap;
 
@@ -44,7 +44,7 @@ describe('activation', () => {
       ReactDOM.findDOMNode(trap),
       {
         onDeactivate: noop,
-        returnFocusOnDeactivate: false
+        returnFocusOnDeactivate: false,
       }
     );
   });
@@ -55,7 +55,7 @@ describe('activation', () => {
         _createFocusTrap={mockCreateFocusTrap}
         focusTrapOptions={{
           onDeactivate: noop,
-          initialFocus: '#initial-focusee'
+          initialFocus: '#initial-focusee',
         }}
       >
         <div>
@@ -72,7 +72,7 @@ describe('activation', () => {
       {
         onDeactivate: noop,
         initialFocus: '#initial-focusee',
-        returnFocusOnDeactivate: false
+        returnFocusOnDeactivate: false,
       }
     );
   });
@@ -95,7 +95,7 @@ describe('activation', () => {
   test('mounting without activation then activating', () => {
     class TestZone extends React.Component {
       state = {
-        trapActive: false
+        trapActive: false,
       };
 
       activateTrap = () => {
@@ -128,7 +128,7 @@ describe('activation', () => {
       ReactDOM.findDOMNode(zone.refs.trap),
       {
         onDeactivate: noop,
-        returnFocusOnDeactivate: false
+        returnFocusOnDeactivate: false,
       }
     );
     expect(mockFocusTrap.activate).toHaveBeenCalledTimes(0);

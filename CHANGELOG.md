@@ -1,5 +1,9 @@
 # Changelog
 
+## UNRELEASED
+
+- Changed code formatting to use dangling commas where ES5 supports them.
+
 ## 7.0.1
 
 - Fix: PropTypes definition now supports server-side rendering. [#83](https://github.com/davidtheclark/focus-trap-react/issues/83)
