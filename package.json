@@ -87,7 +87,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "start-server-and-test": "^1.11.3",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   },
   "dependencies": {
     "focus-trap": "^5.1.0"
