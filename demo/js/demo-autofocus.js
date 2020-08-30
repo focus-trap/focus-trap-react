@@ -31,7 +31,7 @@ class DemoAutofocus extends React.Component {
           onDeactivate: this.unmountTrap,
         }}
       >
-        <div className="trap">
+        <div className="trap is-active">
           <button onClick={this.unmountTrap}>deactivate trap</button>
           <div>
             <a href="#">Another focusable thing</a>

@@ -33,7 +33,7 @@ class DemoFfne extends React.Component {
           escapeDeactivates: false,
         }}
       >
-        <div className="trap">
+        <div className="trap is-active">
           <p>
             Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
             <a href="#">focusable</a> parts.

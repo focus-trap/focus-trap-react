@@ -26,7 +26,9 @@ class DemoSpecialElement extends React.Component {
 
   render() {
     let trapClass = 'trap';
-    if (this.state.activeTrap) trapClass += ' is-active';
+    if (this.state.activeTrap) {
+      trapClass += ' is-active';
+    }
 
     return (
       <div>
@@ -38,11 +40,12 @@ class DemoSpecialElement extends React.Component {
           focusTrapOptions={{
             onDeactivate: this.unmountTrap,
             clickOutsideDeactivates: true,
+            returnFocusOnDeactivate: true,
           }}
         >
           <section
             id="focus-trap-three"
-            style={{ background: '#eee' }}
+            style={this.state.activeTrap ? null : { background: '#eee' }}
             data-whatever="nothing"
             className={trapClass}
           >
