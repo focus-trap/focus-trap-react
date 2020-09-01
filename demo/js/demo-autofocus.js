@@ -37,7 +37,8 @@ class DemoAutofocus extends React.Component {
             <a href="#">Another focusable thing</a>
           </div>
           <div>
-            Autofocused input: <input autoFocus={true} />
+            Autofocused input:
+            <input autoFocus={true} data-testid={'autofocus-el'} />
           </div>
         </div>
       </FocusTrap>

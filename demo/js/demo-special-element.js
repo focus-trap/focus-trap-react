@@ -10,18 +10,24 @@ class DemoSpecialElement extends React.Component {
 
     this.state = {
       activeTrap: false,
+      passThruMsg: '',
     };
 
     this.mountTrap = this.mountTrap.bind(this);
     this.unmountTrap = this.unmountTrap.bind(this);
+    this.updatePassThruMsg = this.updatePassThruMsg.bind(this);
   }
 
   mountTrap() {
-    this.setState({ activeTrap: true });
+    this.setState({ activeTrap: true, passThruMsg: '' });
   }
 
   unmountTrap() {
     this.setState({ activeTrap: false });
+  }
+
+  updatePassThruMsg() {
+    this.setState({ passThruMsg: 'Clicked!' });
   }
 
   render() {
@@ -34,6 +40,8 @@ class DemoSpecialElement extends React.Component {
       <div>
         <p>
           <button onClick={this.mountTrap}>activate trap</button>
+          <button onClick={this.updatePassThruMsg}>pass thru click</button>
+          <span>{this.state.passThruMsg}</span>
         </p>
         <FocusTrap
           active={this.state.activeTrap}
