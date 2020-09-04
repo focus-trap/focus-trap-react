@@ -14,8 +14,7 @@
   ],
   "scripts": {
     "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
-    "prestart": "yarn build",
-    "start": "budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
+    "start": "yarn build && budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
     "lint": "eslint \"*.js\" \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\"",
     "format": "prettier --write \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
     "format-check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
@@ -30,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davidtheclark/focus-trap-react.git"
+    "url": "git+https://github.com/focus-trap/focus-trap-react.git"
   },
   "keywords": [
     "react",
@@ -60,9 +59,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/davidtheclark/focus-trap-react/issues"
+    "url": "https://github.com/focus-trap/focus-trap-react/issues"
   },
-  "homepage": "https://github.com/davidtheclark/focus-trap-react#readme",
+  "homepage": "https://github.com/focus-trap/focus-trap-react#readme",
   "devDependencies": {
     "@babel/cli": "^7.11.5",
     "@babel/core": "^7.11.5",
@@ -91,7 +90,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "focus-trap": "^5.1.0"
+    "focus-trap": "^6.0.0"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",

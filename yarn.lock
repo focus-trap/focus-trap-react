@@ -3875,13 +3875,12 @@ flatted@^2.0.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.2.tgz#4575b21e2bcee7434aa9be662f4b7b5f9c2b5138"
   integrity sha512-r5wGx7YeOwNWNlCA0wQ86zKyDLMQr+/RB8xy74M4hTphfmjlijTSSXGuH8rnvKZnfT9i+75zmd8jcKdMR4O6jA==
 
-focus-trap@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-5.1.0.tgz#64a0bfabd95c382103397dbc96bfef3a3cf8e5ad"
-  integrity sha512-CkB/nrO55069QAUjWFBpX6oc+9V90Qhgpe6fBWApzruMq5gnlh90Oo7iSSDK7pKiV5ugG6OY2AXM5mxcmL3lwQ==
+focus-trap@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.0.0.tgz#9fdb4ab4250908c24ba40e617675b4503f4bf456"
+  integrity sha512-NtbrZoOZ4xvPZrjVHxyJ7Z8N+iha8JbS3lONDM5z+kKmkwJFc6yXnZiwEV4ZGDIl2J9SJcCM6X/dSF27rXX5vQ==
   dependencies:
-    tabbable "^4.0.0"
-    xtend "^4.0.1"
+    tabbable "^5.0.0"
 
 follow-redirects@1.5.10:
   version "1.5.10"
@@ -7685,10 +7684,10 @@ syntax-error@^1.1.1:
   dependencies:
     acorn-node "^1.2.0"
 
-tabbable@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-4.0.0.tgz#5bff1d1135df1482cf0f0206434f15eadbeb9261"
-  integrity sha512-H1XoH1URcBOa/rZZWxLxHCtOdVUEev+9vo5YdYhC9tCY4wnybX+VQrCYuy9ubkg69fCBxCONJOSLGfw0DWMffQ==
+tabbable@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-5.0.0.tgz#862b6f33a625da45d7c648cff0262dab453d8b0c"
+  integrity sha512-+TJTMpkHRCWkMGczHHVEfzBYCsVOiBjd3vle55AT4H299BhdJDLFqcYmr7S6kt5EGhT8gAywSC5gPUBDNvtl7w==
 
 table@^5.2.3:
   version "5.4.6"

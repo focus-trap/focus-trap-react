@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const PropTypes = require('prop-types');
-const createFocusTrap = require('focus-trap');
+const { createFocusTrap } = require('focus-trap');
 
 // TODO: These issues are related to older React features which we'll likely need
 //  to fix in order to move the code forward to the next major version of React.
