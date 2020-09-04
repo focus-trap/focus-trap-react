@@ -140,7 +140,7 @@ FocusTrap.propTypes = {
       PropTypes.string,
       PropTypes.func,
     ]),
-    allowOutsideClick: PropTypes.func,
+    allowOutsideClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     preventScroll: PropTypes.bool,
   }),
   children: PropTypes.oneOfType([
