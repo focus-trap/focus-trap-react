@@ -1,5 +1,16 @@
 # Changelog
 
+## 8.0.0
+
+### Major Changes
+
+- 513a2d3: **BREAKING**: Updated [focus-trap](https://github.com/focus-trap/focus-trap/blob/master/CHANGELOG.md#600) dependency to new 6.0.1 release, which contains breaking changes. This update means it's also now using the latest version of [tabbable](https://github.com/focus-trap/tabbable/blob/master/CHANGELOG.md#500), which also has breaking changes. See respective CHANGELOGs for details.
+
+### Patch Changes
+
+- 35040fa: Remove call for maintainers. @stefcameron and @maraisr hope to take up the charge. Additional help and contributors are most welcome for anyone interested!
+- 513a2d3: Changed code formatting to use dangling commas where ES5 supports them.
+
 ## 7.0.1
 
 - Fix: PropTypes definition now supports server-side rendering. [#83](https://github.com/davidtheclark/focus-trap-react/issues/83)
@@ -33,7 +44,7 @@
 ## 4.0.0
 
 - Update focus-trap to 3.0.0, which includes [a couple of behavior changes](https://github.com/davidtheclark/focus-trap/blob/master/CHANGELOG.md#300). The key change is that focus management has been changed so that you can include tricky focusable elements like radio groups, iframes, and shadow DOM components in your trap — as long as the first and last focusable elements in the trap can still be detected by [Tabbable](https://github.com/davidtheclark/tabbable).
-  - An effect of this change is that *positive tabindexes are no longer guaranteed to work as expected*. You should avoid these.
+  - An effect of this change is that _positive tabindexes are no longer guaranteed to work as expected_. You should avoid these.
 
 ## 3.1.4
 
@@ -65,8 +76,7 @@
 
 ## 3.0.3
 
-- Introduce `dist/focus-trap-react.js`, where `src/` now compiles to, since React 15.5+ demands `class`es, so Babel-compilation.
-  Which is actually a huge overhaul, though in semver it's just a patch.
+- Introduce `dist/focus-trap-react.js`, where `src/` now compiles to, since React 15.5+ demands `class`es, so Babel-compilation. Which is actually a huge overhaul, though in semver it's just a patch.
 
 ## 3.0.2
 
