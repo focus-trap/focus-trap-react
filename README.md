@@ -1,12 +1,5 @@
 # focus-trap-react [![CI](https://github.com/focus-trap/focus-trap-react/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/focus-trap/focus-trap-react/actions?query=workflow:CI+branch:master)
 
----
-
-**SEEKING CO-MAINTAINERS!** Continued development of this project is going to require the work of one or more dedicated co-maintainers (or forkers). If you're interested, please comment in [this issue](https://github.com/focus-trap/focus-trap-react/issues/48).
-
----
-
-
 A React component that traps focus.
 
 This component is a light wrapper around [focus-trap](https://github.com/focus-trap/focus-trap),

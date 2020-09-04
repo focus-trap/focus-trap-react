@@ -9,7 +9,7 @@ class DemoFfne extends React.Component {
     super(props);
 
     this.state = {
-      activeTrap: false
+      activeTrap: false,
     };
 
     this.mountTrap = this.mountTrap.bind(this);
@@ -30,10 +30,10 @@ class DemoFfne extends React.Component {
         focusTrapOptions={{
           onDeactivate: this.unmountTrap,
           initialFocus: '#focused-input',
-          escapeDeactivates: false
+          escapeDeactivates: false,
         }}
       >
-        <div className="trap">
+        <div className="trap is-active">
           <p>
             Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
             <a href="#">focusable</a> parts.

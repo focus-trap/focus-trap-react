@@ -4,22 +4,6 @@
   "description": "A React component that traps focus.",
   "main": "dist/focus-trap-react.js",
   "types": "index.d.ts",
-  "scripts": {
-    "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
-    "prestart": "yarn build",
-    "start": "budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
-    "lint": "eslint \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\"",
-    "format": "prettier --write \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
-    "format-check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
-    "build": "babel src -d dist",
-    "release": "yarn build && changeset publish",
-    "test-unit": "jest",
-    "test": "yarn format-check && yarn lint && jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/davidtheclark/focus-trap-react.git"
-  },
   "files": [
     "README.md",
     "LICENSE",
@@ -28,6 +12,25 @@
     "src",
     "index.d.ts"
   ],
+  "scripts": {
+    "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
+    "start": "yarn build && budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
+    "lint": "eslint \"*.js\" \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\"",
+    "format": "prettier --write \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
+    "format-check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*}.+(js|yml)\"",
+    "build": "babel src -d dist",
+    "test-types": "tsc index.d.ts",
+    "test-unit": "jest",
+    "test-cypress": "start-server-and-test start 9966 'cypress open'",
+    "test-cypress-ci": "start-server-and-test start 9966 'cypress run --browser $CYPRESS_BROWSER --headless'",
+    "test": "yarn format-check && yarn lint && yarn test-unit && yarn test-types",
+    "prepublishOnly": "yarn build",
+    "release": "yarn build && changeset publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/focus-trap/focus-trap-react.git"
+  },
   "keywords": [
     "react",
     "reactjs",
@@ -56,36 +59,42 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/davidtheclark/focus-trap-react/issues"
+    "url": "https://github.com/focus-trap/focus-trap-react/issues"
   },
-  "homepage": "https://github.com/davidtheclark/focus-trap-react#readme",
+  "homepage": "https://github.com/focus-trap/focus-trap-react#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.3",
-    "@babel/core": "^7.10.3",
-    "@babel/plugin-proposal-class-properties": "^7.10.1",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-react": "^7.10.1",
-    "@changesets/cli": "^2.9.1",
+    "@babel/cli": "^7.11.5",
+    "@babel/core": "^7.11.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@changesets/cli": "^2.10.2",
+    "@testing-library/cypress": "^6.0.1",
+    "@types/jquery": "^3.5.1",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.0.1",
+    "babel-jest": "^26.3.0",
     "babelify": "^10.0.0",
-    "browserify": "^16.5.1",
-    "budo": "^11.6.3",
-    "eslint": "^7.3.0",
+    "browserify": "^16.5.2",
+    "budo": "^11.6.4",
+    "cypress": "^5.1.0",
+    "cypress-plugin-tab": "^1.0.5",
+    "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-react": "^7.20.0",
-    "jest": "^26.0.1",
-    "prettier": "^2.0.5",
+    "eslint-plugin-react": "^7.20.6",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "start-server-and-test": "^1.11.3",
+    "typescript": "^4.0.2"
   },
   "dependencies": {
-    "focus-trap": "^5.1.0"
+    "focus-trap": "^6.0.0"
   },
   "peerDependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "prop-types": "^15.7.2"
+    "react-dom": "^16.0.0"
   }
 }

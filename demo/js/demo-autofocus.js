@@ -9,7 +9,7 @@ class DemoAutofocus extends React.Component {
     super(props);
 
     this.state = {
-      activeTrap: false
+      activeTrap: false,
     };
 
     this.mountTrap = this.mountTrap.bind(this);
@@ -28,10 +28,10 @@ class DemoAutofocus extends React.Component {
     const trap = this.state.activeTrap ? (
       <FocusTrap
         focusTrapOptions={{
-          onDeactivate: this.unmountTrap
+          onDeactivate: this.unmountTrap,
         }}
       >
-        <div className="trap">
+        <div className="trap is-active">
           <button onClick={this.unmountTrap}>deactivate trap</button>
           <div>
             <a href="#">Another focusable thing</a>
