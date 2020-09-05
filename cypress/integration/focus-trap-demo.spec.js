@@ -1,19 +1,18 @@
-// TODO: maybe we just need one spec file for all
 describe('<FocusTrap> component', () => {
-  it('By default focus first element in its tab order and trap focus within its children', () => {
-    cy.visit('index.html');
+  beforeEach(() => cy.visit('index.html'));
 
+  it('By default focus first element in its tab order and trap focus within its children', () => {
     cy.get('#demo-defaults')
-      .as('trap');
+      .as('testRoot');
 
     // activate trap
-    cy.get('@trap')
+    cy.get('@testRoot')
       .findByRole('button', { name: 'activate trap' })
       .as('lastlyFocusedElementBeforeTrapIsActivated')
       .click();
 
     // 1st element should be focused
-    cy.get('@trap').findByRole('link', { name: 'with' }).as('firstElementInTrap').should('be.focused');
+    cy.get('@testRoot').findByRole('link', { name: 'with' }).as('firstElementInTrap').should('be.focused');
 
     // trap is active(keep focus in trap by blocking clicks on outside focusable element)
     cy.findAllByRole('link', { name: 'Return to the repository' }).first().click();
@@ -43,7 +42,7 @@ describe('<FocusTrap> component', () => {
     cy.get('@lastElementInTrap').should('be.focused');
 
     // trap can be deactivated and return focus to lastly focused element before trap is activated
-    cy.get('@trap').findByRole('button', { name: 'deactivate trap' }).click();
+    cy.get('@testRoot').findByRole('button', { name: 'deactivate trap' }).click();
     cy.get('@lastlyFocusedElementBeforeTrapIsActivated')
       .should('have.focus')
 
@@ -54,5 +53,74 @@ describe('<FocusTrap> component', () => {
       .tab();
     cy.focused().should(([nextFocusedEl]) =>
       expect(nextFocusedEl).not.equal(previousFocusedEl));
+  });
+
+  it('On trap mounts and activates, focus on manually specified input element', () => {
+    cy.get('#demo-ffne')
+      .as('testRoot');
+
+    // activate trap
+    cy.get('@testRoot').findByRole('button', { name: 'activate trap' })
+      .click();
+
+    // instead of next tab-order element being focused, element specified should be focused
+    cy.get('@testRoot').findByRole('textbox', { name: 'Initially focused input' }).should('be.focused');
+  });
+
+  it('Escape key does not deactivate trap. Instead, click on "deactivate trap" to deactivate trap', () => {
+    cy.get('#demo-ffne')
+      .as('testRoot');
+
+    // activate trap
+    cy.get('@testRoot').findByRole('button', { name: 'activate trap' }).as('lastlyFocusedElementBeforeTrapIsActivated')
+      .click();
+
+    // trying deactivate trap by ESC
+    cy.get('@testRoot').findByRole('textbox', { name: 'Initially focused input' }).as('trapChild').focus().type('{esc}');
+
+    // ESC does not deactivate the trap
+    cy.get('@trapChild').should('exist').should('be.focused');
+
+    // click on deactivate trap button to deactivate trap
+    cy.get('@testRoot').findByRole('button', { name: 'deactivate trap' }).click();
+    cy.get('@trapChild').should('not.exist');
+    cy.get('@lastlyFocusedElementBeforeTrapIsActivated').should('be.focused');
+  });
+
+  it('Can be deactivated while staying mounted  ', () => {
+    cy.get('#demo-special-element')
+      .as('testRoot');
+
+    // activate trap
+    cy.get('@testRoot').findByRole('button', { name: 'activate trap' }).as('lastlyFocusedElementBeforeTrapIsActivated')
+      .click();
+
+    // stay mounted after deactivation
+    cy.get('@testRoot').findByRole('button', { name: 'deactivate trap' }).as('trapChild').click();
+    cy.get('@lastlyFocusedElementBeforeTrapIsActivated').should('be.focused');
+    cy.get('@trapChild').should('exist');
+  });
+
+  it('Can click outside of trap to deactivate and click carries through  ', () => {
+    cy.get('#demo-special-element')
+      .as('testRoot');
+
+    // activate trap
+    cy.get('@testRoot').findByRole('button', { name: 'activate trap' }).click();
+
+    // click outside to deactivate trap and also click carries through
+    cy.findByRole('button', { name: 'pass thru click' }).click().should('be.focused');
+    cy.get('@testRoot').findByText('Clicked!');
+  });
+
+  it('Focus on element with "autofocus" attribute than the 1st tab order element within mounted trap children', () => {
+    cy.get('#demo-autofocus')
+      .as('testRoot');
+
+    // activate trap
+    cy.get('@testRoot').findByRole('button', { name: 'activate trap' }).click();
+
+    // element with "autofocus" attribute is focused
+    cy.findByTestId('autofocus-el').should('be.focused');
   });
 });
