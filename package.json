@@ -82,7 +82,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-react": "^7.20.6",
     "jest": "^26.4.2",
-    "prettier": "^2.1.1",
+    "prettier": "^2.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
