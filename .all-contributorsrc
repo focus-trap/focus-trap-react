@@ -99,6 +99,16 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "DSil",
+      "name": "Daniel",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6265045?v=4",
+      "profile": "https://github.com/DSil",
+      "contributions": [
+        "maintenance",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
