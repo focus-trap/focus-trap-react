@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.1.0
+
+### Minor Changes
+
+- 5994a8c: Bump focus-trap from 6.0.1 to 6.1.0. This new version of focus-trap provides a new `delayInitialFocus` flag that can be used to further customize trap behavior.
+
+### Patch Changes
+
+- 0562ef0: Change `prepublishOnly` script to `prepare` script so that it also runs if someone installs the package directly from the git repo (e.g. from your work in which you fixed a bug or added a feature you're waiting to get merged to master and published to NPM).
+
 ## 8.0.0
 
 ### Major Changes
