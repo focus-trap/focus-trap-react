@@ -109,6 +109,15 @@
         "maintenance",
         "test"
       ]
+    },
+    {
+      "login": "Ayc0",
+      "name": "Benjamin Koltes",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/22725671?v=4",
+      "profile": "https://github.com/Ayc0",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
