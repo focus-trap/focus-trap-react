@@ -35,6 +35,15 @@
         "test",
         "doc"
       ]
+    },
+    {
+      "login": "maraisr",
+      "name": "Marais Rossouw",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/599459?v=4",
+      "profile": "https://marais.io/",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
