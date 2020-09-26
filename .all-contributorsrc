@@ -89,6 +89,16 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "scottrippey",
+      "name": "Scott Rippey",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/430608?v=4",
+      "profile": "https://scottrippey.github.io/",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
