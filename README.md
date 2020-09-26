@@ -159,4 +159,4 @@ If you would like to pause or unpause the focus trap (see [`focus-trap`'s docume
 
 ## Contributing
 
-See [CONTRIBUTING](CONTRIBUTING.md].
+See [CONTRIBUTING](CONTRIBUTING.md).
