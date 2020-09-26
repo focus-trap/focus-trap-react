@@ -118,6 +118,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "bnjmnt4n",
+      "name": "Benjamin Tan",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/813865?v=4",
+      "profile": "https://ofcr.se/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
