@@ -157,20 +157,6 @@ Type: `Boolean`, optional
 
 If you would like to pause or unpause the focus trap (see [`focus-trap`'s documentation](https://github.com/focus-trap/focus-trap#focustrappause)), toggle this prop.
 
-## Contributing & Development
+## Contributing
 
-Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
-
-Format with `yarn format`.
-
-Lint with `yarn lint`.
-
-Run the demos with `yarn start`.
-
-Test with `yarn test` (checks formatting, checks lint, runs both unit and E2E tests).  
-To troubleshoot headless E2E test failures, recording can be found at `cypress/videos/*.mp4`.  
-Note: By default `chrome` is the browser on which headless E2E test are running
-
-Unit test (only) with `yarn test-unit`.
-
-E2E test can alo be run in headed mode on Cypress interactive UI which is easier for development and troubleshoot with `yarn test-cypress`.   
+See [CONTRIBUTING](CONTRIBUTING.md].
