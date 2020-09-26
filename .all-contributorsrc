@@ -80,6 +80,15 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "resource11",
+      "name": "Kathleen McMahon",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/11621935?v=4",
+      "profile": "http://kathleenmcmahon.dev/",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
