@@ -1,6 +1,6 @@
 {
   "projectName": "focus-trap-react",
-  "projectOwner": "stefcameron",
+  "projectOwner": "focus-trap",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -130,8 +130,18 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Slapbox",
+      "name": "Slapbox",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6835891?v=4",
+      "profile": "https://recollectr.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "contributorsSortAlphabetically": true
+  "contributorsSortAlphabetically": true,
+  "skipCi": true
 }
