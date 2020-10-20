@@ -153,7 +153,7 @@ Type: `Boolean`, optional
 
 By default, the `FocusTrap` activates when it mounts. So you activate and deactivate it via mounting and unmounting. If, however, you want to keep the `FocusTrap` mounted *while still toggling its activation state*, you can do that with this prop.
 
-See `demo/demo-three.jsx`.
+See `demo/demo-special-element.js`.
 
 #### paused
 
