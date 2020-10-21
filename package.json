@@ -56,7 +56,7 @@
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-react": "^7.12.1",
     "@changesets/cli": "^2.11.1",
     "@testing-library/cypress": "^7.0.1",
     "@types/jquery": "^3.5.3",
