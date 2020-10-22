@@ -67,7 +67,7 @@ describe('deactivation', () => {
     expect(mockFocusTrap.deactivate).toHaveBeenCalledTimes(1);
   });
 
-  test('deactivation respects `returnFocusOnDeactivate` option', () => {
+  describe('deactivation respects `returnFocusOnDeactivate` option', () => {
     class TestZone extends React.Component {
       state = {
         trapActive: true,
@@ -87,7 +87,8 @@ describe('deactivation', () => {
               ref={(component) => (this.trap = component)}
               _createFocusTrap={mockCreateFocusTrap}
               active={this.state.trapActive}
-              focusTrapOptions={{ returnFocusOnDeactivate: true }}
+              // eslint-disable-next-line react/prop-types
+              focusTrapOptions={this.props.trapOptions}
             >
               <div>
                 <button>something special</button>
@@ -98,15 +99,79 @@ describe('deactivation', () => {
       }
     }
 
-    const zone = ReactDOM.render(<TestZone />, domContainer);
-    // mock deactivate on the fouscTrap instance for we can asset
-    // that we are passing the correct config to the focus trap.
-    zone.trap.focusTrap.deactivate = jest.fn();
+    test('returnFocusOnDeactivate = true', () => {
+      const zone = ReactDOM.render(
+        <TestZone trapOptions={{ returnFocusOnDeactivate: true }} />,
+        domContainer
+      );
 
-    TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
+      // mock deactivate on the focusTrap instance so we can assert
+      // that we are passing the correct config to the focus trap.
+      zone.trap.focusTrap.deactivate = jest.fn();
 
-    expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({
-      returnFocus: true,
+      // mock the FocusTrap instance's returnFocus() method so we can make sure
+      //  it gets called
+      zone.trap.returnFocus = jest.fn();
+
+      TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
+
+      // we should always be calling deactivate() with returnFocus=false since
+      //  we take care of returning focus ourselves
+      expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({
+        returnFocus: false,
+      });
+
+      // since we set returnFocusOnDeactivate=true, FocusTrap should've tried to return focus
+      expect(zone.trap.returnFocus).toHaveBeenCalled();
+    });
+
+    test('returnFocusOnDeactivate = false', () => {
+      const zone = ReactDOM.render(
+        <TestZone trapOptions={{ returnFocusOnDeactivate: false }} />,
+        domContainer
+      );
+
+      // mock deactivate on the focusTrap instance so we can assert
+      // that we are passing the correct config to the focus trap.
+      zone.trap.focusTrap.deactivate = jest.fn();
+
+      // mock the FocusTrap instance's returnFocus() method so we can make sure
+      //  it gets called
+      zone.trap.returnFocus = jest.fn();
+
+      TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
+
+      // we should always be calling deactivate() with returnFocus=false since
+      //  we take care of returning focus ourselves
+      expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({
+        returnFocus: false,
+      });
+
+      // since we set returnFocusOnDeactivate=false, FocusTrap should NOT have tried to return focus
+      expect(zone.trap.returnFocus).not.toHaveBeenCalled();
+    });
+
+    test('returnFocusOnDeactivate defaults to true', () => {
+      const zone = ReactDOM.render(<TestZone />, domContainer);
+
+      // mock deactivate on the focusTrap instance so we can assert
+      // that we are passing the correct config to the focus trap.
+      zone.trap.focusTrap.deactivate = jest.fn();
+
+      // mock the FocusTrap instance's returnFocus() method so we can make sure
+      //  it gets called
+      zone.trap.returnFocus = jest.fn();
+
+      TestUtils.Simulate.click(ReactDOM.findDOMNode(zone.refs.trigger));
+
+      // we should always be calling deactivate() with returnFocus=false since
+      //  we take care of returning focus ourselves
+      expect(zone.trap.focusTrap.deactivate).toHaveBeenCalledWith({
+        returnFocus: false,
+      });
+
+      // since default is returnFocusOnDeactivate=true, FocusTrap should've tried to return focus
+      expect(zone.trap.returnFocus).toHaveBeenCalled();
     });
   });
 

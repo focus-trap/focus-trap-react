@@ -148,6 +148,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "krikienoid",
+      "name": "krikienoid",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8528227?v=4",
+      "profile": "https://github.com/krikienoid",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
