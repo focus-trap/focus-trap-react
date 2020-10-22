@@ -190,6 +190,8 @@ In alphabetical order:
     <td align="center"><a href="https://ofcr.se/"><img src="https://avatars1.githubusercontent.com/u/813865?v=4" width="100px;" alt=""/><br /><sub><b>Benjamin Tan</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/commits?author=bnjmnt4n" title="Documentation">📖</a></td>
     <td align="center"><a href="https://recollectr.io"><img src="https://avatars2.githubusercontent.com/u/6835891?v=4" width="100px;" alt=""/><br /><sub><b>Slapbox</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/commits?author=Slapbox" title="Documentation">📖</a></td>
     <td align="center"><a href="http://josuzuki.me"><img src="https://avatars1.githubusercontent.com/u/9583920?v=4" width="100px;" alt=""/><br /><sub><b>Jonathan Suzuki</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/issues?q=author%3AJoSuzuki" title="Bug reports">🐛</a></td>
+  </tr>
+  <tr>
     <td align="center"><a href="https://github.com/krikienoid"><img src="https://avatars3.githubusercontent.com/u/8528227?v=4" width="100px;" alt=""/><br /><sub><b>krikienoid</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/issues?q=author%3Akrikienoid" title="Bug reports">🐛</a></td>
   </tr>
 </table>
