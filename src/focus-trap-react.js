@@ -12,50 +12,64 @@ class FocusTrap extends React.Component {
   constructor(props) {
     super(props);
 
-    if (typeof document !== 'undefined') {
-      this.previouslyFocusedElement = document.activeElement;
-    }
-  }
-
-  componentDidMount() {
     // We need to hijack the returnFocusOnDeactivate option,
     // because React can move focus into the element before we arrived at
     // this lifecycle hook (e.g. with autoFocus inputs). So the component
     // captures the previouslyFocusedElement in componentWillMount,
     // then (optionally) returns focus to it in componentWillUnmount.
-    const specifiedFocusTrapOptions = this.props.focusTrapOptions;
-    const tailoredFocusTrapOptions = {
+    this.tailoredFocusTrapOptions = {
       returnFocusOnDeactivate: false,
     };
 
-    for (const optionName in specifiedFocusTrapOptions) {
-      if (
-        !Object.prototype.hasOwnProperty.call(
-          specifiedFocusTrapOptions,
-          optionName
-        )
-      ) {
+    // because of the above, we maintain our own flag for this option, and
+    //  default it to `true` because that's focus-trap's default
+    this.returnFocusOnDeactivate = true;
+
+    const { focusTrapOptions } = props;
+    for (const optionName in focusTrapOptions) {
+      if (!Object.prototype.hasOwnProperty.call(focusTrapOptions, optionName)) {
         continue;
       }
 
       if (optionName === 'returnFocusOnDeactivate') {
+        this.returnFocusOnDeactivate = !!focusTrapOptions[optionName];
         continue;
       }
 
-      tailoredFocusTrapOptions[optionName] =
-        specifiedFocusTrapOptions[optionName];
+      this.tailoredFocusTrapOptions[optionName] = focusTrapOptions[optionName];
     }
 
+    // now we remember what the currently focused element is, not relying on focus-trap
+    this.updatePreviousElement();
+  }
+
+  /** Update the previously focused element with the currently focused element. */
+  updatePreviousElement() {
+    if (typeof document !== 'undefined') {
+      this.previouslyFocusedElement = document.activeElement;
+    }
+  }
+
+  /** Returns focus to the element that had focus when the trap was activated. */
+  returnFocus() {
+    if (this.previouslyFocusedElement && this.previouslyFocusedElement.focus) {
+      this.previouslyFocusedElement.focus();
+    }
+  }
+
+  componentDidMount() {
     const focusTrapElementDOMNode = ReactDOM.findDOMNode(this.focusTrapElement);
 
     // eslint-disable-next-line react/prop-types -- _createFocusTrap is an internal prop
     this.focusTrap = this.props._createFocusTrap(
       focusTrapElementDOMNode,
-      tailoredFocusTrapOptions
+      this.tailoredFocusTrapOptions
     );
+
     if (this.props.active) {
       this.focusTrap.activate();
     }
+
     if (this.props.paused) {
       this.focusTrap.pause();
     }
@@ -63,11 +77,16 @@ class FocusTrap extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.active && !this.props.active) {
-      const { returnFocusOnDeactivate } = this.props.focusTrapOptions;
-      const returnFocus = returnFocusOnDeactivate || false;
-      const config = { returnFocus };
-      this.focusTrap.deactivate(config);
-    } else if (!prevProps.active && this.props.active) {
+      // NOTE: we never let the trap return the focus since we do that ourselves
+      this.focusTrap.deactivate({ returnFocus: false });
+      if (this.returnFocusOnDeactivate) {
+        this.returnFocus();
+      }
+      return; // un/pause does nothing on an inactive trap
+    }
+
+    if (!prevProps.active && this.props.active) {
+      this.updatePreviousElement();
       this.focusTrap.activate();
     }
 
@@ -79,13 +98,10 @@ class FocusTrap extends React.Component {
   }
 
   componentWillUnmount() {
-    this.focusTrap.deactivate();
-    if (
-      this.props.focusTrapOptions.returnFocusOnDeactivate !== false &&
-      this.previouslyFocusedElement &&
-      this.previouslyFocusedElement.focus
-    ) {
-      this.previouslyFocusedElement.focus();
+    // NOTE: we never let the trap return the focus since we do that ourselves
+    this.focusTrap.deactivate({ returnFocus: false });
+    if (this.returnFocusOnDeactivate) {
+      this.returnFocus();
     }
   }
 
