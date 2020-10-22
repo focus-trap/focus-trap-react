@@ -1,7 +1,7 @@
 # focus-trap-react [![CI](https://github.com/focus-trap/focus-trap-react/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/focus-trap/focus-trap-react/actions?query=workflow:CI+branch:master) [![license](https://badgen.now.sh/badge/license/MIT)](./LICENSE)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A React component that traps focus.
@@ -189,6 +189,7 @@ In alphabetical order:
     <td align="center"><a href="https://github.com/Ayc0"><img src="https://avatars3.githubusercontent.com/u/22725671?v=4" width="100px;" alt=""/><br /><sub><b>Benjamin Koltes</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/issues?q=author%3AAyc0" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://ofcr.se/"><img src="https://avatars1.githubusercontent.com/u/813865?v=4" width="100px;" alt=""/><br /><sub><b>Benjamin Tan</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/commits?author=bnjmnt4n" title="Documentation">📖</a></td>
     <td align="center"><a href="https://recollectr.io"><img src="https://avatars2.githubusercontent.com/u/6835891?v=4" width="100px;" alt=""/><br /><sub><b>Slapbox</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/commits?author=Slapbox" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://josuzuki.me"><img src="https://avatars1.githubusercontent.com/u/9583920?v=4" width="100px;" alt=""/><br /><sub><b>Jonathan Suzuki</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/issues?q=author%3AJoSuzuki" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
