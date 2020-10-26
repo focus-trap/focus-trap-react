@@ -15,7 +15,7 @@
   "scripts": {
     "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
     "start": "yarn build && budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
-    "lint": "eslint \"*.js\" \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\"",
+    "lint": "eslint \"*.js\" \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\" \"cypress/**/*.js\"",
     "format": "prettier --write \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*,cypress/**/*}.+(js|yml)\"",
     "format-check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*,cypress/**/*}.+(js|yml)\"",
     "build": "babel src -d dist",
@@ -70,6 +70,7 @@
     "cypress-plugin-tab": "^1.0.5",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.13.0",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-react": "^7.21.5",
     "jest": "^26.6.0",
     "prettier": "^2.1.2",
