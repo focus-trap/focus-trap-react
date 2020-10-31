@@ -1,5 +1,13 @@
 # Changelog
 
+## 8.1.1
+
+### Patch Changes
+
+- 925dfd2: Update the react and react-dom peer dependencies from `^16.0.0` to `>=16.0.0` since this library works with React 17 as well as React 16.
+- 01653da: Fix focus not always returning to correct node after setting `active` prop to `false`. #139
+- 95f8ab6: Update focus-trap dependency from 6.1.2 to [6.1.4](https://github.com/focus-trap/focus-trap/blob/master/CHANGELOG.md#614). Bug fixes only.
+
 ## 8.1.0
 
 ### Minor Changes
