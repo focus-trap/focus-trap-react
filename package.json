@@ -62,7 +62,7 @@
     "@types/jquery": "^3.5.4",
     "all-contributors-cli": "^6.19.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.1",
+    "babel-jest": "^26.6.3",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "budo": "^11.6.4",
