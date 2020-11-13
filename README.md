@@ -161,6 +161,12 @@ Type: `Boolean`, optional
 
 If you would like to pause or unpause the focus trap (see [`focus-trap`'s documentation](https://github.com/focus-trap/focus-trap#focustrappause)), toggle this prop.
 
+#### containerElements
+
+Type: `Array of Elements`, optional
+
+If passed in, these elements will be used as the boundaries for the focus-trap, instead of the child.  These get passed as arguments to focus-trap's updateContainerElements method.
+
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md).
