@@ -163,7 +163,7 @@ If you would like to pause or unpause the focus trap (see [`focus-trap`'s docume
 
 #### containerElements
 
-Type: `Array of Elements`, optional
+Type: `Array of HTMLElement`, optional
 
 If passed in, these elements will be used as the boundaries for the focus-trap, instead of the child.  These get passed as arguments to focus-trap's updateContainerElements method.
 

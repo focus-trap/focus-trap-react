@@ -124,7 +124,7 @@ class FocusTrap extends React.Component {
     }
   }
 
-  setFocusTrapElement = (elements) => {
+  setFocusTrapElements = (elements) => {
     this.focusTrapElements = elements;
   };
 
@@ -141,7 +141,7 @@ class FocusTrap extends React.Component {
       }
 
       const elements = containerElements ? containerElements : [element];
-      this.setFocusTrapElement(elements);
+      this.setFocusTrapElements(elements);
     };
 
     const childWithRef = React.cloneElement(child, {
@@ -182,9 +182,7 @@ FocusTrap.propTypes = {
     allowOutsideClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     preventScroll: PropTypes.bool,
   }),
-  containerElements: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.instanceOf(ElementType), PropTypes.string])
-  ),
+  containerElements: PropTypes.arrayOf(PropTypes.instanceOf(ElementType)),
   children: PropTypes.oneOfType([
     PropTypes.element, // React element
     PropTypes.instanceOf(ElementType), // DOM element
