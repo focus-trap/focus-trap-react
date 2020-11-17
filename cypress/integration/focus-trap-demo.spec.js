@@ -242,7 +242,7 @@ describe('<FocusTrap> component', () => {
     });
   });
 
-  describe.only('demo: containerElements prop', () => {
+  describe('demo: containerElements prop', () => {
     it('containerElements can be passed in and used as multiple boundaries to keep the focus within', () => {
       cy.get('#demo-containerelements').as('testRoot');
 

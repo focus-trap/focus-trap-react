@@ -9,7 +9,7 @@ declare namespace FocusTrap {
     active?: boolean;
     paused?: boolean;
     focusTrapOptions?: FocusTrapOptions;
-    containerElements?: Array<HTMLElement | string>;
+    containerElements?: Array<HTMLElement>;
   }
 }
 
