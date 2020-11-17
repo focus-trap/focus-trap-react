@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.2.0
+
+### Minor Changes
+
+- 76ed007: Add ability to pass containerElements to focus-trap #179. This PR is made possible because of https://github.com/focus-trap/focus-trap/pull/217 and the released version 6.2.0 of focus-trap.
+
 ## 8.1.1
 
 ### Patch Changes
