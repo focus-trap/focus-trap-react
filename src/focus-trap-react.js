@@ -118,7 +118,10 @@ class FocusTrap extends React.Component {
 
   componentWillUnmount() {
     // NOTE: we never let the trap return the focus since we do that ourselves
-    this.focusTrap.deactivate({ returnFocus: false });
+    if (this.focusTrap) {
+      this.focusTrap.deactivate({ returnFocus: false });
+    }
+
     if (this.returnFocusOnDeactivate) {
       this.returnFocus();
     }
