@@ -57,43 +57,62 @@ class FocusTrap extends React.Component {
     }
   }
 
-  componentDidMount() {
-    const focusTrapElementDOMNode = ReactDOM.findDOMNode(this.focusTrapElement);
+  setupFocusTrap() {
+    if (!this.focusTrap) {
+      const focusTrapElementDOMNodes = this.focusTrapElements.map(
+        ReactDOM.findDOMNode
+      );
 
-    // eslint-disable-next-line react/prop-types -- _createFocusTrap is an internal prop
-    this.focusTrap = this.props._createFocusTrap(
-      focusTrapElementDOMNode,
-      this.tailoredFocusTrapOptions
-    );
+      const nodesExist = focusTrapElementDOMNodes.some(Boolean);
+      if (nodesExist) {
+        // eslint-disable-next-line react/prop-types -- _createFocusTrap is an internal prop
+        this.focusTrap = this.props._createFocusTrap(
+          focusTrapElementDOMNodes,
+          this.tailoredFocusTrapOptions
+        );
 
-    if (this.props.active) {
-      this.focusTrap.activate();
-    }
+        if (this.props.active) {
+          this.focusTrap.activate();
+        }
 
-    if (this.props.paused) {
-      this.focusTrap.pause();
+        if (this.props.paused) {
+          this.focusTrap.pause();
+        }
+      }
     }
   }
 
+  componentDidMount() {
+    this.setupFocusTrap();
+  }
+
   componentDidUpdate(prevProps) {
-    if (prevProps.active && !this.props.active) {
-      // NOTE: we never let the trap return the focus since we do that ourselves
-      this.focusTrap.deactivate({ returnFocus: false });
-      if (this.returnFocusOnDeactivate) {
-        this.returnFocus();
+    this.setupFocusTrap();
+
+    if (this.focusTrap) {
+      if (prevProps.containerElements !== this.props.containerElements) {
+        this.focusTrap.updateContainerElements(this.props.containerElements);
       }
-      return; // un/pause does nothing on an inactive trap
-    }
 
-    if (!prevProps.active && this.props.active) {
-      this.updatePreviousElement();
-      this.focusTrap.activate();
-    }
+      if (prevProps.active && !this.props.active) {
+        // NOTE: we never let the trap return the focus since we do that ourselves
+        this.focusTrap.deactivate({ returnFocus: false });
+        if (this.returnFocusOnDeactivate) {
+          this.returnFocus();
+        }
+        return; // un/pause does nothing on an inactive trap
+      }
 
-    if (prevProps.paused && !this.props.paused) {
-      this.focusTrap.unpause();
-    } else if (!prevProps.paused && this.props.paused) {
-      this.focusTrap.pause();
+      if (!prevProps.active && this.props.active) {
+        this.updatePreviousElement();
+        this.focusTrap.activate();
+      }
+
+      if (prevProps.paused && !this.props.paused) {
+        this.focusTrap.unpause();
+      } else if (!prevProps.paused && this.props.paused) {
+        this.focusTrap.pause();
+      }
     }
   }
 
@@ -105,20 +124,24 @@ class FocusTrap extends React.Component {
     }
   }
 
-  setFocusTrapElement = (element) => {
-    this.focusTrapElement = element;
+  setFocusTrapElements = (elements) => {
+    this.focusTrapElements = elements;
   };
 
   render() {
     const child = React.Children.only(this.props.children);
 
     const composedRefCallback = (element) => {
-      this.setFocusTrapElement(element);
+      const { containerElements } = this.props;
+
       if (typeof child.ref === 'function') {
         child.ref(element);
       } else if (child.ref) {
         child.ref.current = element;
       }
+
+      const elements = containerElements ? containerElements : [element];
+      this.setFocusTrapElements(elements);
     };
 
     const childWithRef = React.cloneElement(child, {
@@ -159,6 +182,7 @@ FocusTrap.propTypes = {
     allowOutsideClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     preventScroll: PropTypes.bool,
   }),
+  containerElements: PropTypes.arrayOf(PropTypes.instanceOf(ElementType)),
   children: PropTypes.oneOfType([
     PropTypes.element, // React element
     PropTypes.instanceOf(ElementType), // DOM element

@@ -14,6 +14,7 @@ describe('activation', () => {
     activate: jest.fn(),
     deactivate: jest.fn(),
     pause: jest.fn(),
+    updateContainerElements: jest.fn(),
   };
   let mockCreateFocusTrap;
 
@@ -41,12 +42,47 @@ describe('activation', () => {
 
     expect(mockCreateFocusTrap).toHaveBeenCalledTimes(1);
     expect(mockCreateFocusTrap).toHaveBeenCalledWith(
-      ReactDOM.findDOMNode(trap),
+      [ReactDOM.findDOMNode(trap)],
       {
         onDeactivate: noop,
         returnFocusOnDeactivate: false,
       }
     );
+  });
+
+  test('activation with containerElements props in new props', () => {
+    const div1 = document.createElement('div');
+    const div2 = document.createElement('div');
+
+    ReactDOM.render(
+      <FocusTrap
+        _createFocusTrap={mockCreateFocusTrap}
+        containerElements={[]}
+        focusTrapOptions={{ onDeactivate: noop }}
+      >
+        <button>something special</button>
+      </FocusTrap>,
+      domContainer
+    );
+
+    expect(mockCreateFocusTrap).not.toHaveBeenCalled();
+
+    ReactDOM.render(
+      <FocusTrap
+        _createFocusTrap={mockCreateFocusTrap}
+        containerElements={[div1, div2]}
+        focusTrapOptions={{ onDeactivate: noop }}
+      >
+        <button>something special</button>
+      </FocusTrap>,
+      domContainer
+    );
+
+    expect(mockCreateFocusTrap).toHaveBeenCalledTimes(1);
+    expect(mockFocusTrap.updateContainerElements).toHaveBeenCalledWith([
+      div1,
+      div2,
+    ]);
   });
 
   test('activation with initialFocus as selector', () => {
@@ -68,7 +104,7 @@ describe('activation', () => {
 
     expect(mockCreateFocusTrap).toHaveBeenCalledTimes(1);
     expect(mockCreateFocusTrap).toHaveBeenCalledWith(
-      ReactDOM.findDOMNode(trap),
+      [ReactDOM.findDOMNode(trap)],
       {
         onDeactivate: noop,
         initialFocus: '#initial-focusee',
@@ -125,7 +161,7 @@ describe('activation', () => {
 
     expect(mockCreateFocusTrap).toHaveBeenCalledTimes(1);
     expect(mockCreateFocusTrap).toHaveBeenCalledWith(
-      ReactDOM.findDOMNode(zone.refs.trap),
+      [ReactDOM.findDOMNode(zone.refs.trap)],
       {
         onDeactivate: noop,
         returnFocusOnDeactivate: false,
