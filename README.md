@@ -171,6 +171,8 @@ If passed in, these elements will be used as the boundaries for the focus-trap, 
 
 If `containerElements` is subsequently updated (i.e. after the trap has been created) to an empty array (or an array of falsy values like `[null, null]`), the trap will still be active, but the TAB key will do nothing because the trap will not contain any tabbable groups of nodes. At this point, the trap can either be deactivated manually or by unmounting, or an updated set of elements can be given to `containerElements` to resume use of the TAB key.
 
+Using `containerElements` does require the use of React refs which, by nature, will require at least one state update in order to get the resolved elements into the prop, resulting in at least one additional render. In the normal case, this is likely more than acceptable, but if you really want to optimize things, then you could consider [using focus-trap directly](https://codesandbox.io/s/focus-trapreact-containerelements-demos-v5ydi) (see `Trap2.js`).
+
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md).
