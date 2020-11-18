@@ -2,9 +2,9 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const FocusTrap = require('../../dist/focus-trap-react');
 
-const container = document.getElementById('demo-containerelements');
+const container = document.getElementById('demo-containerelements-childless');
 
-class DemoContainerElements extends React.Component {
+class DemoContainerElementsChildless extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,16 +39,20 @@ class DemoContainerElements extends React.Component {
 
   render() {
     const trap = this.state.activeTrap ? (
-      <FocusTrap
-        containerElements={[this.element1, this.element2]}
-        focusTrapOptions={{
-          onDeactivate: this.unmountTrap,
-          allowOutsideClick(event) {
-            return event.target.id === 'demo-containerelements-deactivate';
-          },
-        }}
-      >
-        {/* NOTE: child is IGNORED in favor of `containerElements` */}
+      <>
+        <FocusTrap
+          containerElements={[this.element1, this.element2]}
+          focusTrapOptions={{
+            onDeactivate: this.unmountTrap,
+            allowOutsideClick(event) {
+              return (
+                event.target.id ===
+                'demo-containerelements-childless-deactivate'
+              );
+            },
+          }}
+        />
+
         <div className="trap is-active">
           <p ref={this.setElementRef('element1')}>
             Here is a focus trap <a href="#">with</a> <a href="#">some</a>
@@ -64,14 +68,14 @@ class DemoContainerElements extends React.Component {
           </p>
           <p>
             <button
-              id="demo-containerelements-deactivate"
+              id="demo-containerelements-childless-deactivate"
               onClick={this.unmountTrap}
             >
               deactivate trap
             </button>
           </p>
         </div>
-      </FocusTrap>
+      </>
     ) : (
       false
     );
@@ -87,4 +91,4 @@ class DemoContainerElements extends React.Component {
   }
 }
 
-ReactDOM.render(<DemoContainerElements />, container);
+ReactDOM.render(<DemoContainerElementsChildless />, container);

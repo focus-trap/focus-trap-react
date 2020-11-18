@@ -79,10 +79,13 @@ describe('activation', () => {
     );
 
     expect(mockCreateFocusTrap).toHaveBeenCalledTimes(1);
-    expect(mockFocusTrap.updateContainerElements).toHaveBeenCalledWith([
-      div1,
-      div2,
-    ]);
+
+    // because we gave the trap 2 valid elements on first render, the trap is
+    //  created immediately with the two elements and there's no subsequent
+    //  update of the trap's container elements that's necessary
+    // NOTE: we test the case of subsequent updates to containerElements in the
+    //  e2e tests
+    expect(mockFocusTrap.updateContainerElements).not.toHaveBeenCalled();
   });
 
   test('activation with initialFocus as selector', () => {

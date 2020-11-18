@@ -165,7 +165,11 @@ If you would like to pause or unpause the focus trap (see [`focus-trap`'s docume
 
 Type: `Array of HTMLElement`, optional
 
-If passed in, these elements will be used as the boundaries for the focus-trap, instead of the child.  These get passed as arguments to focus-trap's updateContainerElements method.
+If passed in, these elements will be used as the boundaries for the focus-trap, __instead of the child__.  These get passed as arguments to `focus-trap`'s `updateContainerElements()` method.
+
+> Note that when you use `containerElements`, the need for a child is eliminated as the child is __always__ ignored when the prop is specified, even if the prop is `[]` (an empty array). Also note that if the refs you're putting into the array like `containerElements={[ref1.current, ref2.current]}` and one or both refs aren't resolved yet, resulting in `[null, null]` for example, the trap will not get created. The array must contain at least one `HTMLElement` in order for the trap to get updated.
+
+If `containerElements` is subsequently updated (i.e. after the trap has been created) to an empty array (or an array of falsy values like `[null, null]`), the trap will still be active, but the TAB key will do nothing because the trap will not contain any tabbable groups of nodes. At this point, the trap can either be deactivated manually or by unmounting, or an updated set of elements can be given to `containerElements` to resume use of the TAB key.
 
 ## Contributing
 

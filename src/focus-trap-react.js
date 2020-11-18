@@ -39,6 +39,11 @@ class FocusTrap extends React.Component {
       this.tailoredFocusTrapOptions[optionName] = focusTrapOptions[optionName];
     }
 
+    // elements from which to create the focus trap on mount; if a child is used
+    //  instead of the `containerElements` prop, we'll get the child's related
+    //  element when the trap renders and then is declared 'mounted'
+    this.focusTrapElements = props.containerElements || [];
+
     // now we remember what the currently focused element is, not relying on focus-trap
     this.updatePreviousElement();
   }
@@ -60,6 +65,9 @@ class FocusTrap extends React.Component {
   setupFocusTrap() {
     if (!this.focusTrap) {
       const focusTrapElementDOMNodes = this.focusTrapElements.map(
+        // NOTE: `findDOMNode()` does not support CSS selectors; it'll just return
+        //  a new text node with the text wrapped in it instead of treating the
+        //  string as a selector and resolving it to a node in the DOM
         ReactDOM.findDOMNode
       );
 
@@ -87,8 +95,6 @@ class FocusTrap extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.setupFocusTrap();
-
     if (this.focusTrap) {
       if (prevProps.containerElements !== this.props.containerElements) {
         this.focusTrap.updateContainerElements(this.props.containerElements);
@@ -113,12 +119,15 @@ class FocusTrap extends React.Component {
       } else if (!prevProps.paused && this.props.paused) {
         this.focusTrap.pause();
       }
+    } else if (prevProps.containerElements !== this.props.containerElements) {
+      this.focusTrapElements = this.props.containerElements;
+      this.setupFocusTrap();
     }
   }
 
   componentWillUnmount() {
-    // NOTE: we never let the trap return the focus since we do that ourselves
     if (this.focusTrap) {
+      // NOTE: we never let the trap return the focus since we do that ourselves
       this.focusTrap.deactivate({ returnFocus: false });
     }
 
@@ -127,31 +136,36 @@ class FocusTrap extends React.Component {
     }
   }
 
-  setFocusTrapElements = (elements) => {
-    this.focusTrapElements = elements;
-  };
-
   render() {
-    const child = React.Children.only(this.props.children);
+    const child = this.props.children
+      ? React.Children.only(this.props.children)
+      : undefined;
 
-    const composedRefCallback = (element) => {
-      const { containerElements } = this.props;
+    if (child) {
+      const composedRefCallback = (element) => {
+        const { containerElements } = this.props;
 
-      if (typeof child.ref === 'function') {
-        child.ref(element);
-      } else if (child.ref) {
-        child.ref.current = element;
-      }
+        if (child) {
+          if (typeof child.ref === 'function') {
+            child.ref(element);
+          } else if (child.ref) {
+            child.ref.current = element;
+          }
+        }
 
-      const elements = containerElements ? containerElements : [element];
-      this.setFocusTrapElements(elements);
-    };
+        this.focusTrapElements = containerElements
+          ? containerElements
+          : [element];
+      };
 
-    const childWithRef = React.cloneElement(child, {
-      ref: composedRefCallback,
-    });
+      const childWithRef = React.cloneElement(child, {
+        ref: composedRefCallback,
+      });
 
-    return childWithRef;
+      return childWithRef;
+    }
+
+    return null;
   }
 }
 

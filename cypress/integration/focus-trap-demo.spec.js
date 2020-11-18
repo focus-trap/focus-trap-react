@@ -243,62 +243,124 @@ describe('<FocusTrap> component', () => {
   });
 
   describe('demo: containerElements prop', () => {
-    it('containerElements can be passed in and used as multiple boundaries to keep the focus within', () => {
-      cy.get('#demo-containerelements').as('testRoot');
+    describe('with child', () => {
+      it('containerElements can be passed in and used as multiple boundaries to keep the focus within', () => {
+        cy.get('#demo-containerelements').as('testRoot');
 
-      // activate trap
-      cy.get('@testRoot')
-        .findByRole('button', { name: 'activate trap' })
-        .as('lastlyFocusedElementBeforeTrapIsActivated')
-        .click();
+        // activate trap
+        cy.get('@testRoot')
+          .findByRole('button', { name: 'activate trap' })
+          .as('lastlyFocusedElementBeforeTrapIsActivated')
+          .click();
 
-      // 1st element should be focused
-      cy.get('@testRoot')
-        .findByRole('link', { name: 'with' })
-        .as('firstElementInTrap')
-        .should('be.focused');
+        // 1st element should be focused
+        cy.get('@testRoot')
+          .findByRole('link', { name: 'with' })
+          .as('firstElementInTrap')
+          .should('be.focused');
 
-      // trap is active(keep focus in trap by tabbing through the focus trap's tabbable elements)
-      cy.get('@firstElementInTrap')
-        .tab()
-        .should('have.text', 'some')
-        .should('be.focused')
-        .tab()
-        .should('have.text', 'focusable')
-        .should('be.focused')
-        .tab()
-        .should('have.text', 'See')
-        .should('be.focused')
-        .tab()
-        .should('have.text', 'how')
-        .should('be.focused')
-        .tab()
-        .should('have.text', 'works')
-        .should('be.focused')
-        .tab()
-        .should('have.text', 'with')
-        .should('be.focused')
-        .tab({ shift: true })
-        .should('have.text', 'works')
-        .should('be.focused')
-        .tab({ shift: true })
-        .should('have.text', 'how')
-        .should('be.focused')
-        .tab({ shift: true })
-        .should('have.text', 'See')
-        .should('be.focused')
-        .tab({ shift: true })
-        .should('have.text', 'focusable')
-        .should('be.focused')
-        .tab({ shift: true })
-        .should('have.text', 'some')
-        .should('be.focused')
-        .tab({ shift: true })
-        .should('have.text', 'with')
-        .should('be.focused')
-        .tab({ shift: true })
-        .should('have.text', 'works')
-        .should('be.focused');
+        // trap is active(keep focus in trap by tabbing through the focus trap's tabbable elements)
+        cy.get('@firstElementInTrap')
+          .tab()
+          .should('have.text', 'some')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'focusable')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'See')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'how')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'works')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'with')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'works')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'how')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'See')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'focusable')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'some')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'with')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'works')
+          .should('be.focused');
+      });
+    });
+
+    describe('without child', () => {
+      it('containerElements can be passed in and used as multiple boundaries to keep the focus within', () => {
+        cy.get('#demo-containerelements-childless').as('testRoot');
+
+        // activate trap
+        cy.get('@testRoot')
+          .findByRole('button', { name: 'activate trap' })
+          .as('lastlyFocusedElementBeforeTrapIsActivated')
+          .click();
+
+        // 1st element should be focused
+        cy.get('@testRoot')
+          .findByRole('link', { name: 'with' })
+          .as('firstElementInTrap')
+          .should('be.focused');
+
+        // trap is active(keep focus in trap by tabbing through the focus trap's tabbable elements)
+        cy.get('@firstElementInTrap')
+          .tab()
+          .should('have.text', 'some')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'focusable')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'See')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'how')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'works')
+          .should('be.focused')
+          .tab()
+          .should('have.text', 'with')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'works')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'how')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'See')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'focusable')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'some')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'with')
+          .should('be.focused')
+          .tab({ shift: true })
+          .should('have.text', 'works')
+          .should('be.focused');
+      });
     });
   });
 });
