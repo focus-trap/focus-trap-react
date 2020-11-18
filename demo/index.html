@@ -59,9 +59,18 @@
 
   <h2>demo containerElements</h2>
   <p>
-    You may pass in an array prop `containerElements` that contains nodes to trap focus within, which if passed will be used instead of the direct child.
+    You may pass in an array prop <code>containerElements</code> that contains nodes to trap focus within, which if passed will be used instead of the direct child. The direct child, if any, <strong>will be ignored by the trap</strong> (unless also given as an element in <code>containerElements</code>).
   </p>
   <div id="demo-containerelements"></div>
+
+  <h2>demo containerElements (no child)</h2>
+  <p>
+    Slight <em>underlying</em> difference from the previous "containerElements" demo in that the
+    focus trap element is not given a child: <code>&lt;FocusTrap containerElements={[...]} /&gt;</code>.
+    The result is the same, but this further reinforces the fact that when <code>containerElements</code> is
+    used, the child is not considered, and therefore not even necessary.
+  </p>
+  <div id="demo-containerelements-childless"></div>
 
   <p>
     <span style="font-size:2em;vertical-align:middle;">☜</span>

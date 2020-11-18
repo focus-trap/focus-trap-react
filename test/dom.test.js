@@ -73,12 +73,12 @@ describe('dom', () => {
     expect(trapNode.firstChild.innerHTML).toBe('something special');
   });
 
-  test('FocusTrap throws with no child provided to it', () => {
+  test('FocusTrap allows having no child', () => {
     expect(() =>
       TestUtils.renderIntoDocument(
         <FocusTrap _createFocusTrap={mockCreateFocusTrap} />
       )
-    ).toThrowError('expected to receive a single React element child');
+    ).not.toThrowError('expected to receive a single React element child');
   });
 
   test('FocusTrap throws with a plain text child provided to it', () => {
