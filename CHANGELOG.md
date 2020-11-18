@@ -1,5 +1,17 @@
 # Changelog
 
+## 8.3.0
+
+### Minor Changes
+
+- c4e4837: - Remove the need for a child in `<FocusTrap />` when `containerElements` is used. The child was already being ignored anyway (when `containerElements` is used; if the prop is not used, then a single child is still required).
+  - Update the typings related to the `children` prop to make it optional. Prop-types already had `children` as optional, however the use of `React.Children.only()` in all cases was still forcing the presence of a single child. That's no longer the case.
+  - Add additional notes about the use of the `containerElements` prop in the documentation.
+
+### Patch Changes
+
+- 0836c6d: Fixing a bug where the focus trap may not have been set before it is unmounted #184
+
 ## 8.2.0
 
 ### Minor Changes
