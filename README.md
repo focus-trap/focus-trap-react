@@ -33,9 +33,7 @@ npm install focus-trap-react
 
 ### React dependency
 
-Version 2+ is compatible with React >0.14+.
-
-Version 1 is compatible with React 0.13.
+React `>= 16.0.0`.
 
 ## Browser Support
 
