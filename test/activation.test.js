@@ -8,6 +8,8 @@ const FocusTrap = require('../src/focus-trap-react');
 //  @see https://github.com/davidtheclark/focus-trap-react/issues/77
 /* eslint-disable react/no-find-dom-node, react/no-render-return-value, react/no-string-refs */
 
+const noop = function () {};
+
 describe('activation', () => {
   let domContainer;
   const mockFocusTrap = {
@@ -177,5 +179,3 @@ describe('activation', () => {
     expect(mockFocusTrap.activate).toHaveBeenCalledTimes(1);
   });
 });
-
-function noop() {}

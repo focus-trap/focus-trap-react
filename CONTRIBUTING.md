@@ -18,9 +18,9 @@ Test with `yarn test` (checks formatting, checks lint, runs both unit and E2E te
 To troubleshoot headless E2E test failures, recording can be found at `cypress/videos/*.mp4`.  
 Note: By default `chrome` is the browser on which headless E2E test are running
 
-Unit test (only) with `yarn test-unit`
+Unit test (only) with `yarn test:unit`
 
-E2E test can alo be run in interactive mode on Cypress UI which is easier for development and troubleshooting with `yarn test-cypress`
+E2E test can alo be run in interactive mode on Cypress UI which is easier for development and troubleshooting with `yarn test:cypress`
 
 ## API Changes
 
