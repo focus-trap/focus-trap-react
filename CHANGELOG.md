@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.3.1
+
+### Patch Changes
+
+- 5d70831: Bump focus-trap to [6.2.1](https://github.com/focus-trap/focus-trap/blob/master/CHANGELOG.md#621) for bug fixes.
+
 ## 8.3.0
 
 ### Minor Changes
