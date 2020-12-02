@@ -8,6 +8,7 @@
     "README.md",
     "LICENSE",
     "CHANGELOG.md",
+    "SECURITY.md",
     "dist",
     "src",
     "index.d.ts"
