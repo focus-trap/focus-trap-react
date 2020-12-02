@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.3.2
+
+### Patch Changes
+
+- 53fa056: Update `focus-trap` dependency to new patch release v6.2.2 for bug fix to multi-container traps.
+
 ## 8.3.1
 
 ### Patch Changes
