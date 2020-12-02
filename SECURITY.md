@@ -35,4 +35,3 @@ Any verified and accepted security vulnerabilities will be rewarded with a listi
 ### Maintainers
 
 - [Stefan Cameron](mailto:stefan@stefcameron.com)
-- [Marais Rossouw](mailto:me@marais.dev)
