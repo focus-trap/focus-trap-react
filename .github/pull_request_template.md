@@ -1,7 +1,7 @@
 <!--
 Thank you for your contribution! 🎉
 
-Please be sure to go over the PR CHECKLIST below before posting your PR to make sure we all think of _everything_... :)
+Please be sure to go over the PR CHECKLIST below before posting your PR to make sure we all think of "everything". :)
 -->
 
 ...ADD PR DETAILS HERE...
