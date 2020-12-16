@@ -84,7 +84,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "focus-trap": "^6.2.2"
+    "focus-trap": "^6.2.3"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
