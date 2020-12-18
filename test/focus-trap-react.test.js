@@ -61,39 +61,39 @@ class DemoDefaults extends React.Component {
 
 describe('focus-trap-react', () => {
   it('traps keyboard focus when the trap is activated', async () => {
-    render(<DemoDefaults />)
+    render(<DemoDefaults />);
 
-    fireEvent.click(screen.getByText('activate trap'))
+    fireEvent.click(screen.getByText('activate trap'));
 
     // Auto-sets focus inside the focus trap
     await waitFor(() => {
-      expect(screen.getByText('with')).toHaveFocus()
-    })
+      expect(screen.getByText('with')).toHaveFocus();
+    });
 
     // Tabbing forward through the focus trap and wrapping back to the beginning
-    userEvent.tab()
-    expect(screen.getByText('some')).toHaveFocus()
+    userEvent.tab();
+    expect(screen.getByText('some')).toHaveFocus();
 
-    userEvent.tab()
-    expect(screen.getByText('focusable')).toHaveFocus()
+    userEvent.tab();
+    expect(screen.getByText('focusable')).toHaveFocus();
 
-    userEvent.tab()
-    expect(screen.getByText('deactivate trap')).toHaveFocus()
+    userEvent.tab();
+    expect(screen.getByText('deactivate trap')).toHaveFocus();
 
-    userEvent.tab()
-    expect(screen.getByText('with')).toHaveFocus()
+    userEvent.tab();
+    expect(screen.getByText('with')).toHaveFocus();
 
     // Tabbing backward through the focus trap and wrapping back to the beginning
-    userEvent.tab({ shift: true })
-    expect(screen.getByText('deactivate trap')).toHaveFocus()
+    userEvent.tab({ shift: true });
+    expect(screen.getByText('deactivate trap')).toHaveFocus();
 
-    userEvent.tab({ shift: true })
-    expect(screen.getByText('focusable')).toHaveFocus()
+    userEvent.tab({ shift: true });
+    expect(screen.getByText('focusable')).toHaveFocus();
 
-    userEvent.tab({ shift: true })
-    expect(screen.getByText('some')).toHaveFocus()
+    userEvent.tab({ shift: true });
+    expect(screen.getByText('some')).toHaveFocus();
 
-    userEvent.tab({ shift: true })
-    expect(screen.getByText('with')).toHaveFocus()
-  })
-})
+    userEvent.tab({ shift: true });
+    expect(screen.getByText('with')).toHaveFocus();
+  });
+});

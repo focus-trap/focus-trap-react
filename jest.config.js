@@ -1,6 +1,9 @@
 module.exports = {
   clearMocks: true,
-  setupFilesAfterEnv: ['regenerator-runtime/runtime', '<rootDir>/test/jest-setup.js'],
+  setupFilesAfterEnv: [
+    'regenerator-runtime/runtime',
+    '<rootDir>/test/jest-setup.js',
+  ],
   testURL: 'http://localhost',
   testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
   transform: {
