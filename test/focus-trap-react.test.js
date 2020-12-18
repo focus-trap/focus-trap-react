@@ -1,11 +1,12 @@
 const React = require('react');
-const ReactTestingLibrary = require('@testing-library/react');
-const FocusTrap = require('../src/focus-trap-react');
-const { waitFor } = require('@testing-library/react');
-require('@testing-library/jest-dom/extend-expect');
+const {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+} = require('@testing-library/react');
 const { default: userEvent } = require('@testing-library/user-event');
-
-const { render, screen, fireEvent } = ReactTestingLibrary;
+const FocusTrap = require('../src/focus-trap-react');
 
 class DemoDefaults extends React.Component {
   constructor(props) {
