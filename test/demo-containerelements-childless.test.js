@@ -13,6 +13,7 @@ describe('demo-container-elements-childless', () => {
     render(<DemoContainerElementsChildless />);
 
     // Activate the focus trap
+    screen.getByText('activate trap').focus();
     fireEvent.click(screen.getByText('activate trap'));
 
     // Auto-sets focus inside the focus trap

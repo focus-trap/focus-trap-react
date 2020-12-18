@@ -13,6 +13,7 @@ describe('demo-defaults', () => {
     render(<DemoDefaults />);
 
     // Activate the focus trap
+    screen.getByText('activate trap').focus();
     fireEvent.click(screen.getByText('activate trap'));
 
     // Auto-sets focus inside the focus trap
@@ -47,10 +48,11 @@ describe('demo-defaults', () => {
     expect(screen.getByText('with')).toHaveFocus();
   });
 
-  it('does not return focus to the trigger element when deactivated by default', async () => {
+  it('returns focus to the trigger element when deactivated', async () => {
     render(<DemoDefaults />);
 
     // Activate the focus trap
+    screen.getByText('activate trap').focus();
     fireEvent.click(screen.getByText('activate trap'));
 
     // Auto-sets focus inside the focus trap
@@ -61,9 +63,9 @@ describe('demo-defaults', () => {
     // Deactivate the focus trap
     fireEvent.click(screen.getByText('deactivate trap'));
 
-    // Does not return focus to the trigger button
+    // Returns focus to the trigger button
     await waitFor(() => {
-      expect(document.body).toHaveFocus();
+      expect(screen.getByText('activate trap')).toHaveFocus();
     });
   });
 
@@ -74,6 +76,7 @@ describe('demo-defaults', () => {
     expect(screen.queryByText(/Here is a focus trap/)).not.toBeInTheDocument();
 
     // Activate the focus trap
+    screen.getByText('activate trap').focus();
     fireEvent.click(screen.getByText('activate trap'));
 
     // Focus trap content is visible

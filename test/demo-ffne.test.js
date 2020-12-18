@@ -12,6 +12,7 @@ describe('demo-first-focus-no-escape', () => {
     render(<DemoFfne />);
 
     // Activate the focus trap
+    screen.getByText('activate trap').focus();
     fireEvent.click(screen.getByText('activate trap'));
 
     // Sets focus to the specified element
@@ -27,6 +28,7 @@ describe('demo-first-focus-no-escape', () => {
     expect(screen.queryByText(/Here is a focus trap/)).not.toBeInTheDocument();
 
     // Activate the focus trap
+    screen.getByText('activate trap').focus();
     fireEvent.click(screen.getByText('activate trap'));
 
     // Focus trap content is visible
