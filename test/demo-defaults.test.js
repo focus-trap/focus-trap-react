@@ -58,7 +58,7 @@ describe('demo-defaults', () => {
       expect(screen.getByText('with')).toHaveFocus();
     });
 
-    // De-activate the focus trap
+    // Deactivate the focus trap
     fireEvent.click(screen.getByText('deactivate trap'));
 
     // Does not return focus to the trigger button
@@ -79,7 +79,7 @@ describe('demo-defaults', () => {
     // Focus trap content is visible
     await screen.findByText(/Here is a focus trap/);
 
-    // De-activate the focus trap using the Escape key
+    // Deactivate the focus trap using the Escape key
     fireEvent.keyDown(screen.getByText('with'), { key: 'Escape' });
 
     // Focus trap content is no longer visible
