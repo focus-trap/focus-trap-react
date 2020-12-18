@@ -52,7 +52,7 @@ class DemoContainerElementsChildless extends React.Component {
 
         <div className="trap is-active">
           <p ref={this.setElementRef('element1')}>
-            Here is a focus trap <a href="#">with</a> <a href="#">some</a>
+            Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
             <a href="#">focusable</a> parts.
           </p>
           <p>
@@ -60,8 +60,7 @@ class DemoContainerElementsChildless extends React.Component {
           </p>
           <p ref={this.setElementRef('element2')}>
             Here is a another focus trap element. <a href="#">See</a>{' '}
-            <a href="#">how</a>
-            it <a href="#">works</a>.
+            <a href="#">how</a> it <a href="#">works</a>.
           </p>
           <p>
             <button
