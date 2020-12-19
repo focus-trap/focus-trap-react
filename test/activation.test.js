@@ -10,7 +10,7 @@ const FocusTrap = require('../src/focus-trap-react');
 
 const noop = function () {};
 
-describe('activation', () => {
+describe.skip('activation', () => {
   let domContainer;
   const mockFocusTrap = {
     activate: jest.fn(),

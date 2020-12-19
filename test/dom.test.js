@@ -8,7 +8,7 @@ const FocusTrap = require('../src/focus-trap-react');
 //  @see https://github.com/davidtheclark/focus-trap-react/issues/77
 /* eslint-disable react/no-find-dom-node */
 
-describe('dom', () => {
+describe.skip('dom', () => {
   let domContainer;
   const mockFocusTrap = {
     activate: jest.fn(),

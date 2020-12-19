@@ -5,7 +5,7 @@ const {
   fireEvent,
   waitFor,
 } = require('@testing-library/react');
-const DemoAutofocus = require('../demo/js/component-examples/demo-autofocus');
+const DemoAutofocus = require('./component-examples/demo-autofocus');
 
 describe('demo-autofocus', () => {
   it('allows the focus to immediately go to the autofocusable element inside the focus trap', async () => {

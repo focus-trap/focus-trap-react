@@ -6,7 +6,7 @@ const {
   waitFor,
 } = require('@testing-library/react');
 const { default: userEvent } = require('@testing-library/user-event');
-const DemoContainerElementsChildless = require('../demo/js/component-examples/demo-containerelements-childless');
+const DemoContainerElementsChildless = require('./component-examples/demo-containerelements-childless');
 
 describe('demo-container-elements-childless', () => {
   it('ignores tabbing to elements that are not specified in the containerElements option', async () => {

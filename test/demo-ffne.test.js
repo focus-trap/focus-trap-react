@@ -5,7 +5,7 @@ const {
   fireEvent,
   waitFor,
 } = require('@testing-library/react');
-const DemoFfne = require('../demo/js/component-examples/demo-ffne');
+const DemoFfne = require('./component-examples/demo-ffne');
 
 describe('demo-first-focus-no-escape', () => {
   it('sets the focus to the element specified by the initialFocus option', async () => {

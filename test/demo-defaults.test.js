@@ -6,7 +6,7 @@ const {
   waitFor,
 } = require('@testing-library/react');
 const { default: userEvent } = require('@testing-library/user-event');
-const DemoDefaults = require('../demo/js/component-examples/demo-defaults');
+const DemoDefaults = require('./component-examples/demo-defaults');
 
 describe('demo-defaults', () => {
   it('traps keyboard focus when the trap is activated', async () => {

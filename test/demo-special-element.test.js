@@ -6,7 +6,7 @@ const {
   waitFor,
 } = require('@testing-library/react');
 const { default: userEvent } = require('@testing-library/user-event');
-const DemoSpecialElement = require('../demo/js/component-examples/demo-special-element');
+const DemoSpecialElement = require('./component-examples/demo-special-element');
 
 describe('demo-special-element', () => {
   it('traps keyboard focus when the trap is activated', async () => {
