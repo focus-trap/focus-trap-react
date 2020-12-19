@@ -1,0 +1,524 @@
+const React = require('react');
+const {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+} = require('@testing-library/react');
+const { default: userEvent } = require('@testing-library/user-event');
+const FocusTrap = require('../src/focus-trap-react');
+
+const FocusTrapExample = ({ focusTrapOptions, ...otherProps }) => {
+  const [trapIsActive, setTrapIsActive] = React.useState(false);
+
+  const mountTrap = () => setTrapIsActive(true);
+  const unmountTrap = () => setTrapIsActive(false);
+
+  const trap = (
+    <FocusTrap
+      focusTrapOptions={{
+        onDeactivate: unmountTrap,
+        ...focusTrapOptions,
+      }}
+      {...otherProps}
+    >
+      <div>
+        <p>Some text</p>
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        <button onClick={unmountTrap}>deactivate trap</button>
+      </div>
+    </FocusTrap>
+  );
+
+  return (
+    <>
+      <button onClick={mountTrap}>activate trap</button>
+      {trapIsActive && trap}
+    </>
+  );
+};
+
+describe('FocusTrap', () => {
+  describe('incorrect children prop usage', () => {
+    beforeEach(() => {
+      // This surpresses React error boundary logs for testing intentionally
+      // thrown errors, like in some test cases in this suite. See discussion of
+      // this here: https://github.com/facebook/react/issues/11098
+      jest.spyOn(console, 'error');
+      global.console.error.mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      global.console.error.mockRestore();
+    });
+
+    it('throws an error if a non-element child is passed', () => {
+      expect(() => render(<FocusTrap>Child text</FocusTrap>)).toThrowError(
+        'expected to receive a single React element child'
+      );
+    });
+
+    it('throws an error if multiple top-level child elements are passed', () => {
+      expect(() =>
+        render(
+          <FocusTrap>
+            <p>Child 1</p>
+            <p>Child 2</p>
+          </FocusTrap>
+        )
+      ).toThrowError('expected to receive a single React element child');
+    });
+
+    it('throws an error if no focusable child elements are provided', () => {
+      expect(() =>
+        render(
+          <FocusTrap>
+            <p>Child 1</p>
+          </FocusTrap>
+        )
+      ).toThrowError(
+        'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
+      );
+    });
+
+    it('throws an error if no container child element surrounds the tabbable content', () => {
+      expect(() =>
+        render(
+          <FocusTrap>
+            <button>Click me</button>
+          </FocusTrap>
+        )
+      ).toThrowError(
+        'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
+      );
+    });
+  });
+
+  describe('correct children prop usage', () => {
+    it('allows a single child element prop to be passed', () => {
+      expect(() =>
+        render(
+          <FocusTrap>
+            <div>
+              <button>Child text</button>
+            </div>
+          </FocusTrap>
+        )
+      ).not.toThrowError('expected to receive a single React element child');
+    });
+
+    it('allows no children prop to be passed', () => {
+      expect(() => render(<FocusTrap />)).not.toThrowError(
+        'expected to receive a single React element child'
+      );
+    });
+  });
+
+  describe('default behaviors', () => {
+    it('traps keyboard focus when the trap is activated', async () => {
+      render(<FocusTrapExample />);
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      const link1 = screen.getByText('Link 1');
+      const link2 = screen.getByText('Link 2');
+      const link3 = screen.getByText('Link 3');
+      const deactivateTrapButton = screen.getByText('deactivate trap');
+
+      // Tabbing forward through the focus trap and wrapping back to the beginning
+      userEvent.tab();
+      expect(link2).toHaveFocus();
+
+      userEvent.tab();
+      expect(link3).toHaveFocus();
+
+      userEvent.tab();
+      expect(deactivateTrapButton).toHaveFocus();
+
+      userEvent.tab();
+      expect(link1).toHaveFocus();
+
+      // Tabbing backward through the focus trap and wrapping back to the beginning
+      userEvent.tab({ shift: true });
+      expect(deactivateTrapButton).toHaveFocus();
+
+      userEvent.tab({ shift: true });
+      expect(link3).toHaveFocus();
+
+      userEvent.tab({ shift: true });
+      expect(link2).toHaveFocus();
+
+      userEvent.tab({ shift: true });
+      expect(link1).toHaveFocus();
+    });
+
+    it('returns focus to the trigger element when deactivated', async () => {
+      render(<FocusTrapExample />);
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      // Deactivate the focus trap
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      // Returns focus to the trigger button
+      await waitFor(() => {
+        expect(activateTrapButton).toHaveFocus();
+      });
+    });
+
+    it('is deactivated when the user presses the Escape key', async () => {
+      render(<FocusTrapExample />);
+
+      // Focus trap content is not visible yet
+      expect(screen.queryByText('Link 1')).not.toBeInTheDocument();
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Focus trap content is visible
+      await screen.findByText('Link 1');
+
+      // Deactivate the focus trap using the Escape key
+      fireEvent.keyDown(screen.getByText('Link 1'), { key: 'Escape' });
+
+      // Focus trap content is no longer visible
+      await waitFor(() => {
+        expect(screen.queryByText('Link 1')).not.toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('focusTrapOptions', () => {
+    it('is not deactivated when the user presses the Escape key if escapeDeactivates=false', async () => {
+      render(
+        <FocusTrapExample focusTrapOptions={{ escapeDeactivates: false }} />
+      );
+
+      // Focus trap content is not visible yet
+      expect(screen.queryByText('Link 1')).not.toBeInTheDocument();
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Focus trap content is visible
+      await screen.findByText('Link 1');
+
+      // Attempt to deactivate the focus trap using the Escape key
+      fireEvent.keyDown(screen.getByText('Link 1'), { key: 'Escape' });
+
+      // Focus trap content is still visible
+      expect(screen.getByText('Link 1')).toBeInTheDocument();
+
+      // Deactivate the focus trap by clicking the deactivate button
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      // Focus trap content is no longer visible
+      await waitFor(() => {
+        expect(screen.queryByText('Link 1')).not.toBeInTheDocument();
+      });
+    });
+
+    it('uses specified elements as the focus trap content when the containerElements prop is provided', async () => {
+      const container1 = document.createElement('div');
+      const anchor1 = document.createElement('a');
+      const anchorText1 = document.createTextNode('Anchor 1');
+      anchor1.setAttribute('href', '#');
+      anchor1.appendChild(anchorText1);
+      container1.appendChild(anchor1);
+      document.body.appendChild(container1);
+
+      const container2 = document.createElement('div');
+      const anchor2 = document.createElement('a');
+      const anchorText2 = document.createTextNode('Anchor 2');
+      anchor2.setAttribute('href', '#');
+      anchor2.appendChild(anchorText2);
+      container2.appendChild(anchor2);
+      document.body.appendChild(container2);
+
+      render(<FocusTrapExample containerElements={[container1, container2]} />);
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(anchor1).toHaveFocus();
+      });
+
+      // Tabbing forward through the focus trap and wrapping back to the beginning
+      userEvent.tab();
+      expect(anchor2).toHaveFocus();
+
+      userEvent.tab();
+      expect(anchor1).toHaveFocus();
+
+      // Tabbing backward through the focus trap and wrapping back to the beginning
+      userEvent.tab({ shift: true });
+      expect(anchor2).toHaveFocus();
+
+      userEvent.tab({ shift: true });
+      expect(anchor1).toHaveFocus();
+
+      // DOM cleanup
+      container1.remove();
+      container2.remove();
+    });
+
+    it('does not return focus to the trigger button when the trap deactivates if returnFocusOnDeactivate=false', async () => {
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{ returnFocusOnDeactivate: false }}
+        />
+      );
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      // Deactivate the focus trap
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      // Does not return focus to the trigger button
+      await waitFor(() => {
+        expect(document.body).toHaveFocus();
+      });
+    });
+  });
+
+  describe('always-present focus traps', () => {
+    it('can be activated and deactivated while still on the screen', async () => {
+      const AlwaysPresentFocusTrapExample = ({
+        focusTrapOptions,
+        ...otherProps
+      }) => {
+        const [trapIsActive, setTrapIsActive] = React.useState(false);
+
+        const activateTrap = () => setTrapIsActive(true);
+        const deactivateTrap = () => setTrapIsActive(false);
+
+        const trap = (
+          <FocusTrap
+            active={trapIsActive}
+            focusTrapOptions={{
+              onActivate: activateTrap,
+              onDeactivate: deactivateTrap,
+              ...focusTrapOptions,
+            }}
+            {...otherProps}
+          >
+            <div>
+              <p>Some text</p>
+              <a href="#">Link 1</a>
+              <a href="#">Link 2</a>
+              <a href="#">Link 3</a>
+              <button onClick={deactivateTrap}>deactivate trap</button>
+            </div>
+          </FocusTrap>
+        );
+
+        return (
+          <>
+            <button onClick={activateTrap}>activate trap</button>
+            <button>before trap content</button>
+            {trap}
+            <button>after trap content</button>
+          </>
+        );
+      };
+
+      render(<AlwaysPresentFocusTrapExample />);
+
+      const activateTrapButton = screen.getByText('activate trap');
+      const beforeTrapContentButton = screen.getByText('before trap content');
+      const link1 = screen.getByText('Link 1');
+      const link2 = screen.getByText('Link 2');
+      const link3 = screen.getByText('Link 3');
+      const deactivateTrapButton = screen.getByText('deactivate trap');
+      const afterTrapContentButton = screen.getByText('after trap content');
+
+      // Tab through the page while the trap is deactivated
+      userEvent.tab();
+      expect(activateTrapButton).toHaveFocus();
+
+      userEvent.tab();
+      expect(beforeTrapContentButton).toHaveFocus();
+
+      userEvent.tab();
+      expect(link1).toHaveFocus();
+
+      userEvent.tab();
+      expect(link2).toHaveFocus();
+
+      userEvent.tab();
+      expect(link3).toHaveFocus();
+
+      userEvent.tab();
+      expect(deactivateTrapButton).toHaveFocus();
+
+      userEvent.tab();
+      expect(afterTrapContentButton).toHaveFocus();
+
+      userEvent.tab();
+      expect(document.body).toHaveFocus();
+
+      // Activate the focus trap
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      // Tab through the page while the trap is activated
+      userEvent.tab();
+      expect(link2).toHaveFocus();
+
+      userEvent.tab();
+      expect(link3).toHaveFocus();
+
+      userEvent.tab();
+      expect(deactivateTrapButton).toHaveFocus();
+
+      userEvent.tab();
+      expect(link1).toHaveFocus();
+
+      // Deactivate the focus trap
+      fireEvent.click(deactivateTrapButton);
+
+      // Returns focus to the trigger button
+      await waitFor(() => {
+        expect(activateTrapButton).toHaveFocus();
+      });
+    });
+
+    it('can be paused and unpaused while still on the screen', async () => {
+      const PausableFocusTrapExample = ({
+        focusTrapOptions,
+        ...otherProps
+      }) => {
+        const [trapIsActive, setTrapIsActive] = React.useState(false);
+        const [trapIsPaused, setTrapIsPaused] = React.useState(false);
+
+        const activateTrap = () => setTrapIsActive(true);
+        const deactivateTrap = () => setTrapIsActive(false);
+
+        const pauseTrap = () => setTrapIsPaused(true);
+        const unpauseTrap = () => setTrapIsPaused(false);
+
+        const trap = (
+          <FocusTrap
+            active={trapIsActive}
+            paused={trapIsPaused}
+            focusTrapOptions={{
+              onActivate: activateTrap,
+              onDeactivate: deactivateTrap,
+              ...focusTrapOptions,
+            }}
+            {...otherProps}
+          >
+            <div>
+              <p>Some text</p>
+              <a href="#">Link 1</a>
+              <a href="#">Link 2</a>
+              <a href="#">Link 3</a>
+              <button onClick={deactivateTrap}>deactivate trap</button>
+              <button onClick={pauseTrap}>pause trap</button>
+            </div>
+          </FocusTrap>
+        );
+
+        return (
+          <>
+            <button onClick={activateTrap}>activate trap</button>
+            <button>before trap content</button>
+            {trap}
+            <button>after trap content</button>
+            <button onClick={unpauseTrap}>unpause trap</button>
+          </>
+        );
+      };
+
+      render(<PausableFocusTrapExample />);
+
+      const activateTrapButton = screen.getByText('activate trap');
+      const unpauseTrapButton = screen.getByText('unpause trap');
+      const beforeTrapContentButton = screen.getByText('before trap content');
+      const link1 = screen.getByText('Link 1');
+      const link2 = screen.getByText('Link 2');
+      const link3 = screen.getByText('Link 3');
+      const deactivateTrapButton = screen.getByText('deactivate trap');
+      const pauseTrapButton = screen.getByText('pause trap');
+      const afterTrapContentButton = screen.getByText('after trap content');
+
+      // Activate the focus trap
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      // Tab through the page while the trap is activated
+      userEvent.tab();
+      expect(link2).toHaveFocus();
+
+      userEvent.tab();
+      expect(link3).toHaveFocus();
+
+      userEvent.tab();
+      expect(deactivateTrapButton).toHaveFocus();
+
+      userEvent.tab();
+      expect(pauseTrapButton).toHaveFocus();
+
+      // Pause the focus trap
+      fireEvent.click(pauseTrapButton);
+
+      userEvent.tab();
+      expect(afterTrapContentButton).toHaveFocus();
+
+      userEvent.tab();
+      expect(unpauseTrapButton).toHaveFocus();
+
+      // Unpause the focus trap
+      fireEvent.click(unpauseTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+    });
+  });
+});
