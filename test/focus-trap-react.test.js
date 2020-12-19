@@ -40,6 +40,10 @@ const FocusTrapExample = ({ focusTrapOptions, ...otherProps }) => {
   );
 };
 
+FocusTrapExample.propTypes = {
+  ...FocusTrap.propTypes,
+};
+
 describe('FocusTrap', () => {
   describe('incorrect children prop usage', () => {
     beforeEach(() => {
@@ -356,6 +360,10 @@ describe('FocusTrap', () => {
         );
       };
 
+      AlwaysPresentFocusTrapExample.propTypes = {
+        ...FocusTrap.propTypes,
+      };
+
       render(<AlwaysPresentFocusTrapExample />);
 
       const activateTrapButton = screen.getByText('activate trap');
@@ -397,7 +405,7 @@ describe('FocusTrap', () => {
 
       // Auto-sets focus inside the focus trap
       await waitFor(() => {
-        expect(screen.getByText('Link 1')).toHaveFocus();
+        expect(link1).toHaveFocus();
       });
 
       // Tab through the page while the trap is activated
@@ -461,7 +469,6 @@ describe('FocusTrap', () => {
         return (
           <>
             <button onClick={activateTrap}>activate trap</button>
-            <button>before trap content</button>
             {trap}
             <button>after trap content</button>
             <button onClick={unpauseTrap}>unpause trap</button>
@@ -469,11 +476,14 @@ describe('FocusTrap', () => {
         );
       };
 
+      PausableFocusTrapExample.propTypes = {
+        ...FocusTrap.propTypes,
+      };
+
       render(<PausableFocusTrapExample />);
 
       const activateTrapButton = screen.getByText('activate trap');
       const unpauseTrapButton = screen.getByText('unpause trap');
-      const beforeTrapContentButton = screen.getByText('before trap content');
       const link1 = screen.getByText('Link 1');
       const link2 = screen.getByText('Link 2');
       const link3 = screen.getByText('Link 3');
@@ -487,7 +497,7 @@ describe('FocusTrap', () => {
 
       // Auto-sets focus inside the focus trap
       await waitFor(() => {
-        expect(screen.getByText('Link 1')).toHaveFocus();
+        expect(link1).toHaveFocus();
       });
 
       // Tab through the page while the trap is activated
@@ -517,7 +527,7 @@ describe('FocusTrap', () => {
 
       // Auto-sets focus inside the focus trap
       await waitFor(() => {
-        expect(screen.getByText('Link 1')).toHaveFocus();
+        expect(link1).toHaveFocus();
       });
     });
   });
