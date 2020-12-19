@@ -204,7 +204,7 @@ In alphabetical order:
   <tr>
     <td align="center"><a href="https://github.com/krikienoid"><img src="https://avatars3.githubusercontent.com/u/8528227?v=4" width="100px;" alt=""/><br /><sub><b>krikienoid</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/issues?q=author%3Akrikienoid" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://clintgoodman.com"><img src="https://avatars3.githubusercontent.com/u/5473697?v=4" width="100px;" alt=""/><br /><sub><b>Clint Goodman</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/commits?author=cgood92" title="Code">💻</a> <a href="https://github.com/focus-trap/focus-trap-react/commits?author=cgood92" title="Documentation">📖</a> <a href="#example-cgood92" title="Examples">💡</a> <a href="https://github.com/focus-trap/focus-trap-react/commits?author=cgood92" title="Tests">⚠️</a></td>
-    <td align="center"><a href="http://tylerhawkins.info/201R/"><img src="https://avatars0.githubusercontent.com/u/13806458?v=4" width="100px;" alt=""/><br /><sub><b>Tyler Hawkins</b></sub></a><br /><a href="#infra-thawkin3" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="http://tylerhawkins.info/201R/"><img src="https://avatars0.githubusercontent.com/u/13806458?v=4" width="100px;" alt=""/><br /><sub><b>Tyler Hawkins</b></sub></a><br /><a href="#infra-thawkin3" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/focus-trap/focus-trap-react/commits?author=thawkin3" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
