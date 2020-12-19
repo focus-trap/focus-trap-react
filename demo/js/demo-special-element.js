@@ -41,7 +41,7 @@ class DemoSpecialElement extends React.Component {
         <p>
           <button onClick={this.mountTrap}>activate trap</button>
           <button onClick={this.updatePassThruMsg}>pass thru click</button>
-          <span data-testid="pass-thru-click">{this.state.passThruMsg}</span>
+          <span>{this.state.passThruMsg}</span>
         </p>
         <FocusTrap
           active={this.state.activeTrap}
