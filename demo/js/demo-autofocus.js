@@ -25,31 +25,44 @@ class DemoAutofocus extends React.Component {
   }
 
   render() {
-    const trap = this.state.activeTrap ? (
+    const trap = this.state.activeTrap && (
       <FocusTrap
         focusTrapOptions={{
           onDeactivate: this.unmountTrap,
         }}
       >
         <div className="trap is-active">
-          <button onClick={this.unmountTrap}>deactivate trap</button>
+          <button
+            onClick={this.unmountTrap}
+            aria-label="deactivate trap for 'autofocus' demo"
+          >
+            deactivate trap
+          </button>
           <div>
             <a href="#">Another focusable thing</a>
           </div>
           <div>
-            Autofocused input:
-            <input autoFocus={true} data-testid={'autofocus-el'} />
+            <label htmlFor="autofocused-input" style={{ marginRight: 10 }}>
+              Autofocused input:
+            </label>
+            <input
+              id="autofocused-input"
+              autoFocus
+              data-testid="autofocus-el"
+            />
           </div>
         </div>
       </FocusTrap>
-    ) : (
-      false
     );
 
     return (
       <div>
         <p>
-          <button key="button" onClick={this.mountTrap}>
+          <button
+            key="button"
+            onClick={this.mountTrap}
+            aria-label="activate trap for 'autofocus' demo"
+          >
             activate trap
           </button>
         </p>

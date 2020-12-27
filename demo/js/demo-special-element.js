@@ -39,7 +39,12 @@ class DemoSpecialElement extends React.Component {
     return (
       <div>
         <p>
-          <button onClick={this.mountTrap}>activate trap</button>
+          <button
+            onClick={this.mountTrap}
+            aria-label="activate trap for 'special element' demo"
+          >
+            activate trap
+          </button>
           <button onClick={this.updatePassThruMsg}>pass thru click</button>
           <span>{this.state.passThruMsg}</span>
         </p>
@@ -62,7 +67,12 @@ class DemoSpecialElement extends React.Component {
               <a href="#">focusable</a> parts.
             </p>
             <p>
-              <button onClick={this.unmountTrap}>deactivate trap</button>
+              <button
+                onClick={this.unmountTrap}
+                aria-label="deactivate trap for 'special element' demo"
+              >
+                deactivate trap
+              </button>
             </p>
           </section>
         </FocusTrap>

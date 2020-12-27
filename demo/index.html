@@ -5,78 +5,76 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>focus-trap-react demo</title>
-
   <link rel="stylesheet" href="style.css">
   <meta name="description" content="A demo of focus-trap-react">
-
 </head>
 <body>
-  <h1 tabindex="0">focus-trap-react demo</h1>
+  <main>
+    <h1 tabindex="0">focus-trap-react demo</h1>
+    <p>
+      <span aria-hidden="true" style="font-size:2em;vertical-align:middle;">☜</span>
+      <a href="https://github.com/focus-trap/focus-trap-react" style="vertical-align:middle;">Return to the repository</a>
+    </p>
 
-  <p>
-    <span style="font-size:2em;vertical-align:middle;">☜</span>
-    <a href="https://github.com/focus-trap/focus-trap-react" style="vertical-align:middle;">Return to the repository</a>
-  </p>
+    <h2>defaults</h2>
+    <p>
+      Default behavior: When this FocusTrap mounts (and activates), the first element in its tab order receives focus.
+    </p>
+    <div id="demo-defaults"></div>
 
-  <h2>defaults</h2>
-  <p>
-    Default behavior: When this FocusTrap mounts (and activates), the first element in its tab order receives focus.
-  </p>
-  <div id="demo-defaults"></div>
+    <h2>first focus, no escape</h2>
+    <p>
+      When this FocusTrap mounts (and activates), focus jumps to a specific, manually specified element.
+    </p>
+    <p>
+      Also, the Escape key does not deactivate this trap; you have to click the button to deactivate.
+    </p>
+    <div id="demo-ffne"></div>
 
-  <h2>first focus, no escape</h2>
-  <p>
-    When this FocusTrap mounts (and activates), focus jumps to a specific, manually specified element.
-  </p>
-  <p>
-    Also, the Escape key does not deactivate this trap: you have to click the button to deactivate.
-  </p>
-  <div id="demo-ffne"></div>
+    <h2>special element</h2>
+    <p>
+      Inspect this element and you'll see that it is not the default plain div,
+      but rather a section tag with an id, a class, inline styles, and an
+      arbitrary <code>data-</code>attribute.
+    </p>
+    <p>
+      Also, this FocusTrap activates and deactivates while staying mounted.
+    </p>
+    <p>
+      ALSO, when you click outside this FocusTrap, the trap deactivates and your click carries through.
+    </p>
+    <p>
+      Finally, focus should return to the "activate trap" button, whether you click the "deactivate trap"
+      button, or press the ESC key.
+    </p>
+    <div id="demo-special-element"></div>
 
-  <h2>special element</h2>
-  <p>
-    Inspect this element and you'll see that it is not the default plain div,
-    but rather a section tag with an id, a class, inline styles, and an
-    arbitrary <code>data-</code>attribute.
-  </p>
-  <p>
-    Also, this FocusTrap activates and deactivates while staying mounted.
-  </p>
-  <p>
-    ALSO, when you click outside this FocusTrap, the trap deactivates and your click carries through.
-  </p>
-  <p>
-    Finally, focus should return to the "activate trap" button, whether you click the "deactivate trap"
-    button, or press the ESC key.
-  </p>
-  <div id="demo-special-element"></div>
+    <h2>demo autofocus</h2>
+    <p>
+      The trap contains an input with the autofocus attribute.
+    </p>
+    <div id="demo-autofocus"></div>
 
-  <h2>demo autofocus</h2>
-  <p>
-    The trap contains an input with the autofocus attribute.
-  </p>
-  <div id="demo-autofocus"></div>
+    <h2>demo containerElements</h2>
+    <p>
+      You may pass in an array prop <code>containerElements</code> that contains nodes to trap focus within, which if passed will be used instead of the direct child. The direct child, if any, <strong>will be ignored by the trap</strong> (unless also given as an element in <code>containerElements</code>).
+    </p>
+    <div id="demo-containerelements"></div>
 
-  <h2>demo containerElements</h2>
-  <p>
-    You may pass in an array prop <code>containerElements</code> that contains nodes to trap focus within, which if passed will be used instead of the direct child. The direct child, if any, <strong>will be ignored by the trap</strong> (unless also given as an element in <code>containerElements</code>).
-  </p>
-  <div id="demo-containerelements"></div>
+    <h2>demo containerElements (no child)</h2>
+    <p>
+      Slight <em>underlying</em> difference from the previous "containerElements" demo in that the
+      focus trap element is not given a child: <code>&lt;FocusTrap containerElements={[...]} /&gt;</code>.
+      The result is the same, but this further reinforces the fact that when <code>containerElements</code> is
+      used, the child is not considered, and therefore not even necessary.
+    </p>
+    <div id="demo-containerelements-childless"></div>
 
-  <h2>demo containerElements (no child)</h2>
-  <p>
-    Slight <em>underlying</em> difference from the previous "containerElements" demo in that the
-    focus trap element is not given a child: <code>&lt;FocusTrap containerElements={[...]} /&gt;</code>.
-    The result is the same, but this further reinforces the fact that when <code>containerElements</code> is
-    used, the child is not considered, and therefore not even necessary.
-  </p>
-  <div id="demo-containerelements-childless"></div>
-
-  <p>
-    <span style="font-size:2em;vertical-align:middle;">☜</span>
-    <a href="https://github.com/focus-trap/focus-trap-react" style="vertical-align:middle;">Return to the repository</a>
-  </p>
-
+    <p>
+      <span aria-hidden="true" style="font-size:2em;vertical-align:middle;">☜</span>
+      <a href="https://github.com/focus-trap/focus-trap-react" style="vertical-align:middle;">Return to the repository</a>
+    </p>
+  </main>
   <script src="demo-bundle.js"></script>
 </body>
 </html>
