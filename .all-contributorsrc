@@ -178,7 +178,8 @@
       "contributions": [
         "infra",
         "test",
-        "doc"
+        "doc",
+        "example"
       ]
     }
   ],
