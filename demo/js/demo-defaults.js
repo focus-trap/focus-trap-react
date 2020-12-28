@@ -25,7 +25,7 @@ class DemoDefaults extends React.Component {
   }
 
   render() {
-    const trap = this.state.activeTrap ? (
+    const trap = this.state.activeTrap && (
       <FocusTrap
         focusTrapOptions={{
           onDeactivate: this.unmountTrap,
@@ -37,18 +37,26 @@ class DemoDefaults extends React.Component {
             <a href="#">focusable</a> parts.
           </p>
           <p>
-            <button onClick={this.unmountTrap}>deactivate trap</button>
+            <button
+              onClick={this.unmountTrap}
+              aria-label="deactivate trap for 'defaults' demo"
+            >
+              deactivate trap
+            </button>
           </p>
         </div>
       </FocusTrap>
-    ) : (
-      false
     );
 
     return (
       <div>
         <p>
-          <button onClick={this.mountTrap}>activate trap</button>
+          <button
+            onClick={this.mountTrap}
+            aria-label="activate trap for 'defaults' demo"
+          >
+            activate trap
+          </button>
         </p>
         {trap}
       </div>

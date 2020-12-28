@@ -19,7 +19,7 @@ describe('<FocusTrap> component', () => {
 
       // activate trap
       cy.get('@testRoot')
-        .findByRole('button', { name: 'activate trap' })
+        .findByRole('button', { name: /^activate trap/ })
         .as('lastlyFocusedElementBeforeTrapIsActivated')
         .click();
 
@@ -52,7 +52,7 @@ describe('<FocusTrap> component', () => {
 
       // trap can be deactivated and return focus to lastly focused element before trap is activated
       cy.get('@testRoot')
-        .findByRole('button', { name: 'deactivate trap' })
+        .findByRole('button', { name: /^deactivate trap/ })
         .click();
       cy.get('@lastlyFocusedElementBeforeTrapIsActivated').should('have.focus');
 
@@ -73,12 +73,12 @@ describe('<FocusTrap> component', () => {
 
       // activate trap
       cy.get('@testRoot')
-        .findByRole('button', { name: 'activate trap' })
+        .findByRole('button', { name: /^activate trap/ })
         .click();
 
       // instead of next tab-order element being focused, element specified should be focused
       cy.get('@testRoot')
-        .findByRole('textbox', { name: 'Initially focused input' })
+        .findByRole('textbox', { name: 'Initially focused input:' })
         .as('focusedEl')
         .should('be.focused');
 
@@ -91,13 +91,13 @@ describe('<FocusTrap> component', () => {
 
       // activate trap
       cy.get('@testRoot')
-        .findByRole('button', { name: 'activate trap' })
+        .findByRole('button', { name: /^activate trap/ })
         .as('lastlyFocusedElementBeforeTrapIsActivated')
         .click();
 
       // trying deactivate trap by ESC
       cy.get('@testRoot')
-        .findByRole('textbox', { name: 'Initially focused input' })
+        .findByRole('textbox', { name: 'Initially focused input:' })
         .as('trapChild')
         .focus()
         .type('{esc}');
@@ -110,7 +110,7 @@ describe('<FocusTrap> component', () => {
 
       // click on deactivate trap button to deactivate trap
       cy.get('@testRoot')
-        .findByRole('button', { name: 'deactivate trap' })
+        .findByRole('button', { name: /^deactivate trap/ })
         .click();
       cy.get('@trapChild').should('not.exist');
       cy.get('@lastlyFocusedElementBeforeTrapIsActivated').should('be.focused');
@@ -152,14 +152,14 @@ describe('<FocusTrap> component', () => {
 
       // activate trap
       cy.get('@testRoot')
-        .findByRole('button', { name: 'activate trap' })
+        .findByRole('button', { name: /^activate trap/ })
         .as('lastlyFocusedElementBeforeTrapIsActivated')
         .click();
 
       verifyFocusTrapped();
 
       cy.get('@testRoot')
-        .findByRole('button', { name: 'deactivate trap' })
+        .findByRole('button', { name: /^deactivate trap/ })
         .as('trapChild')
         .click();
 
@@ -174,14 +174,14 @@ describe('<FocusTrap> component', () => {
 
       // activate trap
       cy.get('@testRoot')
-        .findByRole('button', { name: 'activate trap' })
+        .findByRole('button', { name: /^activate trap/ })
         .as('lastlyFocusedElementBeforeTrapIsActivated')
         .click();
 
       verifyFocusTrapped();
 
       cy.get('@testRoot')
-        .findByRole('button', { name: 'deactivate trap' })
+        .findByRole('button', { name: /^deactivate trap/ })
         .as('trapChild')
         .type('{esc}');
 
@@ -196,14 +196,14 @@ describe('<FocusTrap> component', () => {
 
       // activate trap
       cy.get('@testRoot')
-        .findByRole('button', { name: 'activate trap' })
+        .findByRole('button', { name: /^activate trap/ })
         .as('lastlyFocusedElementBeforeTrapIsActivated')
         .click();
 
       verifyFocusTrapped();
 
       cy.get('@testRoot')
-        .findByRole('button', { name: 'deactivate trap' })
+        .findByRole('button', { name: /^deactivate trap/ })
         .as('trapChild');
 
       // click outside to deactivate trap and also click carries through
@@ -231,7 +231,7 @@ describe('<FocusTrap> component', () => {
 
       // activate trap
       cy.get('@testRoot')
-        .findByRole('button', { name: 'activate trap' })
+        .findByRole('button', { name: /^activate trap/ })
         .click();
 
       // element with "autofocus" attribute is focused
@@ -249,7 +249,7 @@ describe('<FocusTrap> component', () => {
 
         // activate trap
         cy.get('@testRoot')
-          .findByRole('button', { name: 'activate trap' })
+          .findByRole('button', { name: /^activate trap/ })
           .as('lastlyFocusedElementBeforeTrapIsActivated')
           .click();
 
@@ -309,7 +309,7 @@ describe('<FocusTrap> component', () => {
 
         // activate trap
         cy.get('@testRoot')
-          .findByRole('button', { name: 'activate trap' })
+          .findByRole('button', { name: /^activate trap/ })
           .as('lastlyFocusedElementBeforeTrapIsActivated')
           .click();
 

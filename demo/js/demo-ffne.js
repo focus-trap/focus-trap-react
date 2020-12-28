@@ -25,7 +25,7 @@ class DemoFfne extends React.Component {
   }
 
   render() {
-    const trap = this.state.activeTrap ? (
+    const trap = this.state.activeTrap && (
       <FocusTrap
         focusTrapOptions={{
           onDeactivate: this.unmountTrap,
@@ -40,23 +40,31 @@ class DemoFfne extends React.Component {
           </p>
           <p>
             <label htmlFor="focused-input" style={{ marginRight: 10 }}>
-              Initially focused input
+              Initially focused input:
             </label>
             <input id="focused-input" />
           </p>
           <p>
-            <button onClick={this.unmountTrap}>deactivate trap</button>
+            <button
+              onClick={this.unmountTrap}
+              aria-label="deactivate trap for 'first focus, no escape' demo"
+            >
+              deactivate trap
+            </button>
           </p>
         </div>
       </FocusTrap>
-    ) : (
-      false
     );
 
     return (
       <div>
         <p>
-          <button onClick={this.mountTrap}>activate trap</button>
+          <button
+            onClick={this.mountTrap}
+            aria-label="activate trap for 'first focus, no escape' demo"
+          >
+            activate trap
+          </button>
         </p>
         {trap}
       </div>

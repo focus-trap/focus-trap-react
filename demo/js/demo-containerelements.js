@@ -38,7 +38,7 @@ class DemoContainerElements extends React.Component {
   }
 
   render() {
-    const trap = this.state.activeTrap ? (
+    const trap = this.state.activeTrap && (
       <FocusTrap
         containerElements={[this.element1, this.element2]}
         focusTrapOptions={{
@@ -51,7 +51,7 @@ class DemoContainerElements extends React.Component {
         {/* NOTE: child is IGNORED in favor of `containerElements` */}
         <div className="trap is-active">
           <p ref={this.setElementRef('element1')}>
-            Here is a focus trap <a href="#">with</a> <a href="#">some</a>
+            Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
             <a href="#">focusable</a> parts.
           </p>
           <p>
@@ -59,27 +59,30 @@ class DemoContainerElements extends React.Component {
           </p>
           <p ref={this.setElementRef('element2')}>
             Here is a another focus trap element. <a href="#">See</a>{' '}
-            <a href="#">how</a>
-            it <a href="#">works</a>.
+            <a href="#">how</a> it <a href="#">works</a>.
           </p>
           <p>
             <button
               id="demo-containerelements-deactivate"
               onClick={this.unmountTrap}
+              aria-label="deactivate trap for 'containerElements' demo"
             >
               deactivate trap
             </button>
           </p>
         </div>
       </FocusTrap>
-    ) : (
-      false
     );
 
     return (
       <div>
         <p>
-          <button onClick={this.mountTrap}>activate trap</button>
+          <button
+            onClick={this.mountTrap}
+            aria-label="activate trap for 'containerElements' demo"
+          >
+            activate trap
+          </button>
         </p>
         {trap}
       </div>
