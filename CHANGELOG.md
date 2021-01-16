@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.4.0
+
+### Minor Changes
+
+- 8d58bc8: Bump focus-trap to v6.3.0
+
 ## 8.3.2
 
 ### Patch Changes
