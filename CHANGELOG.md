@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.4.1
+
+### Patch Changes
+
+- a4c3105: Update PropTypes for clickOutsideDeactivates to match latest focus-trap.
+
 ## 8.4.0
 
 ### Minor Changes
