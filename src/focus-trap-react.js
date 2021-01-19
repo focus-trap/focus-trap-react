@@ -189,7 +189,10 @@ FocusTrap.propTypes = {
       PropTypes.func,
     ]),
     escapeDeactivates: PropTypes.bool,
-    clickOutsideDeactivates: PropTypes.bool,
+    clickOutsideDeactivates: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.func,
+    ]),
     returnFocusOnDeactivate: PropTypes.bool,
     setReturnFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
