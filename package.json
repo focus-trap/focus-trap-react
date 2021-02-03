@@ -60,7 +60,7 @@
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.12.11",
-    "@babel/preset-react": "^7.12.10",
+    "@babel/preset-react": "^7.12.13",
     "@changesets/cli": "^2.13.1",
     "@testing-library/cypress": "^7.0.3",
     "@testing-library/dom": "^7.29.4",
