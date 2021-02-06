@@ -43,7 +43,7 @@ Why? Because this module's core functionality comes from focus-trap, which uses 
 
 ## Usage
 
-You wrap any element that you want to act as a focus trap with the `<FocusTrap>` component. `<FocusTrap>` expects exactly one child element which can be any HTML element or other React component that contains focusable elements.
+You wrap any element that you want to act as a focus trap with the `<FocusTrap>` component. `<FocusTrap>` expects exactly one child element which can be any HTML element or other React component that contains focusable elements. __It cannot be a Fragment__ because `<FocusTrap>` needs to be able to get a reference to the underlying HTML element, and Fragments do not have any representation in the DOM.
 
 For example:
 
@@ -69,11 +69,9 @@ Here's one more simple example:
 ```js
 const React = require('react');
 const ReactDOM = require('react-dom');
-const FocusTrap = require('../../dist/focus-trap-react');
+const FocusTrap = require('focus-trap-react');
 
-const container = document.getElementById('demo-one');
-
-class DemoOne extends React.Component {
+class Demo extends React.Component {
   constructor(props) {
     super(props);
 
@@ -85,13 +83,13 @@ class DemoOne extends React.Component {
     this.unmountTrap = this.unmountTrap.bind(this);
   }
 
-  mountTrap() {
+  mountTrap = () => {
     this.setState({ activeTrap: true });
-  }
+  };
 
-  unmountTrap() {
+  unmountTrap = () => {
     this.setState({ activeTrap: false });
-  }
+  };
 
   render() {
     const trap = this.state.activeTrap
@@ -134,7 +132,7 @@ class DemoOne extends React.Component {
   }
 }
 
-ReactDOM.render(<DemoOne />, container);
+ReactDOM.render(<Demo />, document.getElementById('root'));
 ```
 
 ### Props
