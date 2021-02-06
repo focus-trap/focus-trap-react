@@ -98,6 +98,20 @@ describe('FocusTrap', () => {
         'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
       );
     });
+
+    it('throws an error if a fragment is given as the child element', () => {
+      expect(() =>
+        render(
+          <FocusTrap>
+            <>
+              <button>Click me</button>
+            </>
+          </FocusTrap>
+        )
+      ).toThrowError(
+        'A focus-trap cannot use a Fragment as its child container. Try replacing it with a <div> element.'
+      );
+    });
   });
 
   describe('correct children prop usage', () => {

@@ -142,6 +142,12 @@ class FocusTrap extends React.Component {
       : undefined;
 
     if (child) {
+      if (child.type && child.type === React.Fragment) {
+        throw new Error(
+          'A focus-trap cannot use a Fragment as its child container. Try replacing it with a <div> element.'
+        );
+      }
+
       const composedRefCallback = (element) => {
         const { containerElements } = this.props;
 
