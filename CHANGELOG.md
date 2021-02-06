@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.4.2
+
+### Patch Changes
+
+- f9a6d1a: Throw an error if a Fragment is given as the child container (currently, it appears to work, but the trap is actually not activated because focus-trap can't find the DOM element for the Fragment "container"). (Fixes #268)
+
 ## 8.4.1
 
 ### Patch Changes
