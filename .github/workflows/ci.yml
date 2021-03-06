@@ -38,6 +38,11 @@ jobs:
       - name: Install packages
         run: yarn --frozen-lockfile
 
+      - name: Install Codecov globally
+        run: |
+          yarn global add codecov
+          echo "$(yarn global bin)" >> $GITHUB_PATH
+
       - name: Lint
         run: |-
           yarn format:check;
@@ -45,8 +50,9 @@ jobs:
 
       - name: Test
         run: |-
-          yarn test:coverage:ci;
+          yarn test:coverage;
           yarn test:types;
+          codecov;
 
       - name: Build # Tests to see if a build can succeed
         run: yarn build
