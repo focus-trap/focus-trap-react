@@ -23,6 +23,7 @@ jobs:
         run: |-
           echo "::set-output name=yarn_cache::$(yarn cache dir)"
           printenv
+          env
 
       - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@master
