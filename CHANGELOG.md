@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.5.0
+
+### Minor Changes
+
+- 6ee37fb: Bump focus-trap from 6.3.0 to 6.4.0. There should be no changes in behavior as a result of this upgrade.
+
 ## 8.4.2
 
 ### Patch Changes
