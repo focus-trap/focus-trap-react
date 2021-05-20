@@ -13,4 +13,4 @@ declare namespace FocusTrap {
   }
 }
 
-declare class FocusTrap extends React.Component<FocusTrap.Props> {}
+declare class FocusTrap extends React.Component<FocusTrap.Props> { }
