@@ -10,7 +10,8 @@ declare namespace FocusTrap {
     paused?: boolean;
     focusTrapOptions?: FocusTrapOptions;
     containerElements?: Array<HTMLElement>;
+    activationDelay?: number
   }
 }
 
-declare class FocusTrap extends React.Component<FocusTrap.Props> { }
+declare class FocusTrap extends React.Component<FocusTrap.Props> {}

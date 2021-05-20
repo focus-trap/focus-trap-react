@@ -6,7 +6,7 @@ const FocusTrap = require('../../dist/focus-trap-react');
 const container = document.getElementById('demo-defaults');
 
 const DemoDefaults = () => {
-  const [activeTrap, setActiveTrap] = useState(false);
+  const [isTrapActive, setIsTrapActive] = useState(false);
 
   return (
     <>
@@ -25,7 +25,7 @@ const DemoDefaults = () => {
       <div>
         <p>
           <button
-            onClick={() => setActiveTrap(true)}
+            onClick={() => setIsTrapActive(true)}
             aria-label="activate trap for 'defaults' demo"
           >
             activate trap
@@ -33,15 +33,15 @@ const DemoDefaults = () => {
         </p>
       </div>
 
-      <FocusTrap active={activeTrap}>
-        <div className={['trap', activeTrap ? 'is-active' : ''].join(' ')}>
+      <FocusTrap active={isTrapActive} activationDelay={10}>
+        <div className={['trap', isTrapActive ? 'is-active' : ''].join(' ')}>
           <p>
             Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
             <a href="#">focusable</a> parts.
           </p>
           <p>
             <button
-              onClick={() => setActiveTrap(false)}
+              onClick={() => setIsTrapActive(false)}
               aria-label="deactivate trap for 'defaults' demo"
             >
               deactivate trap
