@@ -10,7 +10,6 @@ declare namespace FocusTrap {
     paused?: boolean;
     focusTrapOptions?: FocusTrapOptions;
     containerElements?: Array<HTMLElement>;
-    activationDelay?: number
   }
 }
 

@@ -12,6 +12,8 @@ class FocusTrap extends React.Component {
   constructor(props) {
     super(props);
 
+    this.focusTrapElement = React.createRef();
+
     // We need to hijack the returnFocusOnDeactivate option,
     // because React can move focus into the element before we arrived at
     // this lifecycle hook (e.g. with autoFocus inputs). So the component
@@ -46,6 +48,17 @@ class FocusTrap extends React.Component {
 
     // now we remember what the currently focused element is, not relying on focus-trap
     this.updatePreviousElement();
+  }
+
+  waitForFocusTrapToBeVisible(callback) {
+    const interval = setInterval(() => {
+      const isVisible =
+        getComputedStyle(this.focusTrapElement.current).visibility !== 'hidden';
+      if (isVisible) {
+        clearInterval(interval);
+        callback();
+      }
+    }, 1);
   }
 
   /** Update the previously focused element with the currently focused element. */
@@ -108,11 +121,9 @@ class FocusTrap extends React.Component {
             this.returnFocus();
           }
         };
-        if (this.props.activationDelay) {
-          setTimeout(deactivate, this.props.activationDelay);
-        } else {
-          deactivate();
-        }
+
+        deactivate();
+
         return; // un/pause does nothing on an inactive trap
       }
 
@@ -121,11 +132,7 @@ class FocusTrap extends React.Component {
           this.updatePreviousElement();
           this.focusTrap.activate();
         };
-        if (this.props.activationDelay) {
-          setTimeout(activate, this.props.activationDelay);
-        } else {
-          activate();
-        }
+        this.waitForFocusTrapToBeVisible(activate);
       }
 
       if (prevProps.paused && !this.props.paused) {
@@ -165,6 +172,7 @@ class FocusTrap extends React.Component {
           } else if (child.ref) {
             child.ref.current = element;
           }
+          this.focusTrapElement.current = element;
         }
 
         this.focusTrapElements = containerElements
