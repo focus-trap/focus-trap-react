@@ -50,11 +50,12 @@ class FocusTrap extends React.Component {
     this.updatePreviousElement();
   }
 
-  waitForFocusTrapToBeVisible(callback) {
+  delayFocusTrapActivation(callback) {
     const interval = setInterval(() => {
-      const isVisible =
-        getComputedStyle(this.focusTrapElement.current).visibility !== 'hidden';
-      if (isVisible) {
+      const canActivate = this.tailoredFocusTrapOptions.checkCanActivate(
+        this.focusTrapElement.current
+      );
+      if (canActivate) {
         clearInterval(interval);
         callback();
       }
@@ -132,7 +133,7 @@ class FocusTrap extends React.Component {
           this.updatePreviousElement();
           this.focusTrap.activate();
         };
-        this.waitForFocusTrapToBeVisible(activate);
+        this.delayFocusTrapActivation(activate);
       }
 
       if (prevProps.paused && !this.props.paused) {
@@ -199,6 +200,7 @@ FocusTrap.propTypes = {
   paused: PropTypes.bool,
   activationDelay: PropTypes.number,
   focusTrapOptions: PropTypes.shape({
+    checkCanActivate: PropTypes.func,
     onActivate: PropTypes.func,
     onDeactivate: PropTypes.func,
     initialFocus: PropTypes.oneOfType([
@@ -236,6 +238,7 @@ FocusTrap.propTypes = {
 FocusTrap.defaultProps = {
   active: true,
   paused: false,
+  checkCanActivate: () => true,
   focusTrapOptions: {},
   _createFocusTrap: createFocusTrap,
 };

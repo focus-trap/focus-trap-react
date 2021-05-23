@@ -5,6 +5,10 @@ const FocusTrap = require('../../dist/focus-trap-react');
 
 const container = document.getElementById('demo-animated');
 
+const focusTrapOptions = {
+  checkCanActivate: (elem) => getComputedStyle(elem).visibility !== 'hidden',
+};
+
 const DemoAnimated = () => {
   const [isTrapActive, setIsTrapActive] = useState(false);
 
@@ -33,7 +37,7 @@ const DemoAnimated = () => {
         </p>
       </div>
 
-      <FocusTrap active={isTrapActive}>
+      <FocusTrap active={isTrapActive} focusTrapOptions={focusTrapOptions}>
         <div
           className={[
             'trap',
