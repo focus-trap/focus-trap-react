@@ -51,11 +51,20 @@ class FocusTrap extends React.Component {
   }
 
   delayFocusTrapActivation(callback) {
+    const startDate = Date.now();
     const interval = setInterval(() => {
       const canActivate = this.tailoredFocusTrapOptions.checkCanActivate(
         this.focusTrapElement.current
       );
-      if (canActivate) {
+      const timeDifferenceInSeconds = (Date.now() - startDate) / 1000;
+      if (timeDifferenceInSeconds > 10) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `Focus-Trap activation timed out after ${timeDifferenceInSeconds} seconds`,
+          this
+        );
+        clearInterval(interval);
+      } else if (canActivate) {
         clearInterval(interval);
         callback();
       }
