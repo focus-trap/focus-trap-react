@@ -41,7 +41,7 @@ class DemoSpecialElement extends React.Component {
         <p>
           <button
             onClick={this.mountTrap}
-            aria-label="activate trap for 'special element' demo"
+            aria-describedby="special-element-heading"
           >
             activate trap
           </button>
@@ -69,7 +69,7 @@ class DemoSpecialElement extends React.Component {
             <p>
               <button
                 onClick={this.unmountTrap}
-                aria-label="deactivate trap for 'special element' demo"
+                aria-describedby="special-element-heading"
               >
                 deactivate trap
               </button>

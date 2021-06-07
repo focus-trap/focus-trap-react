@@ -34,7 +34,7 @@ class DemoAutofocus extends React.Component {
         <div className="trap is-active">
           <button
             onClick={this.unmountTrap}
-            aria-label="deactivate trap for 'autofocus' demo"
+            aria-describedby="autofocus-heading"
           >
             deactivate trap
           </button>
@@ -61,7 +61,7 @@ class DemoAutofocus extends React.Component {
           <button
             key="button"
             onClick={this.mountTrap}
-            aria-label="activate trap for 'autofocus' demo"
+            aria-describedby="autofocus-heading"
           >
             activate trap
           </button>

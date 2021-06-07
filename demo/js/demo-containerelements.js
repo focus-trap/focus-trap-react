@@ -65,7 +65,7 @@ class DemoContainerElements extends React.Component {
             <button
               id="demo-containerelements-deactivate"
               onClick={this.unmountTrap}
-              aria-label="deactivate trap for 'containerElements' demo"
+              aria-describedby="containerelements-heading"
             >
               deactivate trap
             </button>
@@ -79,7 +79,7 @@ class DemoContainerElements extends React.Component {
         <p>
           <button
             onClick={this.mountTrap}
-            aria-label="activate trap for 'containerElements' demo"
+            aria-describedby="containerelements-heading"
           >
             activate trap
           </button>

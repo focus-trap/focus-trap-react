@@ -45,10 +45,7 @@ class DemoFfne extends React.Component {
             <input id="focused-input" />
           </p>
           <p>
-            <button
-              onClick={this.unmountTrap}
-              aria-label="deactivate trap for 'first focus, no escape' demo"
-            >
+            <button onClick={this.unmountTrap} aria-describedby="ffne-heading">
               deactivate trap
             </button>
           </p>
@@ -59,10 +56,7 @@ class DemoFfne extends React.Component {
     return (
       <div>
         <p>
-          <button
-            onClick={this.mountTrap}
-            aria-label="activate trap for 'first focus, no escape' demo"
-          >
+          <button onClick={this.mountTrap} aria-describedby="ffne-heading">
             activate trap
           </button>
         </p>
