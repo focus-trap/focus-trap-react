@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.5.1
+
+### Patch Changes
+
+- b8d7071: Bump focus-trap dependency to 6.5.0 to get new features
+
 ## 8.5.0
 
 ### Minor Changes
