@@ -4,6 +4,7 @@ module.exports = {
     'regenerator-runtime/runtime',
     '<rootDir>/test/jest-setup.js',
   ],
+  testEnvironment: 'jsdom',
   testURL: 'http://localhost',
   testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
   transform: {
