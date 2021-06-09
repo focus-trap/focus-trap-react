@@ -69,7 +69,7 @@ class DemoContainerElementsChildless extends React.Component {
             <button
               id="demo-containerelements-childless-deactivate"
               onClick={this.unmountTrap}
-              aria-label="deactivate trap for 'containerElements (no child)' demo"
+              aria-describedby="containerelements-childless-heading"
             >
               deactivate trap
             </button>
@@ -83,7 +83,7 @@ class DemoContainerElementsChildless extends React.Component {
         <p>
           <button
             onClick={this.mountTrap}
-            aria-label="activate trap for 'containerElements (no child)' demo"
+            aria-describedby="containerelements-childless-heading"
           >
             activate trap
           </button>

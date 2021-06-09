@@ -39,7 +39,7 @@ class DemoDefaults extends React.Component {
           <p>
             <button
               onClick={this.unmountTrap}
-              aria-label="deactivate trap for 'defaults' demo"
+              aria-describedby="defaults-heading"
             >
               deactivate trap
             </button>
@@ -51,10 +51,7 @@ class DemoDefaults extends React.Component {
     return (
       <div>
         <p>
-          <button
-            onClick={this.mountTrap}
-            aria-label="activate trap for 'defaults' demo"
-          >
+          <button onClick={this.mountTrap} aria-describedby="defaults-heading">
             activate trap
           </button>
         </p>

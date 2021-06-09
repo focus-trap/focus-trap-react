@@ -16,13 +16,18 @@
       <a href="https://github.com/focus-trap/focus-trap-react" style="vertical-align:middle;">Return to the repository</a>
     </p>
 
-    <h2>defaults</h2>
+    <h2 id="defaults-heading">defaults</h2>
     <p>
       Default behavior: When this FocusTrap mounts (and activates), the first element in its tab order receives focus.
     </p>
     <div id="demo-defaults"></div>
+    <p>
+      <a href="https://github.com/focus-trap/focus-trap-react/blob/master/demo/js/demo-defaults.js" aria-describedby="defaults-heading">
+        View demo source <span aria-hidden="true">&gt;&gt;</span>
+      </a>
+    </p>
 
-    <h2>first focus, no escape</h2>
+    <h2 id="ffne-heading">first focus, no escape</h2>
     <p>
       When this FocusTrap mounts (and activates), focus jumps to a specific, manually specified element.
     </p>
@@ -30,8 +35,13 @@
       Also, the Escape key does not deactivate this trap; you have to click the button to deactivate.
     </p>
     <div id="demo-ffne"></div>
+    <p>
+      <a href="https://github.com/focus-trap/focus-trap-react/blob/master/demo/js/demo-ffne.js" aria-describedby="ffne-heading">
+        View demo source <span aria-hidden="true">&gt;&gt;</span>
+      </a>
+    </p>
 
-    <h2>special element</h2>
+    <h2 id="special-element-heading">special element</h2>
     <p>
       Inspect this element and you'll see that it is not the default plain div,
       but rather a section tag with an id, a class, inline styles, and an
@@ -48,20 +58,35 @@
       button, or press the ESC key.
     </p>
     <div id="demo-special-element"></div>
+    <p>
+      <a href="https://github.com/focus-trap/focus-trap-react/blob/master/demo/js/demo-special-element.js" aria-describedby="special-element-heading">
+        View demo source <span aria-hidden="true">&gt;&gt;</span>
+      </a>
+    </p>
 
-    <h2>demo autofocus</h2>
+    <h2 id="autofocus-heading">demo autofocus</h2>
     <p>
       The trap contains an input with the autofocus attribute.
     </p>
     <div id="demo-autofocus"></div>
+    <p>
+      <a href="https://github.com/focus-trap/focus-trap-react/blob/master/demo/js/demo-autofocus.js" aria-describedby="autofocus-heading">
+        View demo source <span aria-hidden="true">&gt;&gt;</span>
+      </a>
+    </p>
 
-    <h2>demo containerElements</h2>
+    <h2 id="containerelements-heading">demo containerElements</h2>
     <p>
       You may pass in an array prop <code>containerElements</code> that contains nodes to trap focus within, which if passed will be used instead of the direct child. The direct child, if any, <strong>will be ignored by the trap</strong> (unless also given as an element in <code>containerElements</code>).
     </p>
     <div id="demo-containerelements"></div>
+    <p>
+      <a href="https://github.com/focus-trap/focus-trap-react/blob/master/demo/js/demo-containerelements.js" aria-describedby="containerelements-heading">
+        View demo source <span aria-hidden="true">&gt;&gt;</span>
+      </a>
+    </p>
 
-    <h2>demo containerElements (no child)</h2>
+    <h2 id="containerelements-childless-heading">demo containerElements (no child)</h2>
     <p>
       Slight <em>underlying</em> difference from the previous "containerElements" demo in that the
       focus trap element is not given a child: <code>&lt;FocusTrap containerElements={[...]} /&gt;</code>.
@@ -69,6 +94,11 @@
       used, the child is not considered, and therefore not even necessary.
     </p>
     <div id="demo-containerelements-childless"></div>
+    <p>
+      <a href="https://github.com/focus-trap/focus-trap-react/blob/master/demo/js/demo-containerelements-childless.js" aria-describedby="containerelements-childless-heading">
+        View demo source <span aria-hidden="true">&gt;&gt;</span>
+      </a>
+    </p>
 
     <p>
       <span aria-hidden="true" style="font-size:2em;vertical-align:middle;">☜</span>
