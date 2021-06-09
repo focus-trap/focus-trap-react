@@ -181,6 +181,15 @@
         "test",
         "tool"
       ]
+    },
+    {
+      "login": "Dan503",
+      "name": "Daniel Tonon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10610368?v=4",
+      "profile": "https://github.com/Dan503",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
