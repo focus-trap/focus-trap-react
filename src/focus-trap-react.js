@@ -183,7 +183,11 @@ FocusTrap.propTypes = {
   paused: PropTypes.bool,
   focusTrapOptions: PropTypes.shape({
     onActivate: PropTypes.func,
+    onPostActivate: PropTypes.func,
+    checkCanFocusTrap: PropTypes.func,
     onDeactivate: PropTypes.func,
+    onPostDeactivate: PropTypes.func,
+    checkCanReturnFocus: PropTypes.func,
     initialFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
