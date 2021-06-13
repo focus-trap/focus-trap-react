@@ -57,10 +57,8 @@ class FocusTrap extends React.Component {
 
   /** Returns focus to the element that had focus when the trap was activated. */
   returnFocus() {
-    const {
-      checkCanReturnFocus,
-      onPostDeactivate,
-    } = this.props.focusTrapOptions;
+    const { checkCanReturnFocus, onPostDeactivate } =
+      this.props.focusTrapOptions;
 
     const sendFocus = () => {
       if (this.previouslyFocusedElement?.focus) {
