@@ -65,7 +65,9 @@ class FocusTrap extends React.Component {
     const sendFocus = () => {
       if (this.previouslyFocusedElement?.focus) {
         this.previouslyFocusedElement.focus();
-        onPostDeactivate();
+        if (onPostDeactivate) {
+          onPostDeactivate();
+        }
       }
     };
 
