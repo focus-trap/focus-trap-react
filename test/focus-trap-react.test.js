@@ -8,6 +8,14 @@ const {
 const { default: userEvent } = require('@testing-library/user-event');
 const FocusTrap = require('../src/focus-trap-react');
 
+const pause = (duration) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, duration);
+  });
+};
+
 const FocusTrapExample = ({ focusTrapOptions, ...otherProps }) => {
   const [trapIsActive, setTrapIsActive] = React.useState(false);
 
@@ -316,6 +324,72 @@ describe('FocusTrap', () => {
       await waitFor(() => {
         expect(document.body).toHaveFocus();
       });
+    });
+
+    it('Does not call onPostActivate() until checkCanFocusTrap() has completed', async () => {
+      let hasRunPostActivate = false;
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            checkCanFocusTrap: () => pause(500),
+            onPostActivate: () => {
+              hasRunPostActivate = true;
+            },
+          }}
+        />
+      );
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      expect(hasRunPostActivate).toBe(false);
+
+      await pause(5);
+
+      expect(hasRunPostActivate).toBe(false);
+
+      await pause(550);
+
+      expect(hasRunPostActivate).toBe(true);
+    });
+
+    it('Does not call onPostDeactivate() until checkCanReturnFocus() has completed', async () => {
+      let hasRunPostDeactivate = false;
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            checkCanReturnFocus: () => pause(500),
+            onPostDeactivate: () => {
+              hasRunPostDeactivate = true;
+            },
+          }}
+        />
+      );
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      // Deactivate the focus trap
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      expect(hasRunPostDeactivate).toBe(false);
+
+      await pause(5);
+
+      expect(hasRunPostDeactivate).toBe(false);
+
+      await pause(550);
+
+      expect(hasRunPostDeactivate).toBe(true);
     });
   });
 
