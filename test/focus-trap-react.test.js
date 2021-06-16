@@ -411,6 +411,70 @@ describe('FocusTrap', () => {
       expect(hasDeactivated).toBe(true);
       expect(hasRunPostDeactivate).toBe(true);
     });
+
+    it('Will call onPostActivate() even if checkCanFocusTrap() is undefined', async () => {
+      let hasActivated = false;
+      let hasRunPostActivate = false;
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            onActivate: () => {
+              hasActivated = true;
+            },
+            onPostActivate: () => {
+              hasRunPostActivate = true;
+            },
+          }}
+        />
+      );
+
+      expect(hasActivated).toBe(false);
+      expect(hasRunPostActivate).toBe(false);
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      expect(hasActivated).toBe(true);
+      expect(hasRunPostActivate).toBe(true);
+    });
+
+    it('Will call onPostDeactivate() even if checkCanReturnFocus() is undefined', async () => {
+      let hasDeactivated = false;
+      let hasRunPostDeactivate = false;
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            onDeactivate: () => {
+              hasDeactivated = true;
+            },
+            onPostDeactivate: () => {
+              hasRunPostDeactivate = true;
+            },
+          }}
+        />
+      );
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      expect(hasDeactivated).toBe(false);
+      expect(hasRunPostDeactivate).toBe(false);
+
+      // Deactivate the focus trap
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      expect(hasDeactivated).toBe(true);
+      expect(hasRunPostDeactivate).toBe(true);
+    });
   });
 
   describe('containerElements prop', () => {
