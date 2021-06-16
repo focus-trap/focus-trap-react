@@ -327,11 +327,15 @@ describe('FocusTrap', () => {
     });
 
     it('Does not call onPostActivate() until checkCanFocusTrap() has completed', async () => {
+      let hasActivated = false;
       let hasRunPostActivate = false;
       render(
         <FocusTrapExample
           focusTrapOptions={{
             checkCanFocusTrap: () => pause(500),
+            onActivate: () => {
+              hasActivated = true;
+            },
             onPostActivate: () => {
               hasRunPostActivate = true;
             },
@@ -339,28 +343,38 @@ describe('FocusTrap', () => {
         />
       );
 
+      expect(hasActivated).toBe(false);
+      expect(hasRunPostActivate).toBe(false);
+
       // Activate the focus trap
       const activateTrapButton = screen.getByText('activate trap');
       activateTrapButton.focus();
       fireEvent.click(activateTrapButton);
 
+      expect(hasActivated).toBe(true);
       expect(hasRunPostActivate).toBe(false);
 
       await pause(5);
 
+      expect(hasActivated).toBe(true);
       expect(hasRunPostActivate).toBe(false);
 
       await pause(550);
 
+      expect(hasActivated).toBe(true);
       expect(hasRunPostActivate).toBe(true);
     });
 
     it('Does not call onPostDeactivate() until checkCanReturnFocus() has completed', async () => {
+      let hasDeactivated = false;
       let hasRunPostDeactivate = false;
       render(
         <FocusTrapExample
           focusTrapOptions={{
             checkCanReturnFocus: () => pause(500),
+            onDeactivate: () => {
+              hasDeactivated = true;
+            },
             onPostDeactivate: () => {
               hasRunPostDeactivate = true;
             },
@@ -378,17 +392,23 @@ describe('FocusTrap', () => {
         expect(screen.getByText('Link 1')).toHaveFocus();
       });
 
+      expect(hasDeactivated).toBe(false);
+      expect(hasRunPostDeactivate).toBe(false);
+
       // Deactivate the focus trap
       fireEvent.click(screen.getByText('deactivate trap'));
 
+      expect(hasDeactivated).toBe(true);
       expect(hasRunPostDeactivate).toBe(false);
 
       await pause(5);
 
+      expect(hasDeactivated).toBe(true);
       expect(hasRunPostDeactivate).toBe(false);
 
       await pause(550);
 
+      expect(hasDeactivated).toBe(true);
       expect(hasRunPostDeactivate).toBe(true);
     });
   });
