@@ -134,6 +134,9 @@ class FocusTrap extends React.Component {
         if (this.returnFocusOnDeactivate) {
           this.returnFocus();
         }
+        if (this.onPostDeactivate) {
+          this.onPostDeactivate();
+        }
         return; // un/pause does nothing on an inactive trap
       }
 
