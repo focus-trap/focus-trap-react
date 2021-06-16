@@ -10,9 +10,7 @@ const FocusTrap = require('../src/focus-trap-react');
 
 const pause = (duration) => {
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, duration);
+    setTimeout(resolve, duration);
   });
 };
 
