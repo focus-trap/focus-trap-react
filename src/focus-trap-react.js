@@ -118,7 +118,17 @@ class FocusTrap extends React.Component {
         this.focusTrap.updateContainerElements(this.props.containerElements);
       }
 
-      if (prevProps.active && !this.props.active) {
+      const hasActivated = !prevProps.active && this.props.active;
+      const hasDeactivated = prevProps.active && !this.props.active;
+      const hasPaused = !prevProps.paused && this.props.paused;
+      const hasUnpaused = prevProps.paused && !this.props.paused;
+
+      if (hasActivated) {
+        this.updatePreviousElement();
+        this.focusTrap.activate();
+      }
+
+      if (hasDeactivated) {
         // NOTE: we never let the trap return the focus since we do that ourselves
         this.focusTrap.deactivate({ returnFocus: false });
         if (this.returnFocusOnDeactivate) {
@@ -127,15 +137,12 @@ class FocusTrap extends React.Component {
         return; // un/pause does nothing on an inactive trap
       }
 
-      if (!prevProps.active && this.props.active) {
-        this.updatePreviousElement();
-        this.focusTrap.activate();
+      if (hasPaused) {
+        this.focusTrap.pause();
       }
 
-      if (prevProps.paused && !this.props.paused) {
+      if (hasUnpaused) {
         this.focusTrap.unpause();
-      } else if (!prevProps.paused && this.props.paused) {
-        this.focusTrap.pause();
       }
     } else if (prevProps.containerElements !== this.props.containerElements) {
       this.focusTrapElements = this.props.containerElements;
