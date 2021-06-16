@@ -60,23 +60,35 @@ class FocusTrap extends React.Component {
     }
   }
 
-  /** Returns focus to the element that had focus when the trap was activated. */
-  returnFocus() {
+  deactivateTrap() {
     const { checkCanReturnFocus } = this.tailoredFocusTrapOptions;
 
-    const sendFocus = () => {
-      if (this.previouslyFocusedElement?.focus) {
+    if (this.focusTrap) {
+      // NOTE: we never let the trap return the focus since we do that ourselves
+      this.focusTrap.deactivate({ returnFocus: false });
+    }
+
+    const finishDeactivation = () => {
+      const canReturnFocus =
+        this.previouslyFocusedElement?.focus && this.returnFocusOnDeactivate;
+
+      if (canReturnFocus) {
+        /** Returns focus to the element that had focus when the trap was activated. */
         this.previouslyFocusedElement.focus();
       }
+
       if (this.onPostDeactivate) {
-        this.onPostDeactivate();
+        this.onPostDeactivate.call(null); // don't call it in context of "this"
       }
     };
 
     if (checkCanReturnFocus) {
-      checkCanReturnFocus(this.previouslyFocusedElement).then(sendFocus);
+      checkCanReturnFocus(this.previouslyFocusedElement).then(
+        finishDeactivation,
+        finishDeactivation
+      );
     } else {
-      sendFocus();
+      finishDeactivation();
     }
   }
 
@@ -129,14 +141,7 @@ class FocusTrap extends React.Component {
       }
 
       if (hasDeactivated) {
-        // NOTE: we never let the trap return the focus since we do that ourselves
-        this.focusTrap.deactivate({ returnFocus: false });
-        if (this.returnFocusOnDeactivate) {
-          this.returnFocus();
-        }
-        if (this.onPostDeactivate) {
-          this.onPostDeactivate();
-        }
+        this.deactivateTrap();
         return; // un/pause does nothing on an inactive trap
       }
 
@@ -154,14 +159,7 @@ class FocusTrap extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.focusTrap) {
-      // NOTE: we never let the trap return the focus since we do that ourselves
-      this.focusTrap.deactivate({ returnFocus: false });
-    }
-
-    if (this.returnFocusOnDeactivate) {
-      this.returnFocus();
-    }
+    this.deactivateTrap();
   }
 
   render() {
