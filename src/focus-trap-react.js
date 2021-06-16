@@ -36,6 +36,11 @@ class FocusTrap extends React.Component {
         continue;
       }
 
+      if (optionName === 'onPostDeactivate') {
+        this.onPostDeactivate = focusTrapOptions[optionName];
+        continue;
+      }
+
       this.tailoredFocusTrapOptions[optionName] = focusTrapOptions[optionName];
     }
 
@@ -57,15 +62,14 @@ class FocusTrap extends React.Component {
 
   /** Returns focus to the element that had focus when the trap was activated. */
   returnFocus() {
-    const { checkCanReturnFocus, onPostDeactivate } =
-      this.props.focusTrapOptions;
+    const { checkCanReturnFocus } = this.tailoredFocusTrapOptions;
 
     const sendFocus = () => {
       if (this.previouslyFocusedElement?.focus) {
         this.previouslyFocusedElement.focus();
       }
-      if (onPostDeactivate) {
-        onPostDeactivate();
+      if (this.onPostDeactivate) {
+        this.onPostDeactivate();
       }
     };
 
