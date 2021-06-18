@@ -53,6 +53,44 @@ class FocusTrap extends React.Component {
     this.updatePreviousElement();
   }
 
+  getNodeForOption(optionName) {
+    const config = {
+      returnFocusOnDeactivate: true,
+      escapeDeactivates: true,
+      delayInitialFocus: true,
+      ...this.tailoredFocusTrapOptions,
+    };
+
+    const optionValue = config[optionName];
+    if (!optionValue) {
+      return null;
+    }
+
+    let node = optionValue;
+
+    if (typeof optionValue === 'string') {
+      node = document.querySelector(optionValue);
+      if (!node) {
+        throw new Error(`\`${optionName}\` refers to no known node`);
+      }
+    }
+
+    if (typeof optionValue === 'function') {
+      node = optionValue();
+      if (!node) {
+        throw new Error(`\`${optionName}\` did not return a node`);
+      }
+    }
+
+    return node;
+  }
+
+  getReturnFocusNode() {
+    const node = this.getNodeForOption('setReturnFocus');
+
+    return node ? node : this.previouslyFocusedElement;
+  }
+
   /** Update the previously focused element with the currently focused element. */
   updatePreviousElement() {
     if (typeof document !== 'undefined') {
@@ -69,12 +107,13 @@ class FocusTrap extends React.Component {
     }
 
     const finishDeactivation = () => {
+      const returnFocusNode = this.getReturnFocusNode();
       const canReturnFocus =
-        this.previouslyFocusedElement?.focus && this.returnFocusOnDeactivate;
+        returnFocusNode?.focus && this.returnFocusOnDeactivate;
 
       if (canReturnFocus) {
         /** Returns focus to the element that had focus when the trap was activated. */
-        this.previouslyFocusedElement.focus();
+        returnFocusNode.focus();
       }
 
       if (this.onPostDeactivate) {
@@ -83,7 +122,7 @@ class FocusTrap extends React.Component {
     };
 
     if (checkCanReturnFocus) {
-      checkCanReturnFocus(this.previouslyFocusedElement).then(
+      checkCanReturnFocus(this.getReturnFocusNode()).then(
         finishDeactivation,
         finishDeactivation
       );
