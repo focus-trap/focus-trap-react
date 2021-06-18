@@ -55,14 +55,7 @@ class FocusTrap extends React.Component {
 
   // TODO: Need more test coverage for this function
   getNodeForOption(optionName) {
-    const config = {
-      returnFocusOnDeactivate: true,
-      escapeDeactivates: true,
-      delayInitialFocus: true,
-      ...this.tailoredFocusTrapOptions,
-    };
-
-    const optionValue = config[optionName];
+    const optionValue = this.tailoredFocusTrapOptions[optionName];
     if (!optionValue) {
       return null;
     }
