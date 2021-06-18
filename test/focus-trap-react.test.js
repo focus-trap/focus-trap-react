@@ -495,6 +495,47 @@ describe('FocusTrap', () => {
       expect(onDeactivate).toHaveBeenCalled();
       expect(onPostDeactivate).toHaveBeenCalled();
     });
+
+    ['string', 'element', 'function'].forEach((elementSelectionMethod) => {
+      it(`Will return focus to setReturnFocus target, setReturnFocus type = ${elementSelectionMethod}`, async () => {
+        render(<div data-testid="AlternateReturnFocusElement" tabIndex={-1} />);
+
+        const selectionMethods = {
+          string: '[data-testid="AlternateReturnFocusElement"]',
+          element: screen.getByTestId('AlternateReturnFocusElement'),
+          function: () => screen.getByTestId('AlternateReturnFocusElement'),
+        };
+
+        render(
+          <FocusTrapExample
+            focusTrapOptions={{
+              setReturnFocus: selectionMethods[elementSelectionMethod],
+            }}
+          />
+        );
+
+        // Activate the focus trap
+        const activateTrapButton = screen.getByText('activate trap');
+        activateTrapButton.focus();
+        fireEvent.click(activateTrapButton);
+
+        // Auto-sets focus inside the focus trap
+        await waitFor(() => {
+          expect(screen.getByText('Link 1')).toHaveFocus();
+        });
+
+        // Deactivate the focus trap
+        const deactivateTrapButton = screen.getByText('deactivate trap');
+        deactivateTrapButton.focus();
+        fireEvent.click(deactivateTrapButton);
+
+        await waitFor(() => {
+          expect(
+            screen.getByTestId('AlternateReturnFocusElement')
+          ).toHaveFocus();
+        });
+      });
+    });
   });
 
   describe('containerElements prop', () => {

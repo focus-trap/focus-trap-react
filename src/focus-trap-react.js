@@ -53,6 +53,7 @@ class FocusTrap extends React.Component {
     this.updatePreviousElement();
   }
 
+  // TODO: Need more test coverage for this function
   getNodeForOption(optionName) {
     const config = {
       returnFocusOnDeactivate: true,
