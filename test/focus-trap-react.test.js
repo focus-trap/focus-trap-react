@@ -330,7 +330,7 @@ describe('FocusTrap', () => {
       render(
         <FocusTrapExample
           focusTrapOptions={{
-            checkCanFocusTrap: () => pause(500),
+            checkCanFocusTrap: () => pause(5),
             onActivate: () => {
               hasActivated = true;
             },
@@ -352,12 +352,12 @@ describe('FocusTrap', () => {
       expect(hasActivated).toBe(true);
       expect(hasRunPostActivate).toBe(false);
 
-      await pause(5);
+      await pause(3);
 
       expect(hasActivated).toBe(true);
       expect(hasRunPostActivate).toBe(false);
 
-      await pause(550);
+      await pause(6);
 
       expect(hasActivated).toBe(true);
       expect(hasRunPostActivate).toBe(true);
@@ -369,7 +369,7 @@ describe('FocusTrap', () => {
       render(
         <FocusTrapExample
           focusTrapOptions={{
-            checkCanReturnFocus: () => pause(500),
+            checkCanReturnFocus: () => pause(5),
             onDeactivate: () => {
               hasDeactivated = true;
             },
@@ -399,12 +399,12 @@ describe('FocusTrap', () => {
       expect(hasDeactivated).toBe(true);
       expect(hasRunPostDeactivate).toBe(false);
 
-      await pause(5);
+      await pause(3);
 
       expect(hasDeactivated).toBe(true);
       expect(hasRunPostDeactivate).toBe(false);
 
-      await pause(550);
+      await pause(6);
 
       expect(hasDeactivated).toBe(true);
       expect(hasRunPostDeactivate).toBe(true);
