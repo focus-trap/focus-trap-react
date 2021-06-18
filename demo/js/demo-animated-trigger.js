@@ -49,7 +49,7 @@ const DemoAnimatedTrigger = () => {
               isTrapActive ? 'is-active' : '',
             ].join(' ')}
             onClick={() => setIsTrapActive(true)}
-            aria-label="activate trap for 'fading' demo"
+            aria-describedby="animated-trigger-heading"
           >
             activate trap
           </button>
@@ -65,7 +65,7 @@ const DemoAnimatedTrigger = () => {
           <p>
             <button
               onClick={() => setIsTrapActive(false)}
-              aria-label="deactivate trap for 'defaults' demo"
+              aria-describedby="animated-trigger-heading"
             >
               deactivate trap
             </button>

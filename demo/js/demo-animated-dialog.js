@@ -48,7 +48,7 @@ const DemoAnimatedDialog = () => {
         <p>
           <button
             onClick={() => setIsTrapActive(true)}
-            aria-label="activate trap for 'fading' demo"
+            aria-describedby="animated-dialog-heading"
           >
             activate trap
           </button>
@@ -70,7 +70,7 @@ const DemoAnimatedDialog = () => {
           <p>
             <button
               onClick={() => setIsTrapActive(false)}
-              aria-label="deactivate trap for 'defaults' demo"
+              aria-describedby="animated-dialog-heading"
             >
               deactivate trap
             </button>
