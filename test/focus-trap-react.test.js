@@ -325,57 +325,51 @@ describe('FocusTrap', () => {
     });
 
     it('Does not call onPostActivate() until checkCanFocusTrap() has completed', async () => {
-      let hasActivated = false;
-      let hasRunPostActivate = false;
+      const onActivate = jest.fn();
+      const onPostActivate = jest.fn();
+
       render(
         <FocusTrapExample
           focusTrapOptions={{
             checkCanFocusTrap: () => pause(5),
-            onActivate: () => {
-              hasActivated = true;
-            },
-            onPostActivate: () => {
-              hasRunPostActivate = true;
-            },
+            onActivate,
+            onPostActivate,
           }}
         />
       );
 
-      expect(hasActivated).toBe(false);
-      expect(hasRunPostActivate).toBe(false);
+      expect(onActivate).not.toHaveBeenCalled();
+      expect(onPostActivate).not.toHaveBeenCalled();
 
       // Activate the focus trap
       const activateTrapButton = screen.getByText('activate trap');
       activateTrapButton.focus();
       fireEvent.click(activateTrapButton);
 
-      expect(hasActivated).toBe(true);
-      expect(hasRunPostActivate).toBe(false);
+      expect(onActivate).toHaveBeenCalled();
+      expect(onPostActivate).not.toHaveBeenCalled();
 
       await pause(3);
 
-      expect(hasActivated).toBe(true);
-      expect(hasRunPostActivate).toBe(false);
+      expect(onActivate).toHaveBeenCalled();
+      expect(onPostActivate).not.toHaveBeenCalled();
 
       await pause(6);
 
-      expect(hasActivated).toBe(true);
-      expect(hasRunPostActivate).toBe(true);
+      expect(onActivate).toHaveBeenCalled();
+      expect(onPostActivate).toHaveBeenCalled();
     });
 
     it('Does not call onPostDeactivate() until checkCanReturnFocus() has completed', async () => {
-      let hasDeactivated = false;
-      let hasRunPostDeactivate = false;
+      const onDeactivate = jest.fn();
+      const onPostDeactivate = jest.fn();
+
       render(
         <FocusTrapExample
           focusTrapOptions={{
             checkCanReturnFocus: () => pause(5),
-            onDeactivate: () => {
-              hasDeactivated = true;
-            },
-            onPostDeactivate: () => {
-              hasRunPostDeactivate = true;
-            },
+            onDeactivate,
+            onPostDeactivate,
           }}
         />
       );
@@ -390,66 +384,60 @@ describe('FocusTrap', () => {
         expect(screen.getByText('Link 1')).toHaveFocus();
       });
 
-      expect(hasDeactivated).toBe(false);
-      expect(hasRunPostDeactivate).toBe(false);
+      expect(onDeactivate).not.toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
 
       // Deactivate the focus trap
       fireEvent.click(screen.getByText('deactivate trap'));
 
-      expect(hasDeactivated).toBe(true);
-      expect(hasRunPostDeactivate).toBe(false);
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
 
       await pause(3);
 
-      expect(hasDeactivated).toBe(true);
-      expect(hasRunPostDeactivate).toBe(false);
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
 
       await pause(6);
 
-      expect(hasDeactivated).toBe(true);
-      expect(hasRunPostDeactivate).toBe(true);
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).toHaveBeenCalled();
     });
 
     it('Will call onPostActivate() even if checkCanFocusTrap() is undefined', async () => {
-      let hasActivated = false;
-      let hasRunPostActivate = false;
+      const onActivate = jest.fn();
+      const onPostActivate = jest.fn();
+
       render(
         <FocusTrapExample
           focusTrapOptions={{
-            onActivate: () => {
-              hasActivated = true;
-            },
-            onPostActivate: () => {
-              hasRunPostActivate = true;
-            },
+            onActivate,
+            onPostActivate,
           }}
         />
       );
 
-      expect(hasActivated).toBe(false);
-      expect(hasRunPostActivate).toBe(false);
+      expect(onActivate).not.toHaveBeenCalled();
+      expect(onPostActivate).not.toHaveBeenCalled();
 
       // Activate the focus trap
       const activateTrapButton = screen.getByText('activate trap');
       activateTrapButton.focus();
       fireEvent.click(activateTrapButton);
 
-      expect(hasActivated).toBe(true);
-      expect(hasRunPostActivate).toBe(true);
+      expect(onActivate).toHaveBeenCalled();
+      expect(onPostActivate).toHaveBeenCalled();
     });
 
     it('Will call onPostDeactivate() even if checkCanReturnFocus() is undefined', async () => {
-      let hasDeactivated = false;
-      let hasRunPostDeactivate = false;
+      const onDeactivate = jest.fn();
+      const onPostDeactivate = jest.fn();
+
       render(
         <FocusTrapExample
           focusTrapOptions={{
-            onDeactivate: () => {
-              hasDeactivated = true;
-            },
-            onPostDeactivate: () => {
-              hasRunPostDeactivate = true;
-            },
+            onDeactivate,
+            onPostDeactivate,
           }}
         />
       );
@@ -464,14 +452,14 @@ describe('FocusTrap', () => {
         expect(screen.getByText('Link 1')).toHaveFocus();
       });
 
-      expect(hasDeactivated).toBe(false);
-      expect(hasRunPostDeactivate).toBe(false);
+      expect(onDeactivate).not.toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
 
       // Deactivate the focus trap
       fireEvent.click(screen.getByText('deactivate trap'));
 
-      expect(hasDeactivated).toBe(true);
-      expect(hasRunPostDeactivate).toBe(true);
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).toHaveBeenCalled();
     });
   });
 
