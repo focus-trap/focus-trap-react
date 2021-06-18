@@ -461,6 +461,40 @@ describe('FocusTrap', () => {
       expect(onDeactivate).toHaveBeenCalled();
       expect(onPostDeactivate).toHaveBeenCalled();
     });
+
+    it('Will call onPostDeactivate() even if returnFocusOnDeactivate is false', async () => {
+      const onDeactivate = jest.fn();
+      const onPostDeactivate = jest.fn();
+
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            onDeactivate,
+            onPostDeactivate,
+            returnFocusOnDeactivate: false,
+          }}
+        />
+      );
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      expect(onDeactivate).not.toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
+
+      // Deactivate the focus trap
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).toHaveBeenCalled();
+    });
   });
 
   describe('containerElements prop', () => {
