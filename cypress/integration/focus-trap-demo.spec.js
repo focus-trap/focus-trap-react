@@ -13,63 +13,71 @@ describe('<FocusTrap> component', () => {
     cy.get(focusedElAlias).should('be.focused');
   }
 
-  ['defaults', 'animated-dialog', 'animated-trigger'].forEach((demoId) => {
-    describe(`demo: ${demoId}`, () => {
-      it('By default focus first element in its tab order and trap focus within its children', () => {
-        cy.get(`#demo-${demoId}`).as('testRoot');
+  ['defaults', 'animated-dialog', 'animated-trigger', 'setReturnFocus'].forEach(
+    (demoId) => {
+      describe(`demo: ${demoId}`, () => {
+        it('By default focus first element in its tab order and trap focus within its children', () => {
+          cy.get(`#demo-${demoId}`).as('testRoot');
 
-        // activate trap
-        cy.get('@testRoot')
-          .findByRole('button', { name: /^activate trap/ })
-          .as('lastlyFocusedElementBeforeTrapIsActivated')
-          .click();
+          // activate trap
+          cy.get('@testRoot')
+            .findByRole('button', { name: /^activate trap/ })
+            .as('lastlyFocusedElementBeforeTrapIsActivated')
+            .click();
 
-        // 1st element should be focused
-        cy.get('@testRoot')
-          .findByRole('link', { name: 'with' })
-          .as('firstElementInTrap')
-          .should('be.focused');
+          // 1st element should be focused
+          cy.get('@testRoot')
+            .findByRole('link', { name: 'with' })
+            .as('firstElementInTrap')
+            .should('be.focused');
 
-        // crucial focus-trap feature: mouse click is trapped
-        verifyCrucialFocusTrapOnClicking('@firstElementInTrap');
+          // crucial focus-trap feature: mouse click is trapped
+          verifyCrucialFocusTrapOnClicking('@firstElementInTrap');
 
-        // trap is active(keep focus in trap by tabbing through the focus trap's tabbable elements)
-        cy.get('@firstElementInTrap')
-          .tab()
-          .should('have.text', 'some')
-          .should('be.focused')
-          .tab()
-          .should('have.text', 'focusable')
-          .should('be.focused')
-          .tab()
-          .as('lastElementInTrap')
-          .should('have.text', 'deactivate trap')
-          .should('be.focused')
-          .tab();
+          // trap is active(keep focus in trap by tabbing through the focus trap's tabbable elements)
+          cy.get('@firstElementInTrap')
+            .tab()
+            .should('have.text', 'some')
+            .should('be.focused')
+            .tab()
+            .should('have.text', 'focusable')
+            .should('be.focused')
+            .tab()
+            .as('lastElementInTrap')
+            .should('have.text', 'deactivate trap')
+            .should('be.focused')
+            .tab();
 
-        // trap is active(keep focus in trap by shift-tabbing through the focus trap's tabbable elements)
-        cy.get('@firstElementInTrap').should('be.focused').tab({ shift: true });
-        cy.get('@lastElementInTrap').should('be.focused');
+          // trap is active(keep focus in trap by shift-tabbing through the focus trap's tabbable elements)
+          cy.get('@firstElementInTrap')
+            .should('be.focused')
+            .tab({ shift: true });
+          cy.get('@lastElementInTrap').should('be.focused');
 
-        // trap can be deactivated and return focus to lastly focused element before trap is activated
-        cy.get('@testRoot')
-          .findByRole('button', { name: /^deactivate trap/ })
-          .click();
-        cy.get('@lastlyFocusedElementBeforeTrapIsActivated').should(
-          'have.focus'
-        );
+          // trap can be deactivated and return focus to lastly focused element before trap is activated
+          cy.get('@testRoot')
+            .findByRole('button', { name: /^deactivate trap/ })
+            .click();
 
-        // focus can be transitioned freely when trap is unmounted
-        let previousFocusedEl;
-        cy.get('@lastlyFocusedElementBeforeTrapIsActivated')
-          .then(([lastlyFocusedEl]) => (previousFocusedEl = lastlyFocusedEl))
-          .tab();
-        cy.focused().should(([nextFocusedEl]) =>
-          expect(nextFocusedEl).not.equal(previousFocusedEl)
-        );
+          const returnFocusTarget =
+            demoId === 'setReturnFocus'
+              ? '#AlternateReturnFocusElement'
+              : '@lastlyFocusedElementBeforeTrapIsActivated';
+
+          cy.get(returnFocusTarget).should('have.focus');
+
+          // focus can be transitioned freely when trap is unmounted
+          let previousFocusedEl;
+          cy.get('@lastlyFocusedElementBeforeTrapIsActivated')
+            .then(([lastlyFocusedEl]) => (previousFocusedEl = lastlyFocusedEl))
+            .tab();
+          cy.focused().should(([nextFocusedEl]) =>
+            expect(nextFocusedEl).not.equal(previousFocusedEl)
+          );
+        });
       });
-    });
-  });
+    }
+  );
 
   describe('demo: ffne', () => {
     it('On trap mounts and activates, focus on manually specified input element', () => {
