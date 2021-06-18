@@ -8,6 +8,12 @@ const {
 const { default: userEvent } = require('@testing-library/user-event');
 const FocusTrap = require('../src/focus-trap-react');
 
+const pause = (duration) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, duration);
+  });
+};
+
 const FocusTrapExample = ({ focusTrapOptions, ...otherProps }) => {
   const [trapIsActive, setTrapIsActive] = React.useState(false);
 
@@ -315,6 +321,219 @@ describe('FocusTrap', () => {
       // Does not return focus to the trigger button
       await waitFor(() => {
         expect(document.body).toHaveFocus();
+      });
+    });
+
+    it('Does not call onPostActivate() until checkCanFocusTrap() has completed', async () => {
+      const onActivate = jest.fn();
+      const onPostActivate = jest.fn();
+
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            checkCanFocusTrap: () => pause(5),
+            onActivate,
+            onPostActivate,
+          }}
+        />
+      );
+
+      expect(onActivate).not.toHaveBeenCalled();
+      expect(onPostActivate).not.toHaveBeenCalled();
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      expect(onActivate).toHaveBeenCalled();
+      expect(onPostActivate).not.toHaveBeenCalled();
+
+      await pause(3);
+
+      expect(onActivate).toHaveBeenCalled();
+      expect(onPostActivate).not.toHaveBeenCalled();
+
+      await pause(6);
+
+      expect(onActivate).toHaveBeenCalled();
+      expect(onPostActivate).toHaveBeenCalled();
+    });
+
+    it('Does not call onPostDeactivate() until checkCanReturnFocus() has completed', async () => {
+      const onDeactivate = jest.fn();
+      const onPostDeactivate = jest.fn();
+
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            checkCanReturnFocus: () => pause(5),
+            onDeactivate,
+            onPostDeactivate,
+          }}
+        />
+      );
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      expect(onDeactivate).not.toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
+
+      // Deactivate the focus trap
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
+
+      await pause(3);
+
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
+
+      await pause(6);
+
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).toHaveBeenCalled();
+    });
+
+    it('Will call onPostActivate() even if checkCanFocusTrap() is undefined', async () => {
+      const onActivate = jest.fn();
+      const onPostActivate = jest.fn();
+
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            onActivate,
+            onPostActivate,
+          }}
+        />
+      );
+
+      expect(onActivate).not.toHaveBeenCalled();
+      expect(onPostActivate).not.toHaveBeenCalled();
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      expect(onActivate).toHaveBeenCalled();
+      expect(onPostActivate).toHaveBeenCalled();
+    });
+
+    it('Will call onPostDeactivate() even if checkCanReturnFocus() is undefined', async () => {
+      const onDeactivate = jest.fn();
+      const onPostDeactivate = jest.fn();
+
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            onDeactivate,
+            onPostDeactivate,
+          }}
+        />
+      );
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      expect(onDeactivate).not.toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
+
+      // Deactivate the focus trap
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).toHaveBeenCalled();
+    });
+
+    it('Will call onPostDeactivate() even if returnFocusOnDeactivate is false', async () => {
+      const onDeactivate = jest.fn();
+      const onPostDeactivate = jest.fn();
+
+      render(
+        <FocusTrapExample
+          focusTrapOptions={{
+            onDeactivate,
+            onPostDeactivate,
+            returnFocusOnDeactivate: false,
+          }}
+        />
+      );
+
+      // Activate the focus trap
+      const activateTrapButton = screen.getByText('activate trap');
+      activateTrapButton.focus();
+      fireEvent.click(activateTrapButton);
+
+      // Auto-sets focus inside the focus trap
+      await waitFor(() => {
+        expect(screen.getByText('Link 1')).toHaveFocus();
+      });
+
+      expect(onDeactivate).not.toHaveBeenCalled();
+      expect(onPostDeactivate).not.toHaveBeenCalled();
+
+      // Deactivate the focus trap
+      fireEvent.click(screen.getByText('deactivate trap'));
+
+      expect(onDeactivate).toHaveBeenCalled();
+      expect(onPostDeactivate).toHaveBeenCalled();
+    });
+
+    ['string', 'element', 'function'].forEach((elementSelectionMethod) => {
+      it(`Will return focus to setReturnFocus target, setReturnFocus type = ${elementSelectionMethod}`, async () => {
+        render(<div data-testid="AlternateReturnFocusElement" tabIndex={-1} />);
+
+        const selectionMethods = {
+          string: '[data-testid="AlternateReturnFocusElement"]',
+          element: screen.getByTestId('AlternateReturnFocusElement'),
+          function: () => screen.getByTestId('AlternateReturnFocusElement'),
+        };
+
+        render(
+          <FocusTrapExample
+            focusTrapOptions={{
+              setReturnFocus: selectionMethods[elementSelectionMethod],
+            }}
+          />
+        );
+
+        // Activate the focus trap
+        const activateTrapButton = screen.getByText('activate trap');
+        activateTrapButton.focus();
+        fireEvent.click(activateTrapButton);
+
+        // Auto-sets focus inside the focus trap
+        await waitFor(() => {
+          expect(screen.getByText('Link 1')).toHaveFocus();
+        });
+
+        // Deactivate the focus trap
+        const deactivateTrapButton = screen.getByText('deactivate trap');
+        deactivateTrapButton.focus();
+        fireEvent.click(deactivateTrapButton);
+
+        await waitFor(() => {
+          expect(
+            screen.getByTestId('AlternateReturnFocusElement')
+          ).toHaveFocus();
+        });
       });
     });
   });
