@@ -251,13 +251,14 @@ FocusTrap.propTypes = {
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
       PropTypes.func,
+      PropTypes.bool,
     ]),
     fallbackFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
       PropTypes.func,
     ]),
-    escapeDeactivates: PropTypes.bool,
+    escapeDeactivates: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     clickOutsideDeactivates: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.func,
