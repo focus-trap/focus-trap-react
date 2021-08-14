@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.7.1
+
+### Patch Changes
+
+- 111a27f: Update focus-trap to v6.6.1, to get tabbable at v5.2.1, to get bug fix for disabled fieldsets.
+
 ## 8.7.0
 
 ### Minor Changes
