@@ -4288,10 +4288,10 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.1.0.tgz#a5d06b4a8b01e3a63771daa5cb7a1903e2e57067"
   integrity sha512-tW+UkmtNg/jv9CSofAKvgVcO7c2URjhTdW1ZTkcAritblu8tajiYy7YisnIflEwtKssCtOxpnBRoCB7iap0/TA==
 
-focus-trap@^6.6.1:
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.6.1.tgz#761ce2c82ddd72beeb049e968bc8414e25b704aa"
-  integrity sha512-x9BWuAeF5UrfWuYKJ3jYrjcVYSYptS9CqtxH5IH7lPlZrMsaugKeAa0HtoZSBZe5DmeTMx2m0qY464ZMzqarzw==
+focus-trap@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.7.0.tgz#9b8660ca7d4c621dae7529e73f30e4e59e4419b4"
+  integrity sha512-Srd0gR1sq0gfvXNDWkrrW0DbOBoKA5k0iHLTX03Pg/Y9u9xy2tlu3rSgozecCcH10Qj7CV+6nglv0G3YpQ98VA==
   dependencies:
     tabbable "^5.2.1"
 

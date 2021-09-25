@@ -7,3 +7,4 @@ require('./demo-autofocus');
 require('./demo-containerelements');
 require('./demo-containerelements-childless');
 require('./demo-setReturnFocus');
+require('./demo-iframe');
