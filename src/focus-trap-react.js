@@ -87,8 +87,9 @@ class FocusTrap extends React.Component {
 
   /** Update the previously focused element with the currently focused element. */
   updatePreviousElement() {
-    if (typeof document !== 'undefined') {
-      this.previouslyFocusedElement = document.activeElement;
+    const currentDocument = this.props.focusTrapOptions.document || document;
+    if (currentDocument) {
+      this.previouslyFocusedElement = currentDocument.activeElement;
     }
   }
 
@@ -241,6 +242,7 @@ FocusTrap.propTypes = {
   active: PropTypes.bool,
   paused: PropTypes.bool,
   focusTrapOptions: PropTypes.shape({
+    document: PropTypes.object,
     onActivate: PropTypes.func,
     onPostActivate: PropTypes.func,
     checkCanFocusTrap: PropTypes.func,
