@@ -87,7 +87,10 @@ class FocusTrap extends React.Component {
 
   /** Update the previously focused element with the currently focused element. */
   updatePreviousElement() {
-    const currentDocument = this.props.focusTrapOptions.document || document;
+    // SSR: careful to check if `document` exists before accessing it as a variable
+    const currentDocument =
+      this.props.focusTrapOptions.document ||
+      (typeof document !== 'undefined' ? document : undefined);
     if (currentDocument) {
       this.previouslyFocusedElement = currentDocument.activeElement;
     }
