@@ -202,6 +202,15 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "syntactic-salt",
+      "name": "syntactic-salt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9385662?v=4",
+      "profile": "https://github.com/syntactic-salt",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
