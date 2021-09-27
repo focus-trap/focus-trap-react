@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.8.1
+
+### Patch Changes
+
+- a2806a0: Fix SSR issues when accessing `document` object (#482)
+
 ## 8.8.0
 
 ### Minor Changes
