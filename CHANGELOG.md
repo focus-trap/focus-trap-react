@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.8.0
+
+### Minor Changes
+
+- 5ee587c: Bump focus-trap dependency to v6.7.1
+
 ## 8.7.1
 
 ### Patch Changes
