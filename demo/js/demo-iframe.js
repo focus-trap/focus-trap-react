@@ -86,7 +86,7 @@ const DemoIframe = () => {
               <p>
                 <button
                   onClick={unmountTrap}
-                  aria-describedby="defaults-heading"
+                  aria-describedby="demo-iframe-heading"
                 >
                   deactivate trap
                 </button>
