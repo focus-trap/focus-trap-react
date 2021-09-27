@@ -4,6 +4,7 @@
 
 ### Minor Changes
 
+- c8e46c2: Support new `document` option introduced in focus-trap v6.7.0 (#460)
 - 5ee587c: Bump focus-trap dependency to v6.7.1
 
 ## 8.7.1
