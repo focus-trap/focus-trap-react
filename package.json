@@ -64,7 +64,7 @@
     "@testing-library/cypress": "^8.0.1",
     "@testing-library/dom": "^8.5.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.1.0",
+    "@testing-library/react": "^12.1.1",
     "@testing-library/user-event": "^13.2.1",
     "@types/jquery": "^3.5.6",
     "all-contributors-cli": "^6.20.0",
