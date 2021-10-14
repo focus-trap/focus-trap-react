@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 08a9449: Use preventScroll option on deactivation
+- 08a9449: Use `preventScroll` option on deactivation if returning focus.
 
 ## 8.8.1
 
