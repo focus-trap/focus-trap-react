@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.8.2
+
+### Patch Changes
+
+- 08a9449: Use preventScroll option on deactivation
+
 ## 8.8.1
 
 ### Patch Changes
