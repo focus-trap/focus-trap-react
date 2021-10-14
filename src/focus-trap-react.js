@@ -97,7 +97,8 @@ class FocusTrap extends React.Component {
   }
 
   deactivateTrap() {
-    const { checkCanReturnFocus } = this.tailoredFocusTrapOptions;
+    const { checkCanReturnFocus, preventScroll = false } =
+      this.tailoredFocusTrapOptions;
 
     if (this.focusTrap) {
       // NOTE: we never let the trap return the focus since we do that ourselves
@@ -111,7 +112,9 @@ class FocusTrap extends React.Component {
 
       if (canReturnFocus) {
         /** Returns focus to the element that had focus when the trap was activated. */
-        returnFocusNode.focus();
+        returnFocusNode.focus({
+          preventScroll,
+        });
       }
 
       if (this.onPostDeactivate) {
