@@ -64,7 +64,7 @@
     "@changesets/cli": "^2.18.0",
     "@testing-library/cypress": "^8.0.2",
     "@testing-library/dom": "^8.11.1",
-    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jquery": "^3.5.8",
