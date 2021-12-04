@@ -53,6 +53,20 @@ class FocusTrap extends React.Component {
     this.updatePreviousElement();
   }
 
+  /**
+   * Gets the configured document.
+   * @returns {Document|undefined} Configured document, falling back to the main
+   *  document, if it exists. During SSR, `undefined` is returned since the
+   *  document doesn't exist.
+   */
+  getDocument() {
+    // SSR: careful to check if `document` exists before accessing it as a variable
+    return (
+      this.props.focusTrapOptions.document ||
+      (typeof document !== 'undefined' ? document : undefined)
+    );
+  }
+
   // TODO: Need more test coverage for this function
   getNodeForOption(optionName) {
     const optionValue = this.tailoredFocusTrapOptions[optionName];
@@ -63,7 +77,7 @@ class FocusTrap extends React.Component {
     let node = optionValue;
 
     if (typeof optionValue === 'string') {
-      node = document.querySelector(optionValue);
+      node = this.getDocument()?.querySelector(optionValue);
       if (!node) {
         throw new Error(`\`${optionName}\` refers to no known node`);
       }
@@ -87,10 +101,7 @@ class FocusTrap extends React.Component {
 
   /** Update the previously focused element with the currently focused element. */
   updatePreviousElement() {
-    // SSR: careful to check if `document` exists before accessing it as a variable
-    const currentDocument =
-      this.props.focusTrapOptions.document ||
-      (typeof document !== 'undefined' ? document : undefined);
+    const currentDocument = this.getDocument();
     if (currentDocument) {
       this.previouslyFocusedElement = currentDocument.activeElement;
     }
