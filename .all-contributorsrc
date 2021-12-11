@@ -220,6 +220,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "LoganDark",
+      "name": "LoganDark",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4723091?v=4",
+      "profile": "https://github.com/LoganDark",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
