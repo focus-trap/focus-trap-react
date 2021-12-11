@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.9.0
+
+### Minor Changes
+
+- 83097a5: Delay trap creation until it should be active. This is a change in behavior, however it should not break existing behavior. The delay now allows you to set `active=false` until you have the `focusTrapOptions` set correctly. [#539](https://github.com/focus-trap/focus-trap-react/issues/539)
+
+### Patch Changes
+
+- 16d1ae1: Fix bug where global document was being accessed instead of first checking for `focusTrapOptions.document` option (#539)
+
 ## 8.8.2
 
 ### Patch Changes
