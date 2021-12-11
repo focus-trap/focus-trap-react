@@ -172,7 +172,14 @@ class FocusTrap extends React.Component {
   }
 
   componentDidMount() {
-    this.setupFocusTrap();
+    if (this.props.active) {
+      this.setupFocusTrap();
+    }
+    // else, wait for later activation in case the `focusTrapOptions` will be updated
+    //  again before the trap is activated (e.g. if waiting to know what the document
+    //  object will be, so the Trap must be rendered, but the consumer is waiting to
+    //  activate until they have obtained the document from a ref)
+    //  @see https://github.com/focus-trap/focus-trap-react/issues/539
   }
 
   componentDidUpdate(prevProps) {
@@ -203,9 +210,23 @@ class FocusTrap extends React.Component {
       if (hasUnpaused) {
         this.focusTrap.unpause();
       }
-    } else if (prevProps.containerElements !== this.props.containerElements) {
-      this.focusTrapElements = this.props.containerElements;
-      this.setupFocusTrap();
+    } else {
+      // NOTE: if we're in `componentDidUpdate` and we don't have a trap yet,
+      //  it either means it shouldn't be active, or it should be but none of
+      //  of given `containerElements` were present in the DOM the last time
+      //  we tried to create the trap
+
+      if (prevProps.containerElements !== this.props.containerElements) {
+        this.focusTrapElements = this.props.containerElements;
+      }
+
+      // don't create the trap unless it should be active in case the consumer
+      //  is still updating `focusTrapOptions`
+      //  @see https://github.com/focus-trap/focus-trap-react/issues/539
+      if (this.props.active) {
+        this.updatePreviousElement();
+        this.setupFocusTrap();
+      }
     }
   }
 
