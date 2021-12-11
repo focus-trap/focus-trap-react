@@ -8,7 +8,7 @@
 
 ### Patch Changes
 
-- 16d1ae1: Fix bug where global document was being accessed instead of first checking for `focusTrapOptions.document` option (#539)
+- 16d1ae1: Fix bug where global document was being accessed instead of first checking for `focusTrapOptions.document` option. [#539](https://github.com/focus-trap/focus-trap-react/issues/539)
 
 ## 8.8.2
 
