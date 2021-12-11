@@ -30,7 +30,7 @@ const DemoSetReturnFocusDialog = () => {
 
       {isTrapActive && (
         <FocusTrap focusTrapOptions={focusTrapOptions}>
-          <div className="trap">
+          <div className="trap is-active">
             <p>
               Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
               <a href="#">focusable</a> parts.
