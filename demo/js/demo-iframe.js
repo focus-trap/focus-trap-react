@@ -84,10 +84,7 @@ const DemoIframe = () => {
                 <a href="#">some</a> <a href="#">focusable</a> parts.
               </p>
               <p>
-                <button
-                  onClick={unmountTrap}
-                  aria-describedby="demo-iframe-heading"
-                >
+                <button onClick={unmountTrap} aria-describedby="iframe-heading">
                   deactivate trap
                 </button>
               </p>
@@ -100,7 +97,7 @@ const DemoIframe = () => {
   return (
     <div>
       <p>
-        <button onClick={mountTrap} aria-describedby="defaults-heading">
+        <button onClick={mountTrap} aria-describedby="iframe-heading">
           activate trap
         </button>
       </p>

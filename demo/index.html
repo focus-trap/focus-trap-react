@@ -131,11 +131,17 @@
         View demo source <span aria-hidden="true">&gt;&gt;</span>
       </a>
     </p>
-    <h2 id="demo-iframe-heading">demo Iframe with document option applied</h2>
+    <h2 id="iframe-heading">demo Iframe with document option applied</h2>
     <p>
       When integrated in an iframe, you may specify the document (of the said
-      iframe) for the focusTrap to stay inside of it. </p>
-      <p>
+      iframe) for the focusTrap to stay inside of it.
+    </p>
+    <p>
+      ⚠️ <strong>NOTE:</strong> When the focusTrap is in an iframe (and so using a document
+      other than the main/root document), focus will be trapped <em>inside the iframe</em>,
+      but it will still be possible to interact with any element <em>outside</em> of it.
+    </p>
+    <p>
       <a
         href="https://github.com/focus-trap/focus-trap-react/blob/demoOption/demo/js/demo-iframe.js"
         aria-describedby="demo-iframe-heading"
