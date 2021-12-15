@@ -67,7 +67,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jquery": "^3.5.9",
+    "@types/jquery": "^3.5.10",
     "all-contributors-cli": "^6.20.0",
     "babel-jest": "^27.4.5",
     "babelify": "^10.0.0",
