@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.9.1
+
+### Patch Changes
+
+- 3eb9421: Bump focus-trap to v6.7.2 for bug fix.
+
 ## 8.9.0
 
 ### Minor Changes
