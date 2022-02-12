@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.9.2
+
+### Patch Changes
+
+- 83e283c: Update focus-trap to v6.7.3 for bug fix related to elements with a negative `tabindex`.
+
 ## 8.9.1
 
 ### Patch Changes
