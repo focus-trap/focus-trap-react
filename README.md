@@ -141,7 +141,9 @@ ReactDOM.render(<Demo />, document.getElementById('root'));
 
 Type: `Object`, optional
 
-Pass any of the options available in [`focus-trap`'s `createOptions`](https://github.com/focus-trap/focus-trap#focustrap--createfocustrapelement-createoptions).
+Pass any of the options available in focus-trap's [createOptions](https://github.com/focus-trap/focus-trap#createoptions).
+
+> ⚠️ See notes about __[testing in JSDom](#testing-in-jsdom)__ (e.g. using Jest) if that's what you currently use.
 
 #### active
 
@@ -168,6 +170,20 @@ If passed in, these elements will be used as the boundaries for the focus-trap, 
 If `containerElements` is subsequently updated (i.e. after the trap has been created) to an empty array (or an array of falsy values like `[null, null]`), the trap will still be active, but the TAB key will do nothing because the trap will not contain any tabbable groups of nodes. At this point, the trap can either be deactivated manually or by unmounting, or an updated set of elements can be given to `containerElements` to resume use of the TAB key.
 
 Using `containerElements` does require the use of React refs which, by nature, will require at least one state update in order to get the resolved elements into the prop, resulting in at least one additional render. In the normal case, this is likely more than acceptable, but if you really want to optimize things, then you could consider [using focus-trap directly](https://codesandbox.io/s/focus-trapreact-containerelements-demos-v5ydi) (see `Trap2.js`).
+
+## Help
+
+### Testing in JSDom
+
+> ⚠️ JSDom is not officially supported. Your mileage may vary, and tests may break from one release to the next (even a patch or minor release).
+>
+> This topic is just here to help with what we know may affect your tests.
+
+In general, a focus trap is best tested in a full browser environment such as Cypress, Playwright, or Nightwatch where a full DOM is available.
+
+Sometimes, that's not entirely desirable, and depending on what you're testing, you may be able to get away with using JSDom (e.g. via Jest), but you'll have to configure your traps using the `focusTrapOptions.tabbableOptions.displayCheck: 'none'` option.
+
+See [Testing focus-trap in JSDom](https://github.com/focus-trap/focus-trap#testing-in-jsdom) for more details.
 
 ## Contributing
 

@@ -312,6 +312,7 @@ FocusTrap.propTypes = {
     allowOutsideClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     preventScroll: PropTypes.bool,
     tabbableOptions: PropTypes.shape({
+      displayCheck: PropTypes.oneOf(['full', 'non-zero-area', 'none']),
       getShadowRoot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     }),
   }),
