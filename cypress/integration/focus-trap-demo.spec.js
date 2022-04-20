@@ -375,4 +375,16 @@ describe('<FocusTrap> component', () => {
       });
     });
   });
+
+  // describe('demo: with-shadow-dom', () => {
+  //   TL/DR: Unfortunately, the https://github.com/Bkucera/cypress-plugin-tab plugin doesn't
+  //    support Shadow DOM, and Cypress itself doesn't have great support for it either
+  //    (see more info below) so there's no point in writing a test for this demo at this time.
+  //   NOTE: Because of how Cypress interacts with Shadown DOMs, it sees the shadow as a black
+  //    box that has focus, so that limits what we can check for in expectations (e.g. we can't
+  //    effectively check that an element inside a shadow has focus; Cypress will always say yes
+  //    because something inside has focus, but it doesn't know what, exactly...). Also, the
+  //    cypress-plugin-tab will complain if we try to .tab() from inside the shadow host saying
+  //    it's not a tabbable element because it doesn't appear to support shadow DOM.
+  // });
 });
