@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.10.0
+
+### Minor Changes
+
+- 659d44e: Bumps focus-trap to v6.8.1. The big new feature is opt-in Shadow DOM support in focus-trap (in tabbable), and new tabbable options exposed in a new `focusTrapOptions.tabbableOptions` configuration option.
+
 ## 8.9.2
 
 ### Patch Changes
