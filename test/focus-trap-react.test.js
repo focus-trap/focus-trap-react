@@ -8,6 +8,28 @@ const {
 const { default: userEvent } = require('@testing-library/user-event');
 const FocusTrap = require('../src/focus-trap-react');
 
+const getTestFocusTrapOptions = function (focusTrapOptions) {
+  const { tabbableOptions, ...rest } = focusTrapOptions || {};
+  return {
+    ...rest,
+    tabbableOptions: {
+      // NOTE: JSDom doesn't support some of the visibility checks that tabbable
+      //  performs to determine if a node is visible (and so tabbable/focusable)
+      //  so we have to use this displayCheck mode to run tests in this env
+      displayCheck: 'none',
+      ...tabbableOptions,
+    },
+  };
+};
+
+const mkTestFocusTrap = function () {
+  // eslint-disable-next-line react/display-name, react/prop-types
+  return React.forwardRef(function ({ focusTrapOptions, ...props }, ref) {
+    const options = getTestFocusTrapOptions(focusTrapOptions);
+    return <FocusTrap {...props} ref={ref} focusTrapOptions={options} />;
+  });
+};
+
 const pause = (duration) => {
   return new Promise((resolve) => {
     setTimeout(resolve, duration);
@@ -20,14 +42,13 @@ const FocusTrapExample = ({ focusTrapOptions, ...otherProps }) => {
   const mountTrap = () => setTrapIsActive(true);
   const unmountTrap = () => setTrapIsActive(false);
 
+  const options = getTestFocusTrapOptions({
+    onDeactivate: unmountTrap,
+    ...focusTrapOptions,
+  });
+
   const trap = (
-    <FocusTrap
-      focusTrapOptions={{
-        onDeactivate: unmountTrap,
-        ...focusTrapOptions,
-      }}
-      {...otherProps}
-    >
+    <FocusTrap focusTrapOptions={options} {...otherProps}>
       <div>
         <p>Some text</p>
         <a href="#">Link 1</a>
@@ -51,12 +72,15 @@ FocusTrapExample.propTypes = {
 };
 
 describe('FocusTrap', () => {
+  let TestFocusTrap;
+
   beforeEach(() => {
     // This surpresses React error boundary logs for testing intentionally
     // thrown errors, like in some test cases in this suite. See discussion of
     // this here: https://github.com/facebook/react/issues/11098
     jest.spyOn(console, 'error');
     global.console.error.mockImplementation(() => {});
+    TestFocusTrap = mkTestFocusTrap();
   });
 
   afterEach(() => {
@@ -65,18 +89,18 @@ describe('FocusTrap', () => {
 
   describe('incorrect children prop usage', () => {
     it('throws an error if a non-element child is passed', () => {
-      expect(() => render(<FocusTrap>Child text</FocusTrap>)).toThrowError(
-        'expected to receive a single React element child'
-      );
+      expect(() =>
+        render(<TestFocusTrap>Child text</TestFocusTrap>)
+      ).toThrowError('expected to receive a single React element child');
     });
 
     it('throws an error if multiple top-level child elements are passed', () => {
       expect(() =>
         render(
-          <FocusTrap>
+          <TestFocusTrap>
             <p>Child 1</p>
             <p>Child 2</p>
-          </FocusTrap>
+          </TestFocusTrap>
         )
       ).toThrowError('expected to receive a single React element child');
     });
@@ -84,9 +108,9 @@ describe('FocusTrap', () => {
     it('throws an error if no focusable child elements are provided', () => {
       expect(() =>
         render(
-          <FocusTrap>
+          <TestFocusTrap>
             <p>Child 1</p>
-          </FocusTrap>
+          </TestFocusTrap>
         )
       ).toThrowError(
         'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
@@ -96,9 +120,9 @@ describe('FocusTrap', () => {
     it('throws an error if no container child element surrounds the tabbable content', () => {
       expect(() =>
         render(
-          <FocusTrap>
+          <TestFocusTrap>
             <button>Click me</button>
-          </FocusTrap>
+          </TestFocusTrap>
         )
       ).toThrowError(
         'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
@@ -108,11 +132,11 @@ describe('FocusTrap', () => {
     it('throws an error if a fragment is given as the child element', () => {
       expect(() =>
         render(
-          <FocusTrap>
+          <TestFocusTrap>
             <>
               <button>Click me</button>
             </>
-          </FocusTrap>
+          </TestFocusTrap>
         )
       ).toThrowError(
         'A focus-trap cannot use a Fragment as its child container. Try replacing it with a <div> element.'
@@ -124,17 +148,17 @@ describe('FocusTrap', () => {
     it('allows a single child element prop to be passed', () => {
       expect(() =>
         render(
-          <FocusTrap>
+          <TestFocusTrap>
             <div>
               <button>Child text</button>
             </div>
-          </FocusTrap>
+          </TestFocusTrap>
         )
       ).not.toThrowError('expected to receive a single React element child');
     });
 
     it('allows no children prop to be passed', () => {
-      expect(() => render(<FocusTrap />)).not.toThrowError(
+      expect(() => render(<TestFocusTrap />)).not.toThrowError(
         'expected to receive a single React element child'
       );
     });
@@ -143,11 +167,11 @@ describe('FocusTrap', () => {
       const childRef = jest.fn();
 
       render(
-        <FocusTrap>
+        <TestFocusTrap>
           <div ref={childRef}>
             <button>Child text</button>
           </div>
-        </FocusTrap>
+        </TestFocusTrap>
       );
 
       expect(childRef).toHaveBeenCalledTimes(1);
@@ -158,13 +182,13 @@ describe('FocusTrap', () => {
         const childRef = React.useRef(null);
 
         return (
-          <FocusTrap>
+          <TestFocusTrap>
             <div ref={childRef}>
               <button onClick={() => expect(childRef.current).not.toBeNull()}>
                 Child text
               </button>
             </div>
-          </FocusTrap>
+          </TestFocusTrap>
         );
       };
 
@@ -754,7 +778,7 @@ describe('FocusTrap', () => {
         const deactivateTrap = () => setTrapIsActive(false);
 
         const trap = (
-          <FocusTrap
+          <TestFocusTrap
             active={trapIsActive}
             focusTrapOptions={{
               onActivate: activateTrap,
@@ -770,7 +794,7 @@ describe('FocusTrap', () => {
               <a href="#">Link 3</a>
               <button onClick={deactivateTrap}>deactivate trap</button>
             </div>
-          </FocusTrap>
+          </TestFocusTrap>
         );
 
         return (
@@ -868,7 +892,7 @@ describe('FocusTrap', () => {
         const unpauseTrap = () => setTrapIsPaused(false);
 
         const trap = (
-          <FocusTrap
+          <TestFocusTrap
             active={trapIsActive}
             paused={trapIsPaused}
             focusTrapOptions={{
@@ -886,7 +910,7 @@ describe('FocusTrap', () => {
               <button onClick={deactivateTrap}>deactivate trap</button>
               <button onClick={pauseTrap}>pause trap</button>
             </div>
-          </FocusTrap>
+          </TestFocusTrap>
         );
 
         return (
