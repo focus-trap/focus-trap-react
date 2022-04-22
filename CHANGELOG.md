@@ -5,6 +5,7 @@
 ### Minor Changes
 
 - 659d44e: Bumps focus-trap to v6.8.1. The big new feature is opt-in Shadow DOM support in focus-trap (in tabbable), and new tabbable options exposed in a new `focusTrapOptions.tabbableOptions` configuration option.
+  - ⚠️ This will likely break your tests __if you're using JSDom__ (e.g. with Jest). See [testing in JSDom](./README.md#testing-in-jsdom) for more info.
 
 ## 8.9.2
 
