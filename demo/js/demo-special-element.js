@@ -1,5 +1,5 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
+const { createRoot } = require('react-dom/client');
 const FocusTrap = require('../../dist/focus-trap-react');
 
 const container = document.getElementById('demo-special-element');
@@ -81,4 +81,5 @@ class DemoSpecialElement extends React.Component {
   }
 }
 
-ReactDOM.render(<DemoSpecialElement />, container);
+const root = createRoot(container);
+root.render(<DemoSpecialElement />);

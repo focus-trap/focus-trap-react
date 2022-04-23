@@ -1,6 +1,6 @@
 const { useState } = require('react');
 const React = require('react');
-const ReactDOM = require('react-dom');
+const { createRoot } = require('react-dom/client');
 const FocusTrap = require('../../dist/focus-trap-react');
 
 const container = document.getElementById('demo-setReturnFocus');
@@ -50,4 +50,5 @@ const DemoSetReturnFocusDialog = () => {
   );
 };
 
-ReactDOM.render(<DemoSetReturnFocusDialog />, container);
+const root = createRoot(container);
+root.render(<DemoSetReturnFocusDialog />);

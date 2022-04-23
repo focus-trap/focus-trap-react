@@ -1,6 +1,6 @@
 const { useState } = require('react');
 const React = require('react');
-const ReactDOM = require('react-dom');
+const { createRoot } = require('react-dom/client');
 const FocusTrap = require('../../dist/focus-trap-react');
 
 const container = document.getElementById('demo-animated-dialog');
@@ -81,4 +81,5 @@ const DemoAnimatedDialog = () => {
   );
 };
 
-ReactDOM.render(<DemoAnimatedDialog />, container);
+const root = createRoot(container);
+root.render(<DemoAnimatedDialog />);

@@ -1,5 +1,5 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
+const { createRoot } = require('react-dom/client');
 const FocusTrap = require('../../dist/focus-trap-react');
 
 const createShadow = function (hostEl, isOpen) {
@@ -101,7 +101,5 @@ const DemoWithShadowDom = function () {
   );
 };
 
-ReactDOM.render(
-  <DemoWithShadowDom />,
-  document.getElementById('demo-with-shadow-dom')
-);
+const root = createRoot(document.getElementById('demo-with-shadow-dom'));
+root.render(<DemoWithShadowDom />);

@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const { createRoot } = require('react-dom/client');
 const PropTypes = require('prop-types');
 const FocusTrap = require('../../dist/focus-trap-react');
 
@@ -66,7 +67,7 @@ const DemoIframe = () => {
     setState({ activeTrap: true });
   };
   const unmountTrap = () => {
-    setState({ activeTrap: true });
+    setState({ activeTrap: false });
   };
   const trap = state.activeTrap && (
     <Sandbox>
@@ -106,4 +107,5 @@ const DemoIframe = () => {
   );
 };
 
-ReactDOM.render(<DemoIframe />, container);
+const root = createRoot(container);
+root.render(<DemoIframe />);

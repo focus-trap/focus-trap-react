@@ -68,7 +68,8 @@ Here's one more simple example:
 
 ```js
 const React = require('react');
-const ReactDOM = require('react-dom');
+const ReactDOM = require('react-dom'); // React 16-17
+const { createRoot } = require('react-dom/client'); // React 18
 const FocusTrap = require('focus-trap-react');
 
 class Demo extends React.Component {
@@ -132,7 +133,8 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById('root'));
+ReactDOM.render(<Demo />, document.getElementById('root')); // React 16-17
+createRoot(document.getElementById('root')).render(<Demo />); // React 18
 ```
 
 ### Props
