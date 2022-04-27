@@ -1,16 +1,20 @@
-const { useState } = require('react');
+const { useState, useMemo } = require('react');
 const React = require('react');
 const { createRoot } = require('react-dom/client');
 const FocusTrap = require('../../dist/focus-trap-react');
 
 const container = document.getElementById('demo-setReturnFocus');
 
-const focusTrapOptions = {
-  setReturnFocus: '#AlternateReturnFocusElement',
-};
-
 const DemoSetReturnFocusDialog = () => {
   const [isTrapActive, setIsTrapActive] = useState(false);
+
+  const focusTrapOptions = useMemo(
+    () => ({
+      setReturnFocus: '#AlternateReturnFocusElement',
+      onDeactivate: () => setIsTrapActive(false),
+    }),
+    []
+  );
 
   return (
     <>
