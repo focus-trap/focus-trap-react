@@ -1,11 +1,22 @@
 # Changelog
 
+## 8.11.0
+
+### Minor Changes
+
+- 7495680: Bump focus-trap to v6.9.0 to get bug fixes and new features to help fix some bugs.
+
+### Patch Changes
+
+- 7495680: Fix onDeactivate, onPostDeactivate, and checkCanReturnFocus options not being called consistently on deactivation.
+- 7495680: Fix focus not being allowed to remain on outside node post-deactivation when `clickOutsideDeactivates` is true or returns true.
+
 ## 8.10.0
 
 ### Minor Changes
 
 - 659d44e: Bumps focus-trap to v6.8.1. The big new feature is opt-in Shadow DOM support in focus-trap (in tabbable), and new tabbable options exposed in a new `focusTrapOptions.tabbableOptions` configuration option.
-  - ⚠️ This will likely break your tests __if you're using JSDom__ (e.g. with Jest). See [testing in JSDom](./README.md#testing-in-jsdom) for more info.
+  - ⚠️ This will likely break your tests **if you're using JSDom** (e.g. with Jest). See [testing in JSDom](./README.md#testing-in-jsdom) for more info.
 
 ## 8.9.2
 
