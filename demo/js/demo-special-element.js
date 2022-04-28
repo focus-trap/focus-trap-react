@@ -51,7 +51,7 @@ class DemoSpecialElement extends React.Component {
         <FocusTrap
           active={this.state.activeTrap}
           focusTrapOptions={{
-            onDeactivate: this.unmountTrap,
+            onPostDeactivate: this.unmountTrap,
             clickOutsideDeactivates: true,
             returnFocusOnDeactivate: true,
           }}

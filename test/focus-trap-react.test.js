@@ -43,8 +43,11 @@ const FocusTrapExample = ({ focusTrapOptions, ...otherProps }) => {
   const unmountTrap = () => setTrapIsActive(false);
 
   const options = getTestFocusTrapOptions({
-    onDeactivate: unmountTrap,
     ...focusTrapOptions,
+    onDeactivate: () => {
+      focusTrapOptions?.onDeactivate?.();
+      unmountTrap();
+    },
   });
 
   const trap = (
@@ -482,8 +485,10 @@ describe('FocusTrap', () => {
       // Deactivate the focus trap
       fireEvent.click(screen.getByText('deactivate trap'));
 
-      expect(onDeactivate).toHaveBeenCalled();
-      expect(onPostDeactivate).toHaveBeenCalled();
+      await waitFor(() => {
+        expect(onDeactivate).toHaveBeenCalled();
+        expect(onPostDeactivate).toHaveBeenCalled();
+      });
     });
 
     it('Will call onPostDeactivate() even if returnFocusOnDeactivate is false', async () => {
@@ -516,8 +521,10 @@ describe('FocusTrap', () => {
       // Deactivate the focus trap
       fireEvent.click(screen.getByText('deactivate trap'));
 
-      expect(onDeactivate).toHaveBeenCalled();
-      expect(onPostDeactivate).toHaveBeenCalled();
+      await waitFor(() => {
+        expect(onDeactivate).toHaveBeenCalled();
+        expect(onPostDeactivate).toHaveBeenCalled();
+      });
     });
 
     ['string', 'element', 'function'].forEach((elementSelectionMethod) => {
