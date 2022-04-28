@@ -86,7 +86,7 @@
     "onchange": "^7.1.0",
     "prettier": "^2.6.2",
     "prop-types": "^15.8.1",
-    "react": "^18.0.0",
+    "react": "^18.1.0",
     "react-dom": "^18.0.0",
     "regenerator-runtime": "^0.13.9",
     "start-server-and-test": "^1.14.0",
