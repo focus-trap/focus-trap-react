@@ -5,7 +5,9 @@ module.exports = {
     '<rootDir>/test/jest-setup.js',
   ],
   testEnvironment: 'jsdom',
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
   testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
   transform: {
     '^.+\\.[t|j]sx?$': 'babel-jest',
