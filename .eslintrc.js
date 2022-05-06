@@ -21,6 +21,7 @@ module.exports = {
     browser: true,
     jest: true,
   },
+  plugins: ['jest'],
   rules: {
     //// possible errors
 
@@ -97,6 +98,13 @@ module.exports = {
     'no-var': 'error',
     'prefer-arrow-callback': 'off',
     'prefer-const': 'error',
+
+    //// from jest plugin
+
+    'jest/no-disabled-tests': 'error',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/valid-title': 'error',
   },
   settings: {
     // eslint-plugin-react settings: a version needs to be specified,
