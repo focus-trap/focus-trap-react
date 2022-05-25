@@ -81,7 +81,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^26.2.2",
-    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react": "^7.30.0",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "jest-watch-typeahead": "^1.1.0",
