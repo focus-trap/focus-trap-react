@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.11.2
+
+### Patch Changes
+
+- 7547d93: Bumps focus-trap to v6.9.3 to pick-up some small bug fixes from underlying tabbable.
+
 ## 8.11.1
 
 ### Patch Changes
