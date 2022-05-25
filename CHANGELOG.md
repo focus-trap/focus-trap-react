@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.11.2
+
+### Patch Changes
+
+- fad4f29: Bump focus-trap to v6.9.2 to pick up a small bug fix.
+- 7547d93: Bump focus-trap to v6.9.3 to pick-up a bug fix from underlying tabbable.wq
+
 ## 8.11.1
 
 ### Patch Changes
