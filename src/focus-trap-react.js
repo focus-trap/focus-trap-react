@@ -1,13 +1,7 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
 const PropTypes = require('prop-types');
 const { createFocusTrap } = require('focus-trap');
 const { isFocusable } = require('tabbable');
-
-// TODO: These issues are related to older React features which we'll likely need
-//  to fix in order to move the code forward to the next major version of React.
-//  @see https://github.com/davidtheclark/focus-trap-react/issues/77
-/* eslint-disable react/no-find-dom-node */
 
 class FocusTrap extends React.Component {
   constructor(props) {
@@ -277,18 +271,11 @@ class FocusTrap extends React.Component {
 
   setupFocusTrap() {
     if (!this.focusTrap) {
-      const focusTrapElementDOMNodes = this.focusTrapElements.map(
-        // NOTE: `findDOMNode()` does not support CSS selectors; it'll just return
-        //  a new text node with the text wrapped in it instead of treating the
-        //  string as a selector and resolving it to a node in the DOM
-        ReactDOM.findDOMNode
-      );
-
-      const nodesExist = focusTrapElementDOMNodes.some(Boolean);
+      const nodesExist = this.focusTrapElements.some(Boolean);
       if (nodesExist) {
         // eslint-disable-next-line react/prop-types -- _createFocusTrap is an internal prop
         this.focusTrap = this.props._createFocusTrap(
-          focusTrapElementDOMNodes,
+          this.focusTrapElements,
           this.internalOptions
         );
 
@@ -378,7 +365,7 @@ class FocusTrap extends React.Component {
         );
       }
 
-      const composedRefCallback = (element) => {
+      const callbackRef = (element) => {
         const { containerElements } = this.props;
 
         if (child) {
@@ -395,7 +382,7 @@ class FocusTrap extends React.Component {
       };
 
       const childWithRef = React.cloneElement(child, {
-        ref: composedRefCallback,
+        ref: callbackRef,
       });
 
       return childWithRef;
