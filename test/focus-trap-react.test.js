@@ -76,6 +76,7 @@ FocusTrapExample.propTypes = {
 
 describe('FocusTrap', () => {
   let TestFocusTrap;
+  let user;
 
   beforeEach(() => {
     // This surpresses React error boundary logs for testing intentionally
@@ -84,6 +85,8 @@ describe('FocusTrap', () => {
     jest.spyOn(console, 'error');
     global.console.error.mockImplementation(() => {});
     TestFocusTrap = mkTestFocusTrap();
+
+    user = userEvent.setup();
   });
 
   afterEach(() => {
@@ -221,29 +224,29 @@ describe('FocusTrap', () => {
       const deactivateTrapButton = screen.getByText('deactivate trap');
 
       // Tabbing forward through the focus trap and wrapping back to the beginning
-      await userEvent.tab();
+      await user.tab();
       expect(link2).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(link3).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(deactivateTrapButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(link1).toHaveFocus();
 
       // Tabbing backward through the focus trap and wrapping back to the beginning
-      await userEvent.tab({ shift: true });
+      await user.tab({ shift: true });
       expect(deactivateTrapButton).toHaveFocus();
 
-      await userEvent.tab({ shift: true });
+      await user.tab({ shift: true });
       expect(link3).toHaveFocus();
 
-      await userEvent.tab({ shift: true });
+      await user.tab({ shift: true });
       expect(link2).toHaveFocus();
 
-      await userEvent.tab({ shift: true });
+      await user.tab({ shift: true });
       expect(link1).toHaveFocus();
     });
 
@@ -567,6 +570,145 @@ describe('FocusTrap', () => {
         });
       });
     });
+
+    describe('#setReturnFocus', () => {
+      const altTargetTestId = 'alt-target';
+      let preExistingTargetEl;
+
+      beforeEach(() => {
+        preExistingTargetEl = document.createElement('button');
+        preExistingTargetEl.id = altTargetTestId;
+        preExistingTargetEl.setAttribute('data-testid', altTargetTestId);
+        document.body.append(preExistingTargetEl);
+      });
+
+      afterEach(() => {
+        document.body.removeChild(preExistingTargetEl);
+      });
+
+      it('Can be a selector string', async () => {
+        render(
+          <FocusTrapExample
+            focusTrapOptions={{
+              setReturnFocus: `#${altTargetTestId}`,
+            }}
+          />
+        );
+
+        const activateEl = screen.getByText('activate trap');
+        await user.click(activateEl);
+
+        const deactivateEl = screen.getByText('deactivate trap');
+        await user.click(deactivateEl);
+
+        expect(screen.getByTestId(altTargetTestId)).toHaveFocus();
+      });
+
+      it('Can be an element', async () => {
+        render(
+          <FocusTrapExample
+            focusTrapOptions={{
+              setReturnFocus: preExistingTargetEl,
+            }}
+          />
+        );
+
+        const activateEl = screen.getByText('activate trap');
+        await user.click(activateEl);
+
+        const deactivateEl = screen.getByText('deactivate trap');
+        await user.click(deactivateEl);
+
+        expect(preExistingTargetEl).toHaveFocus();
+      });
+
+      it('Can be false for no focus return', async () => {
+        render(
+          <FocusTrapExample
+            focusTrapOptions={{
+              setReturnFocus: false,
+            }}
+          />
+        );
+
+        const activateEl = screen.getByText('activate trap');
+        await user.click(activateEl);
+
+        const deactivateEl = screen.getByText('deactivate trap');
+        await user.click(deactivateEl);
+
+        expect(activateEl).not.toHaveFocus();
+        expect(screen.getByTestId(altTargetTestId)).not.toHaveFocus();
+        expect(document.activeElement === document.body).toBeTruthy();
+      });
+
+      it('Can be function that returns selector string', async () => {
+        const handler = jest.fn(() => `#${altTargetTestId}`);
+        render(
+          <FocusTrapExample
+            focusTrapOptions={{
+              setReturnFocus: handler,
+            }}
+          />
+        );
+
+        const activateEl = screen.getByText('activate trap');
+        await user.click(activateEl);
+
+        const deactivateEl = screen.getByText('deactivate trap');
+        await user.click(deactivateEl);
+
+        expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler.mock.calls[0][0] === activateEl).toBeTruthy();
+        expect(screen.getByTestId(altTargetTestId)).toHaveFocus();
+      });
+
+      it('Can be function that returns an element', async () => {
+        const handler = jest.fn(() =>
+          document.querySelector(`#${altTargetTestId}`)
+        );
+        render(
+          <FocusTrapExample
+            focusTrapOptions={{
+              setReturnFocus: handler,
+            }}
+          />
+        );
+
+        const activateEl = screen.getByText('activate trap');
+        await user.click(activateEl);
+
+        const deactivateEl = screen.getByText('deactivate trap');
+        await user.click(deactivateEl);
+
+        expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler.mock.calls[0][0] === activateEl).toBeTruthy();
+        expect(screen.getByTestId(altTargetTestId)).toHaveFocus();
+      });
+
+      it('Can be function that returns false for no focus return', async () => {
+        const handler = jest.fn(() => false);
+        render(
+          <FocusTrapExample
+            focusTrapOptions={{
+              setReturnFocus: handler,
+            }}
+          />
+        );
+
+        const activateEl = screen.getByText('activate trap');
+        await user.click(activateEl);
+
+        const deactivateEl = screen.getByText('deactivate trap');
+        await user.click(deactivateEl);
+
+        expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler.mock.calls[0][0] === activateEl).toBeTruthy();
+        expect(activateEl).not.toHaveFocus();
+        expect(screen.getByTestId(altTargetTestId)).not.toHaveFocus();
+        expect(document.activeElement === document.body).toBeTruthy();
+      });
+    });
   });
 
   describe('containerElements prop', () => {
@@ -600,17 +742,17 @@ describe('FocusTrap', () => {
       });
 
       // Tabbing forward through the focus trap and wrapping back to the beginning
-      await userEvent.tab();
+      await user.tab();
       expect(anchor2).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(anchor1).toHaveFocus();
 
       // Tabbing backward through the focus trap and wrapping back to the beginning
-      await userEvent.tab({ shift: true });
+      await user.tab({ shift: true });
       expect(anchor2).toHaveFocus();
 
-      await userEvent.tab({ shift: true });
+      await user.tab({ shift: true });
       expect(anchor1).toHaveFocus();
 
       // DOM cleanup
@@ -634,20 +776,20 @@ describe('FocusTrap', () => {
       // Does not activate the focus trap or change which element is currently focused
       expect(activateTrapButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('Link 1')).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('Link 2')).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('Link 3')).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('deactivate trap')).toHaveFocus();
 
       // Because the focus trap is not activated, the tab order continues past the trap content
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('after trap content')).toHaveFocus();
     });
 
@@ -711,19 +853,19 @@ describe('FocusTrap', () => {
       // Does not activate the focus trap or change which element is currently focused
       expect(activateTrapButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('Link 1')).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('Link 2')).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('Link 3')).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(screen.getByText('deactivate trap')).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       const useTwoContainerElementsButton = screen.getByText(
         'use two container elements'
       );
@@ -743,17 +885,17 @@ describe('FocusTrap', () => {
       });
 
       // Tabbing forward through the focus trap and wrapping back to the beginning
-      await userEvent.tab();
+      await user.tab();
       expect(anchor2).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(anchor1).toHaveFocus();
 
       // Tabbing backward through the focus trap and wrapping back to the beginning
-      await userEvent.tab({ shift: true });
+      await user.tab({ shift: true });
       expect(anchor2).toHaveFocus();
 
-      await userEvent.tab({ shift: true });
+      await user.tab({ shift: true });
       expect(anchor1).toHaveFocus();
 
       // Updates the containerElements prop value to contain zero elements,
@@ -829,28 +971,28 @@ describe('FocusTrap', () => {
       const afterTrapContentButton = screen.getByText('after trap content');
 
       // Tab through the page while the trap is deactivated
-      await userEvent.tab();
+      await user.tab();
       expect(activateTrapButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(beforeTrapContentButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(link1).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(link2).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(link3).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(deactivateTrapButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(afterTrapContentButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(document.body).toHaveFocus();
 
       // Activate the focus trap
@@ -863,16 +1005,16 @@ describe('FocusTrap', () => {
       });
 
       // Tab through the page while the trap is activated
-      await userEvent.tab();
+      await user.tab();
       expect(link2).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(link3).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(deactivateTrapButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(link1).toHaveFocus();
 
       // Deactivate the focus trap
@@ -955,25 +1097,25 @@ describe('FocusTrap', () => {
       });
 
       // Tab through the page while the trap is activated
-      await userEvent.tab();
+      await user.tab();
       expect(link2).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(link3).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(deactivateTrapButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(pauseTrapButton).toHaveFocus();
 
       // Pause the focus trap
       fireEvent.click(pauseTrapButton);
 
-      await userEvent.tab();
+      await user.tab();
       expect(afterTrapContentButton).toHaveFocus();
 
-      await userEvent.tab();
+      await user.tab();
       expect(unpauseTrapButton).toHaveFocus();
 
       // Unpause the focus trap
