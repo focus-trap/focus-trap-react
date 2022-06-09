@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.11.3
+
+### Patch Changes
+
+- 9947461: Bump focus-trap dependency to v6.9.4 to get typings fix.
+- 519e5a5: Fix setReturnFocus option as function not being passed node focused prior to activation.
+
 ## 8.11.2
 
 ### Patch Changes
