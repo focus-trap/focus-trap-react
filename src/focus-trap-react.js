@@ -42,11 +42,11 @@ class FocusTrap extends React.Component {
 
     // original options provided by the consumer
     this.originalOptions = {
-      // because of the above `tailoredFocusTrapOptions`, we maintain our own flag for
+      // because of the above `internalOptions`, we maintain our own flag for
       //  this option, and default it to `true` because that's focus-trap's default
       returnFocusOnDeactivate: true,
 
-      // because of the above `tailoredFocusTrapOptions`, we keep these separate since
+      // because of the above `internalOptions`, we keep these separate since
       //  they're part of the deactivation process which we configure (internally) to
       //  be shared between focus-trap and focus-trap-react
       onDeactivate: null,
@@ -71,7 +71,7 @@ class FocusTrap extends React.Component {
         optionName === 'clickOutsideDeactivates'
       ) {
         this.originalOptions[optionName] = focusTrapOptions[optionName];
-        continue; // exclude from tailoredFocusTrapOptions
+        continue; // exclude from internalOptions
       }
 
       this.internalOptions[optionName] = focusTrapOptions[optionName];
@@ -106,36 +106,63 @@ class FocusTrap extends React.Component {
     );
   }
 
-  // TODO: Need more test coverage for this function
-  getNodeForOption(optionName) {
-    const optionValue = this.internalOptions[optionName];
-    if (!optionValue) {
-      return null;
-    }
-
-    let node = optionValue;
-
-    if (typeof optionValue === 'string') {
-      node = this.getDocument()?.querySelector(optionValue);
-      if (!node) {
-        throw new Error(`\`${optionName}\` refers to no known node`);
-      }
-    }
+  /**
+   * Gets the node for the given option, which is expected to be an option that
+   *  can be either a DOM node, a string that is a selector to get a node, `false`
+   *  (if a node is explicitly NOT given), or a function that returns any of these
+   *  values.
+   * @param {string} optionName
+   * @returns {undefined | false | HTMLElement | SVGElement} Returns
+   *  `undefined` if the option is not specified; `false` if the option
+   *  resolved to `false` (node explicitly not given); otherwise, the resolved
+   *  DOM node.
+   * @throws {Error} If the option is set, not `false`, and is not, or does not
+   *  resolve to a node.
+   */
+  getNodeForOption = function (optionName, ...params) {
+    // use internal options first, falling back to original options
+    let optionValue =
+      this.internalOptions[optionName] ?? this.originalOptions[optionName];
 
     if (typeof optionValue === 'function') {
-      node = optionValue();
+      optionValue = optionValue(...params);
+    }
+
+    if (optionValue === true) {
+      optionValue = undefined; // use default value
+    }
+
+    if (!optionValue) {
+      if (optionValue === undefined || optionValue === false) {
+        return optionValue;
+      }
+      // else, empty string (invalid), null (invalid), 0 (invalid)
+
+      throw new Error(
+        `\`${optionName}\` was specified but was not a node, or did not return a node`
+      );
+    }
+
+    let node = optionValue; // could be HTMLElement, SVGElement, or non-empty string at this point
+
+    if (typeof optionValue === 'string') {
+      node = this.getDocument()?.querySelector(optionValue); // resolve to node, or null if fails
       if (!node) {
-        throw new Error(`\`${optionName}\` did not return a node`);
+        throw new Error(
+          `\`${optionName}\` as selector refers to no known node`
+        );
       }
     }
 
     return node;
-  }
+  };
 
   getReturnFocusNode() {
-    const node = this.getNodeForOption('setReturnFocus');
-
-    return node ? node : this.previouslyFocusedElement;
+    const node = this.getNodeForOption(
+      'setReturnFocus',
+      this.previouslyFocusedElement
+    );
+    return node ? node : node === false ? false : this.previouslyFocusedElement;
   }
 
   /** Update the previously focused element with the currently focused element. */
@@ -395,12 +422,13 @@ FocusTrap.propTypes = {
     initialFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
-      PropTypes.func,
       PropTypes.bool,
+      PropTypes.func,
     ]),
     fallbackFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
+      // NOTE: does not support `false` as value (or return value from function)
       PropTypes.func,
     ]),
     escapeDeactivates: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
@@ -412,6 +440,7 @@ FocusTrap.propTypes = {
     setReturnFocus: PropTypes.oneOfType([
       PropTypes.instanceOf(ElementType),
       PropTypes.string,
+      PropTypes.bool,
       PropTypes.func,
     ]),
     allowOutsideClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),

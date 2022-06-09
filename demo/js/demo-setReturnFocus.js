@@ -10,7 +10,14 @@ const DemoSetReturnFocusDialog = () => {
 
   const focusTrapOptions = useMemo(
     () => ({
-      setReturnFocus: '#AlternateReturnFocusElement',
+      setReturnFocus: (prevSelNode) => {
+        // contrived code to prove during tests that the setReturnFocus() option
+        //  can be a function that is given a reference to the node that was focused
+        //  prior to trap activation
+        return prevSelNode.parentNode.querySelector(
+          '#AlternateReturnFocusElement'
+        );
+      },
       onDeactivate: () => setIsTrapActive(false),
     }),
     []
