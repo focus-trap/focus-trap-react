@@ -230,6 +230,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "SMores",
+      "name": "Shane Moore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5354254?v=4",
+      "profile": "http://smoores.dev",
+      "contributions": [
+        "platform"
+      ]
     }
   ],
   "contributorsPerLine": 7,
