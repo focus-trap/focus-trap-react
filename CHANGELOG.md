@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.0.1
+
+### Patch Changes
+
+- 2d6cd9b: Add explicit dependency on tabbable since the source directly requires it.
+
 ## 9.0.0
 
 ### Major Changes
