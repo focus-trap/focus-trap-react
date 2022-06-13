@@ -1,5 +1,26 @@
 # Changelog
 
+## 9.0.0
+
+### Major Changes
+
+- 4a77d87: Stop using the infamous `findDOMNode()` on provided `containerElements`.
+  - There seems to have been no good reason for this as this prop, if specified, is already required to be an array of HTMLElement references, which means these nodes have already been rendered (if they were once React elements). There appears to have been no remaining need for this API.
+  - Furthermore, the minimum supported version of React is now 16.3 as it technically has been for a while now since that is the version that introduced callback refs, which we've been using for quite some time now (so this bump will hopefully not cause any ripples).
+
+## 8.11.3
+
+### Patch Changes
+
+- 9947461: Bump focus-trap dependency to v6.9.4 to get typings fix.
+- 519e5a5: Fix setReturnFocus option as function not being passed node focused prior to activation.
+
+## 8.11.2
+
+### Patch Changes
+
+- 7547d93: Bumps focus-trap to v6.9.3 to pick-up some small bug fixes from underlying tabbable.
+
 ## 8.11.1
 
 ### Patch Changes
