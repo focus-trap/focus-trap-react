@@ -437,7 +437,7 @@ FocusTrap.propTypes = {
       getShadowRoot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     }),
   }),
-  containerElements: PropTypes.arrayOf(PropTypes.instanceOf(ElementType)),
+  containerElements: PropTypes.arrayOf(PropTypes.instanceOf(ElementType)), // DOM element ONLY
   children: PropTypes.oneOfType([
     PropTypes.element, // React element
     PropTypes.instanceOf(ElementType), // DOM element

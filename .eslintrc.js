@@ -115,7 +115,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['cypress/support/index.js'],
+      files: ['cypress/support/e2e.js'],
       parserOptions: {
         sourceType: 'module',
       },
