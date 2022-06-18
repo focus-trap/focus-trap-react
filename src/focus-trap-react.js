@@ -270,7 +270,27 @@ class FocusTrap extends React.Component {
   }
 
   setupFocusTrap() {
-    if (!this.focusTrap) {
+    if (this.focusTrap) {
+      // trap already exists: it's possible we're in StrictMode and we're being remounted,
+      //  in which case, we will have deactivated the trap when we got unmounted (remember,
+      //  StrictMode, in development, purposely unmounts and remounts components after
+      //  mounting them the first time to make sure they have reusable state,
+      //  @see https://reactjs.org/docs/strict-mode.html#ensuring-reusable-state) so now
+      //  we need to restore the state of the trap according to our component state
+      // NOTE: Strict mode __violates__ assumptions about the `componentWillUnmount()` API
+      //  which clearly states -- even for React 18 -- that, "Once a component instance is
+      //  unmounted, __it will never be mounted again.__" (emphasis ours). So when we get
+      //  unmounted, we assume we're gone forever and we deactivate the trap. But then
+      //  we get remounted and we're supposed to restore state. But if you had paused,
+      //  we've now deactivated (we don't know we're amount to get remounted again)
+      //  which means we need to reactivate and then pause. Otherwise, do nothing.
+      if (this.props.active && !this.focusTrap.active) {
+        this.focusTrap.activate();
+        if (this.props.paused) {
+          this.focusTrap.pause();
+        }
+      }
+    } else {
       const nodesExist = this.focusTrapElements.some(Boolean);
       if (nodesExist) {
         // eslint-disable-next-line react/prop-types -- _createFocusTrap is an internal prop
