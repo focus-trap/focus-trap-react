@@ -9,7 +9,7 @@ class DemoSpecialElement extends React.Component {
     super(props);
 
     this.state = {
-      activeTrap: false,
+      activeTrap: true,
       passThruMsg: '',
     };
 
@@ -37,46 +37,48 @@ class DemoSpecialElement extends React.Component {
     }
 
     return (
-      <div>
-        <p>
-          <button
-            onClick={this.mountTrap}
-            aria-describedby="special-element-heading"
+      <React.StrictMode>
+        <div>
+          <p>
+            <button
+              onClick={this.mountTrap}
+              aria-describedby="special-element-heading"
+            >
+              activate trap
+            </button>
+            <button onClick={this.updatePassThruMsg}>pass thru click</button>
+            <span>{this.state.passThruMsg}</span>
+          </p>
+          <FocusTrap
+            active={this.state.activeTrap}
+            focusTrapOptions={{
+              onPostDeactivate: this.unmountTrap,
+              clickOutsideDeactivates: true,
+              returnFocusOnDeactivate: true,
+            }}
           >
-            activate trap
-          </button>
-          <button onClick={this.updatePassThruMsg}>pass thru click</button>
-          <span>{this.state.passThruMsg}</span>
-        </p>
-        <FocusTrap
-          active={this.state.activeTrap}
-          focusTrapOptions={{
-            onPostDeactivate: this.unmountTrap,
-            clickOutsideDeactivates: true,
-            returnFocusOnDeactivate: true,
-          }}
-        >
-          <section
-            id="focus-trap-three"
-            style={this.state.activeTrap ? null : { background: '#eee' }}
-            data-whatever="nothing"
-            className={trapClass}
-          >
-            <p>
-              Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
-              <a href="#">focusable</a> parts.
-            </p>
-            <p>
-              <button
-                onClick={this.unmountTrap}
-                aria-describedby="special-element-heading"
-              >
-                deactivate trap
-              </button>
-            </p>
-          </section>
-        </FocusTrap>
-      </div>
+            <section
+              id="focus-trap-three"
+              style={this.state.activeTrap ? null : { background: '#eee' }}
+              data-whatever="nothing"
+              className={trapClass}
+            >
+              <p>
+                Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
+                <a href="#">focusable</a> parts.
+              </p>
+              <p>
+                <button
+                  onClick={this.unmountTrap}
+                  aria-describedby="special-element-heading"
+                >
+                  deactivate trap
+                </button>
+              </p>
+            </section>
+          </FocusTrap>
+        </div>
+      </React.StrictMode>
     );
   }
 }

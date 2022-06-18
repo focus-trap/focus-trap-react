@@ -14,8 +14,8 @@
     "index.d.ts"
   ],
   "scripts": {
-    "demo-bundle": "browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
-    "start": "yarn build && budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
+    "demo-bundle": "NODE_ENV=production browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
+    "start": "yarn build && NODE_ENV=development budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
     "lint": "eslint \"*.js\" \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\" \"cypress/**/*.js\"",
     "format": "prettier --write \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*,cypress/**/*}.+(js|yml)\"",
     "format:check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*,cypress/**/*}.+(js|yml)\"",
@@ -89,7 +89,7 @@
     "prettier": "^2.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.1.0",
+    "react-dom": "^18.2.0",
     "regenerator-runtime": "^0.13.9",
     "start-server-and-test": "^1.14.0",
     "typescript": "^4.7.3"
