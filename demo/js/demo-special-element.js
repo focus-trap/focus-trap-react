@@ -9,7 +9,7 @@ class DemoSpecialElement extends React.Component {
     super(props);
 
     this.state = {
-      activeTrap: true,
+      activeTrap: false,
       passThruMsg: '',
     };
 
