@@ -74,7 +74,7 @@ You can read further code examples in `demo/` (it's very simple), and [see how i
 
 Here's one more simple example:
 
-```js
+```jsx
 const React = require('react');
 const ReactDOM = require('react-dom'); // React 16-17
 const { createRoot } = require('react-dom/client'); // React 18
@@ -147,6 +147,94 @@ createRoot(document.getElementById('root')).render(<Demo />); // React 18
 
 ### Props
 
+#### children
+
+> ⚠️ The `<FocusTrap>` component requires a __single__ child, and this child must __forward refs__ onto the element which will ultimately be considered the trap's container. Since React does not provide for a way to forward refs to class-based components, this means the child must be a __functional__ component that uses the `React.forwardRef()` API.
+
+> 💬 The child is ignored (but still rendered) if the `containerElements` prop is used to imperatively provide trap container elements.
+
+Example:
+
+```jsx
+const React = require('react');
+const { createRoot } = require('react-dom/client');
+const propTypes = require('prop-types');
+const FocusTrap = require('../../dist/focus-trap-react');
+
+const container = document.getElementById('demo-function-child');
+
+const TrapChild = React.forwardRef(function ({ onDeactivate }, ref) {
+  return (
+    <div ref={ref}>
+      <p>
+        Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
+        <a href="#">focusable</a> parts.
+      </p>
+      <p>
+        <button
+          onClick={onDeactivate}
+          aria-describedby="class-child-heading"
+        >
+          deactivate trap
+        </button>
+      </p>
+    </div>
+  );
+});
+
+TrapChild.displayName = 'TrapChild';
+TrapChild.propTypes = {
+  onDeactivate: propTypes.func,
+};
+
+class DemoFunctionChild extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeTrap: false,
+    };
+
+    this.mountTrap = this.mountTrap.bind(this);
+    this.unmountTrap = this.unmountTrap.bind(this);
+  }
+
+  mountTrap() {
+    this.setState({ activeTrap: true });
+  }
+
+  unmountTrap() {
+    this.setState({ activeTrap: false });
+  }
+
+  render() {
+    const trap = this.state.activeTrap && (
+      <FocusTrap
+        focusTrapOptions={{
+          onDeactivate: this.unmountTrap,
+        }}
+      >
+        <TrapChild />
+      </FocusTrap>
+    );
+
+    return (
+      <div>
+        <p>
+          <button onClick={this.mountTrap} aria-describedby="function-child-heading">
+            activate trap
+          </button>
+        </p>
+        {trap}
+      </div>
+    );
+  }
+}
+
+const root = createRoot(container);
+root.render(<DemoFunctionChild />);
+```
+
 #### focusTrapOptions
 
 Type: `Object`, optional
@@ -173,9 +261,9 @@ If you would like to pause or unpause the focus trap (see [`focus-trap`'s docume
 
 Type: `Array of HTMLElement`, optional
 
-If passed in, these elements will be used as the boundaries for the focus-trap, __instead of the child__.  These get passed as arguments to `focus-trap`'s `updateContainerElements()` method.
+If specified, these elements will be used as the boundaries for the focus-trap, __instead of the child__.  These get passed as arguments to `focus-trap`'s `updateContainerElements()` method.
 
-> Note that when you use `containerElements`, the need for a child is eliminated as the child is __always__ ignored when the prop is specified, even if the prop is `[]` (an empty array). Also note that if the refs you're putting into the array like `containerElements={[ref1.current, ref2.current]}` and one or both refs aren't resolved yet, resulting in `[null, null]` for example, the trap will not get created. The array must contain at least one `HTMLElement` in order for the trap to get updated.
+> 💬 Note that when you use `containerElements`, the need for a child is eliminated as the child is __always__ ignored when the prop is specified, even if the prop is `[]` (an empty array). Also note that if the refs you're putting into the array like `containerElements={[ref1.current, ref2.current]}` and one or both refs aren't resolved yet, resulting in `[null, null]` for example, the trap will not get created. The array must contain at least one `HTMLElement` in order for the trap to get updated.
 
 If `containerElements` is subsequently updated (i.e. after the trap has been created) to an empty array (or an array of falsy values like `[null, null]`), the trap will still be active, but the TAB key will do nothing because the trap will not contain any tabbable groups of nodes. At this point, the trap can either be deactivated manually or by unmounting, or an updated set of elements can be given to `containerElements` to resume use of the TAB key.
 
