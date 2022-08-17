@@ -33,13 +33,21 @@ npm install focus-trap-react
 
 ### React dependency
 
-React `>= 16.0.0`.
+React `>= 16.3.0`
 
 ## Browser Support
 
-Basically IE9+.
+As old and as broad as _reasonably_ possible, excluding browsers that are out of support or have nearly no user base.
 
-Why? Because this module's core functionality comes from focus-trap, which uses [a couple of IE9+ functions](https://github.com/davidtheclark/tabbable#browser-support).
+Focused on desktop browsers, particularly Chrome, Edge, FireFox, Safari, and Opera.
+
+Focus-trap-react is not officially tested on any mobile browsers or devices.
+
+> ⚠️ Microsoft [no longer supports](https://blogs.windows.com/windowsexperience/2022/06/15/internet-explorer-11-has-retired-and-is-officially-out-of-support-what-you-need-to-know/) any version of IE, so IE is no longer supported by this library.
+
+> 💬 Focus-trap-react relies on focus-trap so its browser support is at least [what focus-trap supports](https://github.com/focus-trap/focus-trap#browser-support).
+
+> 💬 Keep in mind that performance optimization and old browser support are often at odds, so tabbable may not always be able to use the most optimal (typically modern) APIs in all cases.
 
 ## Usage
 
