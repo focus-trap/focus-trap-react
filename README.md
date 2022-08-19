@@ -150,6 +150,8 @@ createRoot(document.getElementById('root')).render(<Demo />); // React 18
 #### children
 
 > ⚠️ The `<FocusTrap>` component requires a __single__ child, and this child must __forward refs__ onto the element which will ultimately be considered the trap's container. Since React does not provide for a way to forward refs to class-based components, this means the child must be a __functional__ component that uses the `React.forwardRef()` API.
+>
+> If you must use a __class__-based component as the trap's container, then you will need to get your own ref to it upon render, and use the `containerElements` prop (initially set to an empty array `[]`) in order to provide the ref's element to it once updated by React (hint: use a [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs)).
 
 > 💬 The child is ignored (but still rendered) if the `containerElements` prop is used to imperatively provide trap container elements.
 
@@ -263,7 +265,9 @@ Type: `Array of HTMLElement`, optional
 
 If specified, these elements will be used as the boundaries for the focus-trap, __instead of the child__.  These get passed as arguments to `focus-trap`'s `updateContainerElements()` method.
 
-> 💬 Note that when you use `containerElements`, the need for a child is eliminated as the child is __always__ ignored when the prop is specified, even if the prop is `[]` (an empty array). Also note that if the refs you're putting into the array like `containerElements={[ref1.current, ref2.current]}` and one or both refs aren't resolved yet, resulting in `[null, null]` for example, the trap will not get created. The array must contain at least one `HTMLElement` in order for the trap to get updated.
+> 💬 Note that when you use `containerElements`, the need for a child is eliminated as the child is __always__ ignored (though still rendered) when the prop is specified, even if this prop is `[]` (an empty array).
+>
+> Also note that if the refs you're putting into the array, like `containerElements={[ref1.current, ref2.current]}`, aren't resolved yet, resulting in `[null, null]` for example, the trap will not get created. The array must contain at least one valid `HTMLElement` in order for the trap to get created/updated.
 
 If `containerElements` is subsequently updated (i.e. after the trap has been created) to an empty array (or an array of falsy values like `[null, null]`), the trap will still be active, but the TAB key will do nothing because the trap will not contain any tabbable groups of nodes. At this point, the trap can either be deactivated manually or by unmounting, or an updated set of elements can be given to `containerElements` to resume use of the TAB key.
 
