@@ -1,5 +1,20 @@
 # Changelog
 
+## 10.0.0
+
+### Major Changes
+
+- af69c14: 🚨 **Breaking:** Underlying `tabbable` dependency has been updated to v6.0.0 and contains a breaking change related to detached nodes with its default `displayCheck` setting. See tabbable's [changelog](https://github.com/focus-trap/tabbable/blob/master/CHANGELOG.md#600) for more information.
+  - The `focus-trap` dependency has also be updated to v7.0.0 but only contains the underlying `tabbable` changes.
+  - The `tabbableOptions.displayCheck` prop type has been updated to include the new "legacy-full" option.
+- 018732c: 🚨 **Breaking:** Dropped support of IE browsers, all versions.
+  - IE11 was [officially retired](https://blogs.windows.com/windowsexperience/2022/06/15/internet-explorer-11-has-retired-and-is-officially-out-of-support-what-you-need-to-know/) on June 15, 2022 (6 weeks ago). There are no longer any versions of IE that are still maintained or even supported by Microsoft.
+- 018732c: Revised and clarified official browser support (still as broad and deep as _reasonably_ possible).
+
+### Patch Changes
+
+- b0bbbd4: Update README with a note about the `children` prop stating that the trap requires a single child, and that if a component is used, it must be a **functional** component that forwards refs.
+
 ## 9.0.2
 
 ### Patch Changes
