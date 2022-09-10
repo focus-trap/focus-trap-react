@@ -147,15 +147,15 @@ createRoot(document.getElementById('root')).render(<Demo />); // React 18
 
 ## ❗️❗️ React 18 Strict Mode ❗️❗️
 
-React 18 introduced [new behavior](https://reactjs.org/docs/strict-mode.html#ensuring-reusable-state) in Strict Mode whereby it mimics a possible future behavior where React might optimize an app's performance by arbitrarily unmounting components that aren't in use and later remount them (with previous, reused state -- that's the key) when the user needs them again. What constitutes "not in use" and "needs them again" is as yet undefined.
+React 18 introduced [new behavior](https://reactjs.org/docs/strict-mode.html#ensuring-reusable-state) in Strict Mode whereby it mimics a possible future behavior where React might optimize an app's performance by unmounting certain components that aren't in use and later remounting them with previous, reused state when the user needs them again. What constitutes "not in use" and "needs them again" is as yet undefined.
 
-It should be noted this violates stated behavior about [componentWillUnmount](https://reactjs.org/docs/react-component.html#componentwillunmount): "Once a component instance is unmounted, __it will never be mounted again.__" Not so in Strict Mode!
+_Remounted with reused state_ is the key difference between what is otherwise expected about [unmounted components](https://reactjs.org/docs/react-component.html#componentwillunmount).
 
-Nonetheless, many of you like to use Strict Mode and may not realize what changed in React 18, so we have made our __[best attempt](https://github.com/focus-trap/focus-trap-react/pull/721) at supporting it in v9.0.2__ whereby the trap attempts to detect that it has been remounted with previous state: If the `active` prop's value is `true`, and an internal focus trap instance already exists, the focus trap is re-activated on remount in order to reconcile stated expectations.
+__[v9.0.2](https://github.com/focus-trap/focus-trap-react/pull/721) adds support__ for this new Strict Mode behavior: The trap attempts to detect that it has been remounted with previous state: If the `active` prop's value is `true`, and an internal focus trap instance already exists, the focus trap is re-activated on remount in order to reconcile stated expectations.
 
 > 🚨 In Strict Mode (and so in dev builds only, since this behavior of Strict Mode only affects dev builds), the trap __will be deactivated as soon as it is mounted__, and then reactivated again, almost immediately, because React will immediately unmount and remount the trap as soon as it's rendered.
 
-Therefore, __do not use options like onActivate, onPostActivate, onDeactivate, or onPostDeactivate to affect component state__.
+Therefore, __avoid using options like onActivate, onPostActivate, onDeactivate, or onPostDeactivate to affect component state__.
 
 <details>
 <summary>Explanation and sample anti-pattern to <strong>avoid</strong></summary>
