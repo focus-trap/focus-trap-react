@@ -145,9 +145,34 @@ ReactDOM.render(<Demo />, document.getElementById('root')); // React 16-17
 createRoot(document.getElementById('root')).render(<Demo />); // React 18
 ```
 
-### Props
+## ❗️❗️ React 18 Strict Mode ❗️❗️
 
-#### children
+React 18 introduced [new behavior](https://reactjs.org/docs/strict-mode.html#ensuring-reusable-state) in Strict Mode whereby it mimics a possible future behavior where React might optimize an app's performance by unmounting certain components that aren't in use and later remounting them with previous, reused state when the user needs them again. What constitutes "not in use" and "needs them again" is as yet undefined.
+
+_Remounted with reused state_ is the key difference between what is otherwise expected about [unmounted components](https://reactjs.org/docs/react-component.html#componentwillunmount).
+
+__[v9.0.2](https://github.com/focus-trap/focus-trap-react/pull/721) adds support__ for this new Strict Mode behavior: The trap attempts to detect that it has been remounted with previous state: If the `active` prop's value is `true`, and an internal focus trap instance already exists, the focus trap is re-activated on remount in order to reconcile stated expectations.
+
+> 🚨 In Strict Mode (and so in dev builds only, since this behavior of Strict Mode only affects dev builds), the trap __will be deactivated as soon as it is mounted__, and then reactivated again, almost immediately, because React will immediately unmount and remount the trap as soon as it's rendered.
+
+Therefore, __avoid using options like onActivate, onPostActivate, onDeactivate, or onPostDeactivate to affect component state__.
+
+<details>
+<summary>Explanation and sample anti-pattern to <strong>avoid</strong></summary>
+<p>
+See <a href="https://github.com/focus-trap/focus-trap-react/issues/796">this discussion</a> for an example sandbox (issue description) where <code>onDeactivate</code> was used to trigger the close of a dialog when the trap was deactivated (e.g. to react to the user clicking outside the trap with <code>focusTrapOptions.clickOutsideDeactivates=true</code>).
+</p>
+<p>
+The result can be that (depending on how you render the trap) in Strict Mode, the dialog never appears because it gets closed as soon as the trap renders, since the trap is deactivated as soon as it's unmounted, and so the <code>onDeactivate</code> handler is called, thus hiding the dialog...
+</p>
+<p>
+<strong>This is intentional</strong>: If the trap gets unmounted, it has no idea if it's being unmounted <em>for good</em> or if it's going to be remounted <em>at some future point in time</em>. It also has no idea of knowing <em>how long</em> it will be until it's remounted again. So it must be deactivated as though it's going away for good in order to prevent unintentional behavior and memory leaks (from orphaned document event listeners).
+</p>
+</details>
+
+## Props
+
+### children
 
 > ⚠️ The `<FocusTrap>` component requires a __single__ child, and this child must __forward refs__ onto the element which will ultimately be considered the trap's container. Since React does not provide for a way to forward refs to class-based components, this means the child must be a __functional__ component that uses the `React.forwardRef()` API.
 >
@@ -237,7 +262,7 @@ const root = createRoot(container);
 root.render(<DemoFunctionChild />);
 ```
 
-#### focusTrapOptions
+### focusTrapOptions
 
 Type: `Object`, optional
 
@@ -245,7 +270,7 @@ Pass any of the options available in focus-trap's [createOptions](https://github
 
 > ⚠️ See notes about __[testing in JSDom](#testing-in-jsdom)__ (e.g. using Jest) if that's what you currently use.
 
-#### active
+### active
 
 Type: `Boolean`, optional
 
@@ -253,13 +278,13 @@ By default, the `FocusTrap` activates when it mounts. So you activate and deacti
 
 See `demo/demo-special-element.js`.
 
-#### paused
+### paused
 
 Type: `Boolean`, optional
 
 If you would like to pause or unpause the focus trap (see [`focus-trap`'s documentation](https://github.com/focus-trap/focus-trap#focustrappause)), toggle this prop.
 
-#### containerElements
+### containerElements
 
 Type: `Array of HTMLElement`, optional
 
