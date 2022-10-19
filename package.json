@@ -71,7 +71,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jquery": "^3.5.14",
     "all-contributors-cli": "^6.24.0",
-    "babel-jest": "^29.1.2",
+    "babel-jest": "^29.2.1",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "budo": "^11.8.4",
