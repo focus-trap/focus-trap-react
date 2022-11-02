@@ -96,7 +96,7 @@
   },
   "dependencies": {
     "focus-trap": "^7.0.0",
-    "tabbable": "^6.0.0"
+    "tabbable": "^6.0.1"
   },
   "peerDependencies": {
     "prop-types": "^15.8.1",
