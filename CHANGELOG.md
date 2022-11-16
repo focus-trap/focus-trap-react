@@ -1,5 +1,12 @@
 # Changelog
 
+## 10.0.1
+
+### Patch Changes
+
+- c772db0: Add help for Strict Mode in README [#796](https://github.com/focus-trap/focus-trap-react/issues/796)
+- d0de500: Bump focus-trap to 7.1.0 and tabbable to 6.0.1 for new trap features and bug fixes
+
 ## 10.0.0
 
 ### Major Changes
