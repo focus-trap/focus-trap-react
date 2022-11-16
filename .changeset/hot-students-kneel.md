@@ -2,4 +2,4 @@
 "focus-trap-react": patch
 ---
 
-[#796] Add help for Strict Mode in README
+Add help for Strict Mode in README [#796](https://github.com/focus-trap/focus-trap-react/issues/796)
