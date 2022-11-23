@@ -90,7 +90,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "regenerator-runtime": "^0.13.10",
+    "regenerator-runtime": "^0.13.11",
     "start-server-and-test": "^1.14.0",
     "typescript": "^4.9.3"
   },
