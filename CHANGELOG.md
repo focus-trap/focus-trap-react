@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.0.2
+
+### Patch Changes
+
+- 0c98e74: Add missing trapStack option from focus-trap 7.1.0, add new isKeyForward and isKeyBackward options from focus-trap 7.2.0, bump focus-trap to 7.2.0.
+
 ## 10.0.1
 
 ### Patch Changes
