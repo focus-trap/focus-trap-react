@@ -461,6 +461,9 @@ FocusTrap.propTypes = {
       ]),
       getShadowRoot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     }),
+    trapStack: PropTypes.array,
+    isKeyForward: PropTypes.func,
+    isKeyBackward: PropTypes.func,
   }),
   containerElements: PropTypes.arrayOf(PropTypes.instanceOf(ElementType)), // DOM element ONLY
   children: PropTypes.oneOfType([
