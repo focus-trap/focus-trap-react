@@ -95,8 +95,8 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "focus-trap": "7.2.1-tabbable-i905.0",
-    "tabbable": "6.0.2-tabbable-i905.0"
+    "focus-trap": "7.2.1-tabbable-i905.1",
+    "tabbable": "6.0.2-tabbable-i905.1"
   },
   "peerDependencies": {
     "prop-types": "^15.8.1",
