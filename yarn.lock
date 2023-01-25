@@ -4313,12 +4313,12 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.1.0.tgz#a5d06b4a8b01e3a63771daa5cb7a1903e2e57067"
   integrity sha512-tW+UkmtNg/jv9CSofAKvgVcO7c2URjhTdW1ZTkcAritblu8tajiYy7YisnIflEwtKssCtOxpnBRoCB7iap0/TA==
 
-focus-trap@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-7.2.0.tgz#25af61b5635d3c18cd2fd176087db7b60be72c6b"
-  integrity sha512-v4wY6HDDYvzkBy4735kW5BUEuw6Yz9ABqMYLuTNbzAFPcBOGiGHwwcNVMvUz4G0kgSYh13wa/7TG3XwTeT4O/A==
+focus-trap@7.2.1-tabbable-i905.0:
+  version "7.2.1-tabbable-i905.0"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-7.2.1-tabbable-i905.0.tgz#e4ed5d0156c860da53a71fd12b9a3632690aa9d7"
+  integrity sha512-97I5wyu4oyulU2P1CgMa5Glc9erkWWHN9BA7eMLW+EfEqh9qkGgYpz/r9TDiH6cu1zkz7bv9Xi/VzQwqcF91kA==
   dependencies:
-    tabbable "^6.0.1"
+    tabbable "6.0.2-tabbable-i905.0"
 
 follow-redirects@^1.14.9:
   version "1.15.2"
@@ -7964,10 +7964,10 @@ syntax-error@^1.1.1:
   dependencies:
     acorn-node "^1.2.0"
 
-tabbable@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.0.1.tgz#427a09b13c83ae41eed3e88abb76a4af28bde1a6"
-  integrity sha512-SYJSIgeyXW7EuX1ytdneO5e8jip42oHWg9xl/o3oTYhmXusZVgiA+VlPvjIN+kHii9v90AmzTZEBcsEvuAY+TA==
+tabbable@6.0.2-tabbable-i905.0:
+  version "6.0.2-tabbable-i905.0"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.0.2-tabbable-i905.0.tgz#fa7fd4782de568ff3b53c97ecdd0277a4c0fcd62"
+  integrity sha512-Bov4AHNWpO9eR+Wh4K8ZPvCtduYp4d7+MCvs2LEkGpq9kWZJOPlArnnfZrD0HhMIKJgMXz0WgHR+noOvEglDMg==
 
 term-color@^1.0.1:
   version "1.0.1"
