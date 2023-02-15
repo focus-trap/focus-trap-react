@@ -12,6 +12,12 @@ body {
   padding: 10px;
 }
 
+.macos-keyboard-warning {
+  background-color: yellow;
+  padding: 8px;
+  text-align: center;
+}
+
 input:focus,
 a:focus,
 button:focus {
