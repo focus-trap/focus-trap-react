@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.1.0
+
+### Minor Changes
+
+- 6c8f714: Bump focus-trap to v7.3.0 and tabbable to v6.1.0 for bug fixes and inert support.
+
 ## 10.0.2
 
 ### Patch Changes
