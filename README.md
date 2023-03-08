@@ -268,6 +268,12 @@ Type: `Object`, optional
 
 Pass any of the options available in focus-trap's [createOptions](https://github.com/focus-trap/focus-trap#createoptions).
 
+> ❗️ This prop is __only read once__ on the first render. It's never looked at again. This is particularly important if you use state-dependent memoized __React Hooks__ (e.g. `const onActivate = useCallback(() => {...}, [something])`) for any of the focus-trap callbacks like `onActivate()`, `onDeactivate()`, `clickOutsideDeactivates()`, etc.
+>
+> If you need state-dependent callbacks, you have two options: __(1)__ Use a React component `class` (as in the examples in this README) with bound member handlers, or __(2)__ use a React Ref like `useRef({ myState: 1 })` in your callbacks and manually manage your state.
+>
+> See [#947](https://github.com/focus-trap/focus-trap-react/issues/947) for more details.
+
 > ⚠️ See notes about __[testing in JSDom](#testing-in-jsdom)__ (e.g. using Jest) if that's what you currently use.
 
 ### active
