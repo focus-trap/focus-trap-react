@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "demo-bundle": "NODE_ENV=production browserify demo/js -t babelify --extension=.jsx -o demo/demo-bundle.js",
-    "start": "yarn build && NODE_ENV=development budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
+    "start": "npm run build && NODE_ENV=development budo demo/js/index.js:demo-bundle.js --dir demo --live -- -t babelify --extension=.jsx",
     "lint": "eslint \"*.js\" \"src/**/*.js\" \"test/**/*.js\" \"demo/**/*.js\" \"cypress/**/*.js\"",
     "format": "prettier --write \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*,cypress/**/*}.+(js|yml)\"",
     "format:check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/*,cypress/**/*}.+(js|yml)\"",
@@ -25,12 +25,12 @@
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
     "test:e2e": "ELECTRON_ENABLE_LOGGING=1 start-server-and-test start 9966 'cypress run --browser $CYPRESS_BROWSER --headless'",
-    "test:e2e:chrome": "CYPRESS_BROWSER=chrome yarn test:e2e",
+    "test:e2e:chrome": "CYPRESS_BROWSER=chrome npm run test:e2e",
     "test:e2e:dev": "ELECTRON_ENABLE_LOGGING=1 start-server-and-test start 9966 'cypress open'",
-    "test": "yarn format:check && yarn lint && yarn test:unit && yarn test:types && yarn test:e2e:chrome",
-    "prepare": "yarn build",
-    "prepublishOnly": "yarn test && yarn build",
-    "release": "yarn build && changeset publish"
+    "test": "npm run format:check && npm run lint && npm run test:unit && npm run test:types && npm run test:e2e:chrome",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test && npm run build",
+    "release": "npm run build && changeset publish"
   },
   "repository": {
     "type": "git",
