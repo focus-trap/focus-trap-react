@@ -24,7 +24,7 @@ __Please leave this checklist in your PR.__
   - Careful to test `typeof document/window !== 'undefined'` before using it in code that gets executed on load.
 - README updated (API changes, instructions, etc.).
 - Changes to dependencies explained.
-- Changeset added (run `yarn changeset` locally to add one, and follow the prompts).
+- Changeset added (run `npm run changeset` locally to add one, and follow the prompts).
   - EXCEPTION: A Changeset is not required if the change does not affect any of the source files that produce the package bundle. For example, demo changes, tooling changes, test updates, or a new dev-only dependency to run tests more efficiently should not have a Changeset since it will not affect package consumers.
 
 </details>
