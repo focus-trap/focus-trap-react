@@ -111,8 +111,8 @@ describe('<FocusTrap> component', () => {
       cy.get('@testRoot')
         .findByRole('textbox', { name: 'Initially focused input:' })
         .as('trapChild')
-        .focus()
-        .type('{esc}');
+        .focus();
+      cy.get('@trapChild').type('{esc}');
 
       // ESC does not deactivate the trap
       cy.get('@trapChild').should('exist').should('be.focused');
