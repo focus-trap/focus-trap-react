@@ -95,7 +95,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "focus-trap": "^7.4.1",
+    "focus-trap": "^7.4.2",
     "tabbable": "^6.1.2"
   },
   "peerDependencies": {
