@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.1.4
+
+### Patch Changes
+
+- c1d6324: Bump focus-trap to v7.4.3 for bug fix for ([#962](https://github.com/focus-trap/focus-trap-react/issues/962))
+
 ## 10.1.3
 
 ### Patch Changes
