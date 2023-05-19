@@ -257,6 +257,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "kasperg",
+      "name": "Kasper Garnæs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/73966?v=4",
+      "profile": "http://reload.dk",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
