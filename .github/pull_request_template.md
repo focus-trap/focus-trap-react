@@ -16,6 +16,7 @@ __Please leave this checklist in your PR.__
 - Source changes maintain:
   - Stated browser compatibility.
   - Stated React compatibility.
+- Web APIs introduced have __deep__ browser coverage, including Safari (often very late to adopt new APIs).
 - Unit test coverage added/updated.
 - E2E test coverage added/updated.
 - Prop-types added/updated.
