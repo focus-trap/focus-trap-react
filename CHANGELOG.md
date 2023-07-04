@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.2.1
+
+### Patch Changes
+
+- 1d58209: Bump focus-trap to v7.5.2 for Safari-related bug fix with `Array.findLast()`
+
 ## 10.2.0
 
 ### Minor Changes
