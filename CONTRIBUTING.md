@@ -62,3 +62,27 @@ $ git add .
 $ git commit -m "Updating demo to latest"
 $ git push
 ```
+
+## Manual publishing
+
+Lately, the `./.github/workflows/release.yml` workflow has been causing issues with tests failing (while the very same tests succeed in the CI workflow and locally). This will block a release in one of two ways:
+
+1. The repo won't get versioned (because the release workflow will fail on the versioning task).
+2. The changes won't get published to NPM (if you get passed (1), the publishing task may fail).
+
+When re-running the failed `release` job on GitHub just won't work (sometimes it takes ~4 tires before it finally goes through, but beyond that...), here are the equivalent local commands using the [changesets CLI](https://www.npmjs.com/package/@changesets/cli):
+
+```bash
+## versioning
+$ npx changeset version
+$ npm install # manual update of lock file version that Changesets no longer does [1]
+$ git push # to master
+
+## publishing
+$ npm test
+$ npm build
+$ npx changeset publish # you'll need publish permission to do this, will prompt for OTP
+$ git push --tags
+```
+
+`[1]` https://github.com/changesets/changesets/issues/421
