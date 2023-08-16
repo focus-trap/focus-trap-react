@@ -1,4 +1,4 @@
-require('@testing-library/jest-dom/extend-expect');
+require('@testing-library/jest-dom');
 
 global.requestAnimationFrame = function (callback) {
   setTimeout(callback, 0);
