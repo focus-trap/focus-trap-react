@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.2.2
+
+### Patch Changes
+
+- 10dc372: Bump focus-trap to 7.5.3 for typings fix
+
 ## 10.2.1
 
 ### Patch Changes
