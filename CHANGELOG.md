@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.2.3
+
+### Patch Changes
+
+- 850a5a0: Bump focus-trap to v7.5.4 for shadow DOM related bug fix
+
 ## 10.2.2
 
 ### Patch Changes
