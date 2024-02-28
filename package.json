@@ -75,7 +75,7 @@
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "budo": "^11.8.4",
-    "cypress": "^13.6.5",
+    "cypress": "^13.6.6",
     "cypress-plugin-tab": "^1.0.5",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
