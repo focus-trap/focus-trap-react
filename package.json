@@ -92,7 +92,7 @@
     "react-dom": "^18.2.0",
     "regenerator-runtime": "^0.14.1",
     "start-server-and-test": "^2.0.3",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   },
   "dependencies": {
     "focus-trap": "^7.5.4",
