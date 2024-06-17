@@ -1,7 +1,7 @@
 # focus-trap-react [![CI](https://github.com/focus-trap/focus-trap-react/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/focus-trap/focus-trap-react/actions?query=workflow:CI+branch:master) [![Codecov](https://img.shields.io/codecov/c/github/focus-trap/focus-trap-react)](https://codecov.io/gh/focus-trap/focus-trap-react) [![license](https://badgen.now.sh/badge/license/MIT)](./LICENSE)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-27-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A React component that traps focus.
@@ -364,6 +364,7 @@ In alphabetical order:
       <td align="center" valign="top" width="14.28%"><a href="http://tylerhawkins.info/201R/"><img src="https://avatars0.githubusercontent.com/u/13806458?v=4?s=100" width="100px;" alt="Tyler Hawkins"/><br /><sub><b>Tyler Hawkins</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/commits?author=thawkin3" title="Documentation">📖</a> <a href="#example-thawkin3" title="Examples">💡</a> <a href="https://github.com/focus-trap/focus-trap-react/commits?author=thawkin3" title="Tests">⚠️</a> <a href="#tool-thawkin3" title="Tools">🔧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/wandroll"><img src="https://avatars.githubusercontent.com/u/4492317?v=4?s=100" width="100px;" alt="Wandrille Verlut"/><br /><sub><b>Wandrille Verlut</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/commits?author=wandroll" title="Code">💻</a> <a href="https://github.com/focus-trap/focus-trap-react/commits?author=wandroll" title="Tests">⚠️</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/krikienoid"><img src="https://avatars3.githubusercontent.com/u/8528227?v=4?s=100" width="100px;" alt="krikienoid"/><br /><sub><b>krikienoid</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/issues?q=author%3Akrikienoid" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/robert-westenberger"><img src="https://avatars.githubusercontent.com/u/44252092?v=4?s=100" width="100px;" alt="robert-westenberger"/><br /><sub><b>robert-westenberger</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/commits?author=robert-westenberger" title="Documentation">📖</a> <a href="https://github.com/focus-trap/focus-trap-react/issues?q=author%3Arobert-westenberger" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/syntactic-salt"><img src="https://avatars.githubusercontent.com/u/9385662?v=4?s=100" width="100px;" alt="syntactic-salt"/><br /><sub><b>syntactic-salt</b></sub></a><br /><a href="https://github.com/focus-trap/focus-trap-react/issues?q=author%3Asyntactic-salt" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
