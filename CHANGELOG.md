@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.3.0
+
+### Minor Changes
+
+- 1738674: Bump focus-trap dependency to 7.6.0 for customizable ESC behavior ([#1346](https://github.com/focus-trap/focus-trap-react/pull/1346))
+
 ## 10.2.3
 
 ### Patch Changes
