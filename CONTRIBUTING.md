@@ -10,7 +10,7 @@ Lint with `npm run lint`
 
 Run the demos with `npm start`. Then open your browser to http://localhost:9966
 
-> Note that changes to **test** files ([demo](./demo) HTML and JS) are hot-reloaded, but changes to the [source](index.js) **are not**. It would be great if source changes were also hot-reloaded. If you know how to fix that, please do!
+> Note that changes to **test** files ([demo](./demo) HTML and JS) are hot-reloaded, but changes to the [source](./src) **are not**. It would be great if source changes were also hot-reloaded. If you know how to fix that, please do!
 
 ## Testing
 

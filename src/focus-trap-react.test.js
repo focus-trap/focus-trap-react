@@ -7,7 +7,7 @@ const {
 } = require('@testing-library/react');
 const { default: userEvent } = require('@testing-library/user-event');
 const FocusTrap = require('../src/focus-trap-react');
-
+// DEBUG TEST ESLINT
 const getTestFocusTrapOptions = function (focusTrapOptions) {
   const { tabbableOptions, ...rest } = focusTrapOptions || {};
   return {
