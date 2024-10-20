@@ -105,6 +105,10 @@ module.exports = {
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',
     'jest/valid-title': 'error',
+
+    //// from react plugin
+
+    'react/prop-types': 'off', // React 19 no longer supports propTypes
   },
   settings: {
     // eslint-plugin-react settings: a version needs to be specified,
