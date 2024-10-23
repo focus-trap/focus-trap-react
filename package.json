@@ -57,7 +57,7 @@
   },
   "homepage": "https://github.com/focus-trap/focus-trap-react#readme",
   "devDependencies": {
-    "@babel/cli": "^7.25.7",
+    "@babel/cli": "^7.25.9",
     "@babel/core": "^7.25.8",
     "@babel/eslint-parser": "^7.25.9",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
