@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.3.1
+
+### Patch Changes
+
+- ee62d91: Bump focus-trap to v7.6.1
+
 ## 10.3.0
 
 ### Minor Changes
