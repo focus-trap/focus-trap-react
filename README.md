@@ -33,13 +33,22 @@ npm install focus-trap-react
 
 ### React dependency
 
-React `>= 16.3.0`
+React `>= 18.0.0`
+
+> Note that while React 18.x still supported `propTypes` and `defaultProps`, they had long-since been deprecated, and are completely dropped in React 19.
+
+Therefore, this library no longer assigns these properties to the `<FocusTrap>` element for runtime validation and initialization. The same techniques you would now use in React 19 are backward-compatible with React 18:
+
+- Use TypeScript for static prop type validation
+- Use a runtime validation library such as [RTV.js](https://rtvjs.stefcameron.com/), [JSON Schema](https://json-schema.org/), or [yup](https://github.com/jquense/yup) for runtime prop validation to replace `prop-types`)
+
+> This library aims to support one major version of React _behind_ the current major version, since React major releases are typically years apart -- to the extent that the feature drift is not too great and remains reasonably surmountable.
 
 ## Browser Support
 
-As old and as broad as _reasonably_ possible, excluding browsers that are out of support or have nearly no user base.
-
 Focused on desktop browsers, particularly Chrome, Edge, FireFox, Safari, and Opera.
+
+Gated by what React [supports](https://legacy.reactjs.org/docs/javascript-environment-requirements.html) in the version [currently](#react-dependency) supported.
 
 Focus-trap-react is not officially tested on any mobile browsers or devices.
 

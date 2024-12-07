@@ -1,8 +1,10 @@
 const React = require('react');
-const PropTypes = require('prop-types');
 const { createFocusTrap } = require('focus-trap');
 const { isFocusable } = require('tabbable');
 
+/**
+ * @type {import('../index.d.ts').FocusTrap}
+ */
 class FocusTrap extends React.Component {
   constructor(props) {
     super(props);
@@ -412,74 +414,10 @@ class FocusTrap extends React.Component {
   }
 }
 
-// support server-side rendering where `Element` will not be defined
-const ElementType = typeof Element === 'undefined' ? Function : Element;
-
-FocusTrap.propTypes = {
-  active: PropTypes.bool,
-  paused: PropTypes.bool,
-  focusTrapOptions: PropTypes.shape({
-    document: PropTypes.object,
-    onActivate: PropTypes.func,
-    onPostActivate: PropTypes.func,
-    checkCanFocusTrap: PropTypes.func,
-    onPause: PropTypes.func,
-    onPostPause: PropTypes.func,
-    onUnpause: PropTypes.func,
-    onPostUnpause: PropTypes.func,
-    onDeactivate: PropTypes.func,
-    onPostDeactivate: PropTypes.func,
-    checkCanReturnFocus: PropTypes.func,
-    initialFocus: PropTypes.oneOfType([
-      PropTypes.instanceOf(ElementType),
-      PropTypes.string,
-      PropTypes.bool,
-      PropTypes.func,
-    ]),
-    fallbackFocus: PropTypes.oneOfType([
-      PropTypes.instanceOf(ElementType),
-      PropTypes.string,
-      // NOTE: does not support `false` as value (or return value from function)
-      PropTypes.func,
-    ]),
-    escapeDeactivates: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    clickOutsideDeactivates: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.func,
-    ]),
-    returnFocusOnDeactivate: PropTypes.bool,
-    setReturnFocus: PropTypes.oneOfType([
-      PropTypes.instanceOf(ElementType),
-      PropTypes.string,
-      PropTypes.bool,
-      PropTypes.func,
-    ]),
-    allowOutsideClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    preventScroll: PropTypes.bool,
-    tabbableOptions: PropTypes.shape({
-      displayCheck: PropTypes.oneOf([
-        'full',
-        'legacy-full',
-        'non-zero-area',
-        'none',
-      ]),
-      getShadowRoot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    }),
-    trapStack: PropTypes.array,
-    isKeyForward: PropTypes.func,
-    isKeyBackward: PropTypes.func,
-  }),
-  containerElements: PropTypes.arrayOf(PropTypes.instanceOf(ElementType)), // DOM element ONLY
-  children: PropTypes.oneOfType([
-    PropTypes.element, // React element
-    PropTypes.instanceOf(ElementType), // DOM element
-  ]),
-
-  // NOTE: _createFocusTrap is internal, for testing purposes only, so we don't
-  //  specify it here. It's expected to be set to the function returned from
-  //  require('focus-trap'), or one with a compatible interface.
-};
-
+// NOTE: While React 19 REMOVED support for `propTypes`, support for `defaultProps`
+//  __for class components ONLY__ remains: "Class components will continue to support
+//  defaultProps since there is no ES6 alternative."
+//  @see https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-proptypes-and-defaultprops
 FocusTrap.defaultProps = {
   active: true,
   paused: false,
