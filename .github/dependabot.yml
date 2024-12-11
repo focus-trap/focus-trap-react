@@ -16,3 +16,13 @@ updates:
     reviewers:
       - 'stefcameron'
     versioning-strategy: 'increase'
+    ignore:
+      # ignore React 19 and related dependencies to keep tests based on R18 for now
+      - dependency-name: "react"
+        versions: ["19.x"]
+      - dependency-name: "@types/react"
+        versions: ["19.x"]
+      - dependency-name: "react-dom"
+        versions: ["19.x"]
+      - dependency-name: "@types/react-dom"
+        versions: ["19.x"]
