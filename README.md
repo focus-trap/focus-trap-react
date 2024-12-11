@@ -84,10 +84,9 @@ You can read further code examples in `demo/` (it's very simple), and [see how i
 Here's one more simple example:
 
 ```jsx
-const React = require('react');
-const ReactDOM = require('react-dom'); // React 16-17
-const { createRoot } = require('react-dom/client'); // React 18
-const FocusTrap = require('focus-trap-react');
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { FocusTrap } from 'focus-trap-react';
 
 class Demo extends React.Component {
   constructor(props) {
@@ -150,7 +149,6 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById('root')); // React 16-17
 createRoot(document.getElementById('root')).render(<Demo />); // React 18
 ```
 
@@ -192,14 +190,13 @@ The result can be that (depending on how you render the trap) in Strict Mode, th
 Example:
 
 ```jsx
-const React = require('react');
-const { createRoot } = require('react-dom/client');
-const propTypes = require('prop-types');
-const FocusTrap = require('../../dist/focus-trap-react');
+import { forwardRef, Component } from 'react';
+import { createRoot } from 'react-dom/client';
+import { FocusTrap } from 'focus-trap-react';
 
 const container = document.getElementById('demo-function-child');
 
-const TrapChild = React.forwardRef(function ({ onDeactivate }, ref) {
+const TrapChild = forwardRef(function ({ onDeactivate }, ref) {
   return (
     <div ref={ref}>
       <p>
@@ -223,7 +220,7 @@ TrapChild.propTypes = {
   onDeactivate: propTypes.func,
 };
 
-class DemoFunctionChild extends React.Component {
+class DemoFunctionChild extends Component {
   constructor(props) {
     super(props);
 
