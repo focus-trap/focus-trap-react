@@ -2,7 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const { createRoot } = require('react-dom/client');
 const PropTypes = require('prop-types');
-const FocusTrap = require('../../dist/focus-trap-react');
+const { FocusTrap } = require('../../dist/focus-trap-react');
 
 const { useRef, useState, useEffect } = React;
 const container = document.getElementById('demo-iframe');
