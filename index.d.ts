@@ -1,7 +1,7 @@
 import { Options as FocusTrapOptions } from 'focus-trap';
 import * as React from 'react';
 
-export interface FocusTrapProps extends React.AllHTMLAttributes<any> {
+export interface FocusTrapProps {
   /**
     * __Single container child__ for the trap. Use `containerElements` instead
     *  if you need a trap with multiple containers.
