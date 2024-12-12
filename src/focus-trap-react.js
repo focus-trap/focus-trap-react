@@ -425,4 +425,8 @@ FocusTrap.defaultProps = {
   _createFocusTrap: createFocusTrap,
 };
 
+// 🔺 DEPRECATED: default export
 module.exports = FocusTrap;
+
+// named export
+module.exports.FocusTrap = FocusTrap;
