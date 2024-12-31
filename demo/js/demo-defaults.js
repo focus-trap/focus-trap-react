@@ -14,6 +14,8 @@ class DemoDefaults extends React.Component {
 
     this.mountTrap = this.mountTrap.bind(this);
     this.unmountTrap = this.unmountTrap.bind(this);
+
+    this.containerEl = null;
   }
 
   mountTrap() {
@@ -24,6 +26,13 @@ class DemoDefaults extends React.Component {
     this.setState({ activeTrap: false });
   }
 
+  // purposely using a ref here to test new React 19 "ref as a prop" behavior
+  //  with fallback to React 18 deprecated behavior
+  handleCallbackRef(el) {
+    this.containerEl = el;
+    this.containerEl?.classList.add('is-active');
+  }
+
   render() {
     const trap = this.state.activeTrap && (
       <FocusTrap
@@ -31,7 +40,10 @@ class DemoDefaults extends React.Component {
           onDeactivate: this.unmountTrap,
         }}
       >
-        <div className="trap is-active">
+        <div
+          className="trap is-active"
+          ref={(el) => this.handleCallbackRef(el)}
+        >
           <p>
             Here is a focus trap <a href="#">with</a> <a href="#">some</a>{' '}
             <a href="#">focusable</a> parts.
