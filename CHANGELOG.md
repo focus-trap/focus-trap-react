@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.0.2
+
+### Patch Changes
+
+- e766841: Fix deprecation warning in React 19 when accessing ref the pre-v19 way
+
 ## 11.0.1
 
 ### Patch Changes
