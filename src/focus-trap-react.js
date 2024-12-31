@@ -3,6 +3,12 @@ const { createFocusTrap } = require('focus-trap');
 const { isFocusable } = require('tabbable');
 
 /**
+ * The major version of React currently running.
+ * @type {number}
+ */
+const reactVerMajor = parseInt(/^(\d+)\./.exec(React.version)?.[1] ?? 0, 10);
+
+/**
  * @type {import('../index.d.ts').FocusTrap}
  */
 class FocusTrap extends React.Component {
@@ -391,10 +397,21 @@ class FocusTrap extends React.Component {
         const { containerElements } = this.props;
 
         if (child) {
-          if (typeof child.ref === 'function') {
-            child.ref(element);
-          } else if (child.ref) {
-            child.ref.current = element;
+          // React 19 moved the `ref` to an official prop
+          if (reactVerMajor >= 19) {
+            if (typeof child.props.ref === 'function') {
+              child.props.ref(element);
+            } else if (child.props.ref) {
+              child.props.ref.current = element;
+            }
+          } else {
+            // older versions of React had the `ref` separate from props (still works in R19
+            //  but results in a deprecation warning in Dev builds)
+            if (typeof child.ref === 'function') {
+              child.ref(element);
+            } else if (child.ref) {
+              child.ref.current = element;
+            }
           }
         }
 
