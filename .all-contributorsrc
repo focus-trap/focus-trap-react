@@ -295,6 +295,15 @@
         "bug",
         "review"
       ]
+    },
+    {
+      "login": "VercammenJens",
+      "name": "Jens Vercammen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19661051?v=4",
+      "profile": "https://github.com/VercammenJens",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
