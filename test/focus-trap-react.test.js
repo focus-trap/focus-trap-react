@@ -23,7 +23,7 @@ const getTestFocusTrapOptions = function (focusTrapOptions) {
 };
 
 const mkTestFocusTrap = function () {
-  // eslint-disable-next-line react/display-name, react/prop-types
+  // eslint-disable-next-line react/display-name
   return React.forwardRef(function ({ focusTrapOptions, ...props }, ref) {
     const options = getTestFocusTrapOptions(focusTrapOptions);
     return <FocusTrap {...props} ref={ref} focusTrapOptions={options} />;

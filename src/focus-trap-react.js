@@ -301,7 +301,6 @@ class FocusTrap extends React.Component {
     } else {
       const nodesExist = this.focusTrapElements.some(Boolean);
       if (nodesExist) {
-        // eslint-disable-next-line react/prop-types -- _createFocusTrap is an internal prop
         this.focusTrap = this.props._createFocusTrap(
           this.focusTrapElements,
           this.internalOptions
