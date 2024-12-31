@@ -71,7 +71,6 @@ describe('<FocusTrap> component', () => {
           cy.get('@lastlyFocusedElementBeforeTrapIsActivated')
             .then(([lastlyFocusedEl]) => (previousFocusedEl = lastlyFocusedEl))
             .tab();
-          // eslint-disable-next-line cypress/unsafe-to-chain-command -- seems safe enough, and not sure how you would NOT chain this...
           cy.focused().should(([nextFocusedEl]) =>
             expect(nextFocusedEl).not.equal(previousFocusedEl)
           );
