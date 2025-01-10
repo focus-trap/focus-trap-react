@@ -2,9 +2,6 @@
   "name": "focus-trap-react",
   "version": "11.0.2",
   "description": "A React component that traps focus.",
-  "engines": {
-    "node": "^20.11.0 || >=21.2.0"
-  },
   "main": "dist/focus-trap-react.js",
   "types": "index.d.ts",
   "files": [

@@ -4,6 +4,8 @@
 
 /* eslint-env node */
 
+import url from 'node:url';
+import path from 'node:path';
 import js from '@eslint/js';
 import globals from 'globals';
 import babel from '@babel/eslint-plugin';
@@ -19,9 +21,11 @@ import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import testingLibrary from 'eslint-plugin-testing-library';
 
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+
 const ecmaVersion = 'latest';
 const impliedStrict = true;
-const tsconfigRootDir = import.meta.dirname;
+const tsconfigRootDir = __dirname;
 
 //
 // Plugins
