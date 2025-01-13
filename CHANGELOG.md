@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.0.3
+
+### Patch Changes
+
+- 095b3d4: Bump focus-trap dependency to v7.6.4 to get fix to manually-paused traps (see [focus-trap|1340](https://github.com/focus-trap/focus-trap/pull/1340) for more info)
+
 ## 11.0.2
 
 ### Patch Changes
