@@ -104,7 +104,7 @@
     "react-dom": "^19.0.0",
     "regenerator-runtime": "^0.14.1",
     "start-server-and-test": "^2.0.9",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "focus-trap": "^7.6.4",
