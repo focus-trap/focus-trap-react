@@ -65,7 +65,7 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@changesets/cli": "^2.28.1",
-    "@eslint/js": "^9.22.0",
+    "@eslint/js": "^9.23.0",
     "@testing-library/cypress": "^10.0.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
