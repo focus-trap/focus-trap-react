@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.0.4
+
+### Patch Changes
+
+- 346e41d: Bump focus-trap to v7.6.5 for shadow DOM bug fix
+
 ## 11.0.3
 
 ### Patch Changes
