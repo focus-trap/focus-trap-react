@@ -75,7 +75,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^8.36.0",
-    "@typescript-eslint/parser": "^8.35.1",
+    "@typescript-eslint/parser": "^8.37.0",
     "all-contributors-cli": "^6.26.1",
     "babel-jest": "^30.0.4",
     "babelify": "^10.0.0",
