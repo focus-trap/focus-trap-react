@@ -1,8 +1,7 @@
 module.exports = {
   clearMocks: true,
   setupFilesAfterEnv: [
-    'regenerator-runtime/runtime',
-    '<rootDir>/jest-setup.js',
+    './jest-setup.js',
   ],
   testEnvironment: 'jsdom',
   testEnvironmentOptions: {
