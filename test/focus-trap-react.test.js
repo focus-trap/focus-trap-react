@@ -95,9 +95,9 @@ describe('FocusTrap', () => {
 
   describe('incorrect children prop usage', () => {
     it('throws an error if a non-element child is passed', () => {
-      expect(() =>
-        render(<TestFocusTrap>Child text</TestFocusTrap>)
-      ).toThrowError('expected to receive a single React element child');
+      expect(() => render(<TestFocusTrap>Child text</TestFocusTrap>)).toThrow(
+        /expected to receive a single React element child/
+      );
     });
 
     it('throws an error if multiple top-level child elements are passed', () => {
@@ -108,7 +108,7 @@ describe('FocusTrap', () => {
             <p>Child 2</p>
           </TestFocusTrap>
         )
-      ).toThrowError('expected to receive a single React element child');
+      ).toThrow(/expected to receive a single React element child/);
     });
 
     it('throws an error if no focusable child elements are provided', () => {
@@ -118,8 +118,8 @@ describe('FocusTrap', () => {
             <p>Child 1</p>
           </TestFocusTrap>
         )
-      ).toThrowError(
-        'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
+      ).toThrow(
+        /Your focus-trap must have at least one container with at least one tabbable node in it at all times/
       );
     });
 
@@ -130,8 +130,8 @@ describe('FocusTrap', () => {
             <button>Click me</button>
           </TestFocusTrap>
         )
-      ).toThrowError(
-        'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
+      ).toThrow(
+        /Your focus-trap must have at least one container with at least one tabbable node in it at all times/
       );
     });
 
@@ -144,8 +144,8 @@ describe('FocusTrap', () => {
             </>
           </TestFocusTrap>
         )
-      ).toThrowError(
-        'A focus-trap cannot use a Fragment as its child container. Try replacing it with a <div> element.'
+      ).toThrow(
+        /A focus-trap cannot use a Fragment as its child container. Try replacing it with a <div> element./
       );
     });
   });
@@ -160,12 +160,12 @@ describe('FocusTrap', () => {
             </div>
           </TestFocusTrap>
         )
-      ).not.toThrowError('expected to receive a single React element child');
+      ).not.toThrow(/expected to receive a single React element child/);
     });
 
     it('allows no children prop to be passed', () => {
-      expect(() => render(<TestFocusTrap />)).not.toThrowError(
-        'expected to receive a single React element child'
+      expect(() => render(<TestFocusTrap />)).not.toThrow(
+        /expected to receive a single React element child/
       );
     });
 
@@ -903,10 +903,8 @@ describe('FocusTrap', () => {
       const useZeroContainerElementsButton = screen.getByText(
         'use zero container elements'
       );
-      expect(() =>
-        fireEvent.click(useZeroContainerElementsButton)
-      ).toThrowError(
-        'Your focus-trap must have at least one container with at least one tabbable node in it at all times'
+      expect(() => fireEvent.click(useZeroContainerElementsButton)).toThrow(
+        /Your focus-trap must have at least one container with at least one tabbable node in it at all times/
       );
 
       // DOM cleanup
