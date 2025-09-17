@@ -103,7 +103,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "regenerator-runtime": "^0.14.1",
-    "start-server-and-test": "^2.1.0",
+    "start-server-and-test": "^2.1.1",
     "typescript": "^5.9.2"
   },
   "dependencies": {
