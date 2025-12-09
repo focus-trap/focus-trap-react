@@ -27,7 +27,7 @@
     "test:e2e": "ELECTRON_ENABLE_LOGGING=1 start-server-and-test start 9966 'cypress run --browser $CYPRESS_BROWSER --headless'",
     "test:e2e:chrome": "CYPRESS_BROWSER=chrome npm run test:e2e",
     "test:e2e:dev": "ELECTRON_ENABLE_LOGGING=1 start-server-and-test start 9966 'cypress open'",
-    "test": "npm run format:check && npm run lint && npm run test:unit && npm run test:types && npm run test:e2e:chrome",
+    "test": "npm run format:check && npm run lint && npm run test:coverage && npm run test:types && npm run test:e2e:chrome",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test && npm run build",
     "release": "npm run build && changeset publish"
