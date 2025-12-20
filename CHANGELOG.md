@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.0.5
+
+### Patch Changes
+
+- 01712b0: Update `focus-trap` dependency to 7.6.6 and `tabbable` to 6.3.0 to get a new `displayCheck` option in `tabbable`.
+
 ## 11.0.4
 
 ### Patch Changes
