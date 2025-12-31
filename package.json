@@ -108,8 +108,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "focus-trap": "^7.7.0",
-    "tabbable": "^6.3.0"
+    "focus-trap": "^7.7.1",
+    "tabbable": "^6.4.0"
   },
   "peerDependencies": {
     "@types/react": "^18.0.0 || ^19.0.0",
