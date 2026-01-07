@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - 01712b0: Update `focus-trap` dependency to 7.6.6 and `tabbable` to 6.3.0 to get a new `displayCheck` option in `tabbable`.
-- 0f8db7c: Bump tabbable and focus-trap dependencies for improved inert handling
+- 0f8db7c: Bump tabbable to 6.4.0 and focus-trap to 7.7.1 for improved inert handling
 
 ## 11.0.4
 
