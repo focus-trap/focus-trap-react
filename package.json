@@ -1,6 +1,6 @@
 {
   "name": "focus-trap-react",
-  "version": "11.0.5",
+  "version": "11.0.6",
   "description": "A React component that traps focus.",
   "main": "dist/focus-trap-react.js",
   "types": "index.d.ts",
