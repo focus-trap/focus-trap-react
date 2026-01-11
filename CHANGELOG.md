@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.0.6
+
+### Patch Changes
+
+- c0bd275: Bump focus-trap to 7.8.0 for new aria-hidden support in isolateSubtrees option and bug fix related to trapStack option
+
 ## 11.0.5
 
 ### Patch Changes
