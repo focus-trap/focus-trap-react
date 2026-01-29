@@ -381,13 +381,16 @@ describe('FocusTrap', () => {
 
       await pause(3);
 
+      // `checkCanFocusTrap` not yet resolved so no post-activate
       expect(onActivate).toHaveBeenCalled();
       expect(onPostActivate).not.toHaveBeenCalled();
 
       await pause(6);
 
+      // `checkCanFocusTrap` should have resolved now, but post-activate
+      //  is still delayed to the next frame (trap behavior)
       expect(onActivate).toHaveBeenCalled();
-      expect(onPostActivate).toHaveBeenCalled();
+      await waitFor(() => expect(onPostActivate).toHaveBeenCalled());
     });
 
     it('Does not call onPostDeactivate() until checkCanReturnFocus() has completed', async () => {
@@ -456,7 +459,9 @@ describe('FocusTrap', () => {
       fireEvent.click(activateTrapButton);
 
       expect(onActivate).toHaveBeenCalled();
-      expect(onPostActivate).toHaveBeenCalled();
+
+      // post-activate is always delayed to next frame by the trap
+      await waitFor(() => expect(onPostActivate).toHaveBeenCalled());
     });
 
     it('Will call onPostDeactivate() even if checkCanReturnFocus() is undefined', async () => {
