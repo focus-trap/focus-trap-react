@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.0
+
+### Major Changes
+
+- 763eae4: **BREAKING:** Updated [focus-trap](https://github.com/focus-trap/focus-trap/blob/master/CHANGELOG.md#800) dependency to v8.0.0. The breaking change is that `onPostActivate()` is now correctly called after the initial focus node is focused (it was previously called before due to a bug with the initial focus delay). See the focus-trap changelog for more details.
+
 ## 11.0.6
 
 ### Patch Changes
