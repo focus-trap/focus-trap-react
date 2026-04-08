@@ -21,7 +21,7 @@
     "format:check": "prettier --check \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/**/*,cypress/**/*}.+(js|cjs|mjs|ts|cts|mts|yml)\"",
     "format:watch": "onchange \"{*,src/**/*,test/**/*,demo/js/**/*,.github/workflows/**/*,cypress/**/*}.+(js|cjs|mjs|ts|cts|mts|yml)\" -- prettier --write {{changed}}",
     "build": "babel src -d dist",
-    "test:types": "tsc index.d.ts",
+    "test:types": "tsc",
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
     "test:e2e": "ELECTRON_ENABLE_LOGGING=1 start-server-and-test start 9966 'cypress run --browser $CYPRESS_BROWSER --headless'",
@@ -105,7 +105,7 @@
     "react-dom": "^19.0.0",
     "regenerator-runtime": "^0.14.1",
     "start-server-and-test": "^3.0.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.2"
   },
   "dependencies": {
     "focus-trap": "^8.0.1",
