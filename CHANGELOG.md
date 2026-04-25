@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.1
+
+### Patch Changes
+
+- 93c93e9: Update `focus-trap` dependency to 8.1.0 for new lifecycle hook improvements (`onActivate`, etc).
+
 ## 12.0.0
 
 ### Major Changes
