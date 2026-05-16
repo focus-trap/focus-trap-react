@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.2
+
+### Patch Changes
+
+- 161ec0d: Update focus-trap dependency to v8.2.1 for bug fixes and a new `delayReturnFocus` option
+
 ## 12.0.1
 
 ### Patch Changes
