@@ -63,8 +63,6 @@ typings/
 
 # Builds
 dist/
-# demo-bundle.js generated when running the demo
-**/*-bundle.js
 
 # OS files
 .DS_Store
