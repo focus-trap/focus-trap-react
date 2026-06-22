@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.3
+
+### Patch Changes
+
+- 26c3dea: Update to tabbable@6.5.0 and focus-trap@8.2.2 for visibility bug fix and support for image areas
+
 ## 12.0.2
 
 ### Patch Changes
