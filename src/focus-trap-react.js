@@ -234,22 +234,20 @@ class FocusTrap extends React.Component {
       const returnFocusNode = this.getReturnFocusNode();
       const canReturnFocus = !!(
         // did the consumer allow it?
-        (
-          this.originalOptions.returnFocusOnDeactivate &&
-          // can we actually focus the node?
-          returnFocusNode?.focus &&
-          // was there an outside click that allowed deactivation?
-          (!this.outsideClick ||
-            // did the consumer allow deactivation when the outside node was clicked?
-            (this.outsideClick.allowDeactivation &&
-              // is the outside node NOT focusable (implying that it did NOT receive focus
-              //  as a result of the click-through) -- in which case do NOT restore focus
-              //  to `returnFocusNode` because focus should remain on the outside node
-              !isFocusable(
-                this.outsideClick.target,
-                this.internalOptions.tabbableOptions
-              )))
-        )
+        this.originalOptions.returnFocusOnDeactivate &&
+        // can we actually focus the node?
+        returnFocusNode?.focus &&
+        // was there an outside click that allowed deactivation?
+        (!this.outsideClick ||
+          // did the consumer allow deactivation when the outside node was clicked?
+          (this.outsideClick.allowDeactivation &&
+            // is the outside node NOT focusable (implying that it did NOT receive focus
+            //  as a result of the click-through) -- in which case do NOT restore focus
+            //  to `returnFocusNode` because focus should remain on the outside node
+            !isFocusable(
+              this.outsideClick.target,
+              this.internalOptions.tabbableOptions
+            )))
         // if no, the restore focus to `returnFocusNode` at this point
       );
       const { preventScroll = false } = this.internalOptions;
