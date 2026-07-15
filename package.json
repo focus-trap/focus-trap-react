@@ -100,7 +100,7 @@
     "jest-environment-jsdom": "^30.4.1",
     "jest-watch-typeahead": "^3.0.1",
     "onchange": "^7.1.0",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "regenerator-runtime": "^0.14.1",
