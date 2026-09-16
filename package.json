@@ -78,7 +78,7 @@
     "@typescript-eslint/eslint-plugin": "^8.69.0",
     "@typescript-eslint/parser": "^8.68.0",
     "all-contributors-cli": "^6.26.1",
-    "babel-jest": "^30.4.1",
+    "babel-jest": "^30.5.1",
     "babelify": "^10.0.0",
     "browserify": "^17.0.1",
     "budo": "^11.8.4",
