@@ -1,11 +1,11 @@
-require('./demo-defaults');
-require('./demo-animated-dialog');
-require('./demo-animated-trigger');
-require('./demo-ffne');
-require('./demo-special-element');
-require('./demo-autofocus');
-require('./demo-containerelements');
-require('./demo-containerelements-childless');
-require('./demo-setReturnFocus');
-require('./demo-iframe');
-require('./demo-with-shadow-dom'); // TEST MANUALLY (Cypress doesn't support Shadow DOM well)
+import './demo-defaults';
+import './demo-animated-dialog';
+import './demo-animated-trigger';
+import './demo-ffne';
+import './demo-special-element';
+import './demo-autofocus';
+import './demo-containerelements';
+import './demo-containerelements-childless';
+import './demo-setReturnFocus';
+import './demo-iframe';
+import './demo-with-shadow-dom'; // TEST MANUALLY (Cypress doesn't support Shadow DOM well)
