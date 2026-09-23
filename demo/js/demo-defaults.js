@@ -1,6 +1,6 @@
-const React = require('react');
-const { createRoot } = require('react-dom/client');
-const { FocusTrap } = require('../../dist/focus-trap-react');
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { FocusTrap } from '../../dist/focus-trap-react';
 
 const container = document.getElementById('demo-defaults');
 

@@ -23,7 +23,6 @@ const getTestFocusTrapOptions = function (focusTrapOptions) {
 };
 
 const mkTestFocusTrap = function () {
-  // eslint-disable-next-line react/display-name
   return React.forwardRef(function ({ focusTrapOptions, ...props }, ref) {
     const options = getTestFocusTrapOptions(focusTrapOptions);
     return <FocusTrap {...props} ref={ref} focusTrapOptions={options} />;
@@ -818,10 +817,11 @@ describe('FocusTrap', () => {
       const ChangingContainerElementsExample = () => {
         const [containerElements, setContainerElements] = React.useState([]);
 
-        const useTwoContainerElements = () =>
+        const selectTwoContainerElements = () =>
           setContainerElements([container1, container2]);
-        const useOneContainerElement = () => setContainerElements([container1]);
-        const useZeroContainerElements = () => setContainerElements([]);
+        const selectOneContainerElement = () =>
+          setContainerElements([container1]);
+        const selectZeroContainerElements = () => setContainerElements([]);
 
         const allowOutsideClick = (e) =>
           e.target.id === 'use-zero-container-elements-button';
@@ -832,15 +832,15 @@ describe('FocusTrap', () => {
               containerElements={containerElements}
               focusTrapOptions={{ allowOutsideClick }}
             />
-            <button onClick={useTwoContainerElements}>
+            <button onClick={selectTwoContainerElements}>
               use two container elements
             </button>
-            <button onClick={useOneContainerElement}>
+            <button onClick={selectOneContainerElement}>
               use one container element
             </button>
             <button
               id="use-zero-container-elements-button"
-              onClick={useZeroContainerElements}
+              onClick={selectZeroContainerElements}
             >
               use zero container elements
             </button>
