@@ -185,6 +185,7 @@ const reactRules = {
   //// React-Hooks Plugin
 
   // default is 'warn', prefer errors (warnings just get ignored)
+  'react-hooks/rules-of-hooks': 'error',
   'react-hooks/exhaustive-deps': 'error',
 };
 
