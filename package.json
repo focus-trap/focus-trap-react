@@ -119,9 +119,9 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "allowScripts": {
-    "@parcel/watcher@2.6.0": true,
+    "@parcel/watcher": true,
     "cypress": true,
-    "fsevents@2.3.3": true,
-    "unrs-resolver@1.12.2": true
+    "fsevents": true,
+    "unrs-resolver": true
   }
 }
