@@ -62,7 +62,7 @@
     "@babel/preset-env": "^7.29.7",
     "@babel/preset-react": "^7.29.7",
     "@changesets/cli": "^3.0.2",
-    "@eslint-react/eslint-plugin": "^5.20.5",
+    "@eslint-react/eslint-plugin": "^5.23.1",
     "@eslint/js": "^10.0.1",
     "@rollup/plugin-babel": "^7.1.0",
     "@rollup/plugin-commonjs": "^29.0.3",
