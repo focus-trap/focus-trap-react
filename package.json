@@ -97,7 +97,7 @@
     "jest-environment-jsdom": "^30.5.1",
     "jest-watch-typeahead": "^3.0.1",
     "onchange": "^7.1.0",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.10",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
