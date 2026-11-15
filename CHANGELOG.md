@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.4
+
+### Patch Changes
+
+- 4671d0a: Update to `tabbable@^6.5.2` and `focus-trap@^8.2.5` for bug fixes.
+
 ## 12.0.3
 
 ### Patch Changes
